@@ -1,9 +1,18 @@
 <!doctype html>
+<!--
+  血染钟楼玩家离线助手 v36 - 发布前整理版
+  定位：玩家端离线单文件 HTML；不包含说书人专用功能。
+  离线：所有样式、脚本、SVG 令牌与首页背景均内嵌在本文件中。
+  本地存储键：botc_player_manual_cn_v2，用于保存“我的身份”、文字备注、隐藏状态和手写记录。
+-->
 <html lang="zh-CN">
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-<title>血染钟楼玩家离线助手 - 背景图叠加版</title>
+<meta name="description" content="血染钟楼玩家端离线助手：角色查询、身份隐藏、玩家记录、规则 FAQ、5人和7人流程示例。" />
+<meta name="theme-color" content="#0b0d14" />
+<meta name="application-name" content="血染钟楼玩家离线助手" />
+<title>血染钟楼玩家离线助手 - v36 发布前整理版</title>
 <style>
   :root{
     --bg:#0b0d14; --card:#171b26; --card2:#202638; --text:#f6f1e7; --muted:#aeb6c8;
@@ -88,7 +97,7 @@
   .toast.show{display:block}
 
   .hero{position:relative;overflow:hidden;background:radial-gradient(circle at 18% 0%,rgba(240,192,96,.22),transparent 34%),linear-gradient(180deg,#242a38,#171b25);border:1px solid rgba(240,192,96,.26);border-radius:24px;padding:18px 16px;margin:8px 0 12px;box-shadow:0 10px 24px var(--shadow)}
-  .hero:after{content:"☾";position:absolute;right:14px;top:2px;font-size:74px;color:rgba(240,192,96,.12);font-weight:1000;line-height:1}
+  .hero:after{content:"";position:absolute;right:18px;top:12px;width:58px;height:58px;border-radius:50%;background:radial-gradient(circle at 34% 34%,rgba(255,249,219,.42),rgba(240,192,96,.16) 46%,rgba(240,192,96,.04) 68%,transparent 70%);box-shadow:0 0 26px rgba(240,192,96,.13);pointer-events:none}
   .heroKicker{display:inline-flex;align-items:center;gap:6px;border:1px solid rgba(240,192,96,.42);background:rgba(240,192,96,.1);color:var(--accent);border-radius:999px;padding:5px 9px;font-size:12px;font-weight:1000}
   .heroTitle{font-size:25px;line-height:1.12;font-weight:1000;margin:12px 0 8px;letter-spacing:.3px;max-width:330px}
   .heroText{font-size:15.5px;color:#e9edf7;margin:0;max-width:390px}
@@ -164,6 +173,59 @@
   .seatNo{display:inline-grid;place-items:center;width:24px;height:24px;border-radius:50%;background:#0b0e14;border:1px solid var(--line);font-weight:1000;color:var(--muted);flex:0 0 auto}
   .quote{background:#101620;border-left:4px solid var(--accent);border-radius:10px;padding:8px 10px;margin:8px 0;color:#fff}
   .flowMini{font-size:13px;color:var(--muted);margin-top:6px}
+
+  /* v34 流程页精修：把示例变成更适合新手快速理解的组件页 */
+  .homeHintLink{appearance:none;border:0;background:transparent;color:#ffe0a0;font-weight:1000;text-decoration:underline;text-underline-offset:3px;padding:0 2px;font:inherit}
+  .homeHintLink:active{color:#fff1c2}
+  .flowIntro{position:relative;overflow:hidden;background:radial-gradient(circle at 14% 0%,rgba(240,192,96,.18),transparent 34%),linear-gradient(180deg,rgba(18,24,35,.96),rgba(11,15,23,.96));border-color:rgba(240,192,96,.22);box-shadow:0 12px 26px rgba(0,0,0,.26),inset 0 1px 0 rgba(255,255,255,.04)}
+  .flowIntro h2{margin-top:0;color:#ffe1a0;text-shadow:0 0 16px rgba(240,192,96,.12)}
+  .flowLead{font-size:15px;color:#e8edf7;margin:6px 0 10px;line-height:1.48}
+  .flowSwitch{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:10px 0 8px}
+  .flowSwitchBtn{border:1px solid rgba(240,192,96,.20);border-radius:14px;padding:9px 10px;background:rgba(10,15,24,.72);color:#dfe6f6;font-weight:1000;font-size:13px;box-shadow:inset 0 1px 0 rgba(255,255,255,.035)}
+  .flowSwitchBtn.active{background:linear-gradient(180deg,#ffe09a,#c88333);color:#251700;border-color:rgba(255,225,156,.78);box-shadow:0 8px 18px rgba(240,192,96,.16),inset 0 1px 0 rgba(255,255,255,.36)}
+  .flowGuide{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:10px}
+  .guideItem{background:rgba(8,13,22,.64);border:1px solid rgba(240,192,96,.12);border-radius:14px;padding:9px 10px;min-height:68px}
+  .guideItem b{display:block;font-size:13.5px;color:#fff;margin-bottom:4px}
+  .guideItem span{display:block;font-size:12.5px;color:#aeb6c8;line-height:1.35}
+  .flowLegend{display:flex;gap:6px;flex-wrap:wrap;margin:10px 0 0}
+  .flowTag{display:inline-flex;align-items:center;gap:6px;border-radius:999px;border:1px solid rgba(240,192,96,.13);background:rgba(9,14,23,.72);padding:4px 8px;font-size:12px;font-weight:900;color:#cfd7e8}
+  .flowDot{width:8px;height:8px;border-radius:50%;display:inline-block;background:var(--accent);box-shadow:0 0 10px rgba(240,192,96,.28)}
+  .flowTag.night .flowDot{background:#7cc7ff;box-shadow:0 0 10px rgba(124,199,255,.30)}
+  .flowTag.day .flowDot{background:#f0c060;box-shadow:0 0 10px rgba(240,192,96,.30)}
+  .flowTag.vote .flowDot{background:#c58bff;box-shadow:0 0 10px rgba(197,139,255,.28)}
+  .flowTag.end .flowDot{background:#93d884;box-shadow:0 0 10px rgba(147,216,132,.28)}
+  .timeline{padding-left:20px}
+  .timeline:before{left:7px;background:linear-gradient(180deg,rgba(240,192,96,.40),rgba(124,199,255,.18),rgba(240,192,96,.18));border-radius:999px}
+  .flowStep{padding:13px 12px 13px;border-color:rgba(240,192,96,.12);box-shadow:0 10px 21px rgba(0,0,0,.22),inset 0 1px 0 rgba(255,255,255,.025)}
+  .flowStep:before{left:-18px;top:20px;background:var(--accent);box-shadow:0 0 0 4px #0b0d14,0 0 16px rgba(240,192,96,.20)}
+  .flowStep.setup{border-color:rgba(240,192,96,.20)}
+  .flowStep.night{border-color:rgba(124,199,255,.18);background:radial-gradient(circle at 96% 0%,rgba(124,199,255,.10),transparent 28%),linear-gradient(180deg,rgba(255,255,255,.025),rgba(255,255,255,0)),#121823}
+  .flowStep.day{border-color:rgba(240,192,96,.18);background:radial-gradient(circle at 96% 0%,rgba(240,192,96,.10),transparent 28%),linear-gradient(180deg,rgba(255,255,255,.025),rgba(255,255,255,0)),#121823}
+  .flowStep.vote{border-color:rgba(197,139,255,.18);background:radial-gradient(circle at 96% 0%,rgba(197,139,255,.10),transparent 28%),linear-gradient(180deg,rgba(255,255,255,.025),rgba(255,255,255,0)),#121823}
+  .flowStep.end{border-color:rgba(147,216,132,.22);background:radial-gradient(circle at 96% 0%,rgba(147,216,132,.12),transparent 30%),linear-gradient(180deg,rgba(255,255,255,.025),rgba(255,255,255,0)),#121823}
+  .flowStep.night:before{background:#7cc7ff;box-shadow:0 0 0 4px #0b0d14,0 0 16px rgba(124,199,255,.24)}
+  .flowStep.vote:before{background:#c58bff;box-shadow:0 0 0 4px #0b0d14,0 0 16px rgba(197,139,255,.20)}
+  .flowStep.end:before{background:#93d884;box-shadow:0 0 0 4px #0b0d14,0 0 16px rgba(147,216,132,.22)}
+  .flowStep h3{font-size:17px;color:#fff;margin-bottom:9px;line-height:1.25}
+  .flowStep .num{background:linear-gradient(180deg,#221b17,#101620);border-color:rgba(240,192,96,.28);box-shadow:inset 0 1px 0 rgba(255,255,255,.04);color:#ffe0a0}
+  .flowStep.night .num{color:#bde6ff;border-color:rgba(124,199,255,.28)}
+  .flowStep.vote .num{color:#e0c4ff;border-color:rgba(197,139,255,.28)}
+  .flowStep.end .num{color:#c8f2be;border-color:rgba(147,216,132,.28)}
+  .quote{border-left-width:3px;background:linear-gradient(180deg,rgba(255,255,255,.026),rgba(255,255,255,0)),rgba(9,14,23,.78);border-color:rgba(240,192,96,.55);box-shadow:inset 0 1px 0 rgba(255,255,255,.025)}
+  .flowMini{border:1px dashed rgba(240,192,96,.16);background:rgba(9,14,23,.42);border-radius:12px;padding:8px 9px;color:#b8c1d3}
+  .seatGrid{gap:8px}
+  .seatRow{position:relative;display:grid;grid-template-columns:auto auto 1fr;align-items:center;gap:8px;min-height:48px;background:linear-gradient(180deg,rgba(255,255,255,.025),rgba(255,255,255,0)),rgba(10,15,24,.72);border-color:rgba(240,192,96,.10);box-shadow:inset 0 1px 0 rgba(255,255,255,.025)}
+  .seatRow.townsfolk{border-color:rgba(147,216,132,.20)}
+  .seatRow.outsider{border-color:rgba(124,199,255,.20)}
+  .seatRow.minion,.seatRow.demon{border-color:rgba(255,109,109,.24)}
+  .seatToken{width:30px;height:30px;display:grid;place-items:center;border-radius:50%;flex:0 0 auto}
+  .seatToken svg{width:20px;height:20px;display:block}
+  .seatRow .seatNo{width:24px;height:24px;font-size:12px}
+  .seatText{display:block;min-width:0;line-height:1.15}
+  .seatRoleName{display:block;font-size:14.5px;font-weight:1000;color:#fff;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .seatDetail{display:block;margin-top:3px;font-size:12px;color:#aeb6c8;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  @media (max-width:380px){.flowGuide{grid-template-columns:1fr}.flowSwitch{gap:6px}.flowSwitchBtn{font-size:12px;padding:8px 7px}.seatRow{grid-template-columns:auto auto 1fr;gap:6px;padding:7px}.seatToken{width:28px;height:28px}.seatRoleName{font-size:14px}.seatDetail{font-size:11.5px}}
+
   @media (max-width:380px){.wrap{padding-left:8px;padding-right:8px}.roleName{font-size:17px}.logo{width:30px;height:30px;font-size:17px}.roleBody .explain{font-size:15px}.roleHead{padding-left:8px;padding-right:8px}.roleGrid{gap:7px}.canvasWrap{height:330px}.roleBody{grid-template-columns:1fr}.goalGrid,.twoCols{gap:8px}.goalBadge{width:36px;height:36px;font-size:19px}}
   @media print{header,.footerNav,.btn{display:none!important}body{background:white;color:black}.card,.roleItem,details.faq{box-shadow:none;border:1px solid #999;background:white;color:black}.small,.sub,.roleEn{color:#333}.wrap{padding:0;max-width:none}}
 
@@ -281,9 +343,776 @@
     }
   }
 
+
+  /* v28.1 角色令牌系统：内联 SVG + 阵营默认 + 全角色专属图标 */
+  .token{--token-a:rgba(240,192,96,.18);--token-b:#111722;--token-c:#080b12;--token-border:rgba(240,192,96,.34);--token-glow:rgba(240,192,96,.14);--token-line:#ffe2a0;position:relative;isolation:isolate;color:var(--token-line);overflow:hidden}
+  .token:before{content:"";position:absolute;inset:2px;border-radius:50%;border:1px solid rgba(255,232,174,.12);box-shadow:inset 0 1px 0 rgba(255,255,255,.16),inset 0 -7px 12px rgba(0,0,0,.32);pointer-events:none;z-index:0}
+  .token:after{content:"";position:absolute;inset:6px;border-radius:50%;background:radial-gradient(circle at 40% 28%,rgba(255,255,255,.13),transparent 34%),radial-gradient(circle at 50% 70%,var(--token-glow),transparent 62%);pointer-events:none;z-index:0}
+  .logo.token,.groupIcon.token,.inlineToken.token{display:inline-grid;place-items:center;background:radial-gradient(circle at 34% 24%,rgba(255,255,255,.22),rgba(255,255,255,0) 32%),linear-gradient(145deg,var(--token-a),var(--token-b) 48%,var(--token-c));border:1px solid var(--token-border);box-shadow:0 0 0 2px rgba(240,192,96,.045),0 8px 14px rgba(0,0,0,.28),inset 0 0 0 1px rgba(255,255,255,.035),inset 0 0 18px rgba(255,255,255,.02)}
+  .logo.token svg,.groupIcon.token svg,.inlineToken.token svg{width:72%;height:72%;display:block;stroke:currentColor;fill:none;stroke-width:1.75;stroke-linecap:round;stroke-linejoin:round;position:relative;z-index:1;filter:drop-shadow(0 1px 1px rgba(0,0,0,.52))}
+  .logo.token svg .softFill,.groupIcon.token svg .softFill,.inlineToken.token svg .softFill{fill:currentColor;stroke:none;opacity:.16}
+  .logo.token svg .coolFill,.groupIcon.token svg .coolFill,.inlineToken.token svg .coolFill{fill:#b9d8ff;stroke:none;opacity:.16}
+  .logo.token svg .warmFill,.groupIcon.token svg .warmFill,.inlineToken.token svg .warmFill{fill:#f0c060;stroke:none;opacity:.22}
+  .logo.token svg .hotFill,.groupIcon.token svg .hotFill,.inlineToken.token svg .hotFill{fill:#ff6d6d;stroke:none;opacity:.22}
+  .token.townsfolk{--token-a:rgba(89,143,157,.28);--token-b:#142234;--token-c:#08111b;--token-border:rgba(240,192,96,.42);--token-glow:rgba(147,216,132,.18);--token-line:#ffe0a0}
+  .token.outsider{--token-a:rgba(124,154,184,.22);--token-b:#17202d;--token-c:#0a0d14;--token-border:rgba(151,177,205,.36);--token-glow:rgba(124,199,255,.14);--token-line:#dcecff}
+  .token.minion{--token-a:rgba(124,28,34,.38);--token-b:#241116;--token-c:#0c090d;--token-border:rgba(219,154,91,.42);--token-glow:rgba(255,109,109,.18);--token-line:#ffd08a}
+  .token.demon{--token-a:rgba(190,42,42,.44);--token-b:#1a0b10;--token-c:#050406;--token-border:rgba(255,109,109,.48);--token-glow:rgba(255,77,55,.26);--token-line:#ffd08a}
+  .token.neutral{--token-a:rgba(240,192,96,.18);--token-b:#171b26;--token-c:#0a0d14;--token-border:rgba(240,192,96,.30);--token-glow:rgba(240,192,96,.10);--token-line:#f7d994}
+  .roleItem.townsfolk{border-color:rgba(147,216,132,.24)}
+  .roleItem.outsider{border-color:rgba(151,177,205,.26)}
+  .roleItem.minion{border-color:rgba(219,154,91,.28)}
+  .roleItem.demon{border-color:rgba(255,109,109,.34)}
+  .roleItem.townsfolk[open]{box-shadow:0 10px 22px rgba(0,0,0,.26),0 0 0 1px rgba(147,216,132,.10)}
+  .roleItem.outsider[open]{box-shadow:0 10px 22px rgba(0,0,0,.26),0 0 0 1px rgba(124,199,255,.10)}
+  .roleItem.minion[open],.roleItem.demon[open]{box-shadow:0 10px 22px rgba(0,0,0,.28),0 0 0 1px rgba(255,109,109,.10)}
+  .roleItem .logo.token{font-size:0;border-width:1px}
+  .groupIcon.token{font-size:0}
+  .inlineToken.token{width:28px;height:28px;vertical-align:middle;border-radius:50%;margin-right:7px;flex:0 0 auto}
+  .big .inlineToken.token{width:42px;height:42px;margin-right:9px;vertical-align:-10px}
+  .faq summary .inlineToken.token{width:28px;height:28px;vertical-align:-8px;margin-right:8px}
+  .noteTop .inlineToken.token{width:22px;height:22px;margin-right:5px;vertical-align:-6px}
+  @media (max-width:380px){.logo.token{width:31px;height:31px}.groupIcon.token{width:30px;height:30px}.inlineToken.token{width:24px;height:24px}.big .inlineToken.token{width:38px;height:38px}}
+
+
+  /* v29 视觉统一：铜牌 TAB、阵营边框、按钮与暗色玻璃卡片统一 */
+  :root{
+    --town-rgb:147,216,132;
+    --outsider-rgb:151,177,205;
+    --minion-rgb:219,154,91;
+    --demon-rgb:255,109,109;
+    --copper-a:#ffe1a0;
+    --copper-b:#d49a48;
+    --copper-c:#6d3e1b;
+  }
+  .card,.tinyStat,.assistantCard,.flowIntro,.flowStep,details.faq{
+    background:
+      radial-gradient(circle at 18% 0%,rgba(240,192,96,.055),transparent 34%),
+      linear-gradient(180deg,rgba(255,255,255,.035),rgba(255,255,255,.006) 46%,rgba(0,0,0,.08)),
+      rgba(17,23,35,.94);
+    border-color:rgba(218,169,91,.16);
+    box-shadow:0 9px 20px rgba(0,0,0,.30),inset 0 1px 0 rgba(255,255,255,.035);
+  }
+  .card.light{background:radial-gradient(circle at 18% 0%,rgba(124,199,255,.055),transparent 34%),linear-gradient(180deg,rgba(255,255,255,.035),rgba(255,255,255,.006)),rgba(22,28,42,.96)}
+  .card.warn{background:radial-gradient(circle at 16% 0%,rgba(240,192,96,.11),transparent 35%),linear-gradient(180deg,rgba(91,18,24,.30),rgba(30,22,18,.96));border-color:rgba(240,192,96,.28)}
+
+  .btn{
+    border:1px solid rgba(255,225,156,.34);
+    background:linear-gradient(180deg,#ffe0a0 0%,#efbd61 48%,#c98231 100%);
+    color:#2b1900;
+    border-radius:14px;
+    box-shadow:0 6px 14px rgba(0,0,0,.24),inset 0 1px 0 rgba(255,255,255,.48),inset 0 -1px 0 rgba(90,46,12,.22);
+    text-shadow:0 1px 0 rgba(255,245,211,.35);
+  }
+  .btn.secondary{
+    color:#f4ead2;
+    border-color:rgba(218,169,91,.28);
+    background:linear-gradient(180deg,rgba(45,51,68,.96),rgba(25,31,46,.96));
+    box-shadow:0 5px 12px rgba(0,0,0,.22),inset 0 1px 0 rgba(255,255,255,.05);
+    text-shadow:none;
+  }
+  .btn.ghost{
+    color:#f4ead2;
+    border-color:rgba(218,169,91,.24);
+    background:rgba(13,18,28,.50);
+    box-shadow:inset 0 1px 0 rgba(255,255,255,.035);
+    text-shadow:none;
+  }
+  .btn.danger{
+    color:white;
+    border-color:rgba(255,146,146,.36);
+    background:linear-gradient(180deg,#d95757,#8f2028);
+    text-shadow:0 1px 0 rgba(0,0,0,.22);
+  }
+
+  .tab{
+    position:relative;
+    isolation:isolate;
+    overflow:hidden;
+    border:1px solid rgba(218,169,91,.26);
+    background:linear-gradient(180deg,rgba(42,45,57,.94),rgba(18,23,34,.92) 58%,rgba(10,14,22,.96));
+    color:#e8ddc9;
+    border-radius:999px;
+    box-shadow:0 5px 12px rgba(0,0,0,.22),inset 0 1px 0 rgba(255,255,255,.055),inset 0 -1px 0 rgba(0,0,0,.34);
+    text-shadow:0 1px 0 rgba(0,0,0,.38);
+  }
+  .tab:before{
+    content:"";
+    position:absolute;
+    inset:1px 2px auto 2px;
+    height:48%;
+    border-radius:999px;
+    background:linear-gradient(180deg,rgba(255,255,255,.13),rgba(255,255,255,0));
+    pointer-events:none;
+    z-index:-1;
+  }
+  .tab.active{
+    color:#281700;
+    border-color:rgba(255,231,166,.76);
+    background:linear-gradient(180deg,#fff0bd 0%,#f2c66f 42%,#bd762f 100%);
+    box-shadow:0 7px 18px rgba(240,192,96,.25),0 0 0 1px rgba(240,192,96,.12),inset 0 1px 0 rgba(255,255,255,.62),inset 0 -1px 0 rgba(93,45,10,.30);
+    text-shadow:0 1px 0 rgba(255,244,204,.45);
+  }
+  .footerNav{
+    background:linear-gradient(180deg,rgba(16,19,30,.88),rgba(7,9,15,.98));
+    border-top-color:rgba(218,169,91,.22);
+    box-shadow:0 -10px 26px rgba(0,0,0,.34),inset 0 1px 0 rgba(255,255,255,.035);
+  }
+  .footerNav .tab{letter-spacing:.1px}
+
+  .roleItem{
+    --role-rgb:240,192,96;
+    position:relative;
+    border-color:rgba(var(--role-rgb),.18);
+    background:
+      radial-gradient(circle at 18% 0%,rgba(var(--role-rgb),.055),transparent 32%),
+      linear-gradient(180deg,rgba(255,255,255,.028),rgba(255,255,255,.005) 50%,rgba(0,0,0,.10)),
+      #111722;
+    box-shadow:0 6px 14px rgba(0,0,0,.22),inset 0 1px 0 rgba(255,255,255,.025);
+  }
+  .roleItem:before{
+    content:"";
+    position:absolute;
+    left:0;top:0;bottom:0;width:3px;
+    background:linear-gradient(180deg,rgba(var(--role-rgb),.72),rgba(var(--role-rgb),.14));
+    opacity:.75;
+    pointer-events:none;
+  }
+  .roleItem.townsfolk{--role-rgb:var(--town-rgb);border-color:rgba(var(--town-rgb),.24)}
+  .roleItem.outsider{--role-rgb:var(--outsider-rgb);border-color:rgba(var(--outsider-rgb),.25)}
+  .roleItem.minion{--role-rgb:var(--minion-rgb);border-color:rgba(var(--minion-rgb),.28)}
+  .roleItem.demon{--role-rgb:var(--demon-rgb);border-color:rgba(var(--demon-rgb),.32)}
+  .roleItem[open]{box-shadow:0 11px 24px rgba(0,0,0,.32),0 0 0 1px rgba(var(--role-rgb),.10),inset 0 1px 0 rgba(255,255,255,.035)}
+  .roleHead{padding:10px 10px 10px 11px;min-height:57px}
+  .roleItem[open] .roleHead{background:linear-gradient(180deg,rgba(var(--role-rgb),.055),rgba(255,255,255,0))}
+  .roleBody{border-top-color:rgba(var(--role-rgb),.14);background:linear-gradient(180deg,rgba(var(--role-rgb),.035),rgba(0,0,0,.055))}
+  .roleName{letter-spacing:.15px}
+  .chev{color:rgba(244,234,210,.58)}
+  .roleItem[open] .chev{color:rgba(var(--role-rgb),.92)}
+  .faqLink{border-color:rgba(var(--role-rgb),.18);background:rgba(12,17,26,.62)}
+  .faqLink:active{color:#ffe0a0;border-color:rgba(240,192,96,.58)}
+
+  .roleItem .logo.token,.goalBadge.token{
+    background:radial-gradient(circle at 34% 24%,rgba(255,255,255,.23),rgba(255,255,255,0) 32%),linear-gradient(145deg,var(--token-a),var(--token-b) 48%,var(--token-c));
+    border-color:var(--token-border);
+    box-shadow:0 0 0 2px rgba(240,192,96,.045),0 7px 13px rgba(0,0,0,.30),inset 0 0 0 1px rgba(255,255,255,.04),inset 0 -8px 12px rgba(0,0,0,.18);
+  }
+  .goalBadge.token{width:40px;height:40px;font-size:0;display:grid;place-items:center;border-radius:50%;padding:0;overflow:hidden;position:relative;isolation:isolate;flex:0 0 auto;color:var(--token-line)}
+  .goalBadge.token svg{width:72%;height:72%;display:block;stroke:currentColor;fill:none;stroke-width:1.75;stroke-linecap:round;stroke-linejoin:round;position:relative;z-index:1;filter:drop-shadow(0 1px 1px rgba(0,0,0,.52))}
+  .goalBadge.token svg .softFill{fill:currentColor;stroke:none;opacity:.16}
+  .goalBadge.token svg .hotFill{fill:#ff6d6d;stroke:none;opacity:.22}
+  .goalCard:after{content:"";right:10px;bottom:-12px;width:68px;height:68px;border-radius:50%;background:radial-gradient(circle,rgba(240,192,96,.06),transparent 64%);opacity:1}
+  .goalCard.good{border-color:rgba(var(--town-rgb),.40)}
+  .goalCard.evil{border-color:rgba(var(--demon-rgb),.40)}
+
+  .groupTitle{letter-spacing:.25px}
+  .groupTitle .groupIcon.token{box-shadow:0 0 0 2px rgba(240,192,96,.04),0 7px 14px rgba(0,0,0,.26),inset 0 0 0 1px rgba(255,255,255,.035)}
+
+  @media (max-width:430px){
+    .footerNav{gap:4px;padding:7px 6px calc(7px + env(safe-area-inset-bottom))}
+    .footerNav .tab{padding:9px 4px;font-size:12px}
+  }
+  @media (max-width:360px){
+    .footerNav .tab{font-size:11.5px;padding-left:3px;padding-right:3px}
+    .roleHead{gap:7px;padding-left:8px;padding-right:8px}
+    .roleName{font-size:16.5px}
+    .logo.token{width:30px;height:30px}
+  }
+
+
+  /* v30 角色页精修：展开态层次、小屏可读性 */
+  #roles{padding-top:1px}
+  .rolePageHeader{margin:8px 0 12px}
+  .roleHintStrip{
+    display:flex;
+    gap:6px;
+    flex-wrap:wrap;
+    margin:8px 1px 2px;
+  }
+  .roleHintStrip span{
+    display:inline-flex;
+    align-items:center;
+    min-height:28px;
+    padding:5px 9px;
+    border:1px solid rgba(218,169,91,.18);
+    border-radius:999px;
+    background:rgba(13,18,28,.58);
+    color:#cfd6e5;
+    font-size:12px;
+    font-weight:800;
+    box-shadow:inset 0 1px 0 rgba(255,255,255,.035);
+  }
+  .roleGroup{margin:14px 0 16px}
+  .groupTitle{margin:15px 2px 9px}
+  .groupName{display:inline-flex;align-items:center}
+  .groupCount{
+    margin-left:auto;
+    color:#b8c1d2;
+    font-size:12px;
+    font-weight:900;
+    border:1px solid rgba(218,169,91,.18);
+    border-radius:999px;
+    padding:3px 8px;
+    background:rgba(12,17,26,.52);
+  }
+  .roleGrid{gap:9px}
+  .roleItem{border-radius:17px;overflow:hidden}
+  .roleItem[open]{border-radius:18px}
+  .roleHead{gap:9px;min-height:60px;padding:10px 10px 10px 11px}
+  .roleItem[open] .roleHead{min-height:64px;padding-bottom:11px}
+  .roleItem[open] .logo.token{width:38px;height:38px}
+  .roleName{font-size:17.5px;line-height:1.08;display:flex;align-items:center;gap:5px;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .roleMeta{display:block;margin-top:4px;color:#9faabc;font-size:11.5px;font-weight:800;line-height:1.05;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .mineBadge{
+    display:inline-grid;
+    place-items:center;
+    min-width:22px;
+    height:20px;
+    padding:0 6px;
+    border-radius:999px;
+    color:#2b1900;
+    background:linear-gradient(180deg,#ffe2a2,#d89b48);
+    border:1px solid rgba(255,231,166,.55);
+    font-size:11px;
+    font-weight:1000;
+    opacity:1;
+    flex:0 0 auto;
+  }
+  .chev{font-size:20px;line-height:1;flex:0 0 auto}
+  .roleBody{padding:12px;grid-template-columns:minmax(0,1fr) auto;gap:12px}
+  .roleCopy{min-width:0}
+  .abilityLabel{
+    color:#f1c76b;
+    font-size:11.5px;
+    font-weight:1000;
+    letter-spacing:.12em;
+    margin:0 0 5px;
+  }
+  .secondaryLabel{margin-top:10px;color:#9fb3cf}
+  .roleBody .explain{font-size:15.8px;line-height:1.48;margin:0;color:#fff6e8}
+  .playerExplain{font-size:14px;line-height:1.46;margin:0;color:#cfd6e5}
+  .roleActions{justify-content:flex-start;min-width:88px}
+  .faqLink{
+    min-height:38px;
+    border-style:solid;
+    border-radius:999px;
+    color:#efd7a4;
+    font-weight:900;
+    box-shadow:inset 0 1px 0 rgba(255,255,255,.035);
+  }
+  .faqLink:active{transform:translateY(1px)}
+  @media (max-width:430px){
+    .roleHintStrip span{flex:1 1 auto;justify-content:center;padding-left:6px;padding-right:6px}
+    .roleGrid{gap:8px}
+    .roleHead{min-height:58px;padding-left:9px;padding-right:8px}
+    .roleName{font-size:17px}
+    .roleMeta{font-size:11px}
+    .roleBody{grid-template-columns:1fr}
+    .roleActions{min-width:0}
+    .faqLink{width:100%}
+  }
+  @media (max-width:380px){
+    .roleHintStrip{gap:5px}
+    .roleHintStrip span{font-size:11.2px;min-height:27px}
+    .roleGrid{gap:7px}
+    .roleHead{gap:7px;padding-left:8px;padding-right:7px}
+    .roleName{font-size:16.3px}
+    .roleMeta{display:none}
+    .roleItem[open] .roleMeta{display:block}
+    .myRoleIdentity{font-size:24px}
+    .myRoleIdentity .inlineToken.token{width:39px;height:39px}
+  }
+  @media (max-width:350px){
+    .roleName{font-size:15.8px}
+    .logo.token{width:29px;height:29px}
+  }
+
+
+  /* v32 规则 / FAQ 页精修：现场速查、角色搜索、跳转高亮 */
+  #rules{padding-top:2px}
+  .ruleHero{
+    position:relative;
+    overflow:hidden;
+    padding:14px 13px;
+    border-color:rgba(240,192,96,.24)!important;
+    background:
+      radial-gradient(circle at 16% 0%,rgba(240,192,96,.16),transparent 34%),
+      linear-gradient(180deg,rgba(33,27,20,.88),rgba(13,18,28,.96))!important;
+  }
+  .ruleHero:after{
+    content:"";
+    position:absolute;
+    right:-28px;
+    top:-30px;
+    width:118px;
+    height:118px;
+    border-radius:50%;
+    background:radial-gradient(circle,rgba(240,192,96,.20),transparent 66%);
+    pointer-events:none;
+  }
+  .ruleHero h2{margin:0 0 6px;font-size:20px;color:#ffe0a0;text-shadow:0 0 14px rgba(240,192,96,.12)}
+  .ruleHero p{margin:0;color:#d8deec;font-size:14px;line-height:1.45;max-width:390px}
+  .ruleJumpRow{display:grid;grid-template-columns:1fr 1fr 1fr;gap:7px;margin-top:12px}
+  .ruleJump{
+    min-height:38px;
+    border-radius:999px;
+    border:1px solid rgba(218,169,91,.24);
+    background:linear-gradient(180deg,rgba(37,43,58,.88),rgba(15,20,31,.88));
+    color:#f4ead2;
+    font-weight:1000;
+    font-size:12.5px;
+    box-shadow:inset 0 1px 0 rgba(255,255,255,.04);
+  }
+  .ruleJump:active{transform:translateY(1px);border-color:rgba(240,192,96,.54);color:#ffe0a0}
+  .ruleClusterTitle{
+    display:flex;
+    align-items:center;
+    gap:9px;
+    margin:14px 2px 8px;
+    color:#ffe0a0;
+    font-size:18px;
+    font-weight:1000;
+    text-shadow:0 0 12px rgba(240,192,96,.10);
+    scroll-margin-top:88px;
+  }
+  .ruleClusterTitle .miniToken{
+    width:30px;
+    height:30px;
+    display:grid;
+    place-items:center;
+    border-radius:50%;
+    border:1px solid rgba(240,192,96,.24);
+    background:radial-gradient(circle at 36% 26%,rgba(255,255,255,.16),transparent 34%),linear-gradient(180deg,#201918,#101620);
+    color:#f1c76b;
+    font-size:15px;
+    box-shadow:0 0 14px rgba(240,192,96,.07),inset 0 1px 0 rgba(255,255,255,.04);
+  }
+  .ruleBasics{display:grid;gap:9px}
+  details.faq{
+    position:relative;
+    overflow:hidden;
+    padding:0;
+    border-radius:16px;
+    border-color:rgba(218,169,91,.16);
+  }
+  details.faq:before{
+    content:"";
+    position:absolute;
+    left:0;
+    top:0;
+    bottom:0;
+    width:3px;
+    opacity:.72;
+    background:linear-gradient(180deg,rgba(240,192,96,.62),rgba(124,199,255,.24));
+  }
+  details.faq summary{
+    list-style:none;
+    display:flex;
+    align-items:center;
+    gap:8px;
+    min-height:48px;
+    padding:12px 38px 12px 12px;
+    font-size:16.5px;
+    line-height:1.2;
+  }
+  details.faq summary::-webkit-details-marker{display:none}
+  details.faq summary:after{
+    content:"›";
+    position:absolute;
+    right:14px;
+    top:12px;
+    color:#b9c2d3;
+    font-size:21px;
+    transition:.16s transform;
+  }
+  details.faq[open] summary:after{transform:rotate(90deg);color:#ffe0a0}
+  details.faq p{
+    margin:0;
+    padding:0 13px 10px 16px;
+    color:#eef2fb;
+    font-size:14.8px;
+    line-height:1.52;
+  }
+  details.faq p.small{color:#aeb6c8;font-size:13.2px}
+  .faqBadge{
+    display:inline-grid;
+    place-items:center;
+    min-width:42px;
+    height:24px;
+    padding:0 8px;
+    border-radius:999px;
+    border:1px solid rgba(218,169,91,.24);
+    background:rgba(13,18,28,.72);
+    color:#f1c76b;
+    font-size:11.5px;
+    font-weight:1000;
+    flex:0 0 auto;
+  }
+  .faqBadge.good{color:#9be08c;border-color:rgba(147,216,132,.28)}
+  .faqBadge.info{color:#9fd0ff;border-color:rgba(124,199,255,.28)}
+  .faqBadge.warn{color:#ffe0a0;border-color:rgba(240,192,96,.30)}
+  .faqBadge.evil{color:#ff9a9a;border-color:rgba(255,109,109,.30)}
+  .faqTitleText{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  .roleFaqPanel{
+    border:1px solid rgba(218,169,91,.13);
+    border-radius:18px;
+    padding:10px;
+    background:linear-gradient(180deg,rgba(255,255,255,.025),rgba(255,255,255,0)),rgba(12,17,26,.54);
+    box-shadow:inset 0 1px 0 rgba(255,255,255,.025);
+  }
+  .faqSearchBox{position:relative;margin:0 0 10px}
+  .faqSearchBox input{
+    width:100%;
+    min-height:44px;
+    border-radius:15px;
+    border:1px solid rgba(218,169,91,.22);
+    background:rgba(8,12,19,.72);
+    color:#fff6e8;
+    padding:10px 12px 10px 38px;
+    font-size:15px;
+    font-family:inherit;
+    outline:none;
+    box-shadow:inset 0 1px 0 rgba(255,255,255,.035);
+  }
+  .faqSearchBox input:focus{border-color:rgba(240,192,96,.52);box-shadow:0 0 0 3px rgba(240,192,96,.08)}
+  .faqSearchBox:before{content:"";position:absolute;left:15px;top:14px;width:12px;height:12px;border:2px solid #d4b36c;border-radius:50%;z-index:1;opacity:.92}
+  .faqSearchBox:after{content:"";position:absolute;left:27px;top:28px;width:8px;height:2px;background:#d4b36c;border-radius:999px;transform:rotate(45deg);z-index:1;opacity:.92}
+  .faqSearchHint{font-size:12.5px;color:#9faabc;margin:6px 2px 0}
+  .faqRole{margin:8px 0;scroll-margin-top:92px}
+  .faqRole.townsfolk:before{background:linear-gradient(180deg,rgba(147,216,132,.58),rgba(240,192,96,.22))}
+  .faqRole.outsider:before{background:linear-gradient(180deg,rgba(151,177,205,.62),rgba(124,199,255,.20))}
+  .faqRole.minion:before{background:linear-gradient(180deg,rgba(219,154,91,.62),rgba(255,109,109,.24))}
+  .faqRole.demon:before{background:linear-gradient(180deg,rgba(255,109,109,.72),rgba(240,192,96,.24))}
+  .faqRole.flash{
+    outline:none;
+    border-color:rgba(240,192,96,.82)!important;
+    box-shadow:0 0 0 3px rgba(240,192,96,.14),0 12px 24px rgba(0,0,0,.34)!important;
+  }
+  .faqRole.hiddenBySearch{display:none}
+  .faqEmpty{
+    display:none;
+    border:1px dashed rgba(218,169,91,.22);
+    border-radius:14px;
+    padding:14px;
+    color:#aeb6c8;
+    text-align:center;
+    font-weight:900;
+    background:rgba(8,12,19,.48);
+  }
+  .faqEmpty.show{display:block}
+  @media (max-width:430px){
+    .ruleJumpRow{grid-template-columns:1fr 1fr 1fr;gap:6px}
+    .ruleJump{font-size:12px;padding-left:4px;padding-right:4px}
+    details.faq summary{font-size:16px;min-height:46px;padding-right:34px}
+    details.faq p{font-size:14.5px}
+    .roleFaqPanel{padding:8px}
+  }
+  @media (max-width:380px){
+    .ruleHero{padding:13px 12px}
+    .ruleJumpRow{grid-template-columns:1fr 1fr}
+    .faqBadge{min-width:38px;height:23px;font-size:11px;padding:0 7px}
+    .faqTitleText{white-space:normal}
+    details.faq summary{align-items:flex-start}
+    .faqSearchBox input{font-size:14px}
+  }
+
+
+  /* v31 记录页精修：记录面板、防窥层级、手写纸张质感 */
+  #notes{padding-top:2px}
+  .notesShell{display:grid;gap:10px;margin-top:8px}
+  .notesHero{
+    position:relative;
+    overflow:hidden;
+    border-radius:20px;
+    padding:13px 13px 12px;
+    border:1px solid rgba(218,169,91,.22);
+    background:
+      radial-gradient(circle at 15% 0%,rgba(240,192,96,.13),transparent 34%),
+      linear-gradient(180deg,rgba(255,255,255,.04),rgba(255,255,255,.006) 50%,rgba(0,0,0,.11)),
+      rgba(15,20,31,.96);
+    box-shadow:0 10px 22px rgba(0,0,0,.30),inset 0 1px 0 rgba(255,255,255,.04);
+  }
+  .notesHero:before{content:"";position:absolute;left:0;top:0;bottom:0;width:4px;background:linear-gradient(180deg,rgba(240,192,96,.78),rgba(240,192,96,.14));pointer-events:none}
+  .notesHeroTop{display:flex;align-items:center;gap:9px;flex-wrap:wrap}
+  .notesTitle{font-size:20px;font-weight:1000;letter-spacing:.2px;color:#ffe0a0;line-height:1.1}
+  .notesSub{margin:7px 0 0;color:#c8d0de;font-size:13px;line-height:1.42}
+  .identityChip{
+    display:inline-flex;
+    align-items:center;
+    gap:6px;
+    min-height:34px;
+    max-width:100%;
+    border:1px solid rgba(218,169,91,.22);
+    border-radius:999px;
+    padding:5px 9px;
+    background:rgba(8,12,20,.48);
+    color:#efe5d1;
+    font-size:13px;
+    font-weight:900;
+    box-shadow:inset 0 1px 0 rgba(255,255,255,.035);
+  }
+  .identityChip .inlineToken.token{width:24px;height:24px;margin:0;vertical-align:middle}
+  .identityChip .identityText{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  .privacyBtn{margin-left:auto;min-height:36px;padding:8px 11px;border-radius:999px}
+  .notesHiddenCard{
+    min-height:260px;
+    display:grid;
+    place-items:center;
+    text-align:center;
+    border:1px dashed rgba(218,169,91,.26);
+    border-radius:18px;
+    background:
+      radial-gradient(circle at 50% 0%,rgba(240,192,96,.08),transparent 42%),
+      rgba(8,12,20,.52);
+    color:#cfd6e5;
+    font-weight:900;
+    padding:24px 16px;
+  }
+  .notesPanel{
+    border-radius:19px;
+    padding:12px;
+    border:1px solid rgba(218,169,91,.16);
+    background:
+      radial-gradient(circle at 12% 0%,rgba(240,192,96,.055),transparent 32%),
+      linear-gradient(180deg,rgba(255,255,255,.03),rgba(255,255,255,.004)),
+      rgba(14,19,30,.94);
+    box-shadow:0 9px 20px rgba(0,0,0,.24),inset 0 1px 0 rgba(255,255,255,.03);
+  }
+  .notesPanelHead{display:flex;align-items:center;gap:8px;margin-bottom:8px}
+  .notesPanelTitle{font-size:16px;font-weight:1000;color:#fff6e8}
+  .notesPanelHint{margin-left:auto;color:#9faabc;font-size:12px;font-weight:800}
+  .noteArea{
+    min-height:152px;
+    border-color:rgba(218,169,91,.20);
+    background:
+      linear-gradient(180deg,rgba(255,255,255,.018),rgba(255,255,255,0)),
+      #0a0e16;
+    border-radius:16px;
+    box-shadow:inset 0 1px 0 rgba(255,255,255,.025),0 6px 14px rgba(0,0,0,.16);
+  }
+  .noteArea:focus{outline:none;border-color:rgba(240,192,96,.48);box-shadow:0 0 0 3px rgba(240,192,96,.08),inset 0 1px 0 rgba(255,255,255,.03)}
+  .canvasWrap{
+    height:420px;
+    border-color:rgba(218,169,91,.26);
+    background:
+      radial-gradient(circle at 18% 12%,rgba(255,255,255,.52),transparent 26%),
+      linear-gradient(0deg,rgba(80,58,26,.055) 1px,transparent 1px) 0 0/100% 28px,
+      linear-gradient(90deg,rgba(80,58,26,.045) 1px,transparent 1px) 0 0/28px 100%,
+      #f2ebdc;
+    box-shadow:0 10px 18px rgba(0,0,0,.22),inset 0 0 0 1px rgba(255,255,255,.34),inset 0 16px 36px rgba(255,255,255,.28);
+  }
+  .toolRow.notesTools{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-top:10px}
+  .notesLocalHint{display:flex;align-items:flex-start;gap:7px;color:#aeb7c7;font-size:12.5px;line-height:1.36;margin:9px 2px 0}
+  .notesLocalHint:before{content:"";width:7px;height:7px;border-radius:50%;margin-top:5px;background:rgba(240,192,96,.72);box-shadow:0 0 10px rgba(240,192,96,.25);flex:0 0 auto}
+  @media (max-width:430px){
+    .notesHeroTop{gap:7px}
+    .identityChip{flex:1 1 auto;min-width:0}
+    .privacyBtn{margin-left:0;flex:0 0 auto}
+    .canvasWrap{height:390px}
+    .toolRow.notesTools{grid-template-columns:1fr;gap:7px}
+  }
+  @media (max-width:380px){
+    .notesTitle{font-size:18px}
+    .notesSub{font-size:12.5px}
+    .noteArea{min-height:142px;font-size:15.5px}
+    .canvasWrap{height:350px}
+  }
+
+
+
+  /* v33 首页非 emoji 化：统一 SVG 小徽章 */
+  .uiIcon{
+    --ui-line:#ffe0a0;
+    --ui-fill:rgba(240,192,96,.18);
+    color:var(--ui-line);
+    font-size:0!important;
+  }
+  .uiIcon svg{
+    width:68%;
+    height:68%;
+    display:block;
+    stroke:currentColor;
+    fill:none;
+    stroke-width:1.8;
+    stroke-linecap:round;
+    stroke-linejoin:round;
+    filter:drop-shadow(0 1px 1px rgba(0,0,0,.56));
+  }
+  .uiIcon svg .softFill{fill:currentColor;stroke:none;opacity:.15}
+  .uiIcon svg .coolFill{fill:#b9d8ff;stroke:none;opacity:.16}
+  .uiIcon svg .warmFill{fill:#f0c060;stroke:none;opacity:.18}
+  .uiIcon svg .hotFill{fill:#ff6d6d;stroke:none;opacity:.20}
+  .ui-good{--ui-line:#ffe0a0;--ui-fill:rgba(147,216,132,.18)}
+  .ui-info{--ui-line:#cfe7ff;--ui-fill:rgba(124,199,255,.18)}
+  .ui-warn{--ui-line:#ffe0a0;--ui-fill:rgba(240,192,96,.18)}
+  .ui-evil{--ui-line:#ffd08a;--ui-fill:rgba(255,109,109,.22)}
+  .homeSectionTitle .badge.uiIcon,
+  .tinyStat b .ico.uiIcon,
+  .assistantTitleIcon{
+    display:inline-grid;
+    place-items:center;
+    flex:0 0 auto;
+  }
+  .homeSectionTitle .badge.uiIcon svg{width:67%;height:67%}
+  .tinyStat b .ico.uiIcon svg{width:70%;height:70%}
+  .assistantTitleIcon{
+    width:29px;
+    height:29px;
+    border-radius:50%;
+    border:1px solid rgba(240,192,96,.28);
+    background:rgba(7,11,18,.55);
+    box-shadow:0 0 14px rgba(240,192,96,.10),inset 0 1px 0 rgba(255,255,255,.05);
+  }
+  .assistantTitleIcon svg{width:68%;height:68%}
+  body[data-tab="home"] .homeSectionTitle .badge.uiIcon,
+  body[data-tab="home"] .tinyStat b .ico.uiIcon,
+  body[data-tab="home"] .assistantTitleIcon{
+    background:rgba(7,11,18,.68)!important;
+    border-color:rgba(240,192,96,.30)!important;
+    box-shadow:0 0 16px rgba(240,192,96,.12),inset 0 1px 0 rgba(255,255,255,.05)!important;
+    backdrop-filter:blur(7px);
+  }
+  @media (max-width:380px){
+    .assistantTitleIcon{width:27px;height:27px}
+    .tinyStat b .ico.uiIcon{width:24px;height:24px}
+  }
+
+
+  /* v35 移动端收尾：360/390 小屏、底部 TAB、记录页按钮、FAQ 搜索、流程座位表 */
+  html{scroll-padding-top:86px}
+  .wrap{width:100%;padding-bottom:calc(92px + env(safe-area-inset-bottom));overflow-x:hidden}
+  .tabs{scrollbar-width:none;-webkit-overflow-scrolling:touch}
+  .tabs::-webkit-scrollbar{display:none}
+  .tab{min-height:38px;display:inline-flex;align-items:center;justify-content:center;touch-action:manipulation;-webkit-tap-highlight-color:transparent}
+  .footerNav{padding-bottom:calc(8px + env(safe-area-inset-bottom))}
+  .footerNav .tab{min-height:42px;line-height:1;flex:1 1 0;min-width:0;max-width:none}
+  .roleItem,.roleHead,.nameBox,.roleName,.roleMeta{min-width:0}
+  .roleGrid{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}
+  .roleHead{touch-action:manipulation;-webkit-tap-highlight-color:transparent}
+  .roleBody .explain,.playerExplain{overflow-wrap:anywhere}
+  details.faq summary,.faqSearchBox input,.ruleJump,.flowSwitchBtn,.privacyBtn,.toolRow.notesTools .btn{touch-action:manipulation;-webkit-tap-highlight-color:transparent}
+  .faqSearchBox input{min-height:46px}
+  .ruleJump{min-height:42px}
+  .notesPanelHead{min-width:0}
+  .notesPanelTitle,.notesPanelHint{min-width:0}
+  .notesPanelHint{white-space:nowrap}
+  .toolRow.notesTools .btn{min-height:42px;padding-left:8px;padding-right:8px}
+  .seatRow{min-width:0;overflow:hidden}
+  .seatText{min-width:0}
+  .seatDetail{max-width:100%}
+  .flowIntro,.flowStep,.notesPanel,.roleItem,details.faq{overflow-wrap:anywhere}
+
+  @media (max-width:430px){
+    header{padding-left:10px;padding-right:10px}
+    h1{font-size:18px}
+    .wrap{padding-left:9px;padding-right:9px;padding-bottom:calc(88px + env(safe-area-inset-bottom))}
+    .tabs{gap:5px;padding-top:7px}
+    header .tabs .tab{padding:8px 10px;font-size:12px;min-height:36px}
+    .footerNav{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:4px;padding:7px 6px calc(7px + env(safe-area-inset-bottom));overflow:visible}
+    .footerNav .tab{width:100%;padding:9px 2px;font-size:11.8px;border-radius:13px;letter-spacing:0}
+    .card{border-radius:17px;padding:12px}
+    .goalGrid,.twoCols{grid-template-columns:1fr 1fr;gap:8px}
+    .goalCard{min-width:0;padding:12px 10px;gap:8px}
+    .goalCard b{font-size:16px}
+    .goalCard span{font-size:13.2px}
+    .roleGrid{gap:7px}
+    .roleHead{min-height:56px;gap:7px;padding:9px 7px 9px 8px}
+    .roleName{font-size:16.2px;letter-spacing:0}
+    .roleMeta{font-size:10.7px;margin-top:3px}
+    .logo.token{width:30px;height:30px}
+    .roleItem[open] .roleHead{min-height:61px}
+    .roleItem[open] .logo.token{width:36px;height:36px}
+    .roleBody{padding:11px;gap:10px}
+    .roleBody .explain{font-size:15.2px}
+    .playerExplain{font-size:13.6px}
+    .mineBadge{height:19px;min-width:20px;padding:0 5px;font-size:10px}
+    .ruleJumpRow{gap:6px}
+    .faqSearchBox input{font-size:14.5px;padding-left:42px}
+    .faqSearchBox:before{left:14px;top:15px}
+    .faqSearchBox:after{left:26px;top:29px}
+    .notesHeroTop{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:8px}
+    .notesTitle{grid-column:1 / -1;font-size:19px}
+    .identityChip{min-width:0;width:100%;justify-content:flex-start}
+    .privacyBtn{justify-self:end;margin-left:0;white-space:nowrap}
+    .notesPanel{padding:11px}
+    .toolRow.notesTools{grid-template-columns:1fr 1fr;gap:7px}
+    .toolRow.notesTools .btn.danger{grid-column:1 / -1}
+    .canvasWrap{height:380px}
+    .flowSwitch{gap:6px}
+    .flowSwitchBtn{font-size:12px;padding:9px 7px;min-height:42px}
+    .flowGuide{grid-template-columns:1fr 1fr;gap:7px}
+    .guideItem{padding:10px 9px}
+    .flowLegend{gap:5px}
+    .flowTag{font-size:11.5px;padding:4px 7px}
+    .timeline{padding-left:17px}
+    .timeline:before{left:6px}
+    .flowStep{padding:12px 10px;margin:9px 0;border-radius:15px}
+    .flowStep:before{left:-15px;top:19px;width:9px;height:9px;box-shadow:0 0 0 3px #0b0d14,0 0 14px rgba(240,192,96,.18)}
+    .flowStep h3{font-size:16.2px;gap:7px}
+    .seatRow{grid-template-columns:auto auto minmax(0,1fr);gap:7px;padding:8px 8px;min-height:46px}
+    .seatToken{width:29px;height:29px}
+    .seatRow .seatNo{width:23px;height:23px;font-size:11.5px}
+    .seatRoleName{font-size:14px}
+    .seatDetail{font-size:11.5px}
+  }
+
+  @media (max-width:380px){
+    .wrap{padding-left:8px;padding-right:8px}
+    .footerNav{gap:3px;padding-left:5px;padding-right:5px}
+    .footerNav .tab{font-size:11px;padding:8px 1px;border-radius:12px;min-height:40px}
+    header .tabs .tab{font-size:11.8px;padding-left:8px;padding-right:8px}
+    .goalCard{padding:11px 9px;min-height:106px}
+    .goalBadge.token{width:35px;height:35px}
+    .goalCard b{font-size:15.2px}
+    .goalCard span{font-size:12.6px;line-height:1.36}
+    .tinyStat{padding:10px 9px;min-height:94px}
+    .tinyStat b{font-size:14px}
+    .tinyStat span{font-size:12.5px}
+    .roleHintStrip span{font-size:11px;padding-left:5px;padding-right:5px}
+    .roleGrid{gap:6px}
+    .roleItem{border-radius:15px}
+    .roleHead{gap:6px;min-height:53px;padding-left:7px;padding-right:6px}
+    .roleName{font-size:15.5px}
+    .roleMeta{display:none}
+    .roleItem[open] .roleMeta{display:block;font-size:10.8px}
+    .logo.token{width:28px;height:28px}
+    .chev{font-size:17px}
+    .roleItem[open] .logo.token{width:34px;height:34px}
+    .ruleJumpRow{grid-template-columns:1fr 1fr;gap:6px}
+    .ruleJump{min-height:40px}
+    .faqSearchBox input{min-height:44px;font-size:14px;padding-left:40px}
+    .notesHeroTop{grid-template-columns:1fr}
+    .privacyBtn{width:100%;justify-self:stretch}
+    .notesSub{font-size:12.3px}
+    .toolRow.notesTools{grid-template-columns:1fr}
+    .toolRow.notesTools .btn.danger{grid-column:auto}
+    .canvasWrap{height:340px}
+    .flowGuide{grid-template-columns:1fr}
+    .flowSwitchBtn{font-size:11.7px;padding-left:5px;padding-right:5px}
+    .flowTag{font-size:11px}
+    .flowStep h3{font-size:15.8px}
+    .quote{font-size:14px}
+    .seatRow{gap:6px;padding:7px}
+    .seatToken{width:27px;height:27px}
+    .seatToken svg{width:18px;height:18px}
+    .seatRoleName{font-size:13.6px}
+    .seatDetail{font-size:11px;white-space:normal;line-height:1.2}
+  }
+
+  @media (max-width:350px){
+    .wrap{padding-left:6px;padding-right:6px}
+    .footerNav .tab{font-size:10.6px}
+    .roleName{font-size:15px}
+    .logo.token{width:27px;height:27px}
+    .goalGrid,.twoCols{gap:6px}
+    .goalCard{gap:6px}
+  }
+
+  /* v36 发布前整理：标题、元信息、本地存储安全性、GitHub Pages 归档版。 */
+
 </style>
 </head>
-<body>
+<body data-build="v36-release-ready">
 <header>
   <h1>血染钟楼离线助手</h1>
   <div class="tabs" id="topTabs"></div>
@@ -300,8 +1129,15 @@
 <div class="modal" id="modal"><div class="modalBox" id="modalBox"></div></div>
 <div class="toast" id="toast"></div>
 <script>
-const VERSION = 'player-1.6.6-html-overlay-bg';
-const LS_KEY = 'botc_player_manual_cn_v2';
+const APP_META = {
+  name: '血染钟楼玩家离线助手',
+  version: 'v36-release-ready',
+  scope: 'player-offline-single-file',
+  storageKey: 'botc_player_manual_cn_v2'
+};
+const VERSION = 'player-1.8.0-release-v36';
+// 发布前注意：不要随意修改 LS_KEY，否则已保存的身份、文字备注和手写记录会被当成新数据。
+const LS_KEY = APP_META.storageKey;
 const ROLES = {
   '洗衣妇': {en:'Washerwoman', team:'good', type:'镇民', first:true, other:false, ability:'第一夜得知：两个玩家中有一人是某个镇民。', player:'你会知道一个镇民身份，并看到两个玩家；这两人里至少有一个真的是这个镇民。'},
   '图书管理员': {en:'Librarian', team:'good', type:'镇民', first:true, other:false, ability:'第一夜得知：两个玩家中有一人是某个外来者；若没有外来者，可得知 0。', player:'你会知道一个外来者身份，并看到两个玩家；这两人里至少有一个是这个外来者。也可能被告知本局没有外来者。'},
@@ -328,10 +1164,61 @@ const ROLES = {
 };
 
 const GROUPS = ['镇民','外来者','爪牙','恶魔'];
-const GROUP_ICON = {'镇民':'☀️','外来者':'❔','爪牙':'🗡️','恶魔':'🔥'};
-const ROLE_ICON = {
-  '洗衣妇':'🧺','图书管理员':'📚','调查员':'🔎','厨师':'🍳','共情者':'💗','占卜师':'🔮','送葬者':'⚰️','僧侣':'🙏','猎手':'🪶','贞洁者':'🌹','杀手':'🎯','士兵':'🛡️','市长':'🏛️',
-  '管家':'🤵','酒鬼':'🍺','隐士':'🕯️','圣徒':'✨','投毒者':'☠️','间谍':'👁️','红唇女郎':'💋','男爵':'🎩','小恶魔':'😈'
+const SVG = {
+  town: `<svg viewBox="0 0 24 24" aria-hidden="true"><circle class="softFill" cx="12" cy="12" r="7"/><path d="M12 4.2v2.1M12 17.7v2.1M4.2 12h2.1M17.7 12h2.1M6.5 6.5 8 8M16 16l1.5 1.5M17.5 6.5 16 8M8 16l-1.5 1.5"/><circle cx="12" cy="12" r="4.1"/></svg>`,
+  outsider: `<svg viewBox="0 0 24 24" aria-hidden="true"><path class="coolFill" d="M12 4.2c3.1 2.1 5.1 4.8 5.1 7.8 0 3.5-2.2 6.5-5.1 7.8-2.9-1.3-5.1-4.3-5.1-7.8 0-3 2-5.7 5.1-7.8Z"/><path d="M12 4.2c3.1 2.1 5.1 4.8 5.1 7.8 0 3.5-2.2 6.5-5.1 7.8-2.9-1.3-5.1-4.3-5.1-7.8 0-3 2-5.7 5.1-7.8Z"/><path d="M9 9.9c.5-1.6 1.6-2.5 3-2.5 1.6 0 2.7 1 2.7 2.3 0 1.8-1.9 2.2-2.5 3.7"/><path d="M12.1 16.6h.1"/></svg>`,
+  minion: `<svg viewBox="0 0 24 24" aria-hidden="true"><path class="warmFill" d="M7.4 5.8 18.2 16.6 16.7 18.1 5.9 7.3Z"/><path d="m5.6 5.6 12.8 12.8M15.7 6.4l1.9 1.9-9.3 9.3-2.1.5.5-2.1 9-9.6Z"/><path d="M14.3 7.7 16.3 9.7"/></svg>`,
+  demon: `<svg viewBox="0 0 24 24" aria-hidden="true"><path class="hotFill" d="M12.2 3.8c3.6 3.3 5.3 6.3 5.3 9.4 0 4-2.6 6.9-5.5 6.9s-5.5-2.9-5.5-6.5c0-2.2 1.2-4 3.1-5.7-.1 1.8.4 3.1 1.4 3.9.1-2.6.6-5.1 1.2-8Z"/><path d="M12.2 3.8c3.6 3.3 5.3 6.3 5.3 9.4 0 4-2.6 6.9-5.5 6.9s-5.5-2.9-5.5-6.5c0-2.2 1.2-4 3.1-5.7-.1 1.8.4 3.1 1.4 3.9.1-2.6.6-5.1 1.2-8Z"/><path d="M9.7 15.2c.7.7 1.4 1 2.3 1s1.6-.3 2.3-1"/></svg>`,
+  default: `<svg viewBox="0 0 24 24" aria-hidden="true"><circle class="softFill" cx="12" cy="12" r="6.8"/><path d="M12 5.2 14.2 9l4.1 1-2.8 3.1.3 4.3L12 15.7l-3.8 1.7.3-4.3L5.7 10l4.1-1L12 5.2Z"/><circle cx="12" cy="12" r="1.6"/></svg>`,
+
+  washerwoman: `<svg viewBox="0 0 24 24" aria-hidden="true"><path class="softFill" d="M6.7 10.2h10.6l-1.1 7.1H7.8Z"/><path d="M6.4 9.6h11.2l-1.2 8.2H7.6L6.4 9.6Z"/><path d="M8.5 9.6c.2-2 1.5-3.3 3.5-3.3s3.3 1.3 3.5 3.3"/><path d="M8.8 13.1c1.1.7 2.1.7 3.2 0 1.1-.7 2.1-.7 3.2 0"/><path d="M9.2 15.7h5.6"/></svg>`,
+  librarian: `<svg viewBox="0 0 24 24" aria-hidden="true"><path class="softFill" d="M5.3 6.4h5.1c.8 0 1.3.4 1.6 1v10.4c-.4-.6-.9-.9-1.7-.9h-5Z"/><path d="M12 7.4c-.4-.7-1-.9-1.8-.9H5.4v10.6h4.9c.8 0 1.4.2 1.7.8V7.4Z"/><path d="M12 7.4c.4-.7 1-.9 1.8-.9h4.8v10.6h-4.9c-.8 0-1.4.2-1.7.8V7.4Z"/><path d="M7.4 9.4h2.6M7.4 12h2.6M14 9.4h2.6M14 12h2.6"/></svg>`,
+  investigator: `<svg viewBox="0 0 24 24" aria-hidden="true"><circle class="softFill" cx="10.4" cy="10.4" r="4.8"/><circle cx="10.4" cy="10.4" r="4.8"/><path d="m14 14 4.7 4.7"/><path d="M8.3 10.1c.5-1.2 1.3-1.8 2.6-1.8"/><path d="M17.3 17.1 18.9 15.5"/></svg>`,
+  chef: `<svg viewBox="0 0 24 24" aria-hidden="true"><path class="softFill" d="M7.2 11.4h9.6v5.2c0 .9-.7 1.6-1.6 1.6H8.8c-.9 0-1.6-.7-1.6-1.6Z"/><path d="M7.1 11.2h9.8v5.3c0 .9-.7 1.6-1.6 1.6H8.7c-.9 0-1.6-.7-1.6-1.6v-5.3Z"/><path d="M6.2 11.2h11.6"/><path d="M8.4 9.1c-.7-1.1.1-2.4 1.5-2.4.3-1.1 1.1-1.8 2.1-1.8s1.8.7 2.1 1.8c1.4 0 2.2 1.3 1.5 2.4"/><path d="M18.5 7.2c1.1 1.1 1.2 2.7.2 4"/><path d="M18.7 11.2h1.2"/></svg>`,
+  empath: `<svg viewBox="0 0 24 24" aria-hidden="true"><path class="softFill" d="M7.5 8.4c0-1.4 1.1-2.5 2.5-2.5.8 0 1.5.4 2 1 .5-.6 1.2-1 2-1 1.4 0 2.5 1.1 2.5 2.5 0 3.2-4.5 5.7-4.5 5.7s-4.5-2.5-4.5-5.7Z"/><path d="M7.5 8.4c0-1.4 1.1-2.5 2.5-2.5.8 0 1.5.4 2 1 .5-.6 1.2-1 2-1 1.4 0 2.5 1.1 2.5 2.5 0 3.2-4.5 5.7-4.5 5.7s-4.5-2.5-4.5-5.7Z"/><path d="M6.4 17.7c1.1-1.7 2.9-2.7 5.6-2.7s4.5 1 5.6 2.7"/></svg>`,
+  fortuneTeller: `<svg viewBox="0 0 24 24" aria-hidden="true"><circle class="softFill" cx="12" cy="10.2" r="5.1"/><circle cx="12" cy="10.2" r="5.1"/><path d="M8.6 18h6.8M9.5 15.6l-1.1 2.4h7.2l-1.1-2.4"/><path d="M9.6 10.2c1.7-1.9 3.1-1.9 4.8 0-1.7 1.9-3.1 1.9-4.8 0Z"/><circle cx="12" cy="10.2" r=".8"/></svg>`,
+  undertaker: `<svg viewBox="0 0 24 24" aria-hidden="true"><path class="softFill" d="M8.2 7.1h7.6l1.7 2v8.2H6.5V9.1Z"/><path d="M8.2 7.1h7.6l1.7 2v8.2H6.5V9.1Z"/><path d="M8.1 17.3h7.8M12 9.1v5.4M9.8 11.3h4.4"/></svg>`,
+  monk: `<svg viewBox="0 0 24 24" aria-hidden="true"><path class="softFill" d="M12 4.5 17.8 7v4.2c0 3.5-2.1 6.4-5.8 8.1-3.7-1.7-5.8-4.6-5.8-8.1V7Z"/><path d="M12 4.5 17.8 7v4.2c0 3.5-2.1 6.4-5.8 8.1-3.7-1.7-5.8-4.6-5.8-8.1V7Z"/><path d="M12 8.1v6.8M9.5 10.6h5"/></svg>`,
+  ravenkeeper: `<svg viewBox="0 0 24 24" aria-hidden="true"><path class="softFill" d="M7 16.9c3.9-.7 7.1-3.6 9.7-8.6-3.9.2-7.4 2.2-9.9 6.3Z"/><path d="M7 16.9c3.9-.7 7.1-3.6 9.7-8.6-3.9.2-7.4 2.2-9.9 6.3Z"/><path d="M7.2 16.7 5.5 19M10.2 14.6l3.9 3M11.7 11.8l3.5 1.5M9.1 13.6c1.2.3 2.2.1 3.1-.6"/></svg>`,
+  virgin: `<svg viewBox="0 0 24 24" aria-hidden="true"><path class="softFill" d="M12 4.8 14.2 9l4.6.7-3.3 3.2.8 4.6L12 15.3l-4.3 2.2.8-4.6-3.3-3.2L9.8 9Z"/><path d="M12 4.8 14.2 9l4.6.7-3.3 3.2.8 4.6L12 15.3l-4.3 2.2.8-4.6-3.3-3.2L9.8 9Z"/><circle cx="12" cy="12" r="2.4"/></svg>`,
+  slayer: `<svg viewBox="0 0 24 24" aria-hidden="true"><circle class="softFill" cx="12" cy="12" r="5.7"/><circle cx="12" cy="12" r="5.7"/><circle cx="12" cy="12" r="2.2"/><path d="M12 4.4v2.2M12 17.4v2.2M4.4 12h2.2M17.4 12h2.2"/></svg>`,
+  soldier: `<svg viewBox="0 0 24 24" aria-hidden="true"><path class="softFill" d="M12 4.7 18 7.2v4.5c0 3.4-2.2 6-6 7.6-3.8-1.6-6-4.2-6-7.6V7.2Z"/><path d="M12 4.7 18 7.2v4.5c0 3.4-2.2 6-6 7.6-3.8-1.6-6-4.2-6-7.6V7.2Z"/><path d="M8.8 12.2h6.4M12 8.5v7.2"/></svg>`,
+  mayor: `<svg viewBox="0 0 24 24" aria-hidden="true"><path class="softFill" d="M6.2 10.3 12 5.7l5.8 4.6v7.5H6.2Z"/><path d="M5.4 10.6 12 5.3l6.6 5.3M6.6 10.2v7.6h10.8v-7.6"/><path d="M10.4 17.8v-4.2h3.2v4.2M8.2 12.3h2M13.8 12.3h2M8.2 14.6h2M13.8 14.6h2"/></svg>`,
+
+  butler: `<svg viewBox="0 0 24 24" aria-hidden="true"><path class="coolFill" d="M7.1 13.4h9.8c-.2-3-2.2-5.2-4.9-5.2s-4.7 2.2-4.9 5.2Z"/><path d="M7.1 13.4h9.8c-.2-3-2.2-5.2-4.9-5.2s-4.7 2.2-4.9 5.2Z"/><path d="M5.8 15h12.4M12 6.3v1.9M10.4 6.3h3.2"/><path d="M8.8 17.3h6.4"/></svg>`,
+  drunk: `<svg viewBox="0 0 24 24" aria-hidden="true"><path class="coolFill" d="M9.7 5.5h4.6v3.3l2.1 5.8c.7 1.9-.4 3.6-2.4 3.6h-4c-2 0-3.1-1.7-2.4-3.6l2.1-5.8Z"/><path d="M9.7 5.5h4.6v3.3l2.1 5.8c.7 1.9-.4 3.6-2.4 3.6h-4c-2 0-3.1-1.7-2.4-3.6l2.1-5.8Z"/><path d="M9.8 8.8h4.4M9.2 13.5c1.4-.8 2.8.8 4.2 0 .5-.3 1-.4 1.5-.2"/></svg>`,
+  recluse: `<svg viewBox="0 0 24 24" aria-hidden="true"><path class="coolFill" d="M12 4.4c3.1 1.4 4.8 3.9 4.8 7.2v6.6H7.2v-6.6c0-3.3 1.7-5.8 4.8-7.2Z"/><path d="M12 4.4c3.1 1.4 4.8 3.9 4.8 7.2v6.6H7.2v-6.6c0-3.3 1.7-5.8 4.8-7.2Z"/><path d="M9.4 12.2c.9-1 1.8-1.5 2.6-1.5s1.7.5 2.6 1.5M9.9 18.2c.1-2.2.8-3.5 2.1-4.2 1.3.7 2 2 2.1 4.2"/></svg>`,
+  saint: `<svg viewBox="0 0 24 24" aria-hidden="true"><circle class="coolFill" cx="12" cy="7.5" r="3.1"/><ellipse cx="12" cy="6.1" rx="4.7" ry="1.7"/><path d="M12 10.6v7.1M9.2 13.4h5.6"/><path d="M7.5 18.2c.9-2.5 2.4-3.8 4.5-3.8s3.6 1.3 4.5 3.8"/></svg>`,
+
+  poisoner: `<svg viewBox="0 0 24 24" aria-hidden="true"><path class="hotFill" d="M10.1 5.6h3.8v3l2.7 5.9c.8 1.7-.3 3.5-2.2 3.5H9.6c-1.9 0-3-1.8-2.2-3.5l2.7-5.9Z"/><path d="M10.1 5.6h3.8v3l2.7 5.9c.8 1.7-.3 3.5-2.2 3.5H9.6c-1.9 0-3-1.8-2.2-3.5l2.7-5.9Z"/><path d="M9.3 14.1c1.6-.9 2.9.7 4.5-.1.5-.2.9-.3 1.4-.2"/><path d="M9.4 5.6h5.2"/></svg>`,
+  spy: `<svg viewBox="0 0 24 24" aria-hidden="true"><path class="hotFill" d="M5.7 12c1.8-3.1 3.9-4.7 6.3-4.7s4.5 1.6 6.3 4.7c-1.8 3.1-3.9 4.7-6.3 4.7S7.5 15.1 5.7 12Z"/><path d="M5.7 12c1.8-3.1 3.9-4.7 6.3-4.7s4.5 1.6 6.3 4.7c-1.8 3.1-3.9 4.7-6.3 4.7S7.5 15.1 5.7 12Z"/><circle cx="12" cy="12" r="2.2"/><path d="M15.8 15.8 18.2 18.2"/></svg>`,
+  scarletWoman: `<svg viewBox="0 0 24 24" aria-hidden="true"><path class="hotFill" d="M6.8 12.1c1.3-1.4 2.4-2.1 3.5-2.1.7 0 1.2.2 1.7.7.5-.5 1-.7 1.7-.7 1.1 0 2.2.7 3.5 2.1-1.3 2-3 3.2-5.2 3.2s-3.9-1.2-5.2-3.2Z"/><path d="M6.8 12.1c1.3-1.4 2.4-2.1 3.5-2.1.7 0 1.2.2 1.7.7.5-.5 1-.7 1.7-.7 1.1 0 2.2.7 3.5 2.1-1.3 2-3 3.2-5.2 3.2s-3.9-1.2-5.2-3.2Z"/><path d="M8 12.2h8M9.7 15.2c1.4 1.2 3.2 1.2 4.6 0"/></svg>`,
+  baron: `<svg viewBox="0 0 24 24" aria-hidden="true"><path class="warmFill" d="M6.3 10.2 8.4 7l3.6 3.4L15.6 7l2.1 3.2-1.1 7H7.4Z"/><path d="M6.3 10.2 8.4 7l3.6 3.4L15.6 7l2.1 3.2-1.1 7H7.4Z"/><path d="M7.1 14h9.8M9.4 17.2h5.2"/></svg>`,
+  imp: `<svg viewBox="0 0 24 24" aria-hidden="true"><path class="hotFill" d="M7 6.1c2.2.3 3.4 1.4 4 2.9h2c.6-1.5 1.8-2.6 4-2.9-.5 1.7-1.2 2.9-2.3 3.7 1.1.9 1.8 2.3 1.8 3.9 0 2.8-2 5-4.5 5s-4.5-2.2-4.5-5c0-1.6.7-3 1.8-3.9C8.2 9 7.5 7.8 7 6.1Z"/><path d="M7 6.1c2.2.3 3.4 1.4 4 2.9h2c.6-1.5 1.8-2.6 4-2.9-.5 1.7-1.2 2.9-2.3 3.7 1.1.9 1.8 2.3 1.8 3.9 0 2.8-2 5-4.5 5s-4.5-2.2-4.5-5c0-1.6.7-3 1.8-3.9C8.2 9 7.5 7.8 7 6.1Z"/><path d="M9.8 13.2h.1M14.1 13.2h.1"/><path d="M10 16c1.1.7 2.9.7 4 0"/></svg>`
+};
+
+const UI_SVG = {
+  target: `<svg viewBox="0 0 24 24" aria-hidden="true"><circle class="softFill" cx="12" cy="12" r="7.2"/><circle cx="12" cy="12" r="7.2"/><circle cx="12" cy="12" r="3.2"/><path d="M12 4.1v2M12 17.9v2M4.1 12h2M17.9 12h2"/></svg>`,
+  contrast: `<svg viewBox="0 0 24 24" aria-hidden="true"><path class="warmFill" d="M5.6 6.6h5.4v10.8H5.6Z"/><path class="coolFill" d="M13 6.6h5.4v10.8H13Z"/><path d="M5.6 6.6h5.4v10.8H5.6ZM13 6.6h5.4v10.8H13Z"/><path d="M8.3 9.1v5.8M15.7 9.1v5.8"/></svg>`,
+  death: `<svg viewBox="0 0 24 24" aria-hidden="true"><path class="coolFill" d="M7.1 10.8c0-3.1 2.1-5.2 4.9-5.2s4.9 2.1 4.9 5.2c0 2.2-1.1 3.8-2.8 4.6v2.7H9.9v-2.7c-1.7-.8-2.8-2.4-2.8-4.6Z"/><path d="M7.1 10.8c0-3.1 2.1-5.2 4.9-5.2s4.9 2.1 4.9 5.2c0 2.2-1.1 3.8-2.8 4.6v2.7H9.9v-2.7c-1.7-.8-2.8-2.4-2.8-4.6Z"/><circle cx="10.1" cy="10.8" r=".9"/><circle cx="13.9" cy="10.8" r=".9"/><path d="M10.1 14.2h3.8M10.4 18.1v1.4M12 18.1v1.4M13.6 18.1v1.4"/></svg>`,
+  flame: `<svg viewBox="0 0 24 24" aria-hidden="true"><path class="hotFill" d="M12.2 4.1c3.2 3 4.8 5.8 4.8 8.6 0 3.7-2.3 6.2-5 6.2s-5-2.5-5-5.9c0-2 1.1-3.7 2.8-5.1-.1 1.7.4 2.8 1.2 3.5.1-2.4.5-4.7 1.2-7.3Z"/><path d="M12.2 4.1c3.2 3 4.8 5.8 4.8 8.6 0 3.7-2.3 6.2-5 6.2s-5-2.5-5-5.9c0-2 1.1-3.7 2.8-5.1-.1 1.7.4 2.8 1.2 3.5.1-2.4.5-4.7 1.2-7.3Z"/><path d="M10 15.1c.6.6 1.2.9 2 .9s1.4-.3 2-.9"/></svg>`,
+  pieces: `<svg viewBox="0 0 24 24" aria-hidden="true"><path class="warmFill" d="M6.2 7h5v2.4c.7-.6 1.8-.5 2.4.2.6.8.4 1.9-.4 2.4H18v5H6.2Z"/><path d="M6.2 7h5v2.4c.7-.6 1.8-.5 2.4.2.6.8.4 1.9-.4 2.4H18v5h-4.6c.5.8.4 1.8-.4 2.3-.8.5-1.8.2-2.2-.6V17H6.2Z"/><path d="M6.2 12h2.4"/></svg>`,
+  vial: `<svg viewBox="0 0 24 24" aria-hidden="true"><path class="coolFill" d="M10.1 5.4h3.8v3l2.6 5.9c.8 1.7-.3 3.5-2.2 3.5H9.7c-1.9 0-3-1.8-2.2-3.5l2.6-5.9Z"/><path d="M10.1 5.4h3.8v3l2.6 5.9c.8 1.7-.3 3.5-2.2 3.5H9.7c-1.9 0-3-1.8-2.2-3.5l2.6-5.9Z"/><path d="M9.4 5.4h5.2M9.2 14.1c1.6-.9 2.9.7 4.5-.1.5-.2.9-.3 1.4-.2"/></svg>`,
+  book: `<svg viewBox="0 0 24 24" aria-hidden="true"><path class="warmFill" d="M5.5 6.2h5.1c.7 0 1.2.3 1.4.9v10.6c-.4-.5-.9-.8-1.6-.8H5.5Z"/><path d="M12 7.1c-.4-.6-.9-.9-1.6-.9H5.5v10.7h4.9c.7 0 1.2.2 1.6.8V7.1Z"/><path d="M12 7.1c.4-.6.9-.9 1.6-.9h4.9v10.7h-4.9c-.7 0-1.2.2-1.6.8V7.1Z"/><path d="M7.5 9.5h2.5M7.5 12h2.5M14 9.5h2.5M14 12h2.5"/></svg>`
+};
+function uiIcon(name, cls=''){
+  return `<span class="uiIcon ${cls}" aria-hidden="true">${UI_SVG[name]||UI_SVG.target}</span>`;
+}
+
+const GROUP_SVG = {'镇民':SVG.town,'外来者':SVG.outsider,'爪牙':SVG.minion,'恶魔':SVG.demon};
+const TYPE_DEFAULT_SVG = {'镇民':SVG.town,'外来者':SVG.outsider,'爪牙':SVG.minion,'恶魔':SVG.demon};
+const ROLE_SVG = {
+  '洗衣妇':SVG.washerwoman,'图书管理员':SVG.librarian,'调查员':SVG.investigator,'厨师':SVG.chef,
+  '共情者':SVG.empath,'占卜师':SVG.fortuneTeller,'送葬者':SVG.undertaker,'僧侣':SVG.monk,
+  '猎手':SVG.ravenkeeper,'贞洁者':SVG.virgin,'杀手':SVG.slayer,'士兵':SVG.soldier,'市长':SVG.mayor,
+  '管家':SVG.butler,'酒鬼':SVG.drunk,'隐士':SVG.recluse,'圣徒':SVG.saint,
+  '投毒者':SVG.poisoner,'间谍':SVG.spy,'红唇女郎':SVG.scarletWoman,'男爵':SVG.baron,
+  '小恶魔':SVG.imp
 };
 const ROLE_FAQ = {
   '洗衣妇': ['两人里必须有一个是真的那个镇民吗？是。正常情况下必须至少一人是真的。', '如果她中毒/醉酒，信息还要对吗？不用，可以完全是假信息。'],
@@ -362,42 +1249,76 @@ state.noteText = state.noteText || '';
 state.notesHidden = !!state.notesHidden;
 state.drawingStrokes = Array.isArray(state.drawingStrokes) ? state.drawingStrokes : [];
 if(!['home','roles','notes','rules','process','process7'].includes(state.tab)) state.tab='home';
-function loadState(){try{return JSON.parse(localStorage.getItem(LS_KEY)||'');}catch(e){return null;}}
-function save(){localStorage.setItem(LS_KEY, JSON.stringify(state));}
+function loadState(){
+  try{
+    const raw = localStorage.getItem(LS_KEY);
+    if(!raw) return null;
+    const data = JSON.parse(raw);
+    return data && typeof data === 'object' ? data : null;
+  }catch(e){return null;}
+}
+function save(){
+  try{localStorage.setItem(LS_KEY, JSON.stringify(state));}
+  catch(e){console.warn('无法写入本地存储，当前更改可能不会在刷新后保留。', e);}
+}
 function $(id){return document.getElementById(id)}
 function escapeHtml(s){return String(s??'').replace(/[&<>"]/g, c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));}
 function teamClass(role){return ROLES[role].team==='evil'?'evil':'good'}
 function teamText(role){return ROLES[role].team==='evil'?'邪恶':'善良'}
 function pill(role){const r=ROLES[role];return `<span class="pill ${teamClass(role)}">${r.type} · ${teamText(role)}</span>`}
 function actionText(r){if(r.first&&r.other)return '第一夜和之后夜晚会行动'; if(r.first)return '只在第一夜获得信息/行动'; if(r.other)return '之后夜晚会行动/触发'; return '白天/被动能力';}
+function phaseText(r){if(r.first&&r.other)return '首夜+夜晚'; if(r.first)return '首夜'; if(r.other)return '夜晚'; return '白天/被动';}
+function tokenClass(type){
+  if(type==='镇民') return 'townsfolk';
+  if(type==='外来者') return 'outsider';
+  if(type==='爪牙') return 'minion';
+  if(type==='恶魔') return 'demon';
+  return 'neutral';
+}
+function roleToken(name, extraClass='logo'){
+  const r=ROLES[name]||{};
+  const svg = ROLE_SVG[name] || TYPE_DEFAULT_SVG[r.type] || SVG.default;
+  return `<span class="${extraClass} token ${tokenClass(r.type)}" aria-hidden="true">${svg}</span>`;
+}
+function groupToken(type){return `<span class="groupIcon token ${tokenClass(type)}" aria-hidden="true">${GROUP_SVG[type]||SVG.default}</span>`;}
+function inlineRoleToken(name){return roleToken(name,'inlineToken');}
+
+function flowSeat(no, role, detail=''){
+  const r=ROLES[role]||{};
+  const detailHtml = detail ? `<span class="seatDetail">${escapeHtml(detail)}</span>` : '';
+  return `<div class="seatRow ${tokenClass(r.type)} ${teamClass(role)}">${roleToken(role,'seatToken')}<span class="seatNo">${no}</span><span class="seatText"><span class="seatRoleName">${escapeHtml(role)}</span>${detailHtml}</span></div>`;
+}
+function flowLegend(){
+  return `<div class="flowLegend"><span class="flowTag setup"><span class="flowDot"></span>开局</span><span class="flowTag night"><span class="flowDot"></span>夜晚</span><span class="flowTag day"><span class="flowDot"></span>白天讨论</span><span class="flowTag vote"><span class="flowDot"></span>提名处决</span><span class="flowTag end"><span class="flowDot"></span>胜负</span></div>`;
+}
 
 function renderHome(){
   $('home').innerHTML = `
     <div class="homeGrid">
       <div>
-        <div class="homeSectionTitle"><span class="badge">🎯</span><span>游戏目标</span></div>
+        <div class="homeSectionTitle"><span class="badge uiIcon ui-warn" aria-hidden="true">${UI_SVG.target}</span><span>游戏目标</span></div>
         <div class="goalGrid">
-          <div class="goalCard good" data-icon="☀️"><span class="goalBadge">☀️</span><div class="goalBody"><b>好人阵营</b><span>找出真正的恶魔，并通过投票处决他。</span></div></div>
-          <div class="goalCard evil" data-icon="🔥"><span class="goalBadge">🔥</span><div class="goalBody"><b>邪恶阵营</b><span>误导讨论，保护恶魔隐藏到最后。</span></div></div>
+          <div class="goalCard good" data-icon=""><span class="goalBadge token townsfolk" aria-hidden="true">${SVG.town}</span><div class="goalBody"><b>好人阵营</b><span>找出真正的恶魔，并通过投票处决他。</span></div></div>
+          <div class="goalCard evil" data-icon=""><span class="goalBadge token demon" aria-hidden="true">${SVG.demon}</span><div class="goalBody"><b>邪恶阵营</b><span>误导讨论，保护恶魔隐藏到最后。</span></div></div>
         </div>
       </div>
 
       <div>
-        <div class="homeSectionTitle"><span class="badge">⚡</span><span>和狼人杀不同</span></div>
+        <div class="homeSectionTitle"><span class="badge uiIcon ui-info" aria-hidden="true">${UI_SVG.contrast}</span><span>和狼人杀不同</span></div>
         <div class="twoCols">
-          <div class="tinyStat"><b><span class="ico">☠️</span>死了也能玩</b><span>死亡后仍可发言、推理，参与感几乎不降低。</span></div>
-          <div class="tinyStat"><b><span class="ico">🔥</span>恶魔藏到最后</b><span>通常只剩 2 名存活玩家且恶魔还活着，邪恶胜利。</span></div>
+          <div class="tinyStat"><b><span class="ico uiIcon ui-info" aria-hidden="true">${UI_SVG.death}</span>死了也能玩</b><span>死亡后仍可发言、推理，参与感几乎不降低。</span></div>
+          <div class="tinyStat"><b><span class="ico uiIcon ui-evil" aria-hidden="true">${UI_SVG.flame}</span>恶魔藏到最后</b><span>通常只剩 2 名存活玩家且恶魔还活着，邪恶胜利。</span></div>
         </div>
       </div>
 
       <div class="twoCols">
-        <div class="tinyStat"><b><span class="ico">🧩</span>角色很多</b><span>能力互相影响，但不用背，随时查。</span></div>
-        <div class="tinyStat"><b><span class="ico">🧪</span>信息会污染</b><span>醉酒、中毒等状态可能让好人拿到错误信息。</span></div>
+        <div class="tinyStat"><b><span class="ico uiIcon ui-warn" aria-hidden="true">${UI_SVG.pieces}</span>角色很多</b><span>能力互相影响，但不用背，随时查。</span></div>
+        <div class="tinyStat"><b><span class="ico uiIcon ui-info" aria-hidden="true">${UI_SVG.vial}</span>信息会污染</b><span>醉酒、中毒等状态可能让好人拿到错误信息。</span></div>
       </div>
     </div>
 
     <div class="assistantCard">
-      <h3>📖 玩家助手能帮你什么？</h3>
+      <h3><span class="assistantTitleIcon uiIcon ui-warn" aria-hidden="true">${UI_SVG.book}</span><span>玩家助手能帮你什么？</span></h3>
       <div class="assistantList">
         <div class="assistantItem"><span class="dot">1</span><span>手机上快速查询角色能力和常见误解，不用翻规则书。</span></div>
         <div class="assistantItem"><span class="dot">2</span><span>长按角色可标记“我的身份”，需要时一键隐藏，避免被旁边玩家看到。</span></div>
@@ -406,12 +1327,12 @@ function renderHome(){
       </div>
     </div>
 
-    <p class="homeHint">切换 TAB 查看详细内容。</p>`;
+    <p class="homeHint">切换 TAB 查看详细内容。新手建议先看 <button class="homeHintLink" onclick="showTab('process')">5人局示例</button>，快速了解游戏流程。</p>`;
 }
 
 function renderTabs(){
   document.body.dataset.tab = state.tab;
-  const tabs=[['home','🏠 首页'],['roles','🎭 角色'],['notes','✍️ 记录'],['rules','❓ 规则'],['process','5人'],['process7','7人']];
+  const tabs=[['home','首页'],['roles','角色'],['notes','记录'],['rules','规则'],['process','5人'],['process7','7人']];
   const html=tabs.map(([id,name])=>`<button class="tab ${state.tab===id?'active':''}" onclick="showTab('${id}')">${name}</button>`).join('');
   $('topTabs').innerHTML=html; $('bottomTabs').innerHTML=html;
   document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));
@@ -419,59 +1340,68 @@ function renderTabs(){
 }
 function showTab(tab){state.tab=tab; save(); renderAll();}
 function renderRoles(){
-  $('roles').innerHTML = GROUPS.map(renderGroup).join('');
+  $('roles').innerHTML = `
+    <div class="rolePageHeader">
+      <div class="roleHintStrip"><span>点开角色看能力</span><span>长按标记“我的身份”</span><span>FAQ 跳到规则页</span></div>
+    </div>
+    ${GROUPS.map(renderGroup).join('')}`;
 }
 function renderGroup(type){
   const names=Object.keys(ROLES).filter(n=>ROLES[n].type===type);
-  return `<div class="roleGroup"><div class="groupTitle"><span class="groupIcon">${GROUP_ICON[type]}</span>${type}</div><div class="roleGrid">${names.map(roleItem).join('')}</div></div>`;
+  return `<div class="roleGroup ${tokenClass(type)}"><div class="groupTitle">${groupToken(type)}<span class="groupName">${type}</span><span class="groupCount">${names.length}个</span></div><div class="roleGrid">${names.map(roleItem).join('')}</div></div>`;
 }
 function roleItem(name){
   const r=ROLES[name]; const mine=state.myRole===name;
-  return `<details class="roleItem ${teamClass(name)}" data-role="${escapeHtml(name)}" ontoggle="oneOpenOnly(this)">
+  return `<details class="roleItem ${teamClass(name)} ${tokenClass(r.type)}" data-role="${escapeHtml(name)}" ontoggle="oneOpenOnly(this)">
     <summary class="roleHead" onpointerdown="holdStart(event,'${name}')" onpointerup="holdEnd()" onpointercancel="holdEnd()" onpointerleave="holdEnd()">
-      <span class="logo" aria-hidden="true">${ROLE_ICON[name]||'☾'}</span>
-      <span class="nameBox"><span class="roleName">${escapeHtml(name)}${mine?' <span class="mineBadge">（我）</span>':''}</span></span>
+      ${roleToken(name)}
+      <span class="nameBox"><span class="roleName">${escapeHtml(name)}${mine?' <span class="mineBadge">我</span>':''}</span><span class="roleMeta">${escapeHtml(r.type)} · ${phaseText(r)}</span></span>
       <span class="chev">›</span>
     </summary>
     <div class="roleBody">
-      <p class="explain">${escapeHtml(r.ability)}</p>
-      <div class="roleActions">${ROLE_FAQ[name]?`<a class="faqLink" href="#" title="查看${name}常见问题" onclick="jumpFAQ('${name}');return false;">FAQ ›</a>`:''}</div>
+      <div class="roleCopy">
+        <div class="abilityLabel">角色能力</div>
+        <p class="explain">${escapeHtml(r.ability)}</p>
+        <div class="abilityLabel secondaryLabel">玩家理解</div>
+        <p class="playerExplain">${escapeHtml(r.player)}</p>
+      </div>
+      <div class="roleActions">${ROLE_FAQ[name]?`<a class="faqLink" href="#" title="查看${name}常见问题" onclick="jumpFAQ('${name}');return false;">常见问题 ›</a>`:''}</div>
     </div>
   </details>`;
 }
-function renderMyTopCard(){
-  if(!state.myRole) return `<div class="card warn"><h3>还没记录自己的身份</h3><p>长按自己的角色名，就会在这里置顶。看完可以隐藏，避免旁边玩家看到。</p></div>`;
-  const r=ROLES[state.myRole];
-  return `<div class="card light ${state.myHidden?'myRoleHidden':''}">
-    <div class="row"><span class="pill info">置顶</span><button class="btn secondary right" onclick="state.myHidden=!state.myHidden;save();renderAll()">${state.myHidden?'显示':'隐藏'}</button></div>
-    <h2>我的身份</h2>
-    <div class="secret">
-      <div class="big">${ROLE_ICON[state.myRole]||''} ${escapeHtml(state.myRole)}</div>
-      <div>${pill(state.myRole)} <span class="pill info">${actionText(r)}</span></div>
-      <p>${escapeHtml(r.player)}</p>
-    </div>
-    <div class="secretHint">身份已隐藏。点“显示”查看。</div>
-    <div class="row"><button class="btn ghost" onclick="state.myRole=null;save();renderAll();toast('已清除我的身份')">清除记录</button></div>
-  </div>`;
-}
 function jumpNotes(){state.tab='notes'; save(); renderAll(); setTimeout(()=>initCanvas(),40);}
 function renderNotes(){
-  const roleLine = state.notesHidden ? '已隐藏' : (state.myRole ? `${ROLE_ICON[state.myRole]||''} ${escapeHtml(state.myRole)}` : '未标记');
+  const identityHTML = state.notesHidden
+    ? `<span class="identityText">身份与记录已隐藏</span>`
+    : (state.myRole ? `${inlineRoleToken(state.myRole)}<span class="identityText">${escapeHtml(state.myRole)}</span>` : `<span class="identityText">未标记身份</span>`);
   $('notes').innerHTML = `
-    <div class="card">
-      <div class="noteTop"><span class="pill info">我的身份：${roleLine}</span><button class="btn secondary right" onclick="state.notesHidden=!state.notesHidden;save();renderAll()">${state.notesHidden?'显示记录':'隐藏记录'}</button></div>
-      ${state.myRole?'':`<p class="small">去“角色”页长按自己的身份，可以在这里显示身份标记。</p>`}
-      ${state.notesHidden ? `<div class="hiddenPad">记录已隐藏<br><span class="small">点击“显示记录”查看</span></div>` : `
-        <label class="small">文字备注</label>
-        <textarea class="noteArea" placeholder="例：N1 查 4+5：是；2号可信；5号重点观察……" oninput="state.noteText=this.value;save()">${escapeHtml(state.noteText||'')}</textarea>
-        <h3>手写记录</h3>
-        <div class="canvasWrap"><canvas id="drawCanvas"></canvas></div>
-        <div class="toolRow">
-          <button class="btn secondary" onclick="undoStroke()">撤销</button>
-          <button class="btn secondary" onclick="clearTextNote()">清空文字</button>
-          <button class="btn danger" onclick="confirmClearDrawing()">清空手写</button>
+    <div class="notesShell">
+      <div class="notesHero">
+        <div class="notesHeroTop">
+          <div class="notesTitle">玩家记录</div>
+          <div class="identityChip">${identityHTML}</div>
+          <button class="btn secondary privacyBtn" onclick="state.notesHidden=!state.notesHidden;save();renderAll()">${state.notesHidden?'显示记录':'隐藏记录'}</button>
         </div>
-        <p class="small">文字和手写只保存在这台设备的浏览器本地，离线可用。</p>
+        <p class="notesSub">用于记录夜晚信息、怀疑对象、投票线索和临场推理。隐藏后会遮住身份、文字和手写内容。</p>
+      </div>
+
+      ${state.notesHidden ? `<div class="notesHiddenCard">记录已隐藏<br><span class="small">点击“显示记录”查看</span></div>` : `
+        <div class="notesPanel">
+          <div class="notesPanelHead"><span class="notesPanelTitle">文字备注</span><span class="notesPanelHint">自动保存</span></div>
+          ${state.myRole?'':`<p class="small">去“角色”页长按自己的身份，可以在这里显示身份标记。</p>`}
+          <textarea class="noteArea" placeholder="例：N1 查 4+5：是；2号可信；5号重点观察……" oninput="state.noteText=this.value;save()">${escapeHtml(state.noteText||'')}</textarea>
+        </div>
+
+        <div class="notesPanel">
+          <div class="notesPanelHead"><span class="notesPanelTitle">手写记录</span><span class="notesPanelHint">适合画座位和连线</span></div>
+          <div class="canvasWrap"><canvas id="drawCanvas"></canvas></div>
+          <div class="toolRow notesTools">
+            <button class="btn secondary" onclick="undoStroke()">撤销一笔</button>
+            <button class="btn secondary" onclick="clearTextNote()">清空文字</button>
+            <button class="btn danger" onclick="confirmClearDrawing()">清空手写</button>
+          </div>
+          <div class="notesLocalHint">文字和手写只保存在这台设备的浏览器本地，离线可用。</div>
+        </div>
       `}
     </div>`;
   if(!state.notesHidden) setTimeout(()=>initCanvas(),30);
@@ -542,16 +1472,64 @@ function undoStroke(){
 window.addEventListener('resize', ()=>{if(state.tab==='notes'&&!state.notesHidden) initCanvas();});
 function renderRules(){
   $('rules').innerHTML=`
-    <details class="faq" open ontoggle="oneFaqOnly(this)"><summary>胜利条件</summary><p><b>好人阵营：</b>恶魔死亡，通常好人胜利。</p><p><b>邪恶阵营：</b>通常只剩 2 名存活玩家且恶魔仍存活，邪恶胜利。</p><p class="small">特殊角色会改变结局，例如圣徒被处决、红唇女郎接棒、市长三人局无人处决。</p></details>
-    <details class="faq" ontoggle="oneFaqOnly(this)"><summary>死亡以后还能玩吗？</summary><p>可以。死亡玩家通常仍可发言，但只剩一次投票机会，常叫“鬼票”。</p></details>
-    <details class="faq" ontoggle="oneFaqOnly(this)"><summary>醉酒 / 中毒</summary><p>两者对玩家效果很像：能力暂时无效，收到的信息可能是错的。区别是：醉酒通常来自自身或长期状态；中毒通常来自其他角色的临时影响。玩家一般不会被告知自己正醉酒或中毒。</p></details>
-    <details class="faq" ontoggle="oneFaqOnly(this)"><summary>“登记为”是什么意思？</summary><p>有些角色会让侦测结果不等于真实身份。比如隐士是好人，但可能被某些能力看成邪恶、爪牙或恶魔。</p></details>
-    <details class="faq" ontoggle="oneFaqOnly(this)"><summary>我可以说谎吗？</summary><p>可以。这个游戏允许任何阵营说谎。好人也可能为了保护关键身份而隐藏或伪装。</p></details>
-    <details class="faq" ontoggle="oneFaqOnly(this)"><summary>和狼人杀最容易搞错的地方</summary><p>死亡不等于出局；死人还能说话。信息也不一定绝对真实，因为醉酒、中毒、登记错误和说书人裁定都会影响结果。</p></details>
-    <div class="roleGroup"><div class="groupTitle"><span class="groupIcon">❓</span>角色功能常见问题</div>${renderRoleFaqs()}</div>`;
+    <div class="ruleHero card">
+      <h2>规则 / FAQ 速查</h2>
+      <p>现场遇到争议时，先看基础规则；想查某个角色的常见误解，可以从角色页跳转，或在下方直接搜索角色名 / 关键词。</p>
+      <div class="ruleJumpRow">
+        <button class="ruleJump" onclick="scrollToRules('basic-rules')">基础规则</button>
+        <button class="ruleJump" onclick="scrollToRules('role-faqs')">角色 FAQ</button>
+        <button class="ruleJump" onclick="clearFaqSearch()">清空搜索</button>
+      </div>
+    </div>
+
+    <div class="ruleClusterTitle" id="basic-rules"><span class="miniToken">规</span><span>基础规则速查</span></div>
+    <div class="ruleBasics">
+      <details class="faq" open ontoggle="oneFaqOnly(this)"><summary><span class="faqBadge good">胜利</span><span class="faqTitleText">胜利条件</span></summary><p><b>好人阵营：</b>恶魔死亡，通常好人胜利。</p><p><b>邪恶阵营：</b>通常只剩 2 名存活玩家且恶魔仍存活，邪恶胜利。</p><p class="small">特殊角色会改变结局，例如圣徒被处决、红唇女郎接棒、市长三人局无人处决。</p></details>
+      <details class="faq" ontoggle="oneFaqOnly(this)"><summary><span class="faqBadge info">死亡</span><span class="faqTitleText">死亡以后还能玩吗？</span></summary><p>可以。死亡玩家通常仍可发言，但只剩一次投票机会，常叫“鬼票”。</p></details>
+      <details class="faq" ontoggle="oneFaqOnly(this)"><summary><span class="faqBadge warn">状态</span><span class="faqTitleText">醉酒 / 中毒</span></summary><p>两者对玩家效果很像：能力暂时无效，收到的信息可能是错的。区别是：醉酒通常来自自身或长期状态；中毒通常来自其他角色的临时影响。玩家一般不会被告知自己正醉酒或中毒。</p></details>
+      <details class="faq" ontoggle="oneFaqOnly(this)"><summary><span class="faqBadge info">侦测</span><span class="faqTitleText">“登记为”是什么意思？</span></summary><p>有些角色会让侦测结果不等于真实身份。比如隐士是好人，但可能被某些能力看成邪恶、爪牙或恶魔。</p></details>
+      <details class="faq" ontoggle="oneFaqOnly(this)"><summary><span class="faqBadge evil">发言</span><span class="faqTitleText">我可以说谎吗？</span></summary><p>可以。这个游戏允许任何阵营说谎。好人也可能为了保护关键身份而隐藏或伪装。</p></details>
+      <details class="faq" ontoggle="oneFaqOnly(this)"><summary><span class="faqBadge warn">对比</span><span class="faqTitleText">和狼人杀最容易搞错的地方</span></summary><p>死亡不等于出局；死人还能说话。信息也不一定绝对真实，因为醉酒、中毒、登记错误和说书人裁定都会影响结果。</p></details>
+    </div>
+
+    <div class="ruleClusterTitle" id="role-faqs"><span class="groupIcon token neutral" aria-hidden="true">${SVG.default}</span><span>角色功能常见问题</span></div>
+    <div class="roleFaqPanel">
+      <div class="faqSearchBox"><input id="faqSearch" type="search" inputmode="search" placeholder="搜索角色或关键词，例如：僧侣 / 中毒 / 市长" oninput="filterRoleFaqs(this.value)" /></div>
+      <div class="faqSearchHint">提示：从角色页点“常见问题”会自动打开对应角色，并滚动到这里。</div>
+      <div id="roleFaqList">${renderRoleFaqs()}</div>
+      <div id="faqEmpty" class="faqEmpty">没有匹配的角色 FAQ</div>
+    </div>`;
 }
 function renderRoleFaqs(){
-  return Object.keys(ROLE_FAQ).map(name=>`<details class="faq faqRole" id="faq-${encodeURIComponent(name)}" ontoggle="oneFaqOnly(this)"><summary>${ROLE_ICON[name]||''} ${name}</summary>${ROLE_FAQ[name].map(x=>`<p>${escapeHtml(x)}</p>`).join('')}</details>`).join('');
+  return Object.keys(ROLE_FAQ).map(name=>{
+    const r=ROLES[name]||{};
+    const typeClass=tokenClass(r.type);
+    const text=[name,r.type,phaseText(r),...(ROLE_FAQ[name]||[])].join(' ');
+    return `<details class="faq faqRole ${typeClass}" id="faq-${encodeURIComponent(name)}" data-faq="${escapeHtml(text)}" ontoggle="oneFaqOnly(this)"><summary>${inlineRoleToken(name)}<span class="faqTitleText">${name}</span><span class="faqBadge">${r.type||'角色'}</span></summary>${ROLE_FAQ[name].map(x=>`<p>${escapeHtml(x)}</p>`).join('')}</details>`;
+  }).join('');
+}
+function scrollToRules(id){
+  const el=document.getElementById(id);
+  if(el) el.scrollIntoView({behavior:'smooth',block:'start'});
+}
+function filterRoleFaqs(raw){
+  const q=String(raw||'').trim().toLowerCase();
+  const items=[...document.querySelectorAll('.faqRole')];
+  let shown=0;
+  items.forEach(el=>{
+    const txt=(el.getAttribute('data-faq')||el.textContent||'').toLowerCase();
+    const hit=!q || txt.includes(q);
+    el.classList.toggle('hiddenBySearch',!hit);
+    if(!hit && el.open) el.open=false;
+    if(hit) shown++;
+  });
+  const empty=document.getElementById('faqEmpty');
+  if(empty) empty.classList.toggle('show',!!q && shown===0);
+}
+function clearFaqSearch(){
+  const input=document.getElementById('faqSearch');
+  if(input){input.value=''; filterRoleFaqs(''); input.focus();}
+  scrollToRules('role-faqs');
 }
 function jumpFAQ(name){
   state.tab='rules'; save(); renderAll();
@@ -585,28 +1563,31 @@ function renderProcess(){
   $('process').innerHTML = `
     <div class="flowIntro">
       <h2>5人局流程示例</h2>
-      <p>这是一个从上帝视角看的示例，帮助玩家理解“发身份 → 第一夜 → 白天讨论 → 提名处决 → 后续夜晚 → 胜负判断”。</p>
+      <p class="flowLead">这是一个从上帝视角看的入门示例，帮助玩家快速理解一局通常怎样从“发身份”推进到“夜晚信息、白天讨论、提名处决和胜负判断”。</p>
+      <div class="flowSwitch"><button class="flowSwitchBtn active" onclick="showTab('process')">5人局：最快上手</button><button class="flowSwitchBtn" onclick="showTab('process7')">7人局：加入爪牙</button></div>
       <div class="flowMeta"><span class="pill good">好人：洗衣妇、占卜师、士兵、酒鬼</span><span class="pill evil">邪恶：小恶魔</span></div>
+      <div class="flowGuide"><div class="guideItem"><b>阅读方式</b><span>先看每步标题，再看金色引用框里的关键信息。</span></div><div class="guideItem"><b>新手重点</b><span>理解“死了还能发言”和“信息可能被污染”。</span></div></div>
+      ${flowLegend()}
     </div>
     <div class="timeline">
-      <div class="flowStep">
+      <div class="flowStep setup">
         <h3><span class="num">1</span>开局发身份</h3>
         <div class="seatGrid">
-          <div class="seatRow"><span class="seatNo">1</span>洗衣妇</div>
-          <div class="seatRow"><span class="seatNo">2</span>占卜师</div>
-          <div class="seatRow"><span class="seatNo">3</span>士兵</div>
-          <div class="seatRow"><span class="seatNo">4</span>显示身份：共情者；真实身份：酒鬼</div>
-          <div class="seatRow"><span class="seatNo">5</span>小恶魔</div>
+          ${flowSeat(1,'洗衣妇')}
+          ${flowSeat(2,'占卜师')}
+          ${flowSeat(3,'士兵')}
+          ${flowSeat(4,'酒鬼','显示身份：共情者')}
+          ${flowSeat(5,'小恶魔')}
         </div>
         <p class="flowMini">玩家只知道自己被告知的身份。4号只知道自己是“共情者”，不知道自己真实是酒鬼。</p>
       </div>
-      <div class="flowStep">
+      <div class="flowStep night">
         <h3><span class="num">2</span>第一夜：恶魔获得伪装</h3>
         <p>5号小恶魔醒来。因为这是 5 人示例局，他知道自己是唯一邪恶玩家，并获得几个不在场身份作为伪装，例如“僧侣、杀手、厨师”。</p>
         <div class="quote">小恶魔之后可以假装自己是僧侣、杀手或厨师。</div>
         <p class="flowMini">第一夜小恶魔通常不杀人。</p>
       </div>
-      <div class="flowStep">
+      <div class="flowStep night">
         <h3><span class="num">3</span>第一夜：好人获得信息</h3>
         <p><b>1号洗衣妇</b>的技能是：第一夜得知两个玩家中有一人是某个镇民。他被告知：</p>
         <div class="quote">2号和4号中有一人是占卜师。</div>
@@ -617,13 +1598,13 @@ function renderProcess(){
         <p>但是 4号是酒鬼，他的能力没有效果。因此说书人可以告诉他“1”，也可以告诉他“0”或其他数字。这个数字可能为真，也可能为假，完全不确定。</p>
         <div class="quote">4号被告知：0。<br>这会让 4号误以为 3号和5号都不像邪恶，但这个信息不可靠。</div>
       </div>
-      <div class="flowStep">
+      <div class="flowStep day">
         <h3><span class="num">4</span>第一天：公开讨论</h3>
         <p>大家醒来后开始发言。好人通常会分享信息来互相验证，但不一定要立刻全说；恶魔会伪装成好人身份，尽量解释自己的行为和信息。</p>
         <div class="quote">1号说：我知道 2号和4号里有一人是占卜师。<br>2号说：我是占卜师，我查了 4号和5号，结果是“是”。<br>4号说：我是共情者，我左右是 3号和5号，我得到 0。<br>5号说：我可能是僧侣，先不想说太多。</div>
         <p class="flowMini">此时出现了典型冲突：2号的信息指向 4号或5号有恶魔；4号的信息却像是在保护 5号。真相是：2号信息可靠，4号是酒鬼，信息不可靠。</p>
       </div>
-      <div class="flowStep">
+      <div class="flowStep vote">
         <h3><span class="num">5</span>第一天：提名与处决</h3>
         <p>讨论一段时间后，进入提名阶段。玩家可以提名一名玩家，并简单说明理由；被提名者通常也可以为自己辩解。</p>
         <p>例如，2号提名 5号，理由是：自己查了 4号和5号得到“是”，而 4号的共情者信息与自己冲突，5号又不愿明确说明身份。</p>
@@ -634,7 +1615,7 @@ function renderProcess(){
         <div class="quote">结果：无人被处决，进入第二夜。</div>
         <p class="flowMini">无人处决很常见。新手局第一天信息不够时，玩家可能选择再观察一晚。</p>
       </div>
-      <div class="flowStep">
+      <div class="flowStep night">
         <h3><span class="num">6</span>第二夜：好人行动与恶魔杀人</h3>
         <p>第二夜，<b>2号占卜师仍然存活</b>，所以他的技能还能发动。他再次醒来，选择 3号和5号。因为里面包含 5号小恶魔，因此他再次被告知：</p>
         <div class="quote">是。</div>
@@ -643,20 +1624,20 @@ function renderProcess(){
         <div class="quote">昨晚，2号死亡。</div>
         <p class="flowMini">死亡不等于出局。2号仍然参与游戏，但从这一刻起失去角色能力，也不会再在夜晚发动占卜师技能。</p>
       </div>
-      <div class="flowStep">
+      <div class="flowStep day">
         <h3><span class="num">7</span>第二天：死亡玩家仍然参与</h3>
         <p>2号已经死亡，但仍然可以继续说话、参与讨论、公开自己的信息、帮助大家分析谁更像恶魔。</p>
         <p>死亡玩家失去角色能力，不能再提名；仍然可以投票，但整局通常只剩 <b>一次鬼票</b>，用完后之后就不能再投票。</p>
         <div class="quote">2号可以说：我死了，但我两晚占卜都指向 5号很可疑。我不能提名了，但我还能发言，也可以把唯一一次鬼票留给关键投票。</div>
         <p>这也是血染钟楼和很多狼人杀不同的地方：死亡玩家不会离开游戏，仍然可以继续推理和影响局势。</p>
       </div>
-      <div class="flowStep">
+      <div class="flowStep day">
         <h3><span class="num">8</span>第二天：信息继续收束</h3>
         <p>1号的信息支持 2号是真的占卜师；2号死亡前的信息指向 4号或5号；4号的信息保护了 5号，但4号真实是酒鬼，所以不能单独采信。</p>
         <p>3号士兵可以说：如果恶魔夜里杀我，我可能不会死。5号昨晚没有杀我，而是杀了占卜师，说明他可能在躲开士兵能力。</p>
         <p class="flowMini">血染钟楼的核心体验：把夜晚信息、死亡顺序、提名投票、发言逻辑拼起来。</p>
       </div>
-      <div class="flowStep">
+      <div class="flowStep vote">
         <h3><span class="num">9</span>第二天：再次提名并处决</h3>
         <p>经过讨论，1号或3号这样的存活玩家可以提名 5号；2号已经死亡，不能提名，但可以发言帮大家整理信息。</p>
         <p>处决门槛按<b>存活玩家数量</b>计算：至少需要达到存活人数的一半，向上取整。此时 1号、3号、4号、5号存活，共 4 名存活玩家，所以至少需要 2 票。若有多个被提名者，最终只有票数达到门槛且票数最高的人会被处决；平票则无人被处决。</p>
@@ -664,7 +1645,7 @@ function renderProcess(){
         <p>这次 5号获得足够票数，并且没有后续提名超过他。当天结束时，5号被处决。</p>
         <p>处决发生后，如果被处决者是恶魔，游戏通常立即结束。</p>
       </div>
-      <div class="flowStep">
+      <div class="flowStep end">
         <h3><span class="num">10</span>处决恶魔，游戏结束</h3>
         <p>5号真实身份是小恶魔。5号被处决后，恶魔死亡。</p>
         <div class="quote">恶魔死亡，好人阵营获胜。</div>
@@ -677,36 +1658,39 @@ function renderProcess7(){
   $('process7').innerHTML = `
     <div class="flowIntro">
       <h2>7人局流程示例</h2>
-      <p>这个示例加入爪牙，让玩家看到邪恶阵营互认、投毒、厨师信息和恶魔伪装身份。</p>
+      <p class="flowLead">这个示例在 5 人局基础上加入爪牙，让玩家看到邪恶阵营互认、投毒、厨师信息和恶魔伪装身份。</p>
+      <div class="flowSwitch"><button class="flowSwitchBtn" onclick="showTab('process')">5人局：最快上手</button><button class="flowSwitchBtn active" onclick="showTab('process7')">7人局：加入爪牙</button></div>
       <div class="flowMeta"><span class="pill good">好人：洗衣妇、厨师、占卜师、士兵、酒鬼</span><span class="pill evil">邪恶：投毒者、小恶魔</span></div>
+      <div class="flowGuide"><div class="guideItem"><b>阅读方式</b><span>注意哪些信息是真的，哪些信息被投毒或酒鬼污染。</span></div><div class="guideItem"><b>新手重点</b><span>处决爪牙不会结束游戏，真正目标仍然是恶魔。</span></div></div>
+      ${flowLegend()}
     </div>
     <div class="timeline">
-      <div class="flowStep">
+      <div class="flowStep setup">
         <h3><span class="num">1</span>开局发身份</h3>
         <div class="seatGrid">
-          <div class="seatRow"><span class="seatNo">1</span>洗衣妇</div>
-          <div class="seatRow"><span class="seatNo">2</span>厨师</div>
-          <div class="seatRow"><span class="seatNo">3</span>占卜师</div>
-          <div class="seatRow"><span class="seatNo">4</span>士兵</div>
-          <div class="seatRow"><span class="seatNo">5</span>显示身份：共情者；真实身份：酒鬼</div>
-          <div class="seatRow"><span class="seatNo">6</span>投毒者</div>
-          <div class="seatRow"><span class="seatNo">7</span>小恶魔</div>
+          ${flowSeat(1,'洗衣妇')}
+          ${flowSeat(2,'厨师')}
+          ${flowSeat(3,'占卜师')}
+          ${flowSeat(4,'士兵')}
+          ${flowSeat(5,'酒鬼','显示身份：共情者')}
+          ${flowSeat(6,'投毒者')}
+          ${flowSeat(7,'小恶魔')}
         </div>
         <p class="flowMini">6号和7号相邻，因此厨师信息会变得有意义。</p>
       </div>
-      <div class="flowStep">
+      <div class="flowStep night">
         <h3><span class="num">2</span>第一夜：邪恶阵营互认</h3>
         <p>6号投毒者和7号小恶魔属于邪恶阵营。第一夜，他们会被告知彼此是谁。小恶魔还会得到几个不在场身份作为伪装。</p>
         <div class="quote">6号知道：7号是恶魔。<br>7号知道：6号是爪牙。<br>7号获得伪装身份：僧侣、杀手、市长。</div>
         <p class="flowMini">这就是为什么恶魔白天经常能报出一个听起来合理的好人身份。</p>
       </div>
-      <div class="flowStep">
+      <div class="flowStep night">
         <h3><span class="num">3</span>第一夜：投毒者行动</h3>
         <p><b>投毒者</b>的技能是：每晚选择一名玩家，该玩家今晚和明天白天中毒。中毒玩家能力无效，得到的信息可能是假的。</p>
         <p>6号选择让 3号占卜师中毒。</p>
         <div class="quote">3号今晚和明天白天中毒。<br>3号自己通常不知道这件事。</div>
       </div>
-      <div class="flowStep">
+      <div class="flowStep night">
         <h3><span class="num">4</span>第一夜：好人获得信息</h3>
         <p><b>1号洗衣妇</b>得知两个玩家中有一人是某个镇民。说书人告诉他：</p>
         <div class="quote">2号和5号中有一人是厨师。</div>
@@ -718,13 +1702,13 @@ function renderProcess7(){
         <p><b>5号真实身份是酒鬼</b>，但被告知自己是共情者。5号邻居是4号和6号，其中 6号是邪恶，所以真实数字本来是 1。但由于5号是酒鬼，信息完全不可靠。</p>
         <div class="quote">5号被告知：1。<br>这个数字可能真也可能假，5号无法确定。</div>
       </div>
-      <div class="flowStep">
+      <div class="flowStep day">
         <h3><span class="num">5</span>第一天：信息出现矛盾</h3>
         <p>白天讨论时，大家开始分享信息。2号厨师的“1”说明有一对邪恶玩家相邻；3号占卜师却说自己查了 6号和7号，结果是“否”。</p>
         <div class="quote">2号说：我厨师数字是 1。<br>3号说：我查 6号和7号，结果是“否”。<br>5号说：我共情者数字是 1，我左右是 4号和6号。</div>
         <p>上帝视角看，3号的信息是错的，因为他被投毒了。玩家视角下，他们只知道“有人可能说谎，或有人被醉酒/中毒影响”。</p>
       </div>
-      <div class="flowStep">
+      <div class="flowStep vote">
         <h3><span class="num">6</span>第一天：提名与处决</h3>
         <p>玩家怀疑 6号，因为5号的共情者信息似乎指向 6号，2号的厨师信息也说明有邪恶相邻。</p>
         <div class="quote">5号提名 6号。<br>6号辩解：3号查过我和7号，结果是“否”，所以我不像邪恶。</div>
@@ -732,25 +1716,25 @@ function renderProcess7(){
         <div class="quote">6号被处决并死亡。<br>恶魔还活着，游戏继续。</div>
         <p class="flowMini">处决爪牙不会让好人立刻获胜。必须让恶魔死亡，通常好人才会胜利。</p>
       </div>
-      <div class="flowStep">
+      <div class="flowStep night">
         <h3><span class="num">7</span>第二夜：恶魔杀人</h3>
         <p>6号已经死亡，投毒者不再行动。7号小恶魔醒来，选择杀死 2号厨师。天亮后说书人宣布：</p>
         <div class="quote">昨晚，2号死亡。</div>
         <p>2号死亡后仍然可以发言，并继续强调自己的厨师数字“1”。</p>
       </div>
-      <div class="flowStep">
+      <div class="flowStep day">
         <h3><span class="num">8</span>第二天：重新理解第一天信息</h3>
         <p>现在大家知道 6号被处决后游戏没结束，说明6号不是恶魔，最多是爪牙或好人。2号夜里死亡，说明恶魔可能害怕厨师信息继续影响讨论。</p>
         <p>3号开始怀疑自己第一夜的占卜信息可能不可靠：如果 6号和7号真的都是安全的，为什么6号死后游戏还继续，且7号仍然解释不清身份？</p>
         <div class="quote">3号可以说：我查 6号和7号是“否”，但现在我怀疑自己可能中毒了。</div>
         <p class="flowMini">这就是投毒者的作用：制造一条看似可靠、实际上误导玩家的信息。</p>
       </div>
-      <div class="flowStep">
+      <div class="flowStep vote">
         <h3><span class="num">9</span>第二天：处决恶魔</h3>
         <p>大家把信息拼起来：厨师数字 1 支持 6号和7号相邻邪恶；6号死后游戏没结束，说明真正的恶魔更可能是 7号；3号第一夜的“否”可能来自投毒。</p>
         <div class="quote">玩家提名 7号。<br>7号获得足够票数。<br>当天结束时，7号被处决。</div>
       </div>
-      <div class="flowStep">
+      <div class="flowStep end">
         <h3><span class="num">10</span>游戏结束</h3>
         <p>7号真实身份是小恶魔。7号被处决后，恶魔死亡。</p>
         <div class="quote">恶魔死亡，好人阵营获胜。</div>
