@@ -1,0 +1,545 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<title>血染钟楼玩家角色手册 - 离线单文件版</title>
+<style>
+  :root{
+    --bg:#111318; --card:#1b1f2a; --card2:#232938; --text:#f4f5f7; --muted:#aeb6c8;
+    --line:#343b4f; --accent:#f0c060; --good:#8bd17c; --evil:#ff7777; --blue:#7cc7ff;
+    --danger:#ff5b5b; --shadow:rgba(0,0,0,.35);
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"PingFang SC","Microsoft YaHei",Arial,sans-serif;line-height:1.45}
+  header{position:sticky;top:0;z-index:20;background:linear-gradient(180deg,#171a22,#111318);border-bottom:1px solid var(--line);padding:10px 12px 7px}
+  h1{font-size:19px;margin:0 0 4px;letter-spacing:.4px}
+  h2{font-size:20px;margin:12px 0 10px}
+  h3{font-size:18px;margin:10px 0 7px}
+  p{margin:8px 0}
+  .sub{color:var(--muted);font-size:12.5px}
+  .wrap{max-width:520px;margin:0 auto;padding:10px 10px 84px}
+  .tabs{display:flex;gap:8px;overflow:auto;padding:8px 0 2px}
+  .tab{border:1px solid var(--line);background:#171b25;color:var(--text);border-radius:999px;padding:8px 12px;white-space:nowrap;font-weight:900;font-size:13px}
+  .tab.active{background:var(--accent);color:#2a1b00;border-color:var(--accent)}
+  .section{display:none}.section.active{display:block}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:13px;margin:10px 0;box-shadow:0 8px 18px var(--shadow)}
+  .card.light{background:var(--card2)}
+  .card.warn{background:#2c2016;border-color:#6b4b21}
+  .small{font-size:13px;color:var(--muted)}
+  .row{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+  .right{margin-left:auto}
+  .btn{border:0;border-radius:13px;padding:10px 13px;background:var(--accent);color:#2a1b00;font-weight:900;font-size:14px;box-shadow:0 3px 0 rgba(0,0,0,.2)}
+  .btn.secondary{background:#2b3243;color:var(--text);border:1px solid var(--line)}
+  .btn.ghost{background:transparent;color:var(--text);border:1px solid var(--line);box-shadow:none}
+  .btn.danger{background:var(--danger);color:white}
+  .btn.full{width:100%;margin-top:8px}
+  .btn:active{transform:translateY(1px)}
+  .pill{display:inline-flex;align-items:center;gap:6px;border:1px solid var(--line);border-radius:999px;padding:4px 8px;background:#121722;color:var(--muted);font-size:12px;margin:2px;font-weight:800}
+  .pill.good{color:var(--good);border-color:rgba(139,209,124,.45)}
+  .pill.evil{color:var(--evil);border-color:rgba(255,119,119,.45)}
+  .pill.info{color:var(--blue);border-color:rgba(124,199,255,.45)}
+  .myRoleHidden .secret{filter:blur(9px);user-select:none}
+  .secretHint{display:none;color:var(--muted);font-size:13px;margin-top:6px}
+  .myRoleHidden .secretHint{display:block}
+  .big{font-size:28px;font-weight:1000;letter-spacing:.5px}
+  .roleGroup{margin:12px 0}
+  .roleGrid{display:grid;grid-template-columns:1fr 1fr;gap:8px;align-items:start}
+  .groupTitle{display:flex;align-items:center;gap:9px;font-size:18px;font-weight:1000;margin:14px 2px 8px;color:#fff}
+  .groupIcon{width:30px;height:30px;display:inline-grid;place-items:center;border-radius:50%;background:#151a24;border:1px solid var(--line);font-size:18px}
+  .roleItem{background:#151a24;border:1px solid var(--line);border-radius:15px;margin:0;overflow:hidden}
+  .roleItem[open]{grid-column:1 / -1}
+  .roleItem.good{border-color:rgba(139,209,124,.25)}
+  .roleItem.evil{border-color:rgba(255,119,119,.25)}
+  .roleHead{list-style:none;display:flex;align-items:center;gap:8px;padding:11px 10px;cursor:pointer;user-select:none;touch-action:manipulation;min-height:56px}
+  .roleHead::-webkit-details-marker{display:none}
+  .logo{width:30px;height:30px;flex:0 0 auto;display:grid;place-items:center;border-radius:50%;background:#0f131b;border:1px solid var(--line);font-size:17px;box-shadow:inset 0 0 0 2px rgba(255,255,255,.03)}
+  .nameBox{min-width:0;flex:1}
+  .roleName{font-size:18px;font-weight:1000;line-height:1.1;white-space:nowrap}
+  .roleEn{display:none}
+  .chev{font-size:18px;color:var(--muted);transition:.15s transform}
+  details[open] .chev{transform:rotate(90deg)}
+  .mineBadge{color:var(--muted);font-size:13px;font-weight:700;white-space:nowrap;opacity:.72}
+  .roleBody{border-top:1px solid var(--line);padding:10px;background:rgba(255,255,255,.018);display:grid;grid-template-columns:1fr auto;gap:10px;align-items:start}
+  .roleBody .explain{font-size:15.5px;color:#fff;margin:0;line-height:1.45}
+  .faqLink{display:inline-flex;align-items:center;justify-content:center;min-height:40px;padding:8px 10px;color:var(--muted);font-size:13px;text-decoration:none;border:1px dashed var(--line);border-radius:12px;background:#101620;white-space:nowrap}
+  .faqLink:active{color:var(--accent);border-color:rgba(240,192,96,.55)}
+  .roleActions{display:flex;flex-direction:column;gap:8px;align-items:stretch}
+  .noteTop{display:flex;align-items:center;gap:8px;margin-bottom:8px}
+  .noteArea{width:100%;min-height:126px;border:1px solid var(--line);background:#0e1118;color:var(--text);border-radius:14px;padding:11px 12px;font-size:16px;line-height:1.45;resize:vertical;font-family:inherit}
+  .canvasWrap{position:relative;width:100%;height:390px;background:#f4f0e6;border:1px solid var(--line);border-radius:16px;overflow:hidden;touch-action:none}
+  #drawCanvas{width:100%;height:100%;display:block;touch-action:none}
+  .hiddenPad{min-height:180px;display:grid;place-items:center;border:1px dashed var(--line);border-radius:16px;background:#101620;color:var(--muted);font-weight:900;text-align:center;padding:20px}
+  .toolRow{display:flex;gap:8px;flex-wrap:wrap;margin-top:9px}
+  .toolRow .btn{flex:1 1 auto}
+  .faqRole{scroll-margin-top:86px}
+  .faqRole.flash{outline:2px solid rgba(240,192,96,.7)}
+  .tipBox{background:#101620;border:1px dashed var(--line);border-radius:14px;padding:10px;margin:9px 0;color:#d7dced;font-size:14px}
+  .footerNav{position:fixed;bottom:0;left:0;right:0;background:#10131a;border-top:1px solid var(--line);padding:8px 10px;display:flex;gap:8px;overflow:auto;z-index:30}
+  .footerNav button{font-size:13px;padding:10px 12px}
+  .toast{position:fixed;left:12px;right:12px;bottom:72px;background:#222a3a;color:#fff;border:1px solid var(--line);border-radius:15px;padding:12px 14px;z-index:1000;display:none;text-align:center;font-weight:800}
+  .toast.show{display:block}
+  .modal{position:fixed;inset:0;background:rgba(0,0,0,.82);z-index:999;display:none;align-items:center;justify-content:center;padding:18px}
+  .modal.show{display:flex}
+  .modalBox{width:min(460px,100%);max-height:92vh;overflow:auto;background:#141821;border:1px solid var(--line);border-radius:22px;padding:18px;box-shadow:0 12px 36px rgba(0,0,0,.55)}
+  .modalRole{font-size:36px;line-height:1.05;font-weight:1000;margin:8px 0}
+  details.faq{background:#151a24;border:1px solid var(--line);border-radius:14px;padding:12px;margin:10px 0}
+  details.faq summary{font-weight:1000;font-size:18px;cursor:pointer}
+
+  .flowIntro{background:#151a24;border:1px solid var(--line);border-radius:18px;padding:13px;margin:10px 0}
+  .flowMeta{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px}
+  .timeline{position:relative;margin:10px 0 0;padding-left:18px}
+  .timeline:before{content:"";position:absolute;left:6px;top:10px;bottom:8px;width:2px;background:var(--line)}
+  .flowStep{position:relative;background:#151a24;border:1px solid var(--line);border-radius:16px;padding:12px;margin:10px 0}
+  .flowStep:before{content:"";position:absolute;left:-16px;top:18px;width:10px;height:10px;border-radius:50%;background:var(--accent);box-shadow:0 0 0 3px var(--bg)}
+  .flowStep h3{display:flex;align-items:center;gap:8px;margin:0 0 8px;font-size:17px}
+  .flowStep .num{display:inline-grid;place-items:center;width:25px;height:25px;border-radius:50%;background:#0f131b;border:1px solid var(--line);font-size:13px;color:var(--accent)}
+  .seatGrid{display:grid;grid-template-columns:1fr;gap:7px;margin:9px 0}
+  .seatRow{display:flex;align-items:center;gap:8px;background:#101620;border:1px solid var(--line);border-radius:12px;padding:8px 9px;font-size:14px}
+  .seatNo{display:inline-grid;place-items:center;width:24px;height:24px;border-radius:50%;background:#0b0e14;border:1px solid var(--line);font-weight:1000;color:var(--muted);flex:0 0 auto}
+  .quote{background:#101620;border-left:4px solid var(--accent);border-radius:10px;padding:8px 10px;margin:8px 0;color:#fff}
+  .flowMini{font-size:13px;color:var(--muted);margin-top:6px}
+  @media (max-width:380px){.wrap{padding-left:8px;padding-right:8px}.roleName{font-size:17px}.logo{width:28px;height:28px}.roleBody .explain{font-size:15px}.roleHead{padding-left:8px;padding-right:8px}.roleGrid{gap:7px}.canvasWrap{height:330px}.roleBody{grid-template-columns:1fr}}
+  @media print{header,.footerNav,.btn{display:none!important}body{background:white;color:black}.card,.roleItem,details.faq{box-shadow:none;border:1px solid #999;background:white;color:black}.small,.sub,.roleEn{color:#333}.wrap{padding:0;max-width:none}}
+</style>
+</head>
+<body>
+<header>
+  <h1>血染钟楼玩家角色手册</h1>
+  <div class="tabs" id="topTabs"></div>
+</header>
+<main class="wrap">
+  <section id="roles" class="section active"></section>
+  <section id="notes" class="section"></section>
+  <section id="rules" class="section"></section>
+  <section id="process" class="section"></section>
+  <section id="process7" class="section"></section>
+</main>
+<div class="footerNav" id="bottomTabs"></div>
+<div class="modal" id="modal"><div class="modalBox" id="modalBox"></div></div>
+<div class="toast" id="toast"></div>
+<script>
+const VERSION = 'player-1.6.0';
+const LS_KEY = 'botc_player_manual_cn_v2';
+const ROLES = {
+  '洗衣妇': {en:'Washerwoman', team:'good', type:'镇民', first:true, other:false, ability:'第一夜得知：两个玩家中有一人是某个镇民。', player:'你会知道一个镇民身份，并看到两个玩家；这两人里至少有一个真的是这个镇民。'},
+  '图书管理员': {en:'Librarian', team:'good', type:'镇民', first:true, other:false, ability:'第一夜得知：两个玩家中有一人是某个外来者；若没有外来者，可得知 0。', player:'你会知道一个外来者身份，并看到两个玩家；这两人里至少有一个是这个外来者。也可能被告知本局没有外来者。'},
+  '调查员': {en:'Investigator', team:'good', type:'镇民', first:true, other:false, ability:'第一夜得知：两个玩家中有一人是某个爪牙。', player:'你会知道一个爪牙身份，并看到两个玩家；这两人里至少有一个是这个爪牙。但有些角色可能被错误登记。'},
+  '厨师': {en:'Chef', team:'good', type:'镇民', first:true, other:false, ability:'第一夜得知有几对相邻的邪恶玩家。', player:'你得到一个数字：有多少对坐在相邻位置的邪恶玩家。首尾也算相邻。'},
+  '共情者': {en:'Empath', team:'good', type:'镇民', first:true, other:true, ability:'每晚得知自己两个存活邻居中有几个邪恶玩家。', player:'每晚你会得到 0、1 或 2，表示你左右最近的两个存活邻居里有几个邪恶玩家。死人会被跳过。'},
+  '占卜师': {en:'Fortune Teller', team:'good', type:'镇民', first:true, other:true, ability:'每晚选择两名玩家，得知其中是否有恶魔。另有一名好人红鲱鱼也会被算作恶魔。', player:'每晚选两人，问“这里面有没有恶魔”。注意：有一名好人会被你误判成恶魔。'},
+  '送葬者': {en:'Undertaker', team:'good', type:'镇民', first:false, other:true, ability:'每晚得知今天被处决玩家的角色。', player:'晚上你会得知白天被处决玩家的身份。没人被处决时通常没有信息。'},
+  '僧侣': {en:'Monk', team:'good', type:'镇民', first:false, other:true, ability:'每晚选择除自己外一名玩家，保护其免受恶魔攻击。', player:'每晚选一名其他玩家。如果恶魔今晚杀他，他不会因此死亡。不能保护自己。'},
+  '猎手': {en:'Ravenkeeper', team:'good', type:'镇民', first:false, other:true, ability:'若夜里死亡，当晚醒来选择一名玩家并得知其角色。', player:'如果你在夜里死亡，你会立刻醒来查一个人的真实身份。白天被处决不会触发。'},
+  '贞洁者': {en:'Virgin', team:'good', type:'镇民', first:false, other:false, ability:'第一次被镇民提名时，该镇民立即被处决。', player:'第一次有镇民提名你时，那个镇民会立刻被处决。只有第一次，而且提名者必须是镇民。'},
+  '杀手': {en:'Slayer', team:'good', type:'镇民', first:false, other:false, ability:'白天一次性公开选择一人；若目标是恶魔，目标死亡。', player:'白天你有一次开枪机会。公开选择一人；如果他是恶魔，他会死亡，否则通常无事发生。'},
+  '士兵': {en:'Soldier', team:'good', type:'镇民', first:false, other:false, ability:'不会被恶魔杀死。', player:'恶魔夜里杀你时，你不会因此死亡。其他死亡方式仍可能发生。'},
+  '市长': {en:'Mayor', team:'good', type:'镇民', first:false, other:false, ability:'若只剩 3 名存活玩家且无人被处决，好人获胜。若夜晚被攻击，可能由其他玩家代死。', player:'只剩 3 个活人时，如果白天没人被处决，好人胜利。你夜里被攻击时，可能会弹到别人身上。'},
+  '管家': {en:'Butler', team:'good', type:'外来者', first:true, other:true, ability:'每晚选择主人；白天只有主人投票时，管家才可以投票。', player:'每晚选一个主人。第二天投票时，只有主人投票，你才可以投票。你仍然可以提名。'},
+  '酒鬼': {en:'Drunk', team:'good', type:'外来者', first:false, other:false, ability:'你不知道自己是酒鬼，会以为自己是某个镇民；你的能力没有效果。', player:'你不会知道自己是酒鬼。你会以为自己是某个镇民，但你的能力没有效果，得到的信息也可能不可靠。'},
+  '隐士': {en:'Recluse', team:'good', type:'外来者', first:false, other:false, ability:'可能被登记为邪恶、爪牙或恶魔，即使死亡也可能如此。', player:'你是好人，但别人的侦测能力可能把你看成邪恶、爪牙或恶魔。死亡后也可能这样。'},
+  '圣徒': {en:'Saint', team:'good', type:'外来者', first:false, other:false, ability:'如果你被处决，邪恶阵营获胜。', player:'如果你白天被处决，邪恶阵营立刻获胜。夜里被杀不触发。'},
+  '投毒者': {en:'Poisoner', team:'evil', type:'爪牙', first:true, other:true, ability:'每晚选择一名玩家：该玩家今晚和明天白天中毒。', player:'每晚选一人中毒。他的能力暂时无效，得到的信息可能是错的。'},
+  '间谍': {en:'Spy', team:'evil', type:'爪牙', first:true, other:true, ability:'每晚可以查看魔典；可能被登记为好人或镇民。', player:'每晚可以看说书人的魔典。别人查你时，你可能显示成好人或镇民。'},
+  '红唇女郎': {en:'Scarlet Woman', team:'evil', type:'爪牙', first:false, other:false, ability:'若恶魔在仍有至少 5 名玩家存活时死亡，你变成恶魔。', player:'如果恶魔死亡时仍有至少 5 名玩家存活，你会变成新的恶魔，游戏继续。'},
+  '男爵': {en:'Baron', team:'evil', type:'爪牙', first:false, other:false, ability:'本局多 2 个外来者，少 2 个镇民。', player:'你的存在会改变开局配置：多 2 个外来者，少 2 个镇民。你白天主要靠发言帮助邪恶阵营。'},
+  '小恶魔': {en:'Imp', team:'evil', type:'恶魔', first:false, other:true, ability:'每晚选择一名玩家死亡。若自杀，另一名爪牙变成小恶魔。', player:'每晚杀一人。你也可以选择杀自己，通常会让一名爪牙变成新的小恶魔。第一夜通常不杀人。'}
+};
+
+const GROUPS = ['镇民','外来者','爪牙','恶魔'];
+const GROUP_ICON = {'镇民':'☀️','外来者':'❔','爪牙':'🗡️','恶魔':'🔥'};
+const ROLE_ICON = {
+  '洗衣妇':'🧺','图书管理员':'📚','调查员':'🔎','厨师':'🍳','共情者':'💗','占卜师':'🔮','送葬者':'⚰️','僧侣':'🙏','猎手':'🪶','贞洁者':'🌹','杀手':'🎯','士兵':'🛡️','市长':'🏛️',
+  '管家':'🤵','酒鬼':'🍺','隐士':'🕯️','圣徒':'✨','投毒者':'☠️','间谍':'👁️','红唇女郎':'💋','男爵':'🎩','小恶魔':'😈'
+};
+const ROLE_FAQ = {
+  '洗衣妇': ['两人里必须有一个是真的那个镇民吗？是。正常情况下必须至少一人是真的。', '如果她中毒/醉酒，信息还要对吗？不用，可以完全是假信息。'],
+  '图书管理员': ['没有外来者时会怎样？可以被告知“0”或没有外来者。', '酒鬼算外来者吗？真实身份是酒鬼时，算外来者；但酒鬼本人不知道。'],
+  '调查员': ['两人里一定有爪牙吗？正常情况下至少一人是那个爪牙。', '为什么可能查到好人？隐士等角色可能被登记成爪牙。'],
+  '厨师': ['首尾相邻算吗？算，座位围成一圈。', '死了以后数字会变吗？不会，厨师只在第一夜拿一次信息。'],
+  '共情者': ['邻居死亡怎么办？跳过死人，看左右最近的存活玩家。', '自己死亡还行动吗？通常死亡后能力停止，不再获得信息。'],
+  '占卜师': ['问到恶魔才是“是”吗？问到恶魔或红鲱鱼都会是“是”。', '红鲱鱼是谁？一名好人，但会被占卜师看成恶魔。'],
+  '送葬者': ['查的是谁？查白天被处决的玩家，不是夜里死亡的玩家。', '没人被处决怎么办？通常不会得到信息。'],
+  '僧侣': ['能保护自己吗？不能，只能保护其他玩家。', '保护能挡什么？主要挡恶魔夜里的攻击，不一定挡处决或其他死亡。'],
+  '猎手': ['白天被处决会触发吗？不会，只有夜里死亡才触发。', '查到的是显示身份还是真实身份？通常是真实身份，除非醉酒/中毒等影响。'],
+  '贞洁者': ['谁提名会触发？第一次由镇民提名你时触发。', '外来者、爪牙、恶魔提名会触发吗？不会。'],
+  '杀手': ['可以开几枪？一次。', '打错会怎样？通常无事发生，但机会用掉。'],
+  '士兵': ['士兵不会死吗？只是不被恶魔杀死，处决等其他方式仍可能死亡。'],
+  '市长': ['三人局一定赢吗？不是。必须只剩3名存活且白天无人被处决。', '夜里被杀为什么别人死？市长被攻击时，说书人可能让其他玩家代死。'],
+  '管家': ['主人不投票，管家能投吗？不能。', '管家能提名吗？能，限制只影响投票。'],
+  '酒鬼': ['酒鬼知道自己是酒鬼吗？不知道，会以为自己是某个镇民。', '酒鬼的信息一定是假吗？不一定，但不可靠，说书人可以给真也可以给假。'],
+  '隐士': ['隐士是邪恶吗？不是，隐士是好人。', '为什么会被查成恶魔/爪牙？这是他的能力效果，可能被错误登记。'],
+  '圣徒': ['夜里被杀会让邪恶赢吗？不会。', '只有被处决才触发吗？是，被处决时邪恶胜利。'],
+  '投毒者': ['中毒持续多久？通常是今晚和明天白天。', '中毒者知道自己中毒吗？通常不知道。'],
+  '间谍': ['间谍每晚都能看魔典吗？可以。', '别人查间谍一定查到邪恶吗？不一定，间谍可能登记为好人或镇民。'],
+  '红唇女郎': ['恶魔死了就一定接棒吗？需要恶魔死亡时至少还有5名玩家存活。', '接棒后身份变成什么？变成新的小恶魔。'],
+  '男爵': ['男爵有什么夜间行动吗？没有。能力在开局配置时已经生效。'],
+  '小恶魔': ['第一夜杀人吗？通常第一夜不杀人。', '可以杀自己吗？可以，通常会让一名爪牙变成新的小恶魔。']
+};
+let state = loadState() || {tab:'roles', myRole:null, myHidden:true, noteText:'', notesHidden:false, drawingStrokes:[]};
+state.noteText = state.noteText || '';
+state.notesHidden = !!state.notesHidden;
+state.drawingStrokes = Array.isArray(state.drawingStrokes) ? state.drawingStrokes : [];
+if(!['roles','notes','rules','process','process7'].includes(state.tab)) state.tab='roles';
+function loadState(){try{return JSON.parse(localStorage.getItem(LS_KEY)||'');}catch(e){return null;}}
+function save(){localStorage.setItem(LS_KEY, JSON.stringify(state));}
+function $(id){return document.getElementById(id)}
+function escapeHtml(s){return String(s??'').replace(/[&<>"]/g, c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));}
+function teamClass(role){return ROLES[role].team==='evil'?'evil':'good'}
+function teamText(role){return ROLES[role].team==='evil'?'邪恶':'善良'}
+function pill(role){const r=ROLES[role];return `<span class="pill ${teamClass(role)}">${r.type} · ${teamText(role)}</span>`}
+function actionText(r){if(r.first&&r.other)return '第一夜和之后夜晚会行动'; if(r.first)return '只在第一夜获得信息/行动'; if(r.other)return '之后夜晚会行动/触发'; return '白天/被动能力';}
+function renderTabs(){
+  const tabs=[['roles','角色'],['notes','记录'],['rules','规则/FAQ'],['process','5人示例'],['process7','7人示例']];
+  const html=tabs.map(([id,name])=>`<button class="tab ${state.tab===id?'active':''}" onclick="showTab('${id}')">${name}</button>`).join('');
+  $('topTabs').innerHTML=html; $('bottomTabs').innerHTML=html;
+  document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));
+  $(state.tab).classList.add('active');
+}
+function showTab(tab){state.tab=tab; save(); renderAll();}
+function renderRoles(){
+  $('roles').innerHTML = GROUPS.map(renderGroup).join('');
+}
+function renderGroup(type){
+  const names=Object.keys(ROLES).filter(n=>ROLES[n].type===type);
+  return `<div class="roleGroup"><div class="groupTitle"><span class="groupIcon">${GROUP_ICON[type]}</span>${type}</div><div class="roleGrid">${names.map(roleItem).join('')}</div></div>`;
+}
+function roleItem(name){
+  const r=ROLES[name]; const mine=state.myRole===name;
+  return `<details class="roleItem ${teamClass(name)}" data-role="${escapeHtml(name)}" ontoggle="oneOpenOnly(this)">
+    <summary class="roleHead" onpointerdown="holdStart(event,'${name}')" onpointerup="holdEnd()" onpointercancel="holdEnd()" onpointerleave="holdEnd()">
+      <span class="logo" aria-hidden="true">${ROLE_ICON[name]||'☾'}</span>
+      <span class="nameBox"><span class="roleName">${escapeHtml(name)}${mine?' <span class="mineBadge">（我）</span>':''}</span></span>
+      <span class="chev">›</span>
+    </summary>
+    <div class="roleBody">
+      <p class="explain">${escapeHtml(r.ability)}</p>
+      <div class="roleActions">${ROLE_FAQ[name]?`<a class="faqLink" href="#" title="查看${name}常见问题" onclick="jumpFAQ('${name}');return false;">FAQ ›</a>`:''}</div>
+    </div>
+  </details>`;
+}
+function renderMyTopCard(){
+  if(!state.myRole) return `<div class="card warn"><h3>还没记录自己的身份</h3><p>长按自己的角色名，就会在这里置顶。看完可以隐藏，避免旁边玩家看到。</p></div>`;
+  const r=ROLES[state.myRole];
+  return `<div class="card light ${state.myHidden?'myRoleHidden':''}">
+    <div class="row"><span class="pill info">置顶</span><button class="btn secondary right" onclick="state.myHidden=!state.myHidden;save();renderAll()">${state.myHidden?'显示':'隐藏'}</button></div>
+    <h2>我的身份</h2>
+    <div class="secret">
+      <div class="big">${ROLE_ICON[state.myRole]||''} ${escapeHtml(state.myRole)}</div>
+      <div>${pill(state.myRole)} <span class="pill info">${actionText(r)}</span></div>
+      <p>${escapeHtml(r.player)}</p>
+    </div>
+    <div class="secretHint">身份已隐藏。点“显示”查看。</div>
+    <div class="row"><button class="btn ghost" onclick="state.myRole=null;save();renderAll();toast('已清除我的身份')">清除记录</button></div>
+  </div>`;
+}
+function jumpNotes(){state.tab='notes'; save(); renderAll(); setTimeout(()=>initCanvas(),40);}
+function renderNotes(){
+  const roleLine = state.notesHidden ? '已隐藏' : (state.myRole ? `${ROLE_ICON[state.myRole]||''} ${escapeHtml(state.myRole)}` : '未标记');
+  $('notes').innerHTML = `
+    <div class="card">
+      <div class="noteTop"><span class="pill info">我的身份：${roleLine}</span><button class="btn secondary right" onclick="state.notesHidden=!state.notesHidden;save();renderAll()">${state.notesHidden?'显示记录':'隐藏记录'}</button></div>
+      ${state.myRole?'':`<p class="small">去“角色”页长按自己的身份，可以在这里显示身份标记。</p>`}
+      ${state.notesHidden ? `<div class="hiddenPad">记录已隐藏<br><span class="small">点击“显示记录”查看</span></div>` : `
+        <label class="small">文字备注</label>
+        <textarea class="noteArea" placeholder="例：N1 查 4+5：是；2号可信；5号重点观察……" oninput="state.noteText=this.value;save()">${escapeHtml(state.noteText||'')}</textarea>
+        <h3>手写记录</h3>
+        <div class="canvasWrap"><canvas id="drawCanvas"></canvas></div>
+        <div class="toolRow">
+          <button class="btn secondary" onclick="undoStroke()">撤销</button>
+          <button class="btn secondary" onclick="clearTextNote()">清空文字</button>
+          <button class="btn danger" onclick="confirmClearDrawing()">清空手写</button>
+        </div>
+        <p class="small">文字和手写只保存在这台设备的浏览器本地，离线可用。</p>
+      `}
+    </div>`;
+  if(!state.notesHidden) setTimeout(()=>initCanvas(),30);
+}
+function clearTextNote(){state.noteText=''; save(); renderAll(); toast('已清空文字备注');}
+function confirmClearDrawing(){
+  const ok = confirm('确定清空手写记录吗？');
+  if(!ok) return;
+  state.drawingStrokes=[]; save(); initCanvas(); toast('已清空手写记录');
+}
+let canvas=null, ctx=null, drawing=false, currentStroke=null;
+function initCanvas(){
+  canvas=$('drawCanvas'); if(!canvas) return;
+  const rect=canvas.getBoundingClientRect();
+  const ratio=window.devicePixelRatio||1;
+  canvas.width=Math.max(1, Math.floor(rect.width*ratio));
+  canvas.height=Math.max(1, Math.floor(rect.height*ratio));
+  ctx=canvas.getContext('2d');
+  ctx.setTransform(ratio,0,0,ratio,0,0);
+  redrawCanvas();
+  canvas.onpointerdown=startDraw;
+  canvas.onpointermove=moveDraw;
+  canvas.onpointerup=endDraw;
+  canvas.onpointercancel=endDraw;
+  canvas.onpointerleave=endDraw;
+}
+function canvasPoint(ev){
+  const r=canvas.getBoundingClientRect();
+  return {x:(ev.clientX-r.left)/Math.max(1,r.width), y:(ev.clientY-r.top)/Math.max(1,r.height)};
+}
+function startDraw(ev){
+  ev.preventDefault(); if(!canvas) return; canvas.setPointerCapture?.(ev.pointerId);
+  drawing=true; currentStroke=[canvasPoint(ev)]; drawStroke(currentStroke);
+}
+function moveDraw(ev){
+  if(!drawing||!currentStroke) return; ev.preventDefault();
+  currentStroke.push(canvasPoint(ev)); redrawCanvas(); drawStroke(currentStroke);
+}
+function endDraw(ev){
+  if(!drawing||!currentStroke) return;
+  drawing=false;
+  if(currentStroke.length>1){state.drawingStrokes.push(currentStroke); save();}
+  currentStroke=null; redrawCanvas();
+}
+function drawStroke(points){
+  if(!ctx||!canvas||!points||!points.length) return;
+  const r=canvas.getBoundingClientRect();
+  const px=p=>({x:p.x*r.width, y:p.y*r.height});
+  ctx.lineWidth=3.2; ctx.lineCap='round'; ctx.lineJoin='round'; ctx.strokeStyle='#151515';
+  const first=px(points[0]);
+  ctx.beginPath(); ctx.moveTo(first.x, first.y);
+  for(let i=1;i<points.length;i++){const pt=px(points[i]); ctx.lineTo(pt.x, pt.y);}
+  ctx.stroke();
+}
+function redrawCanvas(){
+  if(!ctx||!canvas) return;
+  const r=canvas.getBoundingClientRect();
+  ctx.clearRect(0,0,r.width,r.height);
+  ctx.fillStyle='#f4f0e6'; ctx.fillRect(0,0,r.width,r.height);
+  ctx.strokeStyle='rgba(0,0,0,.08)'; ctx.lineWidth=1;
+  for(let y=32;y<r.height;y+=32){ctx.beginPath();ctx.moveTo(0,y);ctx.lineTo(r.width,y);ctx.stroke();}
+  (state.drawingStrokes||[]).forEach(drawStroke);
+}
+function undoStroke(){
+  if(!state.drawingStrokes?.length){toast('没有可撤销的手写');return;}
+  state.drawingStrokes.pop(); save(); redrawCanvas();
+}
+window.addEventListener('resize', ()=>{if(state.tab==='notes'&&!state.notesHidden) initCanvas();});
+function renderRules(){
+  $('rules').innerHTML=`
+    <details class="faq" open ontoggle="oneFaqOnly(this)"><summary>胜利条件</summary><p><b>好人阵营：</b>恶魔死亡，通常好人胜利。</p><p><b>邪恶阵营：</b>通常只剩 2 名存活玩家且恶魔仍存活，邪恶胜利。</p><p class="small">特殊角色会改变结局，例如圣徒被处决、红唇女郎接棒、市长三人局无人处决。</p></details>
+    <details class="faq" ontoggle="oneFaqOnly(this)"><summary>死亡以后还能玩吗？</summary><p>可以。死亡玩家通常仍可发言，但只剩一次投票机会，常叫“鬼票”。</p></details>
+    <details class="faq" ontoggle="oneFaqOnly(this)"><summary>醉酒 / 中毒</summary><p>两者对玩家效果很像：能力暂时无效，收到的信息可能是错的。区别是：醉酒通常来自自身或长期状态；中毒通常来自其他角色的临时影响。玩家一般不会被告知自己正醉酒或中毒。</p></details>
+    <details class="faq" ontoggle="oneFaqOnly(this)"><summary>“登记为”是什么意思？</summary><p>有些角色会让侦测结果不等于真实身份。比如隐士是好人，但可能被某些能力看成邪恶、爪牙或恶魔。</p></details>
+    <details class="faq" ontoggle="oneFaqOnly(this)"><summary>我可以说谎吗？</summary><p>可以。这个游戏允许任何阵营说谎。好人也可能为了保护关键身份而隐藏或伪装。</p></details>
+    <details class="faq" ontoggle="oneFaqOnly(this)"><summary>和狼人杀最容易搞错的地方</summary><p>死亡不等于出局；死人还能说话。信息也不一定绝对真实，因为醉酒、中毒、登记错误和说书人裁定都会影响结果。</p></details>
+    <div class="roleGroup"><div class="groupTitle"><span class="groupIcon">❓</span>角色功能常见问题</div>${renderRoleFaqs()}</div>`;
+}
+function renderRoleFaqs(){
+  return Object.keys(ROLE_FAQ).map(name=>`<details class="faq faqRole" id="faq-${encodeURIComponent(name)}" ontoggle="oneFaqOnly(this)"><summary>${ROLE_ICON[name]||''} ${name}</summary>${ROLE_FAQ[name].map(x=>`<p>${escapeHtml(x)}</p>`).join('')}</details>`).join('');
+}
+function jumpFAQ(name){
+  state.tab='rules'; save(); renderAll();
+  setTimeout(()=>{
+    const el=document.getElementById('faq-'+encodeURIComponent(name));
+    if(!el) return;
+    document.querySelectorAll('details.faqRole[open]').forEach(d=>{if(d!==el)d.open=false;});
+    el.open=true;
+    el.scrollIntoView({behavior:'smooth',block:'start'});
+    el.classList.add('flash');
+    setTimeout(()=>el.classList.remove('flash'),900);
+  },30);
+}
+function oneOpenOnly(el){
+  if(!el.open) return;
+  document.querySelectorAll('details.roleItem[open]').forEach(d=>{if(d!==el) d.open=false;});
+}
+function oneFaqOnly(el){
+  if(!el.open) return;
+  document.querySelectorAll('details.faq[open]').forEach(d=>{if(d!==el) d.open=false;});
+}
+let holdTimer=null;
+function holdStart(ev, role){clearTimeout(holdTimer); holdTimer=setTimeout(()=>setMine(role),600);}
+function holdEnd(){clearTimeout(holdTimer);}
+function setMine(role){state.myRole=role; state.myHidden=false; save(); renderAll(); toast(`已标记：${role}（我）`);}
+function toast(msg){const t=$('toast');t.textContent=msg;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),1800)}
+$('modal').addEventListener('click', e=>{if(e.target.id==='modal') $('modal').classList.remove('show');});
+window.addEventListener('keydown', e=>{if(e.key==='Escape') $('modal').classList.remove('show');});
+
+function renderProcess(){
+  $('process').innerHTML = `
+    <div class="flowIntro">
+      <h2>5人局流程示例</h2>
+      <p>这是一个从上帝视角看的示例，帮助玩家理解“发身份 → 第一夜 → 白天讨论 → 提名处决 → 后续夜晚 → 胜负判断”。</p>
+      <div class="flowMeta"><span class="pill good">好人：洗衣妇、占卜师、士兵、酒鬼</span><span class="pill evil">邪恶：小恶魔</span></div>
+    </div>
+    <div class="timeline">
+      <div class="flowStep">
+        <h3><span class="num">1</span>开局发身份</h3>
+        <div class="seatGrid">
+          <div class="seatRow"><span class="seatNo">1</span>洗衣妇</div>
+          <div class="seatRow"><span class="seatNo">2</span>占卜师</div>
+          <div class="seatRow"><span class="seatNo">3</span>士兵</div>
+          <div class="seatRow"><span class="seatNo">4</span>显示身份：共情者；真实身份：酒鬼</div>
+          <div class="seatRow"><span class="seatNo">5</span>小恶魔</div>
+        </div>
+        <p class="flowMini">玩家只知道自己被告知的身份。4号只知道自己是“共情者”，不知道自己真实是酒鬼。</p>
+      </div>
+      <div class="flowStep">
+        <h3><span class="num">2</span>第一夜：恶魔获得伪装</h3>
+        <p>5号小恶魔醒来。因为这是 5 人示例局，他知道自己是唯一邪恶玩家，并获得几个不在场身份作为伪装，例如“僧侣、杀手、厨师”。</p>
+        <div class="quote">小恶魔之后可以假装自己是僧侣、杀手或厨师。</div>
+        <p class="flowMini">第一夜小恶魔通常不杀人。</p>
+      </div>
+      <div class="flowStep">
+        <h3><span class="num">3</span>第一夜：好人获得信息</h3>
+        <p><b>1号洗衣妇</b>的技能是：第一夜得知两个玩家中有一人是某个镇民。他被告知：</p>
+        <div class="quote">2号和4号中有一人是占卜师。</div>
+        <p><b>2号占卜师</b>的技能是：每晚选择两名玩家，得知其中是否有恶魔。2号选择 4号和5号，因为里面包含 5号小恶魔，因此 2号被告知：</p>
+        <div class="quote">是。</div>
+        <p><b>3号士兵</b>是被动能力：恶魔夜里杀他时，他不会因此死亡。第一夜通常不需要醒来，也不会获得信息。</p>
+        <p><b>4号真实身份是酒鬼</b>，但他被告知的身份是共情者。共情者的技能是：每晚得知自己两个存活邻居中有几个邪恶玩家。4号的邻居是 3号和5号，其中 5号是邪恶，所以真实数字本来是 1。</p>
+        <p>但是 4号是酒鬼，他的能力没有效果。因此说书人可以告诉他“1”，也可以告诉他“0”或其他数字。这个数字可能为真，也可能为假，完全不确定。</p>
+        <div class="quote">4号被告知：0。<br>这会让 4号误以为 3号和5号都不像邪恶，但这个信息不可靠。</div>
+      </div>
+      <div class="flowStep">
+        <h3><span class="num">4</span>第一天：公开讨论</h3>
+        <p>大家醒来后开始发言。好人通常会分享信息来互相验证，但不一定要立刻全说；恶魔会伪装成好人身份，尽量解释自己的行为和信息。</p>
+        <div class="quote">1号说：我知道 2号和4号里有一人是占卜师。<br>2号说：我是占卜师，我查了 4号和5号，结果是“是”。<br>4号说：我是共情者，我左右是 3号和5号，我得到 0。<br>5号说：我可能是僧侣，先不想说太多。</div>
+        <p class="flowMini">此时出现了典型冲突：2号的信息指向 4号或5号有恶魔；4号的信息却像是在保护 5号。真相是：2号信息可靠，4号是酒鬼，信息不可靠。</p>
+      </div>
+      <div class="flowStep">
+        <h3><span class="num">5</span>第一天：提名与处决</h3>
+        <p>讨论一段时间后，进入提名阶段。玩家可以提名一名玩家，并简单说明理由；被提名者通常也可以为自己辩解。</p>
+        <p>例如，2号提名 5号，理由是：自己查了 4号和5号得到“是”，而 4号的共情者信息与自己冲突，5号又不愿明确说明身份。</p>
+        <div class="quote">2号提名 5号。<br>2号说明理由。<br>5号辩解：也可能是 4号有问题，或者 2号在说谎。</div>
+        <p>然后开始投票。说书人会按座位顺序数票。只有票数达到处决门槛，并且成为当前最高票，才会暂时进入“即将被处决”的状态。</p>
+        <p>白天可以有多次提名。后面的提名如果票数更高，可以取代前一个即将被处决的人；如果没有更高票，原来的结果保留。</p>
+        <p>在这个示例中，大家还不确定 5号是否真是恶魔，所以 5号票数不够，第一天无人处决。</p>
+        <div class="quote">结果：无人被处决，进入第二夜。</div>
+        <p class="flowMini">无人处决很常见。新手局第一天信息不够时，玩家可能选择再观察一晚。</p>
+      </div>
+      <div class="flowStep">
+        <h3><span class="num">6</span>第二夜：好人行动与恶魔杀人</h3>
+        <p>第二夜，<b>2号占卜师仍然存活</b>，所以他的技能还能发动。他再次醒来，选择 3号和5号。因为里面包含 5号小恶魔，因此他再次被告知：</p>
+        <div class="quote">是。</div>
+        <p>3号士兵是被动能力，不醒来；4号以为自己是共情者，也会像共情者一样被叫醒，但因为真实是酒鬼，得到的数字仍然可能真也可能假。</p>
+        <p>随后 5号小恶魔醒来，选择杀死 2号占卜师。天亮后，说书人宣布：</p>
+        <div class="quote">昨晚，2号死亡。</div>
+        <p class="flowMini">死亡不等于出局。2号仍然参与游戏，但从这一刻起失去角色能力，也不会再在夜晚发动占卜师技能。</p>
+      </div>
+      <div class="flowStep">
+        <h3><span class="num">7</span>第二天：死亡玩家仍然参与</h3>
+        <p>2号已经死亡，但仍然可以继续说话、参与讨论、公开自己的信息、帮助大家分析谁更像恶魔。</p>
+        <p>死亡玩家失去角色能力，不能再提名；仍然可以投票，但整局通常只剩 <b>一次鬼票</b>，用完后之后就不能再投票。</p>
+        <div class="quote">2号可以说：我死了，但我两晚占卜都指向 5号很可疑。我不能提名了，但我还能发言，也可以把唯一一次鬼票留给关键投票。</div>
+        <p>这也是血染钟楼和很多狼人杀不同的地方：死亡玩家不会离开游戏，仍然可以继续推理和影响局势。</p>
+      </div>
+      <div class="flowStep">
+        <h3><span class="num">8</span>第二天：信息继续收束</h3>
+        <p>1号的信息支持 2号是真的占卜师；2号死亡前的信息指向 4号或5号；4号的信息保护了 5号，但4号真实是酒鬼，所以不能单独采信。</p>
+        <p>3号士兵可以说：如果恶魔夜里杀我，我可能不会死。5号昨晚没有杀我，而是杀了占卜师，说明他可能在躲开士兵能力。</p>
+        <p class="flowMini">血染钟楼的核心体验：把夜晚信息、死亡顺序、提名投票、发言逻辑拼起来。</p>
+      </div>
+      <div class="flowStep">
+        <h3><span class="num">9</span>第二天：再次提名并处决</h3>
+        <p>经过讨论，1号或3号这样的存活玩家可以提名 5号；2号已经死亡，不能提名，但可以发言帮大家整理信息。</p>
+        <p>处决门槛按<b>存活玩家数量</b>计算：至少需要达到存活人数的一半，向上取整。此时 1号、3号、4号、5号存活，共 4 名存活玩家，所以至少需要 2 票。若有多个被提名者，最终只有票数达到门槛且票数最高的人会被处决；平票则无人被处决。</p>
+        <div class="quote">3号提名 5号。<br>5号至少需要 2 票才可能被处决。<br>2号可以使用鬼票参与这次投票，但用掉后以后不能再投票。</div>
+        <p>这次 5号获得足够票数，并且没有后续提名超过他。当天结束时，5号被处决。</p>
+        <p>处决发生后，如果被处决者是恶魔，游戏通常立即结束。</p>
+      </div>
+      <div class="flowStep">
+        <h3><span class="num">10</span>处决恶魔，游戏结束</h3>
+        <p>5号真实身份是小恶魔。5号被处决后，恶魔死亡。</p>
+        <div class="quote">恶魔死亡，好人阵营获胜。</div>
+        <p class="flowMini">如果当天处决错人，游戏会继续。若最后只剩 2 名存活玩家且恶魔仍存活，通常邪恶阵营获胜。</p>
+      </div>
+    </div>`;
+}
+
+function renderProcess7(){
+  $('process7').innerHTML = `
+    <div class="flowIntro">
+      <h2>7人局流程示例</h2>
+      <p>这个示例加入爪牙，让玩家看到邪恶阵营互认、投毒、厨师信息和恶魔伪装身份。</p>
+      <div class="flowMeta"><span class="pill good">好人：洗衣妇、厨师、占卜师、士兵、酒鬼</span><span class="pill evil">邪恶：投毒者、小恶魔</span></div>
+    </div>
+    <div class="timeline">
+      <div class="flowStep">
+        <h3><span class="num">1</span>开局发身份</h3>
+        <div class="seatGrid">
+          <div class="seatRow"><span class="seatNo">1</span>洗衣妇</div>
+          <div class="seatRow"><span class="seatNo">2</span>厨师</div>
+          <div class="seatRow"><span class="seatNo">3</span>占卜师</div>
+          <div class="seatRow"><span class="seatNo">4</span>士兵</div>
+          <div class="seatRow"><span class="seatNo">5</span>显示身份：共情者；真实身份：酒鬼</div>
+          <div class="seatRow"><span class="seatNo">6</span>投毒者</div>
+          <div class="seatRow"><span class="seatNo">7</span>小恶魔</div>
+        </div>
+        <p class="flowMini">6号和7号相邻，因此厨师信息会变得有意义。</p>
+      </div>
+      <div class="flowStep">
+        <h3><span class="num">2</span>第一夜：邪恶阵营互认</h3>
+        <p>6号投毒者和7号小恶魔属于邪恶阵营。第一夜，他们会被告知彼此是谁。小恶魔还会得到几个不在场身份作为伪装。</p>
+        <div class="quote">6号知道：7号是恶魔。<br>7号知道：6号是爪牙。<br>7号获得伪装身份：僧侣、杀手、市长。</div>
+        <p class="flowMini">这就是为什么恶魔白天经常能报出一个听起来合理的好人身份。</p>
+      </div>
+      <div class="flowStep">
+        <h3><span class="num">3</span>第一夜：投毒者行动</h3>
+        <p><b>投毒者</b>的技能是：每晚选择一名玩家，该玩家今晚和明天白天中毒。中毒玩家能力无效，得到的信息可能是假的。</p>
+        <p>6号选择让 3号占卜师中毒。</p>
+        <div class="quote">3号今晚和明天白天中毒。<br>3号自己通常不知道这件事。</div>
+      </div>
+      <div class="flowStep">
+        <h3><span class="num">4</span>第一夜：好人获得信息</h3>
+        <p><b>1号洗衣妇</b>得知两个玩家中有一人是某个镇民。说书人告诉他：</p>
+        <div class="quote">2号和5号中有一人是厨师。</div>
+        <p>真实情况是 2号确实是厨师。</p>
+        <p><b>2号厨师</b>得知有几对相邻的邪恶玩家。6号投毒者和7号小恶魔相邻，所以 2号被告知：</p>
+        <div class="quote">1。</div>
+        <p><b>3号占卜师</b>选择 6号和7号。正常情况下，因为包含小恶魔 7号，应被告知“是”。但3号已经中毒，所以说书人可以给假信息：</p>
+        <div class="quote">3号被告知：否。<br>注意：这是中毒造成的不可靠信息。</div>
+        <p><b>5号真实身份是酒鬼</b>，但被告知自己是共情者。5号邻居是4号和6号，其中 6号是邪恶，所以真实数字本来是 1。但由于5号是酒鬼，信息完全不可靠。</p>
+        <div class="quote">5号被告知：1。<br>这个数字可能真也可能假，5号无法确定。</div>
+      </div>
+      <div class="flowStep">
+        <h3><span class="num">5</span>第一天：信息出现矛盾</h3>
+        <p>白天讨论时，大家开始分享信息。2号厨师的“1”说明有一对邪恶玩家相邻；3号占卜师却说自己查了 6号和7号，结果是“否”。</p>
+        <div class="quote">2号说：我厨师数字是 1。<br>3号说：我查 6号和7号，结果是“否”。<br>5号说：我共情者数字是 1，我左右是 4号和6号。</div>
+        <p>上帝视角看，3号的信息是错的，因为他被投毒了。玩家视角下，他们只知道“有人可能说谎，或有人被醉酒/中毒影响”。</p>
+      </div>
+      <div class="flowStep">
+        <h3><span class="num">6</span>第一天：提名与处决</h3>
+        <p>玩家怀疑 6号，因为5号的共情者信息似乎指向 6号，2号的厨师信息也说明有邪恶相邻。</p>
+        <div class="quote">5号提名 6号。<br>6号辩解：3号查过我和7号，结果是“否”，所以我不像邪恶。</div>
+        <p>投票后，6号票数达到处决门槛。当天结束时，6号投毒者被处决。</p>
+        <div class="quote">6号被处决并死亡。<br>恶魔还活着，游戏继续。</div>
+        <p class="flowMini">处决爪牙不会让好人立刻获胜。必须让恶魔死亡，通常好人才会胜利。</p>
+      </div>
+      <div class="flowStep">
+        <h3><span class="num">7</span>第二夜：恶魔杀人</h3>
+        <p>6号已经死亡，投毒者不再行动。7号小恶魔醒来，选择杀死 2号厨师。天亮后说书人宣布：</p>
+        <div class="quote">昨晚，2号死亡。</div>
+        <p>2号死亡后仍然可以发言，并继续强调自己的厨师数字“1”。</p>
+      </div>
+      <div class="flowStep">
+        <h3><span class="num">8</span>第二天：重新理解第一天信息</h3>
+        <p>现在大家知道 6号被处决后游戏没结束，说明6号不是恶魔，最多是爪牙或好人。2号夜里死亡，说明恶魔可能害怕厨师信息继续影响讨论。</p>
+        <p>3号开始怀疑自己第一夜的占卜信息可能不可靠：如果 6号和7号真的都是安全的，为什么6号死后游戏还继续，且7号仍然解释不清身份？</p>
+        <div class="quote">3号可以说：我查 6号和7号是“否”，但现在我怀疑自己可能中毒了。</div>
+        <p class="flowMini">这就是投毒者的作用：制造一条看似可靠、实际上误导玩家的信息。</p>
+      </div>
+      <div class="flowStep">
+        <h3><span class="num">9</span>第二天：处决恶魔</h3>
+        <p>大家把信息拼起来：厨师数字 1 支持 6号和7号相邻邪恶；6号死后游戏没结束，说明真正的恶魔更可能是 7号；3号第一夜的“否”可能来自投毒。</p>
+        <div class="quote">玩家提名 7号。<br>7号获得足够票数。<br>当天结束时，7号被处决。</div>
+      </div>
+      <div class="flowStep">
+        <h3><span class="num">10</span>游戏结束</h3>
+        <p>7号真实身份是小恶魔。7号被处决后，恶魔死亡。</p>
+        <div class="quote">恶魔死亡，好人阵营获胜。</div>
+        <p class="flowMini">7人局比5人局多了爪牙，因此会出现“处决了邪恶玩家但游戏还没结束”的情况。</p>
+      </div>
+    </div>`;
+}
+
+function renderAll(){renderTabs(); renderRoles(); renderNotes(); renderRules(); renderProcess(); renderProcess7();}
+renderAll();
+</script>
+</body>
+</html>
