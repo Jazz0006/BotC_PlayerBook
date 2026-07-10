@@ -1,6 +1,6 @@
 <!doctype html>
 <!--
-  血染钟楼玩家离线助手 v36 - 发布前整理版
+  血染钟楼玩家离线助手 v41 - 角色译名统一检查版
   定位：玩家端离线单文件 HTML；不包含说书人专用功能。
   离线：所有样式、脚本、SVG 令牌与首页背景均内嵌在本文件中。
   本地存储键：botc_player_manual_cn_v2，用于保存“我的身份”、文字备注、隐藏状态和手写记录。
@@ -12,7 +12,7 @@
 <meta name="description" content="血染钟楼玩家端离线助手：角色查询、身份隐藏、玩家记录、规则 FAQ、5人和7人流程示例。" />
 <meta name="theme-color" content="#0b0d14" />
 <meta name="application-name" content="血染钟楼玩家离线助手" />
-<title>血染钟楼玩家离线助手 - v36 发布前整理版</title>
+<title>血染钟楼玩家离线助手 - v41 角色译名统一检查版</title>
 <style>
   :root{
     --bg:#0b0d14; --card:#171b26; --card2:#202638; --text:#f6f1e7; --muted:#aeb6c8;
@@ -1135,7 +1135,7 @@ const APP_META = {
   scope: 'player-offline-single-file',
   storageKey: 'botc_player_manual_cn_v2'
 };
-const VERSION = 'player-1.8.0-release-v36';
+const VERSION = 'player-1.8.1-butler-faq-v39';
 // 发布前注意：不要随意修改 LS_KEY，否则已保存的身份、文字备注和手写记录会被当成新数据。
 const LS_KEY = APP_META.storageKey;
 const ROLES = {
@@ -1147,18 +1147,18 @@ const ROLES = {
   '占卜师': {en:'Fortune Teller', team:'good', type:'镇民', first:true, other:true, ability:'每晚选择两名玩家，得知其中是否有恶魔。另有一名好人红鲱鱼也会被算作恶魔。', player:'每晚选两人，问“这里面有没有恶魔”。注意：有一名好人会被你误判成恶魔。'},
   '送葬者': {en:'Undertaker', team:'good', type:'镇民', first:false, other:true, ability:'每晚得知今天被处决玩家的角色。', player:'晚上你会得知白天被处决玩家的身份。没人被处决时通常没有信息。'},
   '僧侣': {en:'Monk', team:'good', type:'镇民', first:false, other:true, ability:'每晚选择除自己外一名玩家，保护其免受恶魔攻击。', player:'每晚选一名其他玩家。如果恶魔今晚杀他，他不会因此死亡。不能保护自己。'},
-  '猎手': {en:'Ravenkeeper', team:'good', type:'镇民', first:false, other:true, ability:'若夜里死亡，当晚醒来选择一名玩家并得知其角色。', player:'如果你在夜里死亡，你会立刻醒来查一个人的真实身份。白天被处决不会触发。'},
-  '贞洁者': {en:'Virgin', team:'good', type:'镇民', first:false, other:false, ability:'第一次被镇民提名时，该镇民立即被处决。', player:'第一次有镇民提名你时，那个镇民会立刻被处决。只有第一次，而且提名者必须是镇民。'},
+  '守鸦人': {en:'Ravenkeeper', team:'good', type:'镇民', first:false, other:true, ability:'若夜里死亡，当晚醒来选择一名玩家并得知其角色。', player:'如果你在夜里死亡，你会立刻醒来查一个人的真实身份。白天被处决不会触发。'},
+  '圣女': {en:'Virgin', team:'good', type:'镇民', first:false, other:false, ability:'第一次被镇民提名时，该镇民立即被处决。', player:'第一次有镇民提名你时，那个镇民会立刻被处决。只有第一次，而且提名者必须是镇民。'},
   '杀手': {en:'Slayer', team:'good', type:'镇民', first:false, other:false, ability:'白天一次性公开选择一人；若目标是恶魔，目标死亡。', player:'白天你有一次开枪机会。公开选择一人；如果他是恶魔，他会死亡，否则通常无事发生。'},
   '士兵': {en:'Soldier', team:'good', type:'镇民', first:false, other:false, ability:'不会被恶魔杀死。', player:'恶魔夜里杀你时，你不会因此死亡。其他死亡方式仍可能发生。'},
   '市长': {en:'Mayor', team:'good', type:'镇民', first:false, other:false, ability:'若只剩 3 名存活玩家且无人被处决，好人获胜。若夜晚被攻击，可能由其他玩家代死。', player:'只剩 3 个活人时，如果白天没人被处决，好人胜利。你夜里被攻击时，可能会弹到别人身上。'},
-  '管家': {en:'Butler', team:'good', type:'外来者', first:true, other:true, ability:'每晚选择主人；白天只有主人投票时，管家才可以投票。', player:'每晚选一个主人。第二天投票时，只有主人投票，你才可以投票。你仍然可以提名。'},
+  '管家': {en:'Butler', team:'good', type:'外来者', first:true, other:true, ability:'每晚选择主人；白天只有主人正在投票或已经被计票，管家才可以投票。', player:'每晚选一个主人。第二天投票时，观察主人是否举手或已经被计票；如果主人不投或放下手，你也要放下手。这个限制主要靠管家自己遵守，不是说书人公开管控。你仍然可以提名。'},
   '酒鬼': {en:'Drunk', team:'good', type:'外来者', first:false, other:false, ability:'你不知道自己是酒鬼，会以为自己是某个镇民；你的能力没有效果。', player:'你不会知道自己是酒鬼。你会以为自己是某个镇民，但你的能力没有效果，得到的信息也可能不可靠。'},
   '隐士': {en:'Recluse', team:'good', type:'外来者', first:false, other:false, ability:'可能被登记为邪恶、爪牙或恶魔，即使死亡也可能如此。', player:'你是好人，但别人的侦测能力可能把你看成邪恶、爪牙或恶魔。死亡后也可能这样。'},
   '圣徒': {en:'Saint', team:'good', type:'外来者', first:false, other:false, ability:'如果你被处决，邪恶阵营获胜。', player:'如果你白天被处决，邪恶阵营立刻获胜。夜里被杀不触发。'},
   '投毒者': {en:'Poisoner', team:'evil', type:'爪牙', first:true, other:true, ability:'每晚选择一名玩家：该玩家今晚和明天白天中毒。', player:'每晚选一人中毒。他的能力暂时无效，得到的信息可能是错的。'},
   '间谍': {en:'Spy', team:'evil', type:'爪牙', first:true, other:true, ability:'每晚可以查看魔典；可能被登记为好人或镇民。', player:'每晚可以看说书人的魔典。别人查你时，你可能显示成好人或镇民。'},
-  '红唇女郎': {en:'Scarlet Woman', team:'evil', type:'爪牙', first:false, other:false, ability:'若恶魔在仍有至少 5 名玩家存活时死亡，你变成恶魔。', player:'如果恶魔死亡时仍有至少 5 名玩家存活，你会变成新的恶魔，游戏继续。'},
+  '猩红女巫': {en:'Scarlet Woman', team:'evil', type:'爪牙', first:false, other:false, ability:'若恶魔在仍有至少 5 名玩家存活时死亡，你变成恶魔。', player:'如果恶魔死亡时仍有至少 5 名玩家存活，你会变成新的恶魔，游戏继续。'},
   '男爵': {en:'Baron', team:'evil', type:'爪牙', first:false, other:false, ability:'本局多 2 个外来者，少 2 个镇民。', player:'你的存在会改变开局配置：多 2 个外来者，少 2 个镇民。你白天主要靠发言帮助邪恶阵营。'},
   '小恶魔': {en:'Imp', team:'evil', type:'恶魔', first:false, other:true, ability:'每晚选择一名玩家死亡。若自杀，另一名爪牙变成小恶魔。', player:'每晚杀一人。你也可以选择杀自己，通常会让一名爪牙变成新的小恶魔。第一夜通常不杀人。'}
 };
@@ -1215,10 +1215,36 @@ const TYPE_DEFAULT_SVG = {'镇民':SVG.town,'外来者':SVG.outsider,'爪牙':SV
 const ROLE_SVG = {
   '洗衣妇':SVG.washerwoman,'图书管理员':SVG.librarian,'调查员':SVG.investigator,'厨师':SVG.chef,
   '共情者':SVG.empath,'占卜师':SVG.fortuneTeller,'送葬者':SVG.undertaker,'僧侣':SVG.monk,
-  '猎手':SVG.ravenkeeper,'贞洁者':SVG.virgin,'杀手':SVG.slayer,'士兵':SVG.soldier,'市长':SVG.mayor,
+  '守鸦人':SVG.ravenkeeper,'圣女':SVG.virgin,'杀手':SVG.slayer,'士兵':SVG.soldier,'市长':SVG.mayor,
   '管家':SVG.butler,'酒鬼':SVG.drunk,'隐士':SVG.recluse,'圣徒':SVG.saint,
-  '投毒者':SVG.poisoner,'间谍':SVG.spy,'红唇女郎':SVG.scarletWoman,'男爵':SVG.baron,
+  '投毒者':SVG.poisoner,'间谍':SVG.spy,'猩红女巫':SVG.scarletWoman,'男爵':SVG.baron,
   '小恶魔':SVG.imp
+};
+
+// 旧译名/常见别名只用于搜索与本地记录兼容，不作为主显示名。
+const ROLE_ALIASES = {
+  '圣女':['贞洁者','Virgin'],
+  '杀手':['猎手','Slayer'],
+  '市长':['镇长','Mayor'],
+  '隐士':['陌客','Recluse'],
+  '猩红女巫':['红唇女郎','Scarlet Woman'],
+  '守鸦人':['Ravenkeeper'],
+  '洗衣妇':['Washerwoman'],
+  '图书管理员':['Librarian'],
+  '调查员':['Investigator'],
+  '厨师':['Chef'],
+  '共情者':['Empath'],
+  '占卜师':['Fortune Teller'],
+  '送葬者':['Undertaker'],
+  '僧侣':['Monk'],
+  '士兵':['Soldier'],
+  '管家':['Butler'],
+  '酒鬼':['Drunk'],
+  '圣徒':['Saint'],
+  '投毒者':['Poisoner'],
+  '间谍':['Spy'],
+  '男爵':['Baron'],
+  '小恶魔':['Imp']
 };
 const ROLE_FAQ = {
   '洗衣妇': ['两人里必须有一个是真的那个镇民吗？是。正常情况下必须至少一人是真的。', '如果她中毒/醉酒，信息还要对吗？不用，可以完全是假信息。'],
@@ -1229,18 +1255,18 @@ const ROLE_FAQ = {
   '占卜师': ['问到恶魔才是“是”吗？问到恶魔或红鲱鱼都会是“是”。', '红鲱鱼是谁？一名好人，但会被占卜师看成恶魔。'],
   '送葬者': ['查的是谁？查白天被处决的玩家，不是夜里死亡的玩家。', '没人被处决怎么办？通常不会得到信息。'],
   '僧侣': ['能保护自己吗？不能，只能保护其他玩家。', '保护能挡什么？主要挡恶魔夜里的攻击，不一定挡处决或其他死亡。'],
-  '猎手': ['白天被处决会触发吗？不会，只有夜里死亡才触发。', '查到的是显示身份还是真实身份？通常是真实身份，除非醉酒/中毒等影响。'],
-  '贞洁者': ['谁提名会触发？第一次由镇民提名你时触发。', '外来者、爪牙、恶魔提名会触发吗？不会。'],
+  '守鸦人': ['白天被处决会触发吗？不会，只有夜里死亡才触发。', '夜里死亡后什么时候行动？通常当晚立刻醒来，选择一名玩家并得知其角色。', '查到的是显示身份还是真实身份？通常是真实身份，除非醉酒/中毒等影响。'],
+  '圣女': ['谁提名会触发？第一次由镇民提名你时触发。', '外来者、爪牙、恶魔提名会触发吗？不会。'],
   '杀手': ['可以开几枪？一次。', '打错会怎样？通常无事发生，但机会用掉。'],
   '士兵': ['士兵不会死吗？只是不被恶魔杀死，处决等其他方式仍可能死亡。'],
   '市长': ['三人局一定赢吗？不是。必须只剩3名存活且白天无人被处决。', '夜里被杀为什么别人死？市长被攻击时，说书人可能让其他玩家代死。'],
-  '管家': ['主人不投票，管家能投吗？不能。', '管家能提名吗？能，限制只影响投票。'],
+  '管家': ['管家投票是谁来管？主要靠管家玩家自己观察和遵守，不是说书人公开点名管控；说书人最多提醒规则或事后提醒。', '主人什么时候算“投票”？主人已经举手准备投票，或主人的票已经被计入时，管家可以举手投票。', '主人不投票，管家能投吗？不能。如果主人不举手，或在被计票前放下手，管家也必须放下手。', '管家能提名吗？能，限制只影响投票。'],
   '酒鬼': ['酒鬼知道自己是酒鬼吗？不知道，会以为自己是某个镇民。', '酒鬼的信息一定是假吗？不一定，但不可靠，说书人可以给真也可以给假。'],
   '隐士': ['隐士是邪恶吗？不是，隐士是好人。', '为什么会被查成恶魔/爪牙？这是他的能力效果，可能被错误登记。'],
   '圣徒': ['夜里被杀会让邪恶赢吗？不会。', '只有被处决才触发吗？是，被处决时邪恶胜利。'],
   '投毒者': ['中毒持续多久？通常是今晚和明天白天。', '中毒者知道自己中毒吗？通常不知道。'],
   '间谍': ['间谍每晚都能看魔典吗？可以。', '别人查间谍一定查到邪恶吗？不一定，间谍可能登记为好人或镇民。'],
-  '红唇女郎': ['恶魔死了就一定接棒吗？需要恶魔死亡时至少还有5名玩家存活。', '接棒后身份变成什么？变成新的小恶魔。'],
+  '猩红女巫': ['恶魔死了就一定接棒吗？需要恶魔死亡时至少还有5名玩家存活。', '接棒后身份变成什么？变成新的小恶魔。'],
   '男爵': ['男爵有什么夜间行动吗？没有。能力在开局配置时已经生效。'],
   '小恶魔': ['第一夜杀人吗？通常第一夜不杀人。', '可以杀自己吗？可以，通常会让一名爪牙变成新的小恶魔。']
 };
@@ -1261,6 +1287,10 @@ function save(){
   try{localStorage.setItem(LS_KEY, JSON.stringify(state));}
   catch(e){console.warn('无法写入本地存储，当前更改可能不会在刷新后保留。', e);}
 }
+// v41 兼容旧版本：迁移此前误写或旧译名，避免升级后丢失“我的身份”。
+const ROLE_NAME_MIGRATIONS = {'猎手':'守鸦人','贞洁者':'圣女','红唇女郎':'猩红女巫','镇长':'市长','陌客':'隐士'};
+if(ROLE_NAME_MIGRATIONS[state.myRole]){ state.myRole = ROLE_NAME_MIGRATIONS[state.myRole]; save(); }
+if(state.myRole && !ROLES[state.myRole]){ state.myRole = null; save(); }
 function $(id){return document.getElementById(id)}
 function escapeHtml(s){return String(s??'').replace(/[&<>"]/g, c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));}
 function teamClass(role){return ROLES[role].team==='evil'?'evil':'good'}
@@ -1484,7 +1514,7 @@ function renderRules(){
 
     <div class="ruleClusterTitle" id="basic-rules"><span class="miniToken">规</span><span>基础规则速查</span></div>
     <div class="ruleBasics">
-      <details class="faq" open ontoggle="oneFaqOnly(this)"><summary><span class="faqBadge good">胜利</span><span class="faqTitleText">胜利条件</span></summary><p><b>好人阵营：</b>恶魔死亡，通常好人胜利。</p><p><b>邪恶阵营：</b>通常只剩 2 名存活玩家且恶魔仍存活，邪恶胜利。</p><p class="small">特殊角色会改变结局，例如圣徒被处决、红唇女郎接棒、市长三人局无人处决。</p></details>
+      <details class="faq" open ontoggle="oneFaqOnly(this)"><summary><span class="faqBadge good">胜利</span><span class="faqTitleText">胜利条件</span></summary><p><b>好人阵营：</b>恶魔死亡，通常好人胜利。</p><p><b>邪恶阵营：</b>通常只剩 2 名存活玩家且恶魔仍存活，邪恶胜利。</p><p class="small">特殊角色会改变结局，例如圣徒被处决、猩红女巫接棒、市长三人局无人处决。</p></details>
       <details class="faq" ontoggle="oneFaqOnly(this)"><summary><span class="faqBadge info">死亡</span><span class="faqTitleText">死亡以后还能玩吗？</span></summary><p>可以。死亡玩家通常仍可发言，但只剩一次投票机会，常叫“鬼票”。</p></details>
       <details class="faq" ontoggle="oneFaqOnly(this)"><summary><span class="faqBadge warn">状态</span><span class="faqTitleText">醉酒 / 中毒</span></summary><p>两者对玩家效果很像：能力暂时无效，收到的信息可能是错的。区别是：醉酒通常来自自身或长期状态；中毒通常来自其他角色的临时影响。玩家一般不会被告知自己正醉酒或中毒。</p></details>
       <details class="faq" ontoggle="oneFaqOnly(this)"><summary><span class="faqBadge info">侦测</span><span class="faqTitleText">“登记为”是什么意思？</span></summary><p>有些角色会让侦测结果不等于真实身份。比如隐士是好人，但可能被某些能力看成邪恶、爪牙或恶魔。</p></details>
@@ -1504,7 +1534,8 @@ function renderRoleFaqs(){
   return Object.keys(ROLE_FAQ).map(name=>{
     const r=ROLES[name]||{};
     const typeClass=tokenClass(r.type);
-    const text=[name,r.type,phaseText(r),...(ROLE_FAQ[name]||[])].join(' ');
+    const aliases=ROLE_ALIASES[name]||[];
+    const text=[name,r.en,...aliases,r.type,phaseText(r),...(ROLE_FAQ[name]||[])].join(' ');
     return `<details class="faq faqRole ${typeClass}" id="faq-${encodeURIComponent(name)}" data-faq="${escapeHtml(text)}" ontoggle="oneFaqOnly(this)"><summary>${inlineRoleToken(name)}<span class="faqTitleText">${name}</span><span class="faqBadge">${r.type||'角色'}</span></summary>${ROLE_FAQ[name].map(x=>`<p>${escapeHtml(x)}</p>`).join('')}</details>`;
   }).join('');
 }
