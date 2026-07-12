@@ -1,6 +1,6 @@
 <!doctype html>
 <!--
-  血染钟楼玩家离线助手 v41 - 角色译名统一检查版
+  血染钟楼玩家离线助手 v46 - 流程示例新手简化版
   定位：玩家端离线单文件 HTML；不包含说书人专用功能。
   离线：所有样式、脚本、SVG 令牌与首页背景均内嵌在本文件中。
   本地存储键：botc_player_manual_cn_v2，用于保存“我的身份”、文字备注、隐藏状态和手写记录。
@@ -9,10 +9,10 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-<meta name="description" content="血染钟楼玩家端离线助手：角色查询、身份隐藏、玩家记录、规则 FAQ、5人和7人流程示例。" />
+<meta name="description" content="血染钟楼玩家端离线助手：角色查询、身份隐藏、玩家记录、规则 FAQ、流程示例。" />
 <meta name="theme-color" content="#0b0d14" />
 <meta name="application-name" content="血染钟楼玩家离线助手" />
-<title>血染钟楼玩家离线助手 - v41 角色译名统一检查版</title>
+<title>血染钟楼玩家离线助手 - v46 流程示例新手简化版</title>
 <style>
   :root{
     --bg:#0b0d14; --card:#171b26; --card2:#202638; --text:#f6f1e7; --muted:#aeb6c8;
@@ -563,6 +563,8 @@
   .roleItem[open] .logo.token{width:38px;height:38px}
   .roleName{font-size:17.5px;line-height:1.08;display:flex;align-items:center;gap:5px;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
   .roleMeta{display:block;margin-top:4px;color:#9faabc;font-size:11.5px;font-weight:800;line-height:1.05;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .roleMeta .roleEnglish{color:#c1cee4;letter-spacing:.12px}
+  .roleMeta .roleTypePhase{color:#8f9aae}
   .mineBadge{
     display:inline-grid;
     place-items:center;
@@ -617,8 +619,9 @@
     .roleGrid{gap:7px}
     .roleHead{gap:7px;padding-left:8px;padding-right:7px}
     .roleName{font-size:16.3px}
-    .roleMeta{display:none}
-    .roleItem[open] .roleMeta{display:block}
+    .roleMeta{display:block;font-size:10.5px;margin-top:2px}
+    .roleMeta .roleTypePhase{display:none}
+    .roleItem[open] .roleMeta .roleTypePhase{display:inline}
     .myRoleIdentity{font-size:24px}
     .myRoleIdentity .inlineToken.token{width:39px;height:39px}
   }
@@ -986,7 +989,7 @@
   .tab{min-height:38px;display:inline-flex;align-items:center;justify-content:center;touch-action:manipulation;-webkit-tap-highlight-color:transparent}
   .footerNav{padding-bottom:calc(8px + env(safe-area-inset-bottom))}
   .footerNav .tab{min-height:42px;line-height:1;flex:1 1 0;min-width:0;max-width:none}
-  .roleItem,.roleHead,.nameBox,.roleName,.roleMeta{min-width:0}
+  .roleItem,.roleHead,.nameBox,.roleName,.roleMeta,.roleEnglish,.roleTypePhase{min-width:0}
   .roleGrid{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}
   .roleHead{touch-action:manipulation;-webkit-tap-highlight-color:transparent}
   .roleBody .explain,.playerExplain{overflow-wrap:anywhere}
@@ -1008,7 +1011,7 @@
     .wrap{padding-left:9px;padding-right:9px;padding-bottom:calc(88px + env(safe-area-inset-bottom))}
     .tabs{gap:5px;padding-top:7px}
     header .tabs .tab{padding:8px 10px;font-size:12px;min-height:36px}
-    .footerNav{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:4px;padding:7px 6px calc(7px + env(safe-area-inset-bottom));overflow:visible}
+    .footerNav{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:4px;padding:7px 6px calc(7px + env(safe-area-inset-bottom));overflow:visible}
     .footerNav .tab{width:100%;padding:9px 2px;font-size:11.8px;border-radius:13px;letter-spacing:0}
     .card{border-radius:17px;padding:12px}
     .goalGrid,.twoCols{grid-template-columns:1fr 1fr;gap:8px}
@@ -1073,8 +1076,9 @@
     .roleItem{border-radius:15px}
     .roleHead{gap:6px;min-height:53px;padding-left:7px;padding-right:6px}
     .roleName{font-size:15.5px}
-    .roleMeta{display:none}
-    .roleItem[open] .roleMeta{display:block;font-size:10.8px}
+    .roleMeta{display:block;font-size:10.2px;margin-top:2px}
+    .roleMeta .roleTypePhase{display:none}
+    .roleItem[open] .roleMeta .roleTypePhase{display:inline}
     .logo.token{width:28px;height:28px}
     .chev{font-size:17px}
     .roleItem[open] .logo.token{width:34px;height:34px}
@@ -1123,7 +1127,6 @@
   <section id="notes" class="section"></section>
   <section id="rules" class="section"></section>
   <section id="process" class="section"></section>
-  <section id="process7" class="section"></section>
 </main>
 <div class="footerNav" id="bottomTabs"></div>
 <div class="modal" id="modal"><div class="modalBox" id="modalBox"></div></div>
@@ -1131,11 +1134,11 @@
 <script>
 const APP_META = {
   name: '血染钟楼玩家离线助手',
-  version: 'v36-release-ready',
+  version: 'v46-flow-beginner-simplified',
   scope: 'player-offline-single-file',
   storageKey: 'botc_player_manual_cn_v2'
 };
-const VERSION = 'player-1.8.1-butler-faq-v39';
+const VERSION = 'player-1.8.7-flow-beginner-simplified-v46';
 // 发布前注意：不要随意修改 LS_KEY，否则已保存的身份、文字备注和手写记录会被当成新数据。
 const LS_KEY = APP_META.storageKey;
 const ROLES = {
@@ -1149,7 +1152,7 @@ const ROLES = {
   '僧侣': {en:'Monk', team:'good', type:'镇民', first:false, other:true, ability:'每晚选择除自己外一名玩家，保护其免受恶魔攻击。', player:'每晚选一名其他玩家。如果恶魔今晚杀他，他不会因此死亡。不能保护自己。'},
   '守鸦人': {en:'Ravenkeeper', team:'good', type:'镇民', first:false, other:true, ability:'若夜里死亡，当晚醒来选择一名玩家并得知其角色。', player:'如果你在夜里死亡，你会立刻醒来查一个人的真实身份。白天被处决不会触发。'},
   '圣女': {en:'Virgin', team:'good', type:'镇民', first:false, other:false, ability:'第一次被镇民提名时，该镇民立即被处决。', player:'第一次有镇民提名你时，那个镇民会立刻被处决。只有第一次，而且提名者必须是镇民。'},
-  '杀手': {en:'Slayer', team:'good', type:'镇民', first:false, other:false, ability:'白天一次性公开选择一人；若目标是恶魔，目标死亡。', player:'白天你有一次开枪机会。公开选择一人；如果他是恶魔，他会死亡，否则通常无事发生。'},
+  '杀手': {en:'Slayer', team:'good', type:'镇民', first:false, other:false, phase:'白天主动', action:'白天一次性主动能力', ability:'白天一次性公开选择一人；若目标是恶魔，目标死亡。', player:'白天你有一次开枪机会。公开选择一人；如果他是恶魔，他会死亡，否则通常无事发生。'},
   '士兵': {en:'Soldier', team:'good', type:'镇民', first:false, other:false, ability:'不会被恶魔杀死。', player:'恶魔夜里杀你时，你不会因此死亡。其他死亡方式仍可能发生。'},
   '市长': {en:'Mayor', team:'good', type:'镇民', first:false, other:false, ability:'若只剩 3 名存活玩家且无人被处决，好人获胜。若夜晚被攻击，可能由其他玩家代死。', player:'只剩 3 个活人时，如果白天没人被处决，好人胜利。你夜里被攻击时，可能会弹到别人身上。'},
   '管家': {en:'Butler', team:'good', type:'外来者', first:true, other:true, ability:'每晚选择主人；白天只有主人正在投票或已经被计票，管家才可以投票。', player:'每晚选一个主人。第二天投票时，观察主人是否举手或已经被计票；如果主人不投或放下手，你也要放下手。这个限制主要靠管家自己遵守，不是说书人公开管控。你仍然可以提名。'},
@@ -1257,7 +1260,7 @@ const ROLE_FAQ = {
   '僧侣': ['能保护自己吗？不能，只能保护其他玩家。', '保护能挡什么？主要挡恶魔夜里的攻击，不一定挡处决或其他死亡。'],
   '守鸦人': ['白天被处决会触发吗？不会，只有夜里死亡才触发。', '夜里死亡后什么时候行动？通常当晚立刻醒来，选择一名玩家并得知其角色。', '查到的是显示身份还是真实身份？通常是真实身份，除非醉酒/中毒等影响。'],
   '圣女': ['谁提名会触发？第一次由镇民提名你时触发。', '外来者、爪牙、恶魔提名会触发吗？不会。'],
-  '杀手': ['可以开几枪？一次。', '打错会怎样？通常无事发生，但机会用掉。'],
+  '杀手': ['这是主动技能还是被动技能？主动技能。白天你需要公开宣布使用能力并选择一名玩家。', '可以开几枪？一次。', '打错会怎样？通常无事发生，但机会用掉。'],
   '士兵': ['士兵不会死吗？只是不被恶魔杀死，处决等其他方式仍可能死亡。'],
   '市长': ['三人局一定赢吗？不是。必须只剩3名存活且白天无人被处决。', '夜里被杀为什么别人死？市长被攻击时，说书人可能让其他玩家代死。'],
   '管家': ['管家投票是谁来管？主要靠管家玩家自己观察和遵守，不是说书人公开点名管控；说书人最多提醒规则或事后提醒。', '主人什么时候算“投票”？主人已经举手准备投票，或主人的票已经被计入时，管家可以举手投票。', '主人不投票，管家能投吗？不能。如果主人不举手，或在被计票前放下手，管家也必须放下手。', '管家能提名吗？能，限制只影响投票。'],
@@ -1270,11 +1273,14 @@ const ROLE_FAQ = {
   '男爵': ['男爵有什么夜间行动吗？没有。能力在开局配置时已经生效。'],
   '小恶魔': ['第一夜杀人吗？通常第一夜不杀人。', '可以杀自己吗？可以，通常会让一名爪牙变成新的小恶魔。']
 };
-let state = loadState() || {tab:'home', myRole:null, myHidden:true, noteText:'', notesHidden:false, drawingStrokes:[]};
+let state = loadState() || {tab:'home', flow:'5', myRole:null, myHidden:true, noteText:'', notesHidden:false, drawingStrokes:[]};
 state.noteText = state.noteText || '';
 state.notesHidden = !!state.notesHidden;
 state.drawingStrokes = Array.isArray(state.drawingStrokes) ? state.drawingStrokes : [];
-if(!['home','roles','notes','rules','process','process7'].includes(state.tab)) state.tab='home';
+state.flow = (state.flow === '8' || state.flow === '7') ? '8' : '5';
+// v46：流程示例继续使用底部单 TAB；5 人示例面向新手简化说明，旧 7 人流程升级为 8 人完整结构示例。
+if(state.tab === 'process7'){ state.tab='process'; state.flow='8'; }
+if(!['home','roles','notes','rules','process'].includes(state.tab)) state.tab='home';
 function loadState(){
   try{
     const raw = localStorage.getItem(LS_KEY);
@@ -1296,8 +1302,8 @@ function escapeHtml(s){return String(s??'').replace(/[&<>"]/g, c=>({'&':'&amp;',
 function teamClass(role){return ROLES[role].team==='evil'?'evil':'good'}
 function teamText(role){return ROLES[role].team==='evil'?'邪恶':'善良'}
 function pill(role){const r=ROLES[role];return `<span class="pill ${teamClass(role)}">${r.type} · ${teamText(role)}</span>`}
-function actionText(r){if(r.first&&r.other)return '第一夜和之后夜晚会行动'; if(r.first)return '只在第一夜获得信息/行动'; if(r.other)return '之后夜晚会行动/触发'; return '白天/被动能力';}
-function phaseText(r){if(r.first&&r.other)return '首夜+夜晚'; if(r.first)return '首夜'; if(r.other)return '夜晚'; return '白天/被动';}
+function actionText(r){if(r.action)return r.action; if(r.first&&r.other)return '第一夜和之后夜晚会行动'; if(r.first)return '只在第一夜获得信息/行动'; if(r.other)return '之后夜晚会行动/触发'; return '白天/被动能力';}
+function phaseText(r){if(r.phase)return r.phase; if(r.first&&r.other)return '首夜+夜晚'; if(r.first)return '首夜'; if(r.other)return '夜晚'; return '白天/被动';}
 function tokenClass(type){
   if(type==='镇民') return 'townsfolk';
   if(type==='外来者') return 'outsider';
@@ -1353,22 +1359,23 @@ function renderHome(){
         <div class="assistantItem"><span class="dot">1</span><span>手机上快速查询角色能力和常见误解，不用翻规则书。</span></div>
         <div class="assistantItem"><span class="dot">2</span><span>长按角色可标记“我的身份”，需要时一键隐藏，避免被旁边玩家看到。</span></div>
         <div class="assistantItem"><span class="dot">3</span><span>记录页可写文字和手写笔记，适合记夜晚信息、怀疑对象和投票线索。</span></div>
-        <div class="assistantItem"><span class="dot">4</span><span>内置 5 人和 7 人示例，没玩过也能快速理解一局怎么推进。</span></div>
+        <div class="assistantItem"><span class="dot">4</span><span>内置 5 人和 8 人示例，没玩过也能快速理解一局怎么推进。</span></div>
       </div>
     </div>
 
-    <p class="homeHint">切换 TAB 查看详细内容。新手建议先看 <button class="homeHintLink" onclick="showTab('process')">5人局示例</button>，快速了解游戏流程。</p>`;
+    <p class="homeHint">切换 TAB 查看详细内容。新手建议先看 <button class="homeHintLink" onclick="showFlow('5')">流程示例</button>，用 5人局快速了解一局游戏怎么进行。</p>`;
 }
 
 function renderTabs(){
   document.body.dataset.tab = state.tab;
-  const tabs=[['home','首页'],['roles','角色'],['notes','记录'],['rules','规则'],['process','5人'],['process7','7人']];
+  const tabs=[['home','首页'],['roles','角色'],['notes','记录'],['rules','规则'],['process','流程示例']];
   const html=tabs.map(([id,name])=>`<button class="tab ${state.tab===id?'active':''}" onclick="showTab('${id}')">${name}</button>`).join('');
   $('topTabs').innerHTML=html; $('bottomTabs').innerHTML=html;
   document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));
   $(state.tab).classList.add('active');
 }
 function showTab(tab){state.tab=tab; save(); renderAll();}
+function showFlow(flow){state.tab='process'; state.flow = (flow === '8' || flow === '7') ? '8' : '5'; save(); renderAll();}
 function renderRoles(){
   $('roles').innerHTML = `
     <div class="rolePageHeader">
@@ -1385,7 +1392,7 @@ function roleItem(name){
   return `<details class="roleItem ${teamClass(name)} ${tokenClass(r.type)}" data-role="${escapeHtml(name)}" ontoggle="oneOpenOnly(this)">
     <summary class="roleHead" onpointerdown="holdStart(event,'${name}')" onpointerup="holdEnd()" onpointercancel="holdEnd()" onpointerleave="holdEnd()">
       ${roleToken(name)}
-      <span class="nameBox"><span class="roleName">${escapeHtml(name)}${mine?' <span class="mineBadge">我</span>':''}</span><span class="roleMeta">${escapeHtml(r.type)} · ${phaseText(r)}</span></span>
+      <span class="nameBox"><span class="roleName">${escapeHtml(name)}${mine?' <span class="mineBadge">我</span>':''}</span><span class="roleMeta"><span class="roleEnglish">${escapeHtml(r.en)}</span><span class="roleTypePhase"> · ${escapeHtml(r.type)} · ${phaseText(r)}</span></span></span>
       <span class="chev">›</span>
     </summary>
     <div class="roleBody">
@@ -1591,13 +1598,14 @@ $('modal').addEventListener('click', e=>{if(e.target.id==='modal') $('modal').cl
 window.addEventListener('keydown', e=>{if(e.key==='Escape') $('modal').classList.remove('show');});
 
 function renderProcess(){
+  if(state.flow === '8' || state.flow === '7') return renderProcess8Flow();
   $('process').innerHTML = `
     <div class="flowIntro">
       <h2>5人局流程示例</h2>
-      <p class="flowLead">这是一个从上帝视角看的入门示例，帮助玩家快速理解一局通常怎样从“发身份”推进到“夜晚信息、白天讨论、提名处决和胜负判断”。</p>
-      <div class="flowSwitch"><button class="flowSwitchBtn active" onclick="showTab('process')">5人局：最快上手</button><button class="flowSwitchBtn" onclick="showTab('process7')">7人局：加入爪牙</button></div>
-      <div class="flowMeta"><span class="pill good">好人：洗衣妇、占卜师、士兵、酒鬼</span><span class="pill evil">邪恶：小恶魔</span></div>
-      <div class="flowGuide"><div class="guideItem"><b>阅读方式</b><span>先看每步标题，再看金色引用框里的关键信息。</span></div><div class="guideItem"><b>新手重点</b><span>理解“死了还能发言”和“信息可能被污染”。</span></div></div>
+      <p class="flowLead">这个示例用 5 人小局展示一局游戏怎样推进：3 名镇民、1 名爪牙、1 名恶魔。先不用记住所有细节，只要看懂夜晚、白天、投票和胜负怎样循环。</p>
+      <div class="flowSwitch"><button class="flowSwitchBtn active" onclick="showFlow('5')">5人局：快速体验</button><button class="flowSwitchBtn" onclick="showFlow('8')">8人局：完整结构</button></div>
+      <div class="flowMeta"><span class="pill good">好人：洗衣妇、占卜师、士兵</span><span class="pill evil">邪恶：投毒者、小恶魔</span></div>
+      <div class="flowGuide"><div class="guideItem"><b>阅读方式</b><span>先跟着示例看完整一局，不用纠结每个规则细节。</span></div><div class="guideItem"><b>新手重点</b><span>好人要找恶魔；邪恶要隐藏恶魔。</span></div></div>
       ${flowLegend()}
     </div>
     <div class="timeline">
@@ -1607,174 +1615,152 @@ function renderProcess(){
           ${flowSeat(1,'洗衣妇')}
           ${flowSeat(2,'占卜师')}
           ${flowSeat(3,'士兵')}
-          ${flowSeat(4,'酒鬼','显示身份：共情者')}
+          ${flowSeat(4,'投毒者')}
           ${flowSeat(5,'小恶魔')}
         </div>
-        <p class="flowMini">玩家只知道自己被告知的身份。4号只知道自己是“共情者”，不知道自己真实是酒鬼。</p>
+        <p class="flowMini">这是 3 镇民、1 爪牙、1 恶魔的 5 人局示例。没有外来者；邪恶玩家开局互不知道对方，直接按自己的角色行动。</p>
       </div>
       <div class="flowStep night">
-        <h3><span class="num">2</span>第一夜：恶魔获得伪装</h3>
-        <p>5号小恶魔醒来。因为这是 5 人示例局，他知道自己是唯一邪恶玩家，并获得几个不在场身份作为伪装，例如“僧侣、杀手、厨师”。</p>
-        <div class="quote">小恶魔之后可以假装自己是僧侣、杀手或厨师。</div>
-        <p class="flowMini">第一夜小恶魔通常不杀人。</p>
+        <h3><span class="num">2</span>第一夜：爪牙行动</h3>
+        <p><b>4号投毒者</b>每晚选择一名玩家，使其今晚和明天白天中毒。投毒者不知道谁是恶魔，所以通常会凭直觉选择看起来像信息位的玩家。</p>
+        <div class="quote">4号选择让 2号占卜师中毒。<br>2号自己通常不知道已经中毒。</div>
       </div>
       <div class="flowStep night">
         <h3><span class="num">3</span>第一夜：好人获得信息</h3>
-        <p><b>1号洗衣妇</b>的技能是：第一夜得知两个玩家中有一人是某个镇民。他被告知：</p>
-        <div class="quote">2号和4号中有一人是占卜师。</div>
-        <p><b>2号占卜师</b>的技能是：每晚选择两名玩家，得知其中是否有恶魔。2号选择 4号和5号，因为里面包含 5号小恶魔，因此 2号被告知：</p>
-        <div class="quote">是。</div>
-        <p><b>3号士兵</b>是被动能力：恶魔夜里杀他时，他不会因此死亡。第一夜通常不需要醒来，也不会获得信息。</p>
-        <p><b>4号真实身份是酒鬼</b>，但他被告知的身份是共情者。共情者的技能是：每晚得知自己两个存活邻居中有几个邪恶玩家。4号的邻居是 3号和5号，其中 5号是邪恶，所以真实数字本来是 1。</p>
-        <p>但是 4号是酒鬼，他的能力没有效果。因此说书人可以告诉他“1”，也可以告诉他“0”或其他数字。这个数字可能为真，也可能为假，完全不确定。</p>
-        <div class="quote">4号被告知：0。<br>这会让 4号误以为 3号和5号都不像邪恶，但这个信息不可靠。</div>
+        <p><b>1号洗衣妇</b>得知两个玩家中有一人是某个镇民。说书人告诉他：</p>
+        <div class="quote">2号和3号中有一人是占卜师。</div>
+        <p>真实情况是 2号确实是占卜师，所以这条信息可以帮助 2号建立可信度。</p>
+        <p><b>2号占卜师</b>选择 4号和5号。正常情况下，因为里面包含 5号小恶魔，应被告知“是”。但 2号已经中毒，所以说书人可以给他错误信息：</p>
+        <div class="quote">2号被告知：否。<br>注意：这是中毒造成的不可靠信息。</div>
+        <p><b>3号士兵</b>是被动能力，第一夜通常不会醒来，也不会获得信息。</p>
       </div>
       <div class="flowStep day">
         <h3><span class="num">4</span>第一天：公开讨论</h3>
-        <p>大家醒来后开始发言。好人通常会分享信息来互相验证，但不一定要立刻全说；恶魔会伪装成好人身份，尽量解释自己的行为和信息。</p>
-        <div class="quote">1号说：我知道 2号和4号里有一人是占卜师。<br>2号说：我是占卜师，我查了 4号和5号，结果是“是”。<br>4号说：我是共情者，我左右是 3号和5号，我得到 0。<br>5号说：我可能是僧侣，先不想说太多。</div>
-        <p class="flowMini">此时出现了典型冲突：2号的信息指向 4号或5号有恶魔；4号的信息却像是在保护 5号。真相是：2号信息可靠，4号是酒鬼，信息不可靠。</p>
+        <p>大家醒来后开始发言。1号的信息支持 2号像真占卜师；2号却说自己查了 4号和5号得到“否”，这会同时保护投毒者和恶魔。</p>
+        <div class="quote">1号说：2号和3号里有一人是占卜师。<br>2号说：我是占卜师，查 4号和5号是“否”。<br>4号说：我可能是被确认的好人，先不急着报身份。<br>5号说：我也不像恶魔，因为占卜师查过我。</div>
+        <p class="flowMini">玩家视角下，2号可能是真的，也可能被醉酒/中毒影响，也可能在说谎。小人数局的讨论会很快进入关键判断。</p>
       </div>
       <div class="flowStep vote">
         <h3><span class="num">5</span>第一天：提名与处决</h3>
-        <p>讨论一段时间后，进入提名阶段。玩家可以提名一名玩家，并简单说明理由；被提名者通常也可以为自己辩解。</p>
-        <p>例如，2号提名 5号，理由是：自己查了 4号和5号得到“是”，而 4号的共情者信息与自己冲突，5号又不愿明确说明身份。</p>
-        <div class="quote">2号提名 5号。<br>2号说明理由。<br>5号辩解：也可能是 4号有问题，或者 2号在说谎。</div>
-        <p>然后开始投票。说书人会按座位顺序数票。只有票数达到处决门槛，并且成为当前最高票，才会暂时进入“即将被处决”的状态。</p>
-        <p>白天可以有多次提名。后面的提名如果票数更高，可以取代前一个即将被处决的人；如果没有更高票，原来的结果保留。</p>
-        <p>在这个示例中，大家还不确定 5号是否真是恶魔，所以 5号票数不够，第一天无人处决。</p>
-        <div class="quote">结果：无人被处决，进入第二夜。</div>
-        <p class="flowMini">无人处决很常见。新手局第一天信息不够时，玩家可能选择再观察一晚。</p>
+        <p>5 人局容错很低，但仍然可以提名。假设 1号怀疑 4号和5号过度依赖 2号信息，于是提名 4号。</p>
+        <div class="quote">1号提名 4号。<br>4号辩解：2号查过我和5号是“否”，我不像邪恶。</div>
+        <p>投票后，4号票数达到处决门槛，并在当天结束时被处决。由于 4号只是爪牙，不是恶魔，游戏不会结束。</p>
+        <div class="quote">4号投毒者被处决并死亡。<br>恶魔仍然存活，游戏继续。</div>
+        <p class="flowMini">这一步展示了一个重要点：处决邪恶玩家不一定获胜，必须让恶魔死亡，通常好人才会胜利。</p>
       </div>
       <div class="flowStep night">
-        <h3><span class="num">6</span>第二夜：好人行动与恶魔杀人</h3>
-        <p>第二夜，<b>2号占卜师仍然存活</b>，所以他的技能还能发动。他再次醒来，选择 3号和5号。因为里面包含 5号小恶魔，因此他再次被告知：</p>
-        <div class="quote">是。</div>
-        <p>3号士兵是被动能力，不醒来；4号以为自己是共情者，也会像共情者一样被叫醒，但因为真实是酒鬼，得到的数字仍然可能真也可能假。</p>
-        <p>随后 5号小恶魔醒来，选择杀死 2号占卜师。天亮后，说书人宣布：</p>
+        <h3><span class="num">6</span>第二夜：恶魔杀人</h3>
+        <p>4号已经死亡，投毒者不再行动。5号小恶魔醒来，选择杀死 2号占卜师。天亮后说书人宣布：</p>
         <div class="quote">昨晚，2号死亡。</div>
-        <p class="flowMini">死亡不等于出局。2号仍然参与游戏，但从这一刻起失去角色能力，也不会再在夜晚发动占卜师技能。</p>
+        <p>2号死亡后仍然可以发言，但失去角色能力，不会再在夜晚发动占卜师技能。</p>
       </div>
       <div class="flowStep day">
-        <h3><span class="num">7</span>第二天：死亡玩家仍然参与</h3>
-        <p>2号已经死亡，但仍然可以继续说话、参与讨论、公开自己的信息、帮助大家分析谁更像恶魔。</p>
-        <p>死亡玩家失去角色能力，不能再提名；仍然可以投票，但整局通常只剩 <b>一次鬼票</b>，用完后之后就不能再投票。</p>
-        <div class="quote">2号可以说：我死了，但我两晚占卜都指向 5号很可疑。我不能提名了，但我还能发言，也可以把唯一一次鬼票留给关键投票。</div>
-        <p>这也是血染钟楼和很多狼人杀不同的地方：死亡玩家不会离开游戏，仍然可以继续推理和影响局势。</p>
-      </div>
-      <div class="flowStep day">
-        <h3><span class="num">8</span>第二天：信息继续收束</h3>
-        <p>1号的信息支持 2号是真的占卜师；2号死亡前的信息指向 4号或5号；4号的信息保护了 5号，但4号真实是酒鬼，所以不能单独采信。</p>
-        <p>3号士兵可以说：如果恶魔夜里杀我，我可能不会死。5号昨晚没有杀我，而是杀了占卜师，说明他可能在躲开士兵能力。</p>
-        <p class="flowMini">血染钟楼的核心体验：把夜晚信息、死亡顺序、提名投票、发言逻辑拼起来。</p>
+        <h3><span class="num">7</span>第二天：重新理解第一天信息</h3>
+        <p>现在大家知道 4号死后游戏没结束，因此 4号不是恶魔。2号夜里死亡，说明恶魔可能害怕占卜师继续行动，也可能故意制造反向逻辑。</p>
+        <p>2号可以公开提醒大家：自己第一夜的信息可能被投毒影响，因为 4号如果真是投毒者，自己查 4号和5号得到“否”就很可疑。</p>
+        <div class="quote">2号可以说：我死了，但现在我怀疑第一夜我被 4号投毒了。4号和5号也许并不安全。</div>
+        <p class="flowMini">死亡玩家不会离开游戏，仍然可以继续推理和影响讨论。</p>
       </div>
       <div class="flowStep vote">
-        <h3><span class="num">9</span>第二天：再次提名并处决</h3>
-        <p>经过讨论，1号或3号这样的存活玩家可以提名 5号；2号已经死亡，不能提名，但可以发言帮大家整理信息。</p>
-        <p>处决门槛按<b>存活玩家数量</b>计算：至少需要达到存活人数的一半，向上取整。此时 1号、3号、4号、5号存活，共 4 名存活玩家，所以至少需要 2 票。若有多个被提名者，最终只有票数达到门槛且票数最高的人会被处决；平票则无人被处决。</p>
-        <div class="quote">3号提名 5号。<br>5号至少需要 2 票才可能被处决。<br>2号可以使用鬼票参与这次投票，但用掉后以后不能再投票。</div>
-        <p>这次 5号获得足够票数，并且没有后续提名超过他。当天结束时，5号被处决。</p>
-        <p>处决发生后，如果被处决者是恶魔，游戏通常立即结束。</p>
+        <h3><span class="num">8</span>第二天：处决恶魔</h3>
+        <p>经过讨论，1号和3号把信息拼起来：1号确认过 2号像占卜师；2号死亡前的信息可能被 4号投毒污染；4号不是恶魔，剩下最可疑的是 5号。</p>
+        <div class="quote">3号提名 5号。<br>5号获得足够票数。<br>当天结束时，5号被处决。</div>
+        <p>5号真实身份是小恶魔。恶魔死亡后，游戏通常立即结束。</p>
       </div>
       <div class="flowStep end">
-        <h3><span class="num">10</span>处决恶魔，游戏结束</h3>
-        <p>5号真实身份是小恶魔。5号被处决后，恶魔死亡。</p>
+        <h3><span class="num">9</span>游戏结束</h3>
         <div class="quote">恶魔死亡，好人阵营获胜。</div>
-        <p class="flowMini">如果当天处决错人，游戏会继续。若最后只剩 2 名存活玩家且恶魔仍存活，通常邪恶阵营获胜。</p>
+        <p class="flowMini">5 人局节奏很快。新手先记住：白天大胆讨论和投票，目标是让恶魔死亡。</p>
       </div>
     </div>`;
 }
 
-function renderProcess7(){
-  $('process7').innerHTML = `
+function renderProcess8Flow(){
+  $('process').innerHTML = `
     <div class="flowIntro">
-      <h2>7人局流程示例</h2>
-      <p class="flowLead">这个示例在 5 人局基础上加入爪牙，让玩家看到邪恶阵营互认、投毒、厨师信息和恶魔伪装身份。</p>
-      <div class="flowSwitch"><button class="flowSwitchBtn" onclick="showTab('process')">5人局：最快上手</button><button class="flowSwitchBtn active" onclick="showTab('process7')">7人局：加入爪牙</button></div>
-      <div class="flowMeta"><span class="pill good">好人：洗衣妇、厨师、占卜师、士兵、酒鬼</span><span class="pill evil">邪恶：投毒者、小恶魔</span></div>
-      <div class="flowGuide"><div class="guideItem"><b>阅读方式</b><span>注意哪些信息是真的，哪些信息被投毒或酒鬼污染。</span></div><div class="guideItem"><b>新手重点</b><span>处决爪牙不会结束游戏，真正目标仍然是恶魔。</span></div></div>
+      <h2>8人局流程示例</h2>
+      <p class="flowLead">这个示例展示标准人数局的完整结构：5 名镇民、1 名外来者、1 名爪牙、1 名恶魔。相比 5 人局，8 人局会出现外来者，也更接近完整规则结构。</p>
+      <div class="flowSwitch"><button class="flowSwitchBtn" onclick="showFlow('5')">5人局：快速体验</button><button class="flowSwitchBtn active" onclick="showFlow('8')">8人局：完整结构</button></div>
+      <div class="flowMeta"><span class="pill good">好人：厨师、共情者、占卜师、送葬者、圣女、酒鬼</span><span class="pill evil">邪恶：猩红女巫、小恶魔</span></div>
+      <div class="flowGuide"><div class="guideItem"><b>阅读方式</b><span>重点看四类角色怎样一起影响局势。</span></div><div class="guideItem"><b>新手重点</b><span>处决爪牙不会结束游戏；真正目标仍然是恶魔。</span></div></div>
       ${flowLegend()}
     </div>
     <div class="timeline">
       <div class="flowStep setup">
         <h3><span class="num">1</span>开局发身份</h3>
         <div class="seatGrid">
-          ${flowSeat(1,'洗衣妇')}
-          ${flowSeat(2,'厨师')}
+          ${flowSeat(1,'厨师')}
+          ${flowSeat(2,'共情者')}
           ${flowSeat(3,'占卜师')}
-          ${flowSeat(4,'士兵')}
-          ${flowSeat(5,'酒鬼','显示身份：共情者')}
-          ${flowSeat(6,'投毒者')}
-          ${flowSeat(7,'小恶魔')}
+          ${flowSeat(4,'送葬者')}
+          ${flowSeat(5,'圣女')}
+          ${flowSeat(6,'酒鬼','显示身份：调查员')}
+          ${flowSeat(7,'猩红女巫')}
+          ${flowSeat(8,'小恶魔')}
         </div>
-        <p class="flowMini">6号和7号相邻，因此厨师信息会变得有意义。</p>
+        <p class="flowMini">这是 5 镇民、1 外来者、1 爪牙、1 恶魔的 8 人局示例。6号真实是酒鬼，但他自己以为是调查员。</p>
       </div>
       <div class="flowStep night">
-        <h3><span class="num">2</span>第一夜：邪恶阵营互认</h3>
-        <p>6号投毒者和7号小恶魔属于邪恶阵营。第一夜，他们会被告知彼此是谁。小恶魔还会得到几个不在场身份作为伪装。</p>
-        <div class="quote">6号知道：7号是恶魔。<br>7号知道：6号是爪牙。<br>7号获得伪装身份：僧侣、杀手、市长。</div>
-        <p class="flowMini">这就是为什么恶魔白天经常能报出一个听起来合理的好人身份。</p>
+        <h3><span class="num">2</span>第一夜：邪恶阵营互认与恶魔伪装</h3>
+        <p>8 人局使用完整结构。第一夜，7号猩红女巫和8号小恶魔会知道彼此属于邪恶阵营；小恶魔还会获得几个不在场的好人身份作为伪装。</p>
+        <div class="quote">7号知道：8号是恶魔。<br>8号知道：7号是爪牙。<br>8号获得伪装身份：僧侣、杀手、市长。</div>
+        <p class="flowMini">这就是标准人数局和 5 人局最大的不同之一：邪恶阵营更容易配合，也更容易编出可信身份。</p>
       </div>
       <div class="flowStep night">
-        <h3><span class="num">3</span>第一夜：投毒者行动</h3>
-        <p><b>投毒者</b>的技能是：每晚选择一名玩家，该玩家今晚和明天白天中毒。中毒玩家能力无效，得到的信息可能是假的。</p>
-        <p>6号选择让 3号占卜师中毒。</p>
-        <div class="quote">3号今晚和明天白天中毒。<br>3号自己通常不知道这件事。</div>
-      </div>
-      <div class="flowStep night">
-        <h3><span class="num">4</span>第一夜：好人获得信息</h3>
-        <p><b>1号洗衣妇</b>得知两个玩家中有一人是某个镇民。说书人告诉他：</p>
-        <div class="quote">2号和5号中有一人是厨师。</div>
-        <p>真实情况是 2号确实是厨师。</p>
-        <p><b>2号厨师</b>得知有几对相邻的邪恶玩家。6号投毒者和7号小恶魔相邻，所以 2号被告知：</p>
+        <h3><span class="num">3</span>第一夜：好人获得信息</h3>
+        <p><b>1号厨师</b>得知有几对相邻的邪恶玩家。7号猩红女巫和8号小恶魔相邻，所以 1号被告知：</p>
         <div class="quote">1。</div>
-        <p><b>3号占卜师</b>选择 6号和7号。正常情况下，因为包含小恶魔 7号，应被告知“是”。但3号已经中毒，所以说书人可以给假信息：</p>
-        <div class="quote">3号被告知：否。<br>注意：这是中毒造成的不可靠信息。</div>
-        <p><b>5号真实身份是酒鬼</b>，但被告知自己是共情者。5号邻居是4号和6号，其中 6号是邪恶，所以真实数字本来是 1。但由于5号是酒鬼，信息完全不可靠。</p>
-        <div class="quote">5号被告知：1。<br>这个数字可能真也可能假，5号无法确定。</div>
+        <p><b>2号共情者</b>得知自己两个存活邻居中有几个邪恶玩家。2号邻居是 1号和3号，都是好人，因此被告知：</p>
+        <div class="quote">0。</div>
+        <p><b>3号占卜师</b>选择 7号和8号。因为里面包含 8号小恶魔，所以被告知：</p>
+        <div class="quote">是。</div>
+        <p><b>6号真实身份是酒鬼</b>，但他以为自己是调查员。调查员会得知两个玩家中有一人是某个爪牙；由于 6号是酒鬼，他的信息没有可靠性。</p>
+        <div class="quote">6号被告知：5号和7号中有一人是猩红女巫。<br>这个信息可能真也可能假，6号无法确定。</div>
       </div>
       <div class="flowStep day">
-        <h3><span class="num">5</span>第一天：信息出现矛盾</h3>
-        <p>白天讨论时，大家开始分享信息。2号厨师的“1”说明有一对邪恶玩家相邻；3号占卜师却说自己查了 6号和7号，结果是“否”。</p>
-        <div class="quote">2号说：我厨师数字是 1。<br>3号说：我查 6号和7号，结果是“否”。<br>5号说：我共情者数字是 1，我左右是 4号和6号。</div>
-        <p>上帝视角看，3号的信息是错的，因为他被投毒了。玩家视角下，他们只知道“有人可能说谎，或有人被醉酒/中毒影响”。</p>
+        <h3><span class="num">4</span>第一天：信息交叉验证</h3>
+        <p>白天讨论时，1号厨师的“1”说明有一对邪恶玩家相邻；3号占卜师的“是”指向 7号或8号可能有恶魔；6号的调查员信息也把 7号放进嫌疑圈。</p>
+        <div class="quote">1号说：我厨师数字是 1。<br>3号说：我查 7号和8号，结果是“是”。<br>6号说：我调查员信息是 5号和7号中有一人是猩红女巫。<br>8号说：我是僧侣，先不想报昨晚保护谁。</div>
+        <p class="flowMini">玩家视角下，6号的信息看起来有用，但他真实是酒鬼，所以这条信息不能完全采信。</p>
       </div>
       <div class="flowStep vote">
-        <h3><span class="num">6</span>第一天：提名与处决</h3>
-        <p>玩家怀疑 6号，因为5号的共情者信息似乎指向 6号，2号的厨师信息也说明有邪恶相邻。</p>
-        <div class="quote">5号提名 6号。<br>6号辩解：3号查过我和7号，结果是“否”，所以我不像邪恶。</div>
-        <p>投票后，6号票数达到处决门槛。当天结束时，6号投毒者被处决。</p>
-        <div class="quote">6号被处决并死亡。<br>恶魔还活着，游戏继续。</div>
-        <p class="flowMini">处决爪牙不会让好人立刻获胜。必须让恶魔死亡，通常好人才会胜利。</p>
+        <h3><span class="num">5</span>第一天：提名与处决</h3>
+        <p>玩家怀疑 7号，因为 1号厨师的相邻邪恶数字、3号占卜师信息和6号调查员信息都可能指向 7号附近。于是 6号提名 7号。</p>
+        <div class="quote">6号提名 7号。<br>7号辩解：6号的信息未必可靠，3号也可能查到了 8号。</div>
+        <p>投票后，7号票数达到处决门槛。当天结束时，7号猩红女巫被处决。</p>
+        <div class="quote">7号被处决并死亡。<br>恶魔还活着，游戏继续。</div>
+        <p class="flowMini">这一步展示完整规则中的关键体验：处决爪牙会削弱邪恶阵营，但不会让好人立刻获胜。</p>
       </div>
       <div class="flowStep night">
-        <h3><span class="num">7</span>第二夜：恶魔杀人</h3>
-        <p>6号已经死亡，投毒者不再行动。7号小恶魔醒来，选择杀死 2号厨师。天亮后说书人宣布：</p>
-        <div class="quote">昨晚，2号死亡。</div>
-        <p>2号死亡后仍然可以发言，并继续强调自己的厨师数字“1”。</p>
+        <h3><span class="num">6</span>第二夜：夜晚继续行动</h3>
+        <p><b>3号占卜师</b>仍然存活，他再次选择 6号和8号。因为里面包含 8号小恶魔，所以再次被告知：</p>
+        <div class="quote">是。</div>
+        <p><b>4号送葬者</b>得知白天被处决玩家的真实角色：</p>
+        <div class="quote">昨晚你得知：7号是猩红女巫。</div>
+        <p>随后 8号小恶魔醒来，选择杀死 3号占卜师。天亮后说书人宣布：</p>
+        <div class="quote">昨晚，3号死亡。</div>
       </div>
       <div class="flowStep day">
-        <h3><span class="num">8</span>第二天：重新理解第一天信息</h3>
-        <p>现在大家知道 6号被处决后游戏没结束，说明6号不是恶魔，最多是爪牙或好人。2号夜里死亡，说明恶魔可能害怕厨师信息继续影响讨论。</p>
-        <p>3号开始怀疑自己第一夜的占卜信息可能不可靠：如果 6号和7号真的都是安全的，为什么6号死后游戏还继续，且7号仍然解释不清身份？</p>
-        <div class="quote">3号可以说：我查 6号和7号是“否”，但现在我怀疑自己可能中毒了。</div>
-        <p class="flowMini">这就是投毒者的作用：制造一条看似可靠、实际上误导玩家的信息。</p>
+        <h3><span class="num">7</span>第二天：死亡玩家仍然参与</h3>
+        <p>3号已经死亡，但仍然可以继续发言。他可以公开两晚占卜结果，帮助大家把嫌疑集中到 8号。</p>
+        <div class="quote">3号可以说：我第一晚查 7号和8号是“是”，第二晚查 6号和8号也是“是”。现在 7号已经确认是猩红女巫，所以 8号非常可疑。</div>
+        <p>4号送葬者的信息确认了 7号确实是爪牙，说明第一天没有处决到恶魔。</p>
       </div>
       <div class="flowStep vote">
-        <h3><span class="num">9</span>第二天：处决恶魔</h3>
-        <p>大家把信息拼起来：厨师数字 1 支持 6号和7号相邻邪恶；6号死后游戏没结束，说明真正的恶魔更可能是 7号；3号第一夜的“否”可能来自投毒。</p>
-        <div class="quote">玩家提名 7号。<br>7号获得足够票数。<br>当天结束时，7号被处决。</div>
+        <h3><span class="num">8</span>第二天：处决恶魔</h3>
+        <p>大家把信息拼起来：厨师数字支持 7号和8号相邻邪恶；送葬者确认 7号是猩红女巫；占卜师两次信息都能解释为 8号是恶魔。</p>
+        <div class="quote">4号提名 8号。<br>8号获得足够票数。<br>当天结束时，8号被处决。</div>
+        <p>8号真实身份是小恶魔。恶魔死亡后，游戏通常立即结束。</p>
       </div>
       <div class="flowStep end">
-        <h3><span class="num">10</span>游戏结束</h3>
-        <p>7号真实身份是小恶魔。7号被处决后，恶魔死亡。</p>
+        <h3><span class="num">9</span>游戏结束</h3>
         <div class="quote">恶魔死亡，好人阵营获胜。</div>
-        <p class="flowMini">7人局比5人局多了爪牙，因此会出现“处决了邪恶玩家但游戏还没结束”的情况。</p>
+        <p class="flowMini">8 人局能完整展示镇民、外来者、爪牙、恶魔四类角色：好人信息更多，邪恶配合也更强，适合新手理解标准规则结构。</p>
       </div>
     </div>`;
 }
 
-function renderAll(){renderTabs(); renderHome(); renderRoles(); renderNotes(); renderRules(); renderProcess(); renderProcess7();}
+function renderAll(){renderTabs(); renderHome(); renderRoles(); renderNotes(); renderRules(); renderProcess();}
 renderAll();
 </script>
 </body>
