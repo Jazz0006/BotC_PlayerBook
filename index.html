@@ -1,6 +1,6 @@
 <!doctype html>
 <!--
-  血染钟楼玩家离线助手 v46 - 流程示例新手简化版
+  血染钟楼玩家离线助手 v52 - 角色墙可读性增强版
   定位：玩家端离线单文件 HTML；不包含说书人专用功能。
   离线：所有样式、脚本、SVG 令牌与首页背景均内嵌在本文件中。
   本地存储键：botc_player_manual_cn_v2，用于保存“我的身份”、文字备注、隐藏状态和手写记录。
@@ -12,7 +12,7 @@
 <meta name="description" content="血染钟楼玩家端离线助手：角色查询、身份隐藏、玩家记录、规则 FAQ、流程示例。" />
 <meta name="theme-color" content="#0b0d14" />
 <meta name="application-name" content="血染钟楼玩家离线助手" />
-<title>血染钟楼玩家离线助手 - v46 流程示例新手简化版</title>
+<title>血染钟楼玩家离线助手 - v52 角色墙可读性增强版</title>
 <style>
   :root{
     --bg:#0b0d14; --card:#171b26; --card2:#202638; --text:#f6f1e7; --muted:#aeb6c8;
@@ -542,6 +542,42 @@
     font-weight:800;
     box-shadow:inset 0 1px 0 rgba(255,255,255,.035);
   }
+
+  .scriptSwitchCard{
+    position:relative;
+    overflow:hidden;
+    background:radial-gradient(circle at 14% 0%,rgba(240,192,96,.16),transparent 36%),linear-gradient(180deg,rgba(24,29,42,.96),rgba(14,18,28,.96));
+    border:1px solid rgba(240,192,96,.20);
+    border-radius:18px;
+    padding:12px;
+    margin:8px 0 10px;
+    box-shadow:0 10px 22px rgba(0,0,0,.22), inset 0 1px 0 rgba(255,255,255,.035);
+  }
+  .scriptSwitchTop{display:flex;align-items:flex-start;gap:10px;margin-bottom:9px}
+  .scriptSwitchTitle{min-width:0;flex:1}
+  .scriptSwitchTitle b{display:block;color:#ffe0a0;font-size:16px;line-height:1.2}
+  .scriptSwitchTitle span{display:block;color:#aeb6c8;font-size:12px;margin-top:3px;line-height:1.35}
+  .scriptSwitchBtns{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:8px 0 7px}
+  .scriptBtn{border:1px solid rgba(240,192,96,.20);border-radius:14px;padding:9px 8px;background:rgba(9,14,23,.70);color:#dfe6f6;font-weight:1000;font-size:13px;box-shadow:inset 0 1px 0 rgba(255,255,255,.035)}
+  .scriptBtn.active{background:linear-gradient(180deg,#ffe09a,#c88333);color:#251700;border-color:rgba(255,225,156,.78);box-shadow:0 8px 18px rgba(240,192,96,.16),inset 0 1px 0 rgba(255,255,255,.36)}
+  .scriptInfoRow{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px}
+  .scriptInfoPill{display:inline-flex;align-items:center;gap:5px;border:1px solid rgba(240,192,96,.13);border-radius:999px;background:rgba(9,14,23,.56);color:#cfd7e8;padding:4px 8px;font-size:12px;font-weight:900}
+  .scriptNotice{margin-top:8px;border:1px dashed rgba(240,192,96,.23);background:rgba(9,14,23,.44);border-radius:13px;padding:8px 9px;color:#c6cede;font-size:12.5px;line-height:1.38}
+  .scriptGuideGrid{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin-top:9px}
+  .scriptGuideItem{border:1px solid rgba(240,192,96,.12);background:rgba(9,14,23,.42);border-radius:13px;padding:8px 9px;min-height:64px}
+  .scriptGuideItem b{display:block;color:#fff;font-size:12.5px;margin-bottom:4px;line-height:1.2}
+  .scriptGuideItem span{display:block;color:#aeb6c8;font-size:12px;line-height:1.35}
+  .scriptTinyTip{margin-top:8px;color:#b9c2d3;font-size:12px;line-height:1.38}
+  .homeScriptPanel{background:radial-gradient(circle at 16% 0%,rgba(124,199,255,.12),transparent 34%),linear-gradient(180deg,rgba(18,24,35,.96),rgba(11,15,23,.94));border:1px solid rgba(240,192,96,.15);border-radius:19px;padding:12px;margin:2px 0 4px;box-shadow:0 8px 18px rgba(0,0,0,.20)}
+  .homeScriptGrid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:8px}
+  .homeScriptCard{appearance:none;text-align:left;border:1px solid rgba(240,192,96,.15);border-radius:15px;background:rgba(9,14,23,.58);color:#f6f1e7;padding:10px 10px;min-height:94px;font:inherit;box-shadow:inset 0 1px 0 rgba(255,255,255,.03)}
+  .homeScriptCard.active{border-color:rgba(240,192,96,.52);background:linear-gradient(180deg,rgba(240,192,96,.14),rgba(9,14,23,.70));box-shadow:0 8px 18px rgba(240,192,96,.10),inset 0 1px 0 rgba(255,255,255,.04)}
+  .homeScriptCard b{display:block;color:#ffe0a0;font-size:14px;margin-bottom:4px;line-height:1.2}
+  .homeScriptCard span{display:block;color:#aeb6c8;font-size:12px;line-height:1.35}
+  .homeScriptHint{font-size:12px;color:#b9c2d3;line-height:1.38;margin-top:8px}
+  .scriptFaqHint{margin:8px 0 0;color:#aeb6c8;font-size:12px;line-height:1.38}
+  @media (max-width:380px){.scriptGuideGrid,.homeScriptGrid{grid-template-columns:1fr}.scriptGuideItem{min-height:0}.homeScriptCard{min-height:0}}
+  @media (max-width:360px){.scriptBtn{font-size:12px;padding:8px 5px}.scriptSwitchTop{gap:8px}.scriptSwitchTitle b{font-size:15px}}
   .roleGroup{margin:14px 0 16px}
   .groupTitle{margin:15px 2px 9px}
   .groupName{display:inline-flex;align-items:center}
@@ -1112,11 +1148,134 @@
     .goalCard{gap:6px}
   }
 
+
+
+  /* v51 角色页速查墙：所有角色紧凑展示，点击弹窗查看详情 */
+  .scriptSwitchCard.compactRoleMode{padding:10px 11px;margin:8px 0 10px;border-radius:17px}
+  .compactRoleMode .scriptSwitchTop{margin-bottom:7px}
+  .compactRoleMode .scriptSwitchTitle b{font-size:15px}
+  .compactRoleMode .scriptSwitchTitle span{font-size:11.8px}
+  .compactRoleMode .scriptSwitchBtns{margin:6px 0;gap:7px}
+  .compactRoleMode .scriptBtn{padding:8px 8px;font-size:12.2px;border-radius:12px}
+  .compactRoleMode .small{font-size:12px;margin:6px 0;color:#c9d1e1;line-height:1.35}
+  .compactRoleMode .scriptInfoRow{margin-top:6px}
+  .compactRoleMode .scriptInfoPill{font-size:11.4px;padding:3px 7px}
+  .scriptGuideDisclosure{margin-top:7px;border:1px dashed rgba(240,192,96,.16);border-radius:13px;background:rgba(9,14,23,.42);overflow:hidden}
+  .scriptGuideDisclosure summary{list-style:none;cursor:pointer;padding:8px 9px;font-size:12.5px;font-weight:1000;color:#ffe0a0;display:flex;align-items:center;justify-content:space-between;gap:8px}
+  .scriptGuideDisclosure summary::-webkit-details-marker{display:none}
+  .scriptGuideDisclosure summary:after{content:'展开';font-size:11px;color:#aeb6c8;font-weight:800}
+  .scriptGuideDisclosure[open] summary:after{content:'收起'}
+  .scriptGuideDisclosure .scriptGuideGrid{display:grid;grid-template-columns:1fr 1fr;gap:7px;padding:0 8px 8px;margin:0}
+
+  .roleHintStrip.roleWallHint{justify-content:center;font-size:11.7px;padding:6px 7px;margin:6px 0 8px;opacity:.92}
+  .roleGroup{margin:7px 0 8px}
+  .roleGroup .groupTitle{font-size:14.5px;margin:7px 2px 5px;gap:6px}
+  .roleGroup .groupIcon{width:24px;height:24px}
+  .roleGroup .groupIcon svg{width:17px;height:17px}
+  .groupCount{font-size:11px;color:#8f98aa;font-weight:900;margin-left:2px}
+  .roleWall{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:6px}
+  .roleChip{position:relative;min-width:0;min-height:47px;border:1px solid rgba(240,192,96,.10);border-radius:14px;background:linear-gradient(180deg,rgba(255,255,255,.030),rgba(255,255,255,0)),rgba(13,18,28,.95);color:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;padding:5px 4px 4px;font-family:inherit;box-shadow:0 7px 14px rgba(0,0,0,.18),inset 0 1px 0 rgba(255,255,255,.03);touch-action:manipulation;overflow:hidden}
+  .roleChip:active{transform:translateY(1px);filter:brightness(1.08)}
+  .roleChip.good{border-color:rgba(147,216,132,.22)}
+  .roleChip.evil{border-color:rgba(255,109,109,.26)}
+  .roleChip.townsfolk{--chip-rgb:var(--town-rgb)}
+  .roleChip.outsider{--chip-rgb:var(--outsider-rgb)}
+  .roleChip.minion{--chip-rgb:var(--minion-rgb)}
+  .roleChip.demon{--chip-rgb:var(--demon-rgb)}
+  .roleChip:before{content:"";position:absolute;inset:0;background:radial-gradient(circle at 50% 0%,rgba(var(--chip-rgb,240,192,96),.16),transparent 45%);pointer-events:none;opacity:.7}
+  .roleChip.mine{border-color:rgba(240,192,96,.72);box-shadow:0 8px 16px rgba(0,0,0,.24),0 0 0 1px rgba(240,192,96,.18),inset 0 1px 0 rgba(255,255,255,.05)}
+  .roleChipToken.token{width:23px;height:23px;flex:0 0 auto;z-index:1}
+  .roleChipToken.token svg{width:16px;height:16px}
+  .roleChipName{position:relative;z-index:1;display:block;max-width:100%;font-size:12.4px;line-height:1.05;font-weight:1000;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;letter-spacing:-.15px}
+  .roleChip.mine .roleChipName:after{content:' 我';font-size:10.5px;color:var(--accent);font-weight:1000}
+  .roleChipEn{display:none}
+
+  .roleModal{position:relative;padding:2px 1px 0}
+  .roleModalClose{position:absolute;right:-4px;top:-5px;width:35px;height:35px;border-radius:50%;border:1px solid rgba(240,192,96,.18);background:#202638;color:#f6f1e7;font-size:20px;font-weight:900;line-height:1}
+  .roleModalHead{display:flex;gap:12px;align-items:center;padding-right:34px;margin-bottom:10px}
+  .roleModalToken.token{width:52px;height:52px;flex:0 0 auto}
+  .roleModalToken.token svg{width:33px;height:33px}
+  .roleModalTitle{min-width:0;flex:1}
+  .roleModalName{font-size:27px;font-weight:1000;line-height:1.05;letter-spacing:.2px;color:#ffe3a1}
+  .roleModalEn{font-size:13px;color:#aeb6c8;margin-top:3px;font-weight:800}
+  .roleModalMeta{display:flex;gap:6px;flex-wrap:wrap;margin:8px 0 10px}
+  .roleModalSection{background:rgba(9,14,23,.55);border:1px solid rgba(240,192,96,.11);border-radius:14px;padding:10px;margin:8px 0}
+  .roleModalSection b{display:block;font-size:13px;color:#f0c060;margin-bottom:5px}
+  .roleModalSection p{margin:0;font-size:15px;line-height:1.45;color:#f5f0e7}
+  .roleModalActions{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:11px}
+  .roleModalActions .btn{width:100%;padding:10px 8px;font-size:13px}
+  .roleModalActions .btn.fullSpan{grid-column:1/-1}
+  .roleModal .scriptNotice{margin-top:8px}
+
+  @media (max-width:390px){
+    .roleWall{gap:5px}
+    .roleChip{min-height:44px;border-radius:13px;padding-left:3px;padding-right:3px}
+    .roleChipName{font-size:11.8px;letter-spacing:-.25px}
+    .roleChipToken.token{width:21px;height:21px}
+    .roleChipToken.token svg{width:15px;height:15px}
+    .compactRoleMode .scriptBtn{font-size:11.7px;padding-left:5px;padding-right:5px}
+    .scriptGuideDisclosure .scriptGuideGrid{grid-template-columns:1fr}
+  }
+  @media (max-width:350px){
+    .roleWall{grid-template-columns:repeat(3,minmax(0,1fr))}
+    .roleChip{min-height:45px}
+  }
+
+
+  /* v52 角色墙可读性增强：放大角色名、强化分区、压缩顶部说明 */
+  .scriptSwitchCard.compactRoleMode{padding:7px 9px 8px;margin:5px 0 7px;border-radius:16px}
+  .compactRoleMode .scriptSwitchTop{margin-bottom:4px}
+  .compactRoleMode .scriptSwitchTitle b{font-size:14.5px;line-height:1.12}
+  .compactRoleMode .scriptSwitchTitle span{font-size:11px;margin-top:1px;line-height:1.2}
+  .compactRoleMode .scriptSwitchBtns{gap:6px;margin:5px 0 4px}
+  .compactRoleMode .scriptBtn{padding:7px 8px;font-size:12.6px;border-radius:12px;min-height:34px}
+  .compactRoleMode .small{font-size:11.7px;margin:3px 0 4px;line-height:1.25;color:#cdd5e5}
+  .compactRoleMode .scriptInfoRow{display:none}
+  .compactRoleMode .scriptNotice{margin-top:5px;padding:6px 8px;font-size:11.8px;line-height:1.28}
+  .compactRoleMode .scriptGuideDisclosure{margin-top:5px}
+  .compactRoleMode .scriptGuideDisclosure summary{padding:6px 8px;min-height:30px;font-size:12.2px}
+
+  .roleHintStrip.roleWallHint{margin:3px 0 7px;padding:0;gap:5px;opacity:1}
+  .roleHintStrip.roleWallHint span{min-height:26px;padding:4px 8px;font-size:12px;border-color:rgba(240,192,96,.20);background:rgba(13,18,28,.72)}
+  .roleGroup{margin:8px 0 11px}
+  .roleGroup .groupTitle{position:relative;margin:8px 0 6px;padding:6px 8px;border-radius:12px;background:linear-gradient(180deg,rgba(255,255,255,.035),rgba(255,255,255,0)),rgba(10,15,24,.72);border:1px solid rgba(240,192,96,.12);font-size:16px;gap:7px;box-shadow:inset 0 1px 0 rgba(255,255,255,.025)}
+  .roleGroup.townsfolk .groupTitle{border-color:rgba(var(--town-rgb),.24)}
+  .roleGroup.outsider .groupTitle{border-color:rgba(var(--outsider-rgb),.24)}
+  .roleGroup.minion .groupTitle{border-color:rgba(var(--minion-rgb),.28)}
+  .roleGroup.demon .groupTitle{border-color:rgba(var(--demon-rgb),.30)}
+  .roleGroup .groupIcon{width:27px;height:27px}
+  .roleGroup .groupIcon svg{width:19px;height:19px}
+  .groupName{font-size:16.5px;letter-spacing:.2px}
+  .groupCount{margin-left:auto;display:inline-grid;place-items:center;min-width:24px;height:22px;padding:0 7px;border-radius:999px;background:rgba(240,192,96,.12);border:1px solid rgba(240,192,96,.18);color:#ffe0a0;font-size:12px;font-weight:1000}
+  .roleWall{grid-template-columns:repeat(4,minmax(0,1fr));gap:7px}
+  .roleChip{min-height:56px;border-radius:15px;gap:4px;padding:7px 3px 6px;border-color:rgba(240,192,96,.14);box-shadow:0 8px 16px rgba(0,0,0,.20),inset 0 1px 0 rgba(255,255,255,.035)}
+  .roleChip:after{content:"";position:absolute;left:0;right:0;top:0;height:3px;background:rgba(var(--chip-rgb,240,192,96),.72);box-shadow:0 0 12px rgba(var(--chip-rgb,240,192,96),.18);pointer-events:none}
+  .roleChipToken.token{width:24px;height:24px}
+  .roleChipToken.token svg{width:17px;height:17px}
+  .roleChipName{font-size:14.2px;line-height:1.05;letter-spacing:-.25px;text-overflow:clip;color:#fff;text-shadow:0 1px 1px rgba(0,0,0,.36)}
+  .roleChip.mine .roleChipName:after{font-size:11px}
+
+  @media (max-width:390px){
+    .roleWall{gap:6px}
+    .roleChip{min-height:53px;border-radius:14px;padding-top:6px;padding-bottom:5px}
+    .roleChipName{font-size:13.5px;letter-spacing:-.35px}
+    .roleChipToken.token{width:22px;height:22px}
+    .roleChipToken.token svg{width:16px;height:16px}
+    .compactRoleMode .scriptBtn{font-size:12px;padding-left:5px;padding-right:5px}
+    .roleGroup .groupTitle{font-size:15.5px;padding:5px 7px}
+    .groupName{font-size:16px}
+  }
+  @media (max-width:350px){
+    .roleWall{grid-template-columns:repeat(3,minmax(0,1fr));gap:6px}
+    .roleChip{min-height:54px}
+    .roleChipName{font-size:14px;letter-spacing:-.25px}
+  }
+
   /* v36 发布前整理：标题、元信息、本地存储安全性、GitHub Pages 归档版。 */
 
 </style>
 </head>
-<body data-build="v36-release-ready">
+<body data-build="v52-role-wall-readability">
 <header>
   <h1>血染钟楼离线助手</h1>
   <div class="tabs" id="topTabs"></div>
@@ -1134,11 +1293,11 @@
 <script>
 const APP_META = {
   name: '血染钟楼玩家离线助手',
-  version: 'v46-flow-beginner-simplified',
+  version: 'v52-role-wall-readability',
   scope: 'player-offline-single-file',
   storageKey: 'botc_player_manual_cn_v2'
 };
-const VERSION = 'player-1.8.7-flow-beginner-simplified-v46';
+const VERSION = 'player-1.9.3-role-wall-readability-v52';
 // 发布前注意：不要随意修改 LS_KEY，否则已保存的身份、文字备注和手写记录会被当成新数据。
 const LS_KEY = APP_META.storageKey;
 const ROLES = {
@@ -1156,7 +1315,12 @@ const ROLES = {
   '士兵': {en:'Soldier', team:'good', type:'镇民', first:false, other:false, ability:'不会被恶魔杀死。', player:'恶魔夜里杀你时，你不会因此死亡。其他死亡方式仍可能发生。'},
   '市长': {en:'Mayor', team:'good', type:'镇民', first:false, other:false, ability:'若只剩 3 名存活玩家且无人被处决，好人获胜。若夜晚被攻击，可能由其他玩家代死。', player:'只剩 3 个活人时，如果白天没人被处决，好人胜利。你夜里被攻击时，可能会弹到别人身上。'},
   '管家': {en:'Butler', team:'good', type:'外来者', first:true, other:true, ability:'每晚选择主人；白天只有主人正在投票或已经被计票，管家才可以投票。', player:'每晚选一个主人。第二天投票时，观察主人是否举手或已经被计票；如果主人不投或放下手，你也要放下手。这个限制主要靠管家自己遵守，不是说书人公开管控。你仍然可以提名。'},
+  '钟表匠': {en:'Clockmaker', team:'good', type:'镇民', first:true, other:false, ability:'第一夜得知：恶魔到最近爪牙相隔几步。', player:'你会得到一个数字。距离从恶魔旁边的玩家开始数；如果爪牙正好坐在恶魔旁边，数字就是 1。'},
+  '侍女': {en:'Chambermaid', team:'good', type:'镇民', first:true, other:true, ability:'每晚选择两名存活玩家（不能选择自己），得知其中有几人当晚因自己的能力醒来。', player:'你会得到 0、1 或 2。你不知道具体是谁醒来；恶魔和爪牙开局互认、被别人叫醒等通常不算。'},
+  '艺术家': {en:'Artist', team:'good', type:'镇民', first:false, other:false, phase:'白天主动', action:'白天一次性主动能力', ability:'每局一次，白天私下向说书人询问任意一个是非问题。', player:'你可以找说书人私聊，问一个能用“是/否”回答的问题。问题越清楚，得到的信息越好用。'},
+  '贤者': {en:'Sage', team:'good', type:'镇民', first:false, other:false, ability:'如果被恶魔杀死，你会得知恶魔是两名玩家之一。', player:'活着时没有信息。只有被恶魔杀死才触发；白天被处决或被其他来源杀死通常不会触发。'},
   '酒鬼': {en:'Drunk', team:'good', type:'外来者', first:false, other:false, ability:'你不知道自己是酒鬼，会以为自己是某个镇民；你的能力没有效果。', player:'你不会知道自己是酒鬼。你会以为自己是某个镇民，但你的能力没有效果，得到的信息也可能不可靠。'},
+  '呆瓜': {en:'Klutz', team:'good', type:'外来者', first:false, other:false, ability:'当你得知自己死亡时，公开选择一名存活玩家；若对方邪恶，你的阵营失败。', player:'你死亡后要公开选一名还活着的玩家。选到好人通常没事；选到邪恶玩家，好人立刻输。'},
   '隐士': {en:'Recluse', team:'good', type:'外来者', first:false, other:false, ability:'可能被登记为邪恶、爪牙或恶魔，即使死亡也可能如此。', player:'你是好人，但别人的侦测能力可能把你看成邪恶、爪牙或恶魔。死亡后也可能这样。'},
   '圣徒': {en:'Saint', team:'good', type:'外来者', first:false, other:false, ability:'如果你被处决，邪恶阵营获胜。', player:'如果你白天被处决，邪恶阵营立刻获胜。夜里被杀不触发。'},
   '投毒者': {en:'Poisoner', team:'evil', type:'爪牙', first:true, other:true, ability:'每晚选择一名玩家：该玩家今晚和明天白天中毒。', player:'每晚选一人中毒。他的能力暂时无效，得到的信息可能是错的。'},
@@ -1167,6 +1331,34 @@ const ROLES = {
 };
 
 const GROUPS = ['镇民','外来者','爪牙','恶魔'];
+
+const SCRIPTS = {
+  trouble_brewing: {
+    id:'trouble_brewing',
+    name:'暗流涌动',
+    en:'Trouble Brewing',
+    format:'标准入门剧本',
+    players:'5–15 人',
+    subtitle:'最适合第一次完整体验的入门剧本。当前流程示例仍以它作为通用教学基础。',
+    roleNames:['洗衣妇','图书管理员','调查员','厨师','共情者','占卜师','送葬者','僧侣','守鸦人','圣女','杀手','士兵','市长','管家','酒鬼','隐士','圣徒','投毒者','间谍','猩红女巫','男爵','小恶魔']
+  },
+  no_greater_joy: {
+    id:'no_greater_joy',
+    name:'No Greater Joy',
+    en:'No Greater Joy',
+    format:'Teensyville 小局剧本',
+    players:'5–6 人',
+    subtitle:'玩过暗流涌动后的快速进阶剧本。5–6 人小局，角色更少、节奏更快，适合在熟悉基础流程后体验。',
+    roleNames:['钟表匠','调查员','共情者','侍女','艺术家','贤者','酒鬼','呆瓜','男爵','猩红女巫','小恶魔'],
+    notice:'本剧本只有 2 名外来者；6 人局若男爵在场且原本已有 1 名外来者，只会再增加 1 名外来者。'
+  }
+};
+
+const SCRIPT_ROLE_NOTES = {
+  no_greater_joy: {
+    '男爵':'No Greater Joy 只有 2 名外来者。6 人局原本已有 1 名外来者时，男爵只能再增加 1 名外来者。'
+  }
+};
 const SVG = {
   town: `<svg viewBox="0 0 24 24" aria-hidden="true"><circle class="softFill" cx="12" cy="12" r="7"/><path d="M12 4.2v2.1M12 17.7v2.1M4.2 12h2.1M17.7 12h2.1M6.5 6.5 8 8M16 16l1.5 1.5M17.5 6.5 16 8M8 16l-1.5 1.5"/><circle cx="12" cy="12" r="4.1"/></svg>`,
   outsider: `<svg viewBox="0 0 24 24" aria-hidden="true"><path class="coolFill" d="M12 4.2c3.1 2.1 5.1 4.8 5.1 7.8 0 3.5-2.2 6.5-5.1 7.8-2.9-1.3-5.1-4.3-5.1-7.8 0-3 2-5.7 5.1-7.8Z"/><path d="M12 4.2c3.1 2.1 5.1 4.8 5.1 7.8 0 3.5-2.2 6.5-5.1 7.8-2.9-1.3-5.1-4.3-5.1-7.8 0-3 2-5.7 5.1-7.8Z"/><path d="M9 9.9c.5-1.6 1.6-2.5 3-2.5 1.6 0 2.7 1 2.7 2.3 0 1.8-1.9 2.2-2.5 3.7"/><path d="M12.1 16.6h.1"/></svg>`,
@@ -1187,11 +1379,16 @@ const SVG = {
   slayer: `<svg viewBox="0 0 24 24" aria-hidden="true"><circle class="softFill" cx="12" cy="12" r="5.7"/><circle cx="12" cy="12" r="5.7"/><circle cx="12" cy="12" r="2.2"/><path d="M12 4.4v2.2M12 17.4v2.2M4.4 12h2.2M17.4 12h2.2"/></svg>`,
   soldier: `<svg viewBox="0 0 24 24" aria-hidden="true"><path class="softFill" d="M12 4.7 18 7.2v4.5c0 3.4-2.2 6-6 7.6-3.8-1.6-6-4.2-6-7.6V7.2Z"/><path d="M12 4.7 18 7.2v4.5c0 3.4-2.2 6-6 7.6-3.8-1.6-6-4.2-6-7.6V7.2Z"/><path d="M8.8 12.2h6.4M12 8.5v7.2"/></svg>`,
   mayor: `<svg viewBox="0 0 24 24" aria-hidden="true"><path class="softFill" d="M6.2 10.3 12 5.7l5.8 4.6v7.5H6.2Z"/><path d="M5.4 10.6 12 5.3l6.6 5.3M6.6 10.2v7.6h10.8v-7.6"/><path d="M10.4 17.8v-4.2h3.2v4.2M8.2 12.3h2M13.8 12.3h2M8.2 14.6h2M13.8 14.6h2"/></svg>`,
+  clockmaker: `<svg viewBox="0 0 24 24" aria-hidden="true"><circle class="softFill" cx="12" cy="12" r="6.8"/><circle cx="12" cy="12" r="6.8"/><path d="M12 6.9v5.2l3.2 2.1"/><path d="M12 4.9v1.3M12 17.8v1.3M4.9 12h1.3M17.8 12h1.3"/><path d="M7.6 7.6l.9.9M15.5 15.5l.9.9M16.4 7.6l-.9.9M8.5 15.5l-.9.9"/></svg>`,
+  chambermaid: `<svg viewBox="0 0 24 24" aria-hidden="true"><path class="softFill" d="M7.2 7.2h9.6v10.9H7.2Z"/><path d="M7.2 7.2h9.6v10.9H7.2Z"/><path d="M9.2 7.2V5.6h5.6v1.6M10.4 10.1h3.2M10.4 12.4h3.2"/><circle cx="15" cy="12.2" r=".7"/><path d="M8.6 18.1h6.8"/></svg>`,
+  artist: `<svg viewBox="0 0 24 24" aria-hidden="true"><path class="softFill" d="M6.4 16.8c1.5-4.5 4.6-7.6 9.3-9.3l1.9 1.9c-1.8 4.5-5 7.6-9.4 9.2Z"/><path d="M6.4 16.8c1.5-4.5 4.6-7.6 9.3-9.3l1.9 1.9c-1.8 4.5-5 7.6-9.4 9.2Z"/><path d="M14.8 8.5 16.6 10.3M8 15.2l2.4 2.4M6.1 18.7c1.2.2 2.1-.1 2.8-.9"/><circle cx="9.3" cy="10.2" r="1.1"/></svg>`,
+  sage: `<svg viewBox="0 0 24 24" aria-hidden="true"><path class="softFill" d="M6.5 6.3h11v11.4h-11Z"/><path d="M7.2 6.3h9.7c.8 0 1.4.6 1.4 1.4v10H7.2c-.8 0-1.5-.7-1.5-1.5V7.8c0-.8.7-1.5 1.5-1.5Z"/><path d="M8.6 9.4h6.8M8.6 12h5.3M8.6 14.6h6.8"/><path d="M16.9 6.6v10.7"/></svg>`,
 
   butler: `<svg viewBox="0 0 24 24" aria-hidden="true"><path class="coolFill" d="M7.1 13.4h9.8c-.2-3-2.2-5.2-4.9-5.2s-4.7 2.2-4.9 5.2Z"/><path d="M7.1 13.4h9.8c-.2-3-2.2-5.2-4.9-5.2s-4.7 2.2-4.9 5.2Z"/><path d="M5.8 15h12.4M12 6.3v1.9M10.4 6.3h3.2"/><path d="M8.8 17.3h6.4"/></svg>`,
   drunk: `<svg viewBox="0 0 24 24" aria-hidden="true"><path class="coolFill" d="M9.7 5.5h4.6v3.3l2.1 5.8c.7 1.9-.4 3.6-2.4 3.6h-4c-2 0-3.1-1.7-2.4-3.6l2.1-5.8Z"/><path d="M9.7 5.5h4.6v3.3l2.1 5.8c.7 1.9-.4 3.6-2.4 3.6h-4c-2 0-3.1-1.7-2.4-3.6l2.1-5.8Z"/><path d="M9.8 8.8h4.4M9.2 13.5c1.4-.8 2.8.8 4.2 0 .5-.3 1-.4 1.5-.2"/></svg>`,
   recluse: `<svg viewBox="0 0 24 24" aria-hidden="true"><path class="coolFill" d="M12 4.4c3.1 1.4 4.8 3.9 4.8 7.2v6.6H7.2v-6.6c0-3.3 1.7-5.8 4.8-7.2Z"/><path d="M12 4.4c3.1 1.4 4.8 3.9 4.8 7.2v6.6H7.2v-6.6c0-3.3 1.7-5.8 4.8-7.2Z"/><path d="M9.4 12.2c.9-1 1.8-1.5 2.6-1.5s1.7.5 2.6 1.5M9.9 18.2c.1-2.2.8-3.5 2.1-4.2 1.3.7 2 2 2.1 4.2"/></svg>`,
   saint: `<svg viewBox="0 0 24 24" aria-hidden="true"><circle class="coolFill" cx="12" cy="7.5" r="3.1"/><ellipse cx="12" cy="6.1" rx="4.7" ry="1.7"/><path d="M12 10.6v7.1M9.2 13.4h5.6"/><path d="M7.5 18.2c.9-2.5 2.4-3.8 4.5-3.8s3.6 1.3 4.5 3.8"/></svg>`,
+  klutz: `<svg viewBox="0 0 24 24" aria-hidden="true"><path class="coolFill" d="M9.1 5.8h5.4l1.6 4.1-2.3 2.8 2.5 5.5H8.4l2.5-5.5-2.4-2.8Z"/><path d="M9.1 5.8h5.4l1.6 4.1-2.3 2.8 2.5 5.5H8.4l2.5-5.5-2.4-2.8Z"/><path d="M9.5 9.9h6.1M10.8 13.1h2.9"/><path d="M7.2 6.7 5.7 5.2M18.3 18.8l-1.5-1.5"/></svg>`,
 
   poisoner: `<svg viewBox="0 0 24 24" aria-hidden="true"><path class="hotFill" d="M10.1 5.6h3.8v3l2.7 5.9c.8 1.7-.3 3.5-2.2 3.5H9.6c-1.9 0-3-1.8-2.2-3.5l2.7-5.9Z"/><path d="M10.1 5.6h3.8v3l2.7 5.9c.8 1.7-.3 3.5-2.2 3.5H9.6c-1.9 0-3-1.8-2.2-3.5l2.7-5.9Z"/><path d="M9.3 14.1c1.6-.9 2.9.7 4.5-.1.5-.2.9-.3 1.4-.2"/><path d="M9.4 5.6h5.2"/></svg>`,
   spy: `<svg viewBox="0 0 24 24" aria-hidden="true"><path class="hotFill" d="M5.7 12c1.8-3.1 3.9-4.7 6.3-4.7s4.5 1.6 6.3 4.7c-1.8 3.1-3.9 4.7-6.3 4.7S7.5 15.1 5.7 12Z"/><path d="M5.7 12c1.8-3.1 3.9-4.7 6.3-4.7s4.5 1.6 6.3 4.7c-1.8 3.1-3.9 4.7-6.3 4.7S7.5 15.1 5.7 12Z"/><circle cx="12" cy="12" r="2.2"/><path d="M15.8 15.8 18.2 18.2"/></svg>`,
@@ -1219,7 +1416,8 @@ const ROLE_SVG = {
   '洗衣妇':SVG.washerwoman,'图书管理员':SVG.librarian,'调查员':SVG.investigator,'厨师':SVG.chef,
   '共情者':SVG.empath,'占卜师':SVG.fortuneTeller,'送葬者':SVG.undertaker,'僧侣':SVG.monk,
   '守鸦人':SVG.ravenkeeper,'圣女':SVG.virgin,'杀手':SVG.slayer,'士兵':SVG.soldier,'市长':SVG.mayor,
-  '管家':SVG.butler,'酒鬼':SVG.drunk,'隐士':SVG.recluse,'圣徒':SVG.saint,
+  '管家':SVG.butler,'钟表匠':SVG.clockmaker,'侍女':SVG.chambermaid,'艺术家':SVG.artist,'贤者':SVG.sage,
+  '酒鬼':SVG.drunk,'呆瓜':SVG.klutz,'隐士':SVG.recluse,'圣徒':SVG.saint,
   '投毒者':SVG.poisoner,'间谍':SVG.spy,'猩红女巫':SVG.scarletWoman,'男爵':SVG.baron,
   '小恶魔':SVG.imp
 };
@@ -1242,7 +1440,12 @@ const ROLE_ALIASES = {
   '僧侣':['Monk'],
   '士兵':['Soldier'],
   '管家':['Butler'],
+  '钟表匠':['钟表师','Clockmaker'],
+  '侍女':['女仆','Chambermaid'],
+  '艺术家':['Artist'],
+  '贤者':['Sage'],
   '酒鬼':['Drunk'],
+  '呆瓜':['Klutz','笨蛋'],
   '圣徒':['Saint'],
   '投毒者':['Poisoner'],
   '间谍':['Spy'],
@@ -1256,6 +1459,10 @@ const ROLE_FAQ = {
   '厨师': ['首尾相邻算吗？算，座位围成一圈。', '死了以后数字会变吗？不会，厨师只在第一夜拿一次信息。'],
   '共情者': ['邻居死亡怎么办？跳过死人，看左右最近的存活玩家。', '自己死亡还行动吗？通常死亡后能力停止，不再获得信息。'],
   '占卜师': ['问到恶魔才是“是”吗？问到恶魔或红鲱鱼都会是“是”。', '红鲱鱼是谁？一名好人，但会被占卜师看成恶魔。'],
+  '钟表匠': ['数字 1 是什么意思？表示最近的爪牙就在恶魔旁边。距离从恶魔相邻玩家开始数。', '如果有多个爪牙怎么办？只看距离恶魔最近的那个爪牙。'],
+  '侍女': ['会算恶魔和爪牙开局互认吗？通常不算，因为那不是他们因自己角色能力醒来。', '醉酒或中毒的人醒来算吗？如果他确实因自己的能力被叫醒，通常仍然算。', '她知道具体是谁醒了吗？不知道，只得到 0、1 或 2。'],
+  '艺术家': ['艺术家是公开问还是私下问？白天私下问说书人一次。', '问题必须是是非题吗？是，最好问能清楚回答“是”或“否”的问题。', '可以假装自己是艺术家吗？可以，任何人都能说自己问过问题；真假需要玩家判断。'],
+  '贤者': ['白天被处决会触发吗？不会。必须是被恶魔杀死才触发。', '会直接知道恶魔是谁吗？不会，会得知恶魔是两名玩家之一。'],
   '送葬者': ['查的是谁？查白天被处决的玩家，不是夜里死亡的玩家。', '没人被处决怎么办？通常不会得到信息。'],
   '僧侣': ['能保护自己吗？不能，只能保护其他玩家。', '保护能挡什么？主要挡恶魔夜里的攻击，不一定挡处决或其他死亡。'],
   '守鸦人': ['白天被处决会触发吗？不会，只有夜里死亡才触发。', '夜里死亡后什么时候行动？通常当晚立刻醒来，选择一名玩家并得知其角色。', '查到的是显示身份还是真实身份？通常是真实身份，除非醉酒/中毒等影响。'],
@@ -1265,12 +1472,13 @@ const ROLE_FAQ = {
   '市长': ['三人局一定赢吗？不是。必须只剩3名存活且白天无人被处决。', '夜里被杀为什么别人死？市长被攻击时，说书人可能让其他玩家代死。'],
   '管家': ['管家投票是谁来管？主要靠管家玩家自己观察和遵守，不是说书人公开点名管控；说书人最多提醒规则或事后提醒。', '主人什么时候算“投票”？主人已经举手准备投票，或主人的票已经被计入时，管家可以举手投票。', '主人不投票，管家能投吗？不能。如果主人不举手，或在被计票前放下手，管家也必须放下手。', '管家能提名吗？能，限制只影响投票。'],
   '酒鬼': ['酒鬼知道自己是酒鬼吗？不知道，会以为自己是某个镇民。', '酒鬼的信息一定是假吗？不一定，但不可靠，说书人可以给真也可以给假。'],
+  '呆瓜': ['死亡后能不选人吗？不能。得知自己死亡时，需要公开选择一名存活玩家。', '选到邪恶会怎样？你的阵营立刻失败。', '可以选择死人吗？不能，只能选择存活玩家。'],
   '隐士': ['隐士是邪恶吗？不是，隐士是好人。', '为什么会被查成恶魔/爪牙？这是他的能力效果，可能被错误登记。'],
   '圣徒': ['夜里被杀会让邪恶赢吗？不会。', '只有被处决才触发吗？是，被处决时邪恶胜利。'],
   '投毒者': ['中毒持续多久？通常是今晚和明天白天。', '中毒者知道自己中毒吗？通常不知道。'],
   '间谍': ['间谍每晚都能看魔典吗？可以。', '别人查间谍一定查到邪恶吗？不一定，间谍可能登记为好人或镇民。'],
   '猩红女巫': ['恶魔死了就一定接棒吗？需要恶魔死亡时至少还有5名玩家存活。', '接棒后身份变成什么？变成新的小恶魔。'],
-  '男爵': ['男爵有什么夜间行动吗？没有。能力在开局配置时已经生效。'],
+  '男爵': ['男爵有什么夜间行动吗？没有。能力在开局配置时已经生效。', 'No Greater Joy 里为什么有时只加 1 个外来者？因为这个剧本只有 2 名外来者；6 人局原本已有 1 名外来者时，男爵只能再让另一个外来者加入。'],
   '小恶魔': ['第一夜杀人吗？通常第一夜不杀人。', '可以杀自己吗？可以，通常会让一名爪牙变成新的小恶魔。']
 };
 let state = loadState() || {tab:'home', flow:'5', myRole:null, myHidden:true, noteText:'', notesHidden:false, drawingStrokes:[]};
@@ -1278,6 +1486,7 @@ state.noteText = state.noteText || '';
 state.notesHidden = !!state.notesHidden;
 state.drawingStrokes = Array.isArray(state.drawingStrokes) ? state.drawingStrokes : [];
 state.flow = (state.flow === '8' || state.flow === '7') ? '8' : '5';
+state.script = SCRIPTS[state.script] ? state.script : 'trouble_brewing';
 // v46：流程示例继续使用底部单 TAB；5 人示例面向新手简化说明，旧 7 人流程升级为 8 人完整结构示例。
 if(state.tab === 'process7'){ state.tab='process'; state.flow='8'; }
 if(!['home','roles','notes','rules','process'].includes(state.tab)) state.tab='home';
@@ -1328,6 +1537,21 @@ function flowLegend(){
   return `<div class="flowLegend"><span class="flowTag setup"><span class="flowDot"></span>开局</span><span class="flowTag night"><span class="flowDot"></span>夜晚</span><span class="flowTag day"><span class="flowDot"></span>白天讨论</span><span class="flowTag vote"><span class="flowDot"></span>提名处决</span><span class="flowTag end"><span class="flowDot"></span>胜负</span></div>`;
 }
 
+function homeScriptCards(){
+  return Object.keys(SCRIPTS).map(id=>{
+    const s=SCRIPTS[id];
+    const active=state.script===id?' active':'';
+    const short=id==='no_greater_joy'?'5–6 人快速小局；适合玩过暗流涌动后继续。':'标准入门剧本；适合第一次完整体验。';
+    return `<button class="homeScriptCard${active}" onclick="openScript('${id}')"><b>${escapeHtml(s.name)}</b><span>${escapeHtml(s.format)} · ${escapeHtml(short)}</span></button>`;
+  }).join('');
+}
+function openScript(scriptId){
+  if(!SCRIPTS[scriptId]) return;
+  state.script=scriptId;
+  state.tab='roles';
+  save();
+  renderAll();
+}
 function renderHome(){
   $('home').innerHTML = `
     <div class="homeGrid">
@@ -1353,13 +1577,19 @@ function renderHome(){
       </div>
     </div>
 
+    <div class="homeScriptPanel">
+      <div class="homeSectionTitle"><span class="badge uiIcon ui-info" aria-hidden="true">${UI_SVG.book}</span><span>当前收录剧本</span></div>
+      <div class="homeScriptGrid">${homeScriptCards()}</div>
+      <div class="homeScriptHint">建议第一次仍从《暗流涌动》和 5 人流程示例开始；熟悉后再切到 No Greater Joy 查询 5–6 人小局角色。</div>
+    </div>
+
     <div class="assistantCard">
       <h3><span class="assistantTitleIcon uiIcon ui-warn" aria-hidden="true">${UI_SVG.book}</span><span>玩家助手能帮你什么？</span></h3>
       <div class="assistantList">
         <div class="assistantItem"><span class="dot">1</span><span>手机上快速查询角色能力和常见误解，不用翻规则书。</span></div>
         <div class="assistantItem"><span class="dot">2</span><span>长按角色可标记“我的身份”，需要时一键隐藏，避免被旁边玩家看到。</span></div>
         <div class="assistantItem"><span class="dot">3</span><span>记录页可写文字和手写笔记，适合记夜晚信息、怀疑对象和投票线索。</span></div>
-        <div class="assistantItem"><span class="dot">4</span><span>内置 5 人和 8 人示例，没玩过也能快速理解一局怎么推进。</span></div>
+        <div class="assistantItem"><span class="dot">4</span><span>内置 5 人和 8 人示例，并收录《暗流涌动》和 No Greater Joy 两个剧本。</span></div>
       </div>
     </div>
 
@@ -1376,36 +1606,96 @@ function renderTabs(){
 }
 function showTab(tab){state.tab=tab; save(); renderAll();}
 function showFlow(flow){state.tab='process'; state.flow = (flow === '8' || flow === '7') ? '8' : '5'; save(); renderAll();}
+function currentScript(){return SCRIPTS[state.script] || SCRIPTS.trouble_brewing;}
+function currentScriptRoleNames(){return currentScript().roleNames || SCRIPTS.trouble_brewing.roleNames;}
+function scriptRoleNote(name){return (SCRIPT_ROLE_NOTES[state.script]||{})[name] || '';}
+function setScript(scriptId){
+  if(!SCRIPTS[scriptId]) return;
+  state.script=scriptId; save(); renderAll(); toast(`已切换剧本：${SCRIPTS[scriptId].name}`);
+}
+function renderScriptSwitch(){
+  const script=currentScript();
+  const available=currentScriptRoleNames().filter(n=>ROLES[n]);
+  const missing=currentScriptRoleNames().filter(n=>!ROLES[n]);
+  const buttons=Object.keys(SCRIPTS).map(id=>{
+    const s=SCRIPTS[id];
+    return `<button class="scriptBtn ${state.script===id?'active':''}" onclick="setScript('${id}')">${escapeHtml(s.name)}</button>`;
+  }).join('');
+  const guide=script.id==='no_greater_joy'
+    ? [
+        ['适合什么时候玩','5–6 人，已经玩过至少一局暗流涌动，想要更短更紧凑。'],
+        ['这一局看什么','把钟表匠、调查员、共情者、侍女、艺术家的信息拼起来。'],
+        ['邪恶方怎么藏','利用酒鬼、男爵和猩红女巫制造错误方向。'],
+        ['新手注意','男爵在 6 人局可能只多 1 名外来者，不要按标准剧本死记。']
+      ]
+    : [
+        ['适合什么时候玩','第一次完整体验血染钟楼，或带狼人杀玩家入门。'],
+        ['这一局看什么','先理解死亡后仍参与、信息可能不可靠、恶魔才是核心目标。'],
+        ['好人怎么推理','从调查员、共情者、占卜师等信息开始拼图。'],
+        ['邪恶方怎么藏','猩红女巫、男爵、投毒者和间谍会让局势变得不稳定。']
+      ];
+  return `<div class="scriptSwitchCard compactRoleMode">
+    <div class="scriptSwitchTop">
+      <div class="scriptSwitchTitle"><b>当前剧本：${escapeHtml(script.name)}</b><span>${escapeHtml(script.en)} · ${escapeHtml(script.format)}</span></div>
+    </div>
+    <div class="scriptSwitchBtns">${buttons}</div>
+    <p class="small">${escapeHtml(script.subtitle)}</p>
+    <div class="scriptInfoRow"><span class="scriptInfoPill">${escapeHtml(script.players)}</span><span class="scriptInfoPill">${available.length}/${currentScriptRoleNames().length} 个角色</span></div>
+    ${script.notice?`<div class="scriptNotice">${escapeHtml(script.notice)}</div>`:''}
+    ${missing.length?`<div class="scriptNotice">待补充新角色：${missing.map(escapeHtml).join('、')}</div>`:''}
+    <details class="scriptGuideDisclosure"><summary>剧本说明</summary><div class="scriptGuideGrid">${guide.map(g=>`<div class="scriptGuideItem"><b>${escapeHtml(g[0])}</b><span>${escapeHtml(g[1])}</span></div>`).join('')}</div></details>
+  </div>`;
+}
 function renderRoles(){
   $('roles').innerHTML = `
     <div class="rolePageHeader">
-      <div class="roleHintStrip"><span>点开角色看能力</span><span>长按标记“我的身份”</span><span>FAQ 跳到规则页</span></div>
+      ${renderScriptSwitch()}
+      <div class="roleHintStrip roleWallHint"><span>点击看详情</span><span>长按标记“我”</span></div>
     </div>
     ${GROUPS.map(renderGroup).join('')}`;
 }
 function renderGroup(type){
-  const names=Object.keys(ROLES).filter(n=>ROLES[n].type===type);
-  return `<div class="roleGroup ${tokenClass(type)}"><div class="groupTitle">${groupToken(type)}<span class="groupName">${type}</span><span class="groupCount">${names.length}个</span></div><div class="roleGrid">${names.map(roleItem).join('')}</div></div>`;
+  const names=currentScriptRoleNames().filter(n=>ROLES[n]&&ROLES[n].type===type);
+  if(!names.length) return '';
+  return `<div class="roleGroup ${tokenClass(type)}"><div class="groupTitle">${groupToken(type)}<span class="groupName">${type}</span><span class="groupCount">${names.length}</span></div><div class="roleWall">${names.map(roleChip).join('')}</div></div>`;
 }
-function roleItem(name){
+function roleChip(name){
   const r=ROLES[name]; const mine=state.myRole===name;
-  return `<details class="roleItem ${teamClass(name)} ${tokenClass(r.type)}" data-role="${escapeHtml(name)}" ontoggle="oneOpenOnly(this)">
-    <summary class="roleHead" onpointerdown="holdStart(event,'${name}')" onpointerup="holdEnd()" onpointercancel="holdEnd()" onpointerleave="holdEnd()">
-      ${roleToken(name)}
-      <span class="nameBox"><span class="roleName">${escapeHtml(name)}${mine?' <span class="mineBadge">我</span>':''}</span><span class="roleMeta"><span class="roleEnglish">${escapeHtml(r.en)}</span><span class="roleTypePhase"> · ${escapeHtml(r.type)} · ${phaseText(r)}</span></span></span>
-      <span class="chev">›</span>
-    </summary>
-    <div class="roleBody">
-      <div class="roleCopy">
-        <div class="abilityLabel">角色能力</div>
-        <p class="explain">${escapeHtml(r.ability)}</p>
-        <div class="abilityLabel secondaryLabel">玩家理解</div>
-        <p class="playerExplain">${escapeHtml(r.player)}</p>
-      </div>
-      <div class="roleActions">${ROLE_FAQ[name]?`<a class="faqLink" href="#" title="查看${name}常见问题" onclick="jumpFAQ('${name}');return false;">常见问题 ›</a>`:''}</div>
-    </div>
-  </details>`;
+  const cls=`roleChip ${teamClass(name)} ${tokenClass(r.type)}${mine?' mine':''}`;
+  return `<button class="${cls}" type="button" data-role="${escapeHtml(name)}" onclick="roleClick('${name}')" onpointerdown="holdStart(event,'${name}')" onpointerup="holdEnd()" onpointercancel="holdEnd()" onpointerleave="holdEnd()">
+    ${roleToken(name,'roleChipToken')}
+    <span class="roleChipName">${escapeHtml(name)}</span>
+    <span class="roleChipEn">${escapeHtml(r.en)}</span>
+  </button>`;
 }
+function roleClick(name){
+  if(holdTriggered){holdTriggered=false; return;}
+  openRole(name);
+}
+function openRole(name){
+  const r=ROLES[name];
+  if(!r) return;
+  const note=scriptRoleNote(name);
+  $('modalBox').innerHTML = `<div class="roleModal ${tokenClass(r.type)} ${teamClass(name)}">
+    <button class="roleModalClose" type="button" onclick="closeModal()" aria-label="关闭">×</button>
+    <div class="roleModalHead">
+      ${roleToken(name,'roleModalToken')}
+      <div class="roleModalTitle"><div class="roleModalName">${escapeHtml(name)}</div><div class="roleModalEn">${escapeHtml(r.en)}</div></div>
+    </div>
+    <div class="roleModalMeta"><span class="pill ${teamClass(name)}">${escapeHtml(r.type)} · ${teamText(name)}</span><span class="pill info">${phaseText(r)}</span></div>
+    <div class="roleModalSection"><b>角色能力</b><p>${escapeHtml(r.ability)}</p></div>
+    <div class="roleModalSection"><b>玩家理解</b><p>${escapeHtml(r.player)}</p></div>
+    ${note?`<div class="scriptNotice">本剧本提示：${escapeHtml(note)}</div>`:''}
+    <div class="roleModalActions">
+      <button class="btn" type="button" onclick="setMineFromModal('${name}')">设为我的身份</button>
+      ${ROLE_FAQ[name]?`<button class="btn secondary" type="button" onclick="openRoleFaq('${name}')">常见问题</button>`:`<button class="btn secondary" type="button" onclick="closeModal()">关闭</button>`}
+    </div>
+  </div>`;
+  $('modal').classList.add('show');
+}
+function closeModal(){ $('modal').classList.remove('show'); }
+function setMineFromModal(name){ setMine(name); openRole(name); }
+function openRoleFaq(name){ closeModal(); jumpFAQ(name); }
 function jumpNotes(){state.tab='notes'; save(); renderAll(); setTimeout(()=>initCanvas(),40);}
 function renderNotes(){
   const identityHTML = state.notesHidden
@@ -1511,9 +1801,10 @@ function renderRules(){
   $('rules').innerHTML=`
     <div class="ruleHero card">
       <h2>规则 / FAQ 速查</h2>
-      <p>现场遇到争议时，先看基础规则；想查某个角色的常见误解，可以从角色页跳转，或在下方直接搜索角色名 / 关键词。</p>
+      <p>现场遇到争议时，先看基础规则；想查当前剧本角色的常见误解，可以从角色页跳转，或在下方直接搜索角色名 / 关键词。</p>
       <div class="ruleJumpRow">
         <button class="ruleJump" onclick="scrollToRules('basic-rules')">基础规则</button>
+        <button class="ruleJump" onclick="scrollToRules('script-faqs')">剧本 FAQ</button>
         <button class="ruleJump" onclick="scrollToRules('role-faqs')">角色 FAQ</button>
         <button class="ruleJump" onclick="clearFaqSearch()">清空搜索</button>
       </div>
@@ -1529,16 +1820,25 @@ function renderRules(){
       <details class="faq" ontoggle="oneFaqOnly(this)"><summary><span class="faqBadge warn">对比</span><span class="faqTitleText">和狼人杀最容易搞错的地方</span></summary><p>死亡不等于出局；死人还能说话。信息也不一定绝对真实，因为醉酒、中毒、登记错误和说书人裁定都会影响结果。</p></details>
     </div>
 
+    <div class="ruleClusterTitle" id="script-faqs"><span class="groupIcon token neutral" aria-hidden="true">${SVG.default}</span><span>剧本 / 选剧本常见问题</span></div>
+    <div class="ruleBasics scriptBasics">
+      <details class="faq" ontoggle="oneFaqOnly(this)"><summary><span class="faqBadge info">剧本</span><span class="faqTitleText">第一次玩应该选哪个剧本？</span></summary><p>建议先玩《暗流涌动》。它是标准入门剧本，角色更多但结构完整，最适合让新人理解阵营、夜晚信息、白天讨论和处决。</p></details>
+      <details class="faq" ontoggle="oneFaqOnly(this)"><summary><span class="faqBadge info">NGJ</span><span class="faqTitleText">No Greater Joy 适合什么时候玩？</span></summary><p>适合 5–6 人，并且大家已经理解血染钟楼基本流程之后。它节奏更快，角色更少，但信息密度不低。</p></details>
+      <details class="faq" ontoggle="oneFaqOnly(this)"><summary><span class="faqBadge warn">区别</span><span class="faqTitleText">No Greater Joy 和暗流涌动最大的区别是什么？</span></summary><p>No Greater Joy 是小局剧本，只有 11 个角色。好人信息来得更集中，邪恶方常靠酒鬼、男爵和猩红女巫制造混乱。6 人局男爵的外来者增加也有剧本上限。</p></details>
+      <div class="scriptFaqHint">这些说明只面向玩家理解，不包含发身份、夜晚唤醒或魔典配置等说书人专用功能。</div>
+    </div>
+
     <div class="ruleClusterTitle" id="role-faqs"><span class="groupIcon token neutral" aria-hidden="true">${SVG.default}</span><span>角色功能常见问题</span></div>
     <div class="roleFaqPanel">
-      <div class="faqSearchBox"><input id="faqSearch" type="search" inputmode="search" placeholder="搜索角色或关键词，例如：僧侣 / 中毒 / 市长" oninput="filterRoleFaqs(this.value)" /></div>
-      <div class="faqSearchHint">提示：从角色页点“常见问题”会自动打开对应角色，并滚动到这里。</div>
+      <div class="faqSearchBox"><input id="faqSearch" type="search" inputmode="search" placeholder="搜索角色或关键词，例如：侍女 / 中毒 / 男爵" oninput="filterRoleFaqs(this.value)" /></div>
+      <div class="faqSearchHint">提示：这里默认显示当前剧本的角色 FAQ；从角色页点“常见问题”会自动打开对应角色。</div>
       <div id="roleFaqList">${renderRoleFaqs()}</div>
       <div id="faqEmpty" class="faqEmpty">没有匹配的角色 FAQ</div>
     </div>`;
 }
 function renderRoleFaqs(){
-  return Object.keys(ROLE_FAQ).map(name=>{
+  const scriptNames=new Set(currentScriptRoleNames());
+  return Object.keys(ROLE_FAQ).filter(name=>scriptNames.has(name)).map(name=>{
     const r=ROLES[name]||{};
     const typeClass=tokenClass(r.type);
     const aliases=ROLE_ALIASES[name]||[];
@@ -1590,87 +1890,95 @@ function oneFaqOnly(el){
   document.querySelectorAll('details.faq[open]').forEach(d=>{if(d!==el) d.open=false;});
 }
 let holdTimer=null;
-function holdStart(ev, role){clearTimeout(holdTimer); holdTimer=setTimeout(()=>setMine(role),600);}
+let holdTriggered=false;
+function holdStart(ev, role){
+  holdTriggered=false;
+  clearTimeout(holdTimer);
+  holdTimer=setTimeout(()=>{holdTriggered=true; setMine(role);},600);
+}
 function holdEnd(){clearTimeout(holdTimer);}
 function setMine(role){state.myRole=role; state.myHidden=false; save(); renderAll(); toast(`已标记：${role}（我）`);}
 function toast(msg){const t=$('toast');t.textContent=msg;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),1800)}
-$('modal').addEventListener('click', e=>{if(e.target.id==='modal') $('modal').classList.remove('show');});
-window.addEventListener('keydown', e=>{if(e.key==='Escape') $('modal').classList.remove('show');});
+$('modal').addEventListener('click', e=>{if(e.target.id==='modal') closeModal();});
+window.addEventListener('keydown', e=>{if(e.key==='Escape') closeModal();});
 
 function renderProcess(){
   if(state.flow === '8' || state.flow === '7') return renderProcess8Flow();
   $('process').innerHTML = `
     <div class="flowIntro">
       <h2>5人局流程示例</h2>
-      <p class="flowLead">这个示例用 5 人小局展示一局游戏怎样推进：3 名镇民、1 名爪牙、1 名恶魔。先不用记住所有细节，只要看懂夜晚、白天、投票和胜负怎样循环。</p>
+      <p class="flowLead">这个示例用 5 人小局展示一局游戏怎样推进：3 名镇民、1 名爪牙、1 名恶魔。角色尽量采用《暗流涌动》和 No Greater Joy 的共有角色，让玩过狼人杀的朋友更容易理解信息如何拼起来。</p>
       <div class="flowSwitch"><button class="flowSwitchBtn active" onclick="showFlow('5')">5人局：快速体验</button><button class="flowSwitchBtn" onclick="showFlow('8')">8人局：完整结构</button></div>
-      <div class="flowMeta"><span class="pill good">好人：洗衣妇、占卜师、士兵</span><span class="pill evil">邪恶：投毒者、小恶魔</span></div>
-      <div class="flowGuide"><div class="guideItem"><b>阅读方式</b><span>先跟着示例看完整一局，不用纠结每个规则细节。</span></div><div class="guideItem"><b>新手重点</b><span>好人要找恶魔；邪恶要隐藏恶魔。</span></div></div>
+      <div class="flowMeta"><span class="pill good">好人：调查员、共情者、占卜师</span><span class="pill evil">邪恶：猩红女巫、小恶魔</span></div>
+      <div class="flowGuide"><div class="guideItem"><b>阅读方式</b><span>先跟着示例看完整一局，不用纠结每个规则细节。</span></div><div class="guideItem"><b>新手重点</b><span>好人要把信息拼起来，最终处决真正的恶魔。</span></div></div>
       ${flowLegend()}
     </div>
     <div class="timeline">
       <div class="flowStep setup">
         <h3><span class="num">1</span>开局发身份</h3>
         <div class="seatGrid">
-          ${flowSeat(1,'洗衣妇')}
-          ${flowSeat(2,'占卜师')}
-          ${flowSeat(3,'士兵')}
-          ${flowSeat(4,'投毒者')}
+          ${flowSeat(1,'调查员')}
+          ${flowSeat(2,'共情者')}
+          ${flowSeat(3,'占卜师')}
+          ${flowSeat(4,'猩红女巫')}
           ${flowSeat(5,'小恶魔')}
         </div>
-        <p class="flowMini">这是 3 镇民、1 爪牙、1 恶魔的 5 人局示例。没有外来者；邪恶玩家开局互不知道对方，直接按自己的角色行动。</p>
+        <p class="flowMini">这是 3 镇民、1 爪牙、1 恶魔的 5 人局示例。没有外来者；5 人小局中邪恶玩家开局互不知道对方，直接按自己的角色行动。</p>
       </div>
       <div class="flowStep night">
-        <h3><span class="num">2</span>第一夜：爪牙行动</h3>
-        <p><b>4号投毒者</b>每晚选择一名玩家，使其今晚和明天白天中毒。投毒者不知道谁是恶魔，所以通常会凭直觉选择看起来像信息位的玩家。</p>
-        <div class="quote">4号选择让 2号占卜师中毒。<br>2号自己通常不知道已经中毒。</div>
+        <h3><span class="num">2</span>第一夜：邪恶方暂时隐藏</h3>
+        <p><b>4号猩红女巫</b>没有夜间主动行动。她的能力是在恶魔较早死亡时接棒成为新的小恶魔。</p>
+        <p><b>5号小恶魔</b>第一夜通常不杀人，所以这一晚主要是好人信息角色获得线索。</p>
+        <div class="quote">这一局邪恶方第一夜不需要做复杂操作。重点先看好人得到哪些信息。</div>
       </div>
       <div class="flowStep night">
         <h3><span class="num">3</span>第一夜：好人获得信息</h3>
-        <p><b>1号洗衣妇</b>得知两个玩家中有一人是某个镇民。说书人告诉他：</p>
-        <div class="quote">2号和3号中有一人是占卜师。</div>
-        <p>真实情况是 2号确实是占卜师，所以这条信息可以帮助 2号建立可信度。</p>
-        <p><b>2号占卜师</b>选择 4号和5号。正常情况下，因为里面包含 5号小恶魔，应被告知“是”。但 2号已经中毒，所以说书人可以给他错误信息：</p>
-        <div class="quote">2号被告知：否。<br>注意：这是中毒造成的不可靠信息。</div>
-        <p><b>3号士兵</b>是被动能力，第一夜通常不会醒来，也不会获得信息。</p>
+        <p><b>1号调查员</b>得知两个玩家中有一人是某个爪牙。说书人告诉他：</p>
+        <div class="quote">2号和4号中有一人是猩红女巫。</div>
+        <p>真实情况是 4号确实是猩红女巫，所以这条信息会把怀疑引向 4号。</p>
+        <p><b>2号共情者</b>得知自己左右两边的存活邻居中有几个邪恶玩家。此时 1号和3号都是好人，所以他得到：</p>
+        <div class="quote">0。</div>
+        <p><b>3号占卜师</b>选择两名玩家，询问其中是否有恶魔。她选择 4号和5号：</p>
+        <div class="quote">因为 5号是小恶魔，3号被告知：是。</div>
+        <p class="flowMini">占卜师很像狼人杀里的预言家，适合帮助新玩家理解“查人信息”。但血染钟楼里信息可能受醉酒、中毒或其他规则影响，不能永远当成绝对真相。</p>
       </div>
       <div class="flowStep day">
         <h3><span class="num">4</span>第一天：公开讨论</h3>
-        <p>大家醒来后开始发言。1号的信息支持 2号像真占卜师；2号却说自己查了 4号和5号得到“否”，这会同时保护投毒者和恶魔。</p>
-        <div class="quote">1号说：2号和3号里有一人是占卜师。<br>2号说：我是占卜师，查 4号和5号是“否”。<br>4号说：我可能是被确认的好人，先不急着报身份。<br>5号说：我也不像恶魔，因为占卜师查过我。</div>
-        <p class="flowMini">玩家视角下，2号可能是真的，也可能被醉酒/中毒影响，也可能在说谎。小人数局的讨论会很快进入关键判断。</p>
+        <p>大家醒来后开始发言。1号怀疑 4号；2号觉得自己两边暂时安全；3号认为 4号和5号里有恶魔。</p>
+        <div class="quote">1号说：2号和4号中有一人是猩红女巫。<br>2号说：我的左右邻居是 1号和3号，我得到 0。<br>3号说：我查 4号和5号，结果是“是”。<br>4号说：调查员也可能被误导，不一定是我。<br>5号说：如果 3号是真的，也可能是 4号有问题。</div>
+        <p class="flowMini">这一步展示血染钟楼的核心乐趣：不是单条信息直接定胜负，而是大家把多条信息放在一起推理。</p>
       </div>
       <div class="flowStep vote">
         <h3><span class="num">5</span>第一天：提名与处决</h3>
-        <p>5 人局容错很低，但仍然可以提名。假设 1号怀疑 4号和5号过度依赖 2号信息，于是提名 4号。</p>
-        <div class="quote">1号提名 4号。<br>4号辩解：2号查过我和5号是“否”，我不像邪恶。</div>
+        <p>5 人局容错很低，但仍然可以提名。假设 1号根据自己的调查员信息提名 4号。</p>
+        <div class="quote">1号提名 4号。<br>4号辩解：我不是恶魔，先杀我不一定能赢。</div>
         <p>投票后，4号票数达到处决门槛，并在当天结束时被处决。由于 4号只是爪牙，不是恶魔，游戏不会结束。</p>
-        <div class="quote">4号投毒者被处决并死亡。<br>恶魔仍然存活，游戏继续。</div>
+        <div class="quote">4号猩红女巫被处决并死亡。<br>恶魔仍然存活，游戏继续。</div>
         <p class="flowMini">这一步展示了一个重要点：处决邪恶玩家不一定获胜，必须让恶魔死亡，通常好人才会胜利。</p>
       </div>
       <div class="flowStep night">
         <h3><span class="num">6</span>第二夜：恶魔杀人</h3>
-        <p>4号已经死亡，投毒者不再行动。5号小恶魔醒来，选择杀死 2号占卜师。天亮后说书人宣布：</p>
-        <div class="quote">昨晚，2号死亡。</div>
-        <p>2号死亡后仍然可以发言，但失去角色能力，不会再在夜晚发动占卜师技能。</p>
+        <p>4号已经死亡，猩红女巫不再有机会接棒。5号小恶魔醒来，选择杀死 3号占卜师。天亮后说书人宣布：</p>
+        <div class="quote">昨晚，3号死亡。</div>
+        <p>3号死亡后仍然可以发言，但失去角色能力，不会再在夜晚发动占卜师技能。</p>
       </div>
       <div class="flowStep day">
         <h3><span class="num">7</span>第二天：重新理解第一天信息</h3>
-        <p>现在大家知道 4号死后游戏没结束，因此 4号不是恶魔。2号夜里死亡，说明恶魔可能害怕占卜师继续行动，也可能故意制造反向逻辑。</p>
-        <p>2号可以公开提醒大家：自己第一夜的信息可能被投毒影响，因为 4号如果真是投毒者，自己查 4号和5号得到“否”就很可疑。</p>
-        <div class="quote">2号可以说：我死了，但现在我怀疑第一夜我被 4号投毒了。4号和5号也许并不安全。</div>
+        <p>现在大家知道 4号死后游戏没结束，因此 4号不是恶魔。3号夜里死亡，说明恶魔可能害怕占卜师继续查人。</p>
+        <p>3号虽然死了，仍然可以继续参与讨论，并提醒大家：自己第一夜查 4号和5号是“是”，既然 4号不是恶魔，5号就非常可疑。</p>
+        <div class="quote">3号可以说：我死了，但我的信息还在。4号不是恶魔，那 5号很可能就是恶魔。</div>
         <p class="flowMini">死亡玩家不会离开游戏，仍然可以继续推理和影响讨论。</p>
       </div>
       <div class="flowStep vote">
         <h3><span class="num">8</span>第二天：处决恶魔</h3>
-        <p>经过讨论，1号和3号把信息拼起来：1号确认过 2号像占卜师；2号死亡前的信息可能被 4号投毒污染；4号不是恶魔，剩下最可疑的是 5号。</p>
-        <div class="quote">3号提名 5号。<br>5号获得足够票数。<br>当天结束时，5号被处决。</div>
+        <p>经过讨论，1号和2号把信息拼起来：1号的信息指向过 4号；4号已经被处决但游戏没结束；3号查过 4号和5号是“是”；剩下最可疑的是 5号。</p>
+        <div class="quote">2号提名 5号。<br>5号获得足够票数。<br>当天结束时，5号被处决。</div>
         <p>5号真实身份是小恶魔。恶魔死亡后，游戏通常立即结束。</p>
       </div>
       <div class="flowStep end">
         <h3><span class="num">9</span>游戏结束</h3>
         <div class="quote">恶魔死亡，好人阵营获胜。</div>
-        <p class="flowMini">5 人局节奏很快。新手先记住：白天大胆讨论和投票，目标是让恶魔死亡。</p>
+        <p class="flowMini">这个示例保留了 4 个 No Greater Joy 也会出现的角色。以后切换到 No Greater Joy 时，玩家只需要再熟悉少量新角色。</p>
       </div>
     </div>`;
 }
