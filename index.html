@@ -1,6 +1,6 @@
 <!doctype html>
 <!--
-  血染钟楼玩家离线助手 v57 - 5人互动流程精修版
+  血染钟楼玩家离线助手 v59 - 5人、8人互动流程版
   定位：玩家端离线单文件 HTML；不包含说书人专用功能。
   离线：所有样式、脚本、SVG 令牌与首页背景均内嵌在本文件中。
   本地存储键：botc_player_manual_cn_v2，用于保存“我的身份”、文字备注、隐藏状态和手写记录。
@@ -12,7 +12,7 @@
 <meta name="description" content="血染钟楼玩家端离线助手：角色查询、身份隐藏、玩家记录、规则 FAQ、流程示例。" />
 <meta name="theme-color" content="#0b0d14" />
 <meta name="application-name" content="血染钟楼玩家离线助手" />
-<title>血染钟楼玩家离线助手 - v57 互动流程精修版</title>
+<title>血染钟楼玩家离线助手 - v59 双流程互动版</title>
 <style>
   :root{
     --bg:#0b0d14; --card:#171b26; --card2:#202638; --text:#f6f1e7; --muted:#aeb6c8;
@@ -766,7 +766,7 @@
   @media (hover:hover){.posterNav button:hover{background:rgba(240,192,96,.07)}}
   @media (prefers-reduced-motion:reduce){.towerLights{display:none}}
   header h1{cursor:pointer}
-  body[data-tab="home"]{background:#020913}
+  body[data-tab="home"]{background:#020913!important}
   body[data-tab="home"] header,body[data-tab="home"] .footerNav{display:none}
   body[data-tab="home"] .wrap{max-width:none;padding:0;min-height:100vh}
 
@@ -1498,6 +1498,7 @@
   .quickTeam.evil .quickTeamTitle:before{background:#ff6d6d;box-shadow:0 0 10px rgba(255,109,109,.34)}
   .quickRoleList{display:grid;gap:6px}
   .quickRole{display:grid;grid-template-columns:auto minmax(0,1fr);align-items:center;gap:9px;min-height:52px;padding:7px 9px;border:1px solid rgba(147,216,132,.15);border-radius:13px;background:rgba(8,13,22,.54)}
+  .quickRole.outsider{border-color:rgba(151,177,205,.22)}
   .quickRole.minion,.quickRole.demon{border-color:rgba(255,109,109,.18)}
   .quickRole .seatToken{width:32px;height:32px}
   .quickRoleCopy{min-width:0}
@@ -1546,6 +1547,14 @@
   .quickChoice strong{color:#fff}
   .quickChoice.win strong{color:#bff0b6}
   .quickChoice.lose strong{color:#ffadad}
+  .quickPrelude{margin:0 0 11px;padding:10px 11px;border:1px solid rgba(240,192,96,.16);border-radius:13px;background:rgba(240,192,96,.065);color:#dfe5ef;font-size:13.5px;line-height:1.48}
+  .quickPrelude strong{color:#ffe09a}
+  .quickPreview{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px;margin:9px 0 11px}
+  .quickPreviewItem{display:grid;place-items:center;min-height:42px;padding:6px;border:1px solid rgba(124,199,255,.14);border-radius:11px;background:rgba(8,13,22,.48);color:#dce8f5;font-size:12px;font-weight:900;text-align:center;line-height:1.25}
+  .quickTruth{color:#bff0b6;font-weight:1000}
+  .quickSurvivors{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin:10px 0}
+  .quickSurvivor{padding:8px 9px;border:1px solid rgba(147,216,132,.16);border-radius:11px;background:rgba(8,13,22,.52);color:#e3e9f3;font-size:13.5px;line-height:1.35}
+  .quickSurvivor strong{display:block;color:#fff}
   @media (min-width:560px){
     .quickRoleList{grid-template-columns:1fr 1fr}
     .quickTeam.good .quickRole:last-child{grid-column:1 / -1}
@@ -1559,6 +1568,8 @@
     .quickRoleAbility{font-size:12px}
     .quickEvent{gap:7px}
     .quickEvent p,.quickChapter>p{font-size:13.5px}
+    .quickPreview{gap:5px}
+    .quickPreviewItem{padding:5px 3px;font-size:11px}
   }
 
   /* v56：5 人流程互动分屏 */
@@ -1582,19 +1593,19 @@
   .quickTap{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;min-height:43px;margin:8px 0 2px;padding:8px 12px;border:1px solid rgba(240,192,96,.18);border-radius:14px;background:linear-gradient(180deg,rgba(240,192,96,.11),rgba(240,192,96,.035));color:#ffe0a0;font-size:13px;font-weight:1000;letter-spacing:.03em;box-shadow:inset 0 1px 0 rgba(255,255,255,.025)}
   .quickTap:after{content:"›";font-size:19px;line-height:1;transition:transform .18s}
   .quickTap:active:after{transform:translateX(3px)}
-  .quickDeck[data-step="4"] .quickTap:after{content:"↻";font-size:16px}
+  .quickDeck.is-last .quickTap:after{content:"↻";font-size:16px}
   @keyframes quickSlideIn{from{opacity:0;transform:translateY(14px) scale(.992)}to{opacity:1;transform:none}}
   @keyframes quickSlideOut{from{opacity:1;transform:none}to{opacity:0;transform:translateY(-8px)}}
   @media (prefers-reduced-motion:reduce){.quickSlide.active,.quickSlide.exiting{animation:none}.quickProgressDot,.quickBack,.quickTap:after{transition:none}}
   @media (max-height:720px){
     .quickDeck{min-height:calc(100svh - 92px)}
-    .quickSlide{min-height:500px}
+    .quickSlide{min-height:calc(100svh - 190px)}
     .quickDeckTop{margin-bottom:5px}
     .quickTap{margin-top:5px}
   }
   @media (max-width:380px){
     .quickDeckTop{margin-left:0;margin-right:0}
-    .quickSlide{min-height:clamp(500px,calc(100svh - 182px),630px)}
+    .quickSlide{min-height:clamp(450px,calc(100svh - 182px),630px)}
     .quickSlideSwitch .flowSwitch{width:100%}
     .quickTap{min-height:41px;border-radius:12px;font-size:12.5px}
   }
@@ -1607,6 +1618,7 @@
   .flowQuick .seatToken.token svg .warmFill{fill:#ffe09a;stroke:none;opacity:.34}
   .flowQuick .seatToken.token svg .hotFill{fill:#ff8585;stroke:none;opacity:.36}
   .flowQuick .seatToken.token.townsfolk{--token-a:rgba(66,168,190,.62);--token-b:#16415e;--token-c:#07141f;--token-border:rgba(132,224,255,.58);--token-glow:rgba(91,199,255,.30);--token-line:#e8f8ff}
+  .flowQuick .seatToken.token.outsider{--token-a:rgba(112,142,174,.58);--token-b:#263447;--token-c:#0a0d14;--token-border:rgba(177,205,234,.54);--token-glow:rgba(124,199,255,.22);--token-line:#eef7ff}
   .flowQuick .seatToken.token.minion{--token-a:rgba(189,53,66,.72);--token-b:#48151d;--token-c:#13070b;--token-border:rgba(255,133,142,.60);--token-glow:rgba(255,85,101,.32);--token-line:#fff0e2}
   .flowQuick .seatToken.token.demon{--token-a:rgba(230,52,45,.80);--token-b:#57110f;--token-c:#100304;--token-border:rgba(255,126,103,.68);--token-glow:rgba(255,66,45,.40);--token-line:#fff1df}
   .quickRole .seatToken{width:36px;height:36px}
@@ -1630,12 +1642,27 @@
   .quickLastChance{font-size:18px!important}
   .quickChoice{font-size:14.5px}
   .quickEightCta{display:none;align-items:center;justify-content:center;gap:8px;width:100%;min-height:45px;margin:7px 0 3px;padding:9px 12px;border:1px solid rgba(240,192,96,.36);border-radius:13px;background:linear-gradient(180deg,rgba(240,192,96,.17),rgba(240,192,96,.06));color:#ffe1a0;font-size:14px;font-weight:1000;box-shadow:inset 0 1px 0 rgba(255,255,255,.05),0 8px 16px rgba(0,0,0,.14)}
-  .quickDeck[data-step="4"]>.quickEightCta{display:flex}
-  .quickDeck[data-step="4"] .quickSlide{min-height:560px;justify-content:flex-end}
-  .quickDeck[data-step="4"] .quickTap{margin-top:6px;transform:translateY(-70px);position:relative;z-index:1}
+  .quickDeck.five-flow.is-last>.quickEightCta{display:flex}
+  .quickDeck.five-flow.is-last .quickSlide{min-height:560px;justify-content:flex-end}
+  .quickDeck.five-flow.is-last .quickTap{margin-top:6px;transform:translateY(-70px);position:relative;z-index:1}
   .quickEightCta:after{content:"›";font-size:20px;line-height:1}
   .quickEightCta:active{transform:translateY(1px);background:rgba(240,192,96,.20)}
-  @media (max-height:720px){.quickDeck[data-step="4"] .quickSlide{min-height:460px}}
+  @media (max-height:720px){.quickDeck.five-flow.is-last .quickSlide{min-height:460px}}
+  .compactRoster .quickRoleList{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .compactRoster .quickTeam{margin-top:7px}
+  .compactRoster .quickTeamTitle{margin-bottom:4px}
+  .compactRoster .quickRole{min-height:43px;gap:6px;padding:4px 6px}
+  .compactRoster .quickRole .seatToken{width:30px;height:30px}
+  .compactRoster .quickRoleName{font-size:14px}
+  @media (max-height:720px){
+    .five-flow .quickRoster{padding:10px 10px 9px}
+    .five-flow .quickRoster h2{margin-bottom:8px}
+    .five-flow .quickTeam{margin-top:7px}
+    .five-flow .quickTeamTitle{margin-bottom:4px}
+    .five-flow .quickRole{min-height:46px;padding:5px 8px}
+    .five-flow .quickRole .seatToken{width:32px;height:32px}
+    .five-flow .quickRoleAbility{font-size:12px;line-height:1.2}
+  }
   @media (max-width:380px){
     .quickRoster h2,.quickChapter h2{font-size:21px}
     .quickRoleName{font-size:15.5px}
@@ -2318,6 +2345,7 @@ function renderFaq(){
     <div class="ruleBasics">
       <details class="faq" open ontoggle="oneFaqOnly(this)"><summary><span class="faqBadge good">胜利</span><span class="faqTitleText">胜利条件</span></summary><p><b>好人阵营：</b>恶魔死亡，通常好人胜利。</p><p><b>邪恶阵营：</b>通常只剩 2 名存活玩家且恶魔仍存活，邪恶胜利。</p><p class="small">特殊角色会改变结局，例如圣徒被处决、猩红女巫接棒、市长三人局无人处决。</p></details>
       <details class="faq" ontoggle="oneFaqOnly(this)"><summary><span class="faqBadge info">死亡</span><span class="faqTitleText">死亡以后还能玩吗？</span></summary><p>可以。死亡玩家通常仍可发言，但只剩一次投票机会，常叫“鬼票”。</p></details>
+      <details class="faq" ontoggle="oneFaqOnly(this)"><summary><span class="faqBadge warn">投票</span><span class="faqTitleText">提名、投票和处决怎样进行？</span></summary><p>只有存活玩家可以提名；每名玩家通常每天只能提名一次，也只能被提名一次。投票时，说书人会依次经过每名玩家，不需要同时举手。</p><p>被提名者需要获得至少存活人数一半的票数，并在当天结束时成为唯一最高票，才会被处决。最高票并列时无人被处决；每天最多处决一人，也可能无人被处决。</p></details>
       <details class="faq" ontoggle="oneFaqOnly(this)"><summary><span class="faqBadge warn">状态</span><span class="faqTitleText">醉酒 / 中毒</span></summary><p>两者对玩家效果很像：能力暂时无效，收到的信息可能是错的。区别是：醉酒通常来自自身或长期状态；中毒通常来自其他角色的临时影响。玩家一般不会被告知自己正醉酒或中毒。</p></details>
       <details class="faq" ontoggle="oneFaqOnly(this)"><summary><span class="faqBadge info">侦测</span><span class="faqTitleText">“登记为”是什么意思？</span></summary><p>有些角色会让侦测结果不等于真实身份。比如隐士是好人，但可能被某些能力看成邪恶、爪牙或恶魔。</p></details>
       <details class="faq" ontoggle="oneFaqOnly(this)"><summary><span class="faqBadge evil">发言</span><span class="faqTitleText">我可以说谎吗？</span></summary><p>可以。这个游戏允许任何阵营说谎。好人也可能为了保护关键身份而隐藏或伪装。</p></details>
@@ -2407,14 +2435,16 @@ $('modal').addEventListener('click', e=>{if(e.target.id==='modal') closeModal();
 window.addEventListener('keydown', e=>{if(e.key==='Escape') closeModal();});
 
 let quickFlowStep=0;
-const QUICK_FLOW_LABELS=['角色','第一晚','白天','第二晚','第二天'];
 function setQuickFlowStep(step){
   const deck=document.querySelector('.quickDeck');
   if(!deck) return;
-  const total=QUICK_FLOW_LABELS.length;
+  const slides=[...deck.querySelectorAll('.quickSlide')];
+  const labels=slides.map((slide,index)=>slide.dataset.label||`阶段${index+1}`);
+  const total=slides.length;
   quickFlowStep=Math.max(0,Math.min(total-1,Number(step)||0));
   deck.dataset.step=String(quickFlowStep);
-  deck.querySelectorAll('.quickSlide').forEach((slide,index)=>{
+  deck.classList.toggle('is-last',quickFlowStep===total-1);
+  slides.forEach((slide,index)=>{
     const active=index===quickFlowStep;
     slide.classList.toggle('active',active);
     slide.setAttribute('aria-hidden',active?'false':'true');
@@ -2424,16 +2454,17 @@ function setQuickFlowStep(step){
   const count=deck.querySelector('.quickProgressCount');
   const back=deck.querySelector('.quickBack');
   const tap=deck.querySelector('.quickTap');
-  if(label) label.textContent=QUICK_FLOW_LABELS[quickFlowStep];
+  if(label) label.textContent=labels[quickFlowStep];
   if(count) count.textContent=`${quickFlowStep+1}/${total}`;
   if(back) back.hidden=quickFlowStep===0;
-  if(tap) tap.textContent=quickFlowStep===total-1?'轻点重新观看':`轻点继续 · ${QUICK_FLOW_LABELS[quickFlowStep+1]}`;
+  if(tap) tap.textContent=quickFlowStep===total-1?'轻点重新观看':`轻点继续 · ${labels[quickFlowStep+1]}`;
   window.scrollTo(0,0);
 }
 function quickFlowAdvance(ev){
   if(ev?.target?.closest?.('button,a') && !ev.target.closest('.quickTap')) return;
   ev?.stopPropagation?.();
-  setQuickFlowStep(quickFlowStep>=QUICK_FLOW_LABELS.length-1?0:quickFlowStep+1);
+  const total=document.querySelectorAll('.quickDeck .quickSlide').length;
+  setQuickFlowStep(quickFlowStep>=total-1?0:quickFlowStep+1);
 }
 function quickFlowBack(ev){ev?.stopPropagation?.();setQuickFlowStep(quickFlowStep-1);}
 function quickFlowKey(ev){
@@ -2447,7 +2478,7 @@ function renderProcess(){
   quickFlowStep=0;
   $('process').innerHTML = `
     <div class="flowQuick">
-      <div class="quickDeck" data-step="0" tabindex="0" aria-label="5人局互动流程，轻点进入下一阶段" onclick="quickFlowAdvance(event)" onkeydown="quickFlowKey(event)">
+      <div class="quickDeck five-flow" data-step="0" tabindex="0" aria-label="5人局互动流程，轻点进入下一阶段" onclick="quickFlowAdvance(event)" onkeydown="quickFlowKey(event)">
         <div class="quickDeckTop">
           <button class="quickBack" type="button" hidden onclick="quickFlowBack(event)" aria-label="返回上一阶段">‹</button>
           <div class="quickDeckStatus"><span class="quickDeckLabel">角色</span><div class="quickProgress" aria-hidden="true"><span class="quickProgressDot active"></span><span class="quickProgressDot"></span><span class="quickProgressDot"></span><span class="quickProgressDot"></span><span class="quickProgressDot"></span></div></div>
@@ -2455,7 +2486,7 @@ function renderProcess(){
         </div>
 
         <div class="quickStory">
-        <div class="quickSlide active" data-step="0" aria-hidden="false">
+        <div class="quickSlide active" data-step="0" data-label="角色" aria-hidden="false">
       <section class="quickRoster">
         <div class="quickSlideSwitch"><div class="flowSwitch" aria-label="切换流程示例"><button class="flowSwitchBtn active" onclick="showFlow('5')">5人局</button><button class="flowSwitchBtn" onclick="showFlow('8')">8人局</button></div></div>
         <h2>这局有哪些角色？</h2>
@@ -2479,11 +2510,10 @@ function renderProcess(){
             <div class="quickRole demon">${roleToken('小恶魔','seatToken')}<div class="quickRoleCopy"><span class="quickRoleName">4号 · 小恶魔</span><span class="quickRoleAbility">每晚杀死一人，也能把恶魔身份传给爪牙。</span></div></div>
           </div>
         </div>
-        <p class="quickSkip"><strong>不用记技能。</strong><span>先看看他们怎样完成一局游戏。</span></p>
       </section>
         </div>
 
-        <div class="quickSlide" data-step="1" aria-hidden="true">
+        <div class="quickSlide" data-step="1" data-label="第一晚" aria-hidden="true">
         <section class="quickChapter night">
           <div class="quickChapterHead"><span class="quickPhaseIcon" aria-hidden="true">☾</span><h2>第一晚</h2></div>
           <div class="quickSectionLabel">好人获得线索</div>
@@ -2493,7 +2523,7 @@ function renderProcess(){
         </section>
         </div>
 
-        <div class="quickSlide" data-step="2" aria-hidden="true">
+        <div class="quickSlide" data-step="2" data-label="白天" aria-hidden="true">
         <section class="quickChapter day">
           <div class="quickChapterHead"><span class="quickPhaseIcon" aria-hidden="true">☀</span><h2>白天</h2></div>
           <p>大家自由讨论，判断谁最可疑。</p>
@@ -2509,7 +2539,7 @@ function renderProcess(){
         </section>
         </div>
 
-        <div class="quickSlide" data-step="3" aria-hidden="true">
+        <div class="quickSlide" data-step="3" data-label="第二晚" aria-hidden="true">
         <section class="quickChapter night">
           <div class="quickChapterHead"><span class="quickPhaseIcon" aria-hidden="true">☾</span><h2>第二晚</h2></div>
           <div class="quickEvent">${roleToken('小恶魔','seatToken')}<div class="quickEventBody"><div class="quickEventName">2号新恶魔 <span class="quickOrder">先行动</span></div><p>杀死1号调查员。</p></div></div>
@@ -2518,7 +2548,7 @@ function renderProcess(){
         </section>
         </div>
 
-        <div class="quickSlide" data-step="4" aria-hidden="true">
+        <div class="quickSlide" data-step="4" data-label="第二天" aria-hidden="true">
         <section class="quickChapter final">
           <div class="quickChapterHead"><span class="quickPhaseIcon" aria-hidden="true">♟</span><h2>第二天</h2></div>
           <div class="quickDawn">天亮后，宣布1号死亡。</div>
@@ -2539,86 +2569,117 @@ function renderProcess(){
 }
 
 function renderProcess8Flow(){
+  quickFlowStep=0;
   $('process').innerHTML = `
-    <div class="flowIntro">
-      <h2>8人局流程示例</h2>
-      <p class="flowLead">这个示例展示标准人数局的完整结构：5 名镇民、1 名外来者、1 名爪牙、1 名恶魔。相比 5 人局，8 人局会出现外来者，也更接近完整规则结构。</p>
-      <div class="flowSwitch"><button class="flowSwitchBtn" onclick="showFlow('5')">5人局：快速体验</button><button class="flowSwitchBtn active" onclick="showFlow('8')">8人局：完整结构</button></div>
-      <div class="flowMeta"><span class="pill good">好人：厨师、共情者、占卜师、送葬者、圣女、酒鬼</span><span class="pill evil">邪恶：猩红女巫、小恶魔</span></div>
-      <div class="flowGuide"><div class="guideItem"><b>阅读方式</b><span>重点看四类角色怎样一起影响局势。</span></div><div class="guideItem"><b>新手重点</b><span>处决爪牙不会结束游戏；真正目标仍然是恶魔。</span></div></div>
-      ${flowLegend()}
-    </div>
-    <div class="timeline">
-      <div class="flowStep setup">
-        <h3><span class="num">1</span>开局发身份</h3>
-        <div class="seatGrid">
-          ${flowSeat(1,'厨师')}
-          ${flowSeat(2,'共情者')}
-          ${flowSeat(3,'占卜师')}
-          ${flowSeat(4,'送葬者')}
-          ${flowSeat(5,'圣女')}
-          ${flowSeat(6,'酒鬼','显示身份：调查员')}
-          ${flowSeat(7,'猩红女巫')}
-          ${flowSeat(8,'小恶魔')}
+    <div class="flowQuick">
+      <div class="quickDeck eight-flow" data-step="0" tabindex="0" aria-label="8人局互动流程，轻点进入下一阶段" onclick="quickFlowAdvance(event)" onkeydown="quickFlowKey(event)">
+        <div class="quickDeckTop">
+          <button class="quickBack" type="button" hidden onclick="quickFlowBack(event)" aria-label="返回上一阶段">‹</button>
+          <div class="quickDeckStatus"><span class="quickDeckLabel">背景与看点</span><div class="quickProgress" aria-hidden="true"><span class="quickProgressDot active"></span><span class="quickProgressDot"></span><span class="quickProgressDot"></span><span class="quickProgressDot"></span><span class="quickProgressDot"></span><span class="quickProgressDot"></span><span class="quickProgressDot"></span><span class="quickProgressDot"></span><span class="quickProgressDot"></span></div></div>
+          <span class="quickProgressCount">1/9</span>
         </div>
-        <p class="flowMini">这是 5 镇民、1 外来者、1 爪牙、1 恶魔的 8 人局示例。6号真实是酒鬼，但他自己以为是调查员。</p>
-      </div>
-      <div class="flowStep night">
-        <h3><span class="num">2</span>第一夜：邪恶阵营互认与恶魔伪装</h3>
-        <p>8 人局使用完整结构。第一夜，7号猩红女巫和8号小恶魔会知道彼此属于邪恶阵营；小恶魔还会获得几个不在场的好人身份作为伪装。</p>
-        <div class="quote">7号知道：8号是恶魔。<br>8号知道：7号是爪牙。<br>8号获得伪装身份：僧侣、杀手、市长。</div>
-        <p class="flowMini">这就是标准人数局和 5 人局最大的不同之一：邪恶阵营更容易配合，也更容易编出可信身份。</p>
-      </div>
-      <div class="flowStep night">
-        <h3><span class="num">3</span>第一夜：好人获得信息</h3>
-        <p><b>1号厨师</b>得知有几对相邻的邪恶玩家。7号猩红女巫和8号小恶魔相邻，所以 1号被告知：</p>
-        <div class="quote">1。</div>
-        <p><b>2号共情者</b>得知自己两个存活邻居中有几个邪恶玩家。2号邻居是 1号和3号，都是好人，因此被告知：</p>
-        <div class="quote">0。</div>
-        <p><b>3号占卜师</b>选择 7号和8号。因为里面包含 8号小恶魔，所以被告知：</p>
-        <div class="quote">是。</div>
-        <p><b>6号真实身份是酒鬼</b>，但他以为自己是调查员。调查员会得知两个玩家中有一人是某个爪牙；由于 6号是酒鬼，他的信息没有可靠性。</p>
-        <div class="quote">6号被告知：5号和7号中有一人是猩红女巫。<br>这个信息可能真也可能假，6号无法确定。</div>
-      </div>
-      <div class="flowStep day">
-        <h3><span class="num">4</span>第一天：信息交叉验证</h3>
-        <p>白天讨论时，1号厨师的“1”说明有一对邪恶玩家相邻；3号占卜师的“是”指向 7号或8号可能有恶魔；6号的调查员信息也把 7号放进嫌疑圈。</p>
-        <div class="quote">1号说：我厨师数字是 1。<br>3号说：我查 7号和8号，结果是“是”。<br>6号说：我调查员信息是 5号和7号中有一人是猩红女巫。<br>8号说：我是僧侣，先不想报昨晚保护谁。</div>
-        <p class="flowMini">玩家视角下，6号的信息看起来有用，但他真实是酒鬼，所以这条信息不能完全采信。</p>
-      </div>
-      <div class="flowStep vote">
-        <h3><span class="num">5</span>第一天：提名与处决</h3>
-        <p>玩家怀疑 7号，因为 1号厨师的相邻邪恶数字、3号占卜师信息和6号调查员信息都可能指向 7号附近。于是 6号提名 7号。</p>
-        <div class="quote">6号提名 7号。<br>7号辩解：6号的信息未必可靠，3号也可能查到了 8号。</div>
-        <p>投票后，7号票数达到处决门槛。当天结束时，7号猩红女巫被处决。</p>
-        <div class="quote">7号被处决并死亡。<br>恶魔还活着，游戏继续。</div>
-        <p class="flowMini">这一步展示完整规则中的关键体验：处决爪牙会削弱邪恶阵营，但不会让好人立刻获胜。</p>
-      </div>
-      <div class="flowStep night">
-        <h3><span class="num">6</span>第二夜：夜晚继续行动</h3>
-        <p><b>3号占卜师</b>仍然存活，他再次选择 6号和8号。因为里面包含 8号小恶魔，所以再次被告知：</p>
-        <div class="quote">是。</div>
-        <p><b>4号送葬者</b>得知白天被处决玩家的真实角色：</p>
-        <div class="quote">昨晚你得知：7号是猩红女巫。</div>
-        <p>随后 8号小恶魔醒来，选择杀死 3号占卜师。天亮后说书人宣布：</p>
-        <div class="quote">昨晚，3号死亡。</div>
-      </div>
-      <div class="flowStep day">
-        <h3><span class="num">7</span>第二天：死亡玩家仍然参与</h3>
-        <p>3号已经死亡，但仍然可以继续发言。他可以公开两晚占卜结果，帮助大家把嫌疑集中到 8号。</p>
-        <div class="quote">3号可以说：我第一晚查 7号和8号是“是”，第二晚查 6号和8号也是“是”。现在 7号已经确认是猩红女巫，所以 8号非常可疑。</div>
-        <p>4号送葬者的信息确认了 7号确实是爪牙，说明第一天没有处决到恶魔。</p>
-      </div>
-      <div class="flowStep vote">
-        <h3><span class="num">8</span>第二天：处决恶魔</h3>
-        <p>大家把信息拼起来：厨师数字支持 7号和8号相邻邪恶；送葬者确认 7号是猩红女巫；占卜师两次信息都能解释为 8号是恶魔。</p>
-        <div class="quote">4号提名 8号。<br>8号获得足够票数。<br>当天结束时，8号被处决。</div>
-        <p>8号真实身份是小恶魔。恶魔死亡后，游戏通常立即结束。</p>
-      </div>
-      <div class="flowStep end">
-        <h3><span class="num">9</span>游戏结束</h3>
-        <div class="quote">恶魔死亡，好人阵营获胜。</div>
-        <p class="flowMini">8 人局能完整展示镇民、外来者、爪牙、恶魔四类角色：好人信息更多，邪恶配合也更强，适合新手理解标准规则结构。</p>
+
+        <div class="quickStory">
+        <div class="quickSlide active" data-step="0" data-label="背景与看点" aria-hidden="false">
+          <section class="quickRoster">
+            <div class="quickSlideSwitch"><div class="flowSwitch" aria-label="切换流程示例"><button class="flowSwitchBtn" onclick="showFlow('5')">5人局</button><button class="flowSwitchBtn active" onclick="showFlow('8')">8人局</button></div></div>
+            <h2>标准8人局，多了什么？</h2>
+            <div class="quickPrelude">5人简化局省略了部分标准规则。本局共有 <strong>5名镇民、1名外来者、1名爪牙、1名恶魔</strong>。</div>
+            <p>外来者属于好人阵营，但能力往往会给好人带来麻烦，可以理解为好人阵营里的“猪队友”。</p>
+            <div class="quickPreview" aria-label="本局重点"><span class="quickPreviewItem">醉酒与假身份</span><span class="quickPreviewItem">中毒与错误信息</span><span class="quickPreviewItem">圣女能力触发</span></div>
+          </section>
+        </div>
+
+        <div class="quickSlide" data-step="1" data-label="角色阵容" aria-hidden="true">
+          <section class="quickRoster compactRoster">
+            <h2>这局有哪些角色？</h2>
+            <div class="quickTeam good"><div class="quickTeamTitle">镇民</div><div class="quickRoleList">
+              <div class="quickRole townsfolk">${roleToken('厨师','seatToken')}<div class="quickRoleCopy"><span class="quickRoleName">1号 · 厨师</span></div></div>
+              <div class="quickRole townsfolk">${roleToken('共情者','seatToken')}<div class="quickRoleCopy"><span class="quickRoleName">2号 · 共情者</span></div></div>
+              <div class="quickRole townsfolk">${roleToken('占卜师','seatToken')}<div class="quickRoleCopy"><span class="quickRoleName">3号 · 占卜师</span></div></div>
+              <div class="quickRole townsfolk">${roleToken('送葬者','seatToken')}<div class="quickRoleCopy"><span class="quickRoleName">4号 · 送葬者</span></div></div>
+              <div class="quickRole townsfolk">${roleToken('圣女','seatToken')}<div class="quickRoleCopy"><span class="quickRoleName">5号 · 圣女</span></div></div>
+            </div></div>
+            <div class="quickTeam good"><div class="quickTeamTitle">外来者</div><div class="quickRoleList">
+              <div class="quickRole outsider">${roleToken('酒鬼','seatToken')}<div class="quickRoleCopy"><span class="quickRoleName">6号 · 酒鬼</span></div></div>
+            </div></div>
+            <div class="quickTeam evil"><div class="quickTeamTitle">邪恶阵营</div><div class="quickRoleList">
+              <div class="quickRole minion">${roleToken('投毒者','seatToken')}<div class="quickRoleCopy"><span class="quickRoleName">7号 · 投毒者</span></div></div>
+              <div class="quickRole demon">${roleToken('小恶魔','seatToken')}<div class="quickRoleCopy"><span class="quickRoleName">8号 · 小恶魔</span></div></div>
+            </div></div>
+          </section>
+        </div>
+
+        <div class="quickSlide" data-step="2" data-label="第一夜·邪恶" aria-hidden="true">
+          <section class="quickChapter night">
+            <div class="quickChapterHead"><span class="quickPhaseIcon" aria-hidden="true">☾</span><h2>第一夜 · 邪恶阵营</h2></div>
+            <div class="quickEvent">${roleToken('投毒者','seatToken')}<div class="quickEventBody"><div class="quickEventName">7号投毒者</div><p>得知8号是小恶魔，随后选择让 <span class="quickResult"><strong>1号厨师中毒</strong></span>。</p></div></div>
+            <div class="quickEvent">${roleToken('小恶魔','seatToken')}<div class="quickEventBody"><div class="quickEventName">8号小恶魔</div><p>得知7号是自己的爪牙，并获得三个本局没有出现的好人角色，用来安全伪装。</p></div></div>
+            <p class="quickRule">中毒玩家的能力暂时失效，得到的信息也可能是错的。</p>
+          </section>
+        </div>
+
+        <div class="quickSlide" data-step="3" data-label="第一夜·信息" aria-hidden="true">
+          <section class="quickChapter night">
+            <div class="quickChapterHead"><span class="quickPhaseIcon" aria-hidden="true">☾</span><h2>第一夜 · 好人信息</h2></div>
+            <div class="quickEvent">${roleToken('厨师','seatToken')}<div class="quickEventBody"><div class="quickEventName">1号厨师 <span class="quickOrder">已中毒</span></div><p>得知数字 <span class="quickResult"><strong>0</strong></span>。实际上7号和8号相邻，正确答案是 <span class="quickTruth">1</span>。</p></div></div>
+            <div class="quickEvent">${roleToken('共情者','seatToken')}<div class="quickEventBody"><div class="quickEventName">2号共情者</div><p>两名存活邻居都是好人，得知数字 <span class="quickResult"><strong>0</strong></span>。</p></div></div>
+            <div class="quickEvent">${roleToken('占卜师','seatToken')}<div class="quickEventBody"><div class="quickEventName">3号占卜师</div><p>调查7号和8号，得到回答 <span class="quickResult"><strong>是</strong></span>。两人中至少有一人是恶魔。</p></div></div>
+            <div class="quickEvent">${roleToken('酒鬼','seatToken')}<div class="quickEventBody"><div class="quickEventName">6号“调查员” <span class="quickOrder">真实是酒鬼</span></div><p>被告知5号和7号中有一人是投毒者。他不知道这条信息可能是真，也可能是假。</p></div></div>
+            <p class="quickRule">占卜师还可能被一名“红鲱鱼”好人误导，把他当成恶魔。</p>
+          </section>
+        </div>
+
+        <div class="quickSlide" data-step="4" data-label="第一天" aria-hidden="true">
+          <section class="quickChapter day">
+            <div class="quickChapterHead"><span class="quickPhaseIcon" aria-hidden="true">☀</span><h2>第一天</h2></div>
+            <p>经过讨论，7号成为主要嫌疑人。</p>
+            <div class="quickOutcome">
+              <div class="quickOutcomeLine"><strong>3号提名7号。</strong></div>
+              <div class="quickOutcomeLine">7号获得4票，之后无人追平或超过。</div>
+              <div class="quickOutcomeLine"><strong>当天结束时，7号被处决。</strong></div>
+              <span class="quickContinue">恶魔还活着，游戏继续</span>
+            </div>
+          </section>
+        </div>
+
+        <div class="quickSlide" data-step="5" data-label="第二夜" aria-hidden="true">
+          <section class="quickChapter night">
+            <div class="quickChapterHead"><span class="quickPhaseIcon" aria-hidden="true">☾</span><h2>第二夜</h2></div>
+            <div class="quickEvent">${roleToken('小恶魔','seatToken')}<div class="quickEventBody"><div class="quickEventName">8号小恶魔</div><p>选择杀死 <span class="quickResult"><strong>3号占卜师</strong></span>。</p></div></div>
+            <div class="quickEvent">${roleToken('送葬者','seatToken')}<div class="quickEventBody"><div class="quickEventName">4号送葬者</div><p>得知白天被处决的7号，真实身份是 <span class="quickResult"><strong>投毒者</strong></span>。</p></div></div>
+          </section>
+        </div>
+
+        <div class="quickSlide" data-step="6" data-label="第二天" aria-hidden="true">
+          <section class="quickChapter day">
+            <div class="quickChapterHead"><span class="quickPhaseIcon" aria-hidden="true">☀</span><h2>第二天</h2></div>
+            <div class="quickOutcome">
+              <div class="quickOutcomeLine"><strong>2号提名5号圣女。</strong></div>
+              <div class="quickOutcomeLine">圣女能力触发，<strong>2号好人立即被处决。</strong></div>
+            </div>
+          </section>
+        </div>
+
+        <div class="quickSlide" data-step="7" data-label="第三夜" aria-hidden="true">
+          <section class="quickChapter night">
+            <div class="quickChapterHead"><span class="quickPhaseIcon" aria-hidden="true">☾</span><h2>第三夜</h2></div>
+            <div class="quickEvent">${roleToken('小恶魔','seatToken')}<div class="quickEventBody"><div class="quickEventName">8号小恶魔</div><p>杀死 <span class="quickResult"><strong>4号送葬者</strong></span>。送葬者在醒来前已被杀死，当晚无法再获得信息。</p></div></div>
+          </section>
+        </div>
+
+        <div class="quickSlide" data-step="8" data-label="第三天" aria-hidden="true">
+          <section class="quickChapter final">
+            <div class="quickChapterHead"><span class="quickPhaseIcon" aria-hidden="true">♟</span><h2>第三天</h2></div>
+            <div class="quickDawn">场上还剩4名存活玩家：3名好人、1名恶魔。</div>
+            <div class="quickChoices">
+              <div class="quickChoice lose">如果白天处决错人，恶魔将在夜里杀人后获胜。</div>
+              <div class="quickChoice">如果白天无人被处决，恶魔夜里杀人后，好人将在第四天获得最后一次机会。</div>
+            </div>
+          </section>
+        </div>
+        </div>
+        <button class="quickTap" type="button" onclick="quickFlowAdvance(event)">轻点继续 · 角色阵容</button>
       </div>
     </div>`;
 }
