@@ -988,22 +988,7 @@
   /* v31 记录页精修：记录面板、防窥层级、手写纸张质感 */
   #notes{padding-top:2px}
   .notesShell{display:grid;gap:10px;margin-top:8px}
-  .notesHero{
-    position:relative;
-    overflow:hidden;
-    border-radius:20px;
-    padding:13px 13px 12px;
-    border:1px solid rgba(218,169,91,.22);
-    background:
-      radial-gradient(circle at 15% 0%,rgba(240,192,96,.13),transparent 34%),
-      linear-gradient(180deg,rgba(255,255,255,.04),rgba(255,255,255,.006) 50%,rgba(0,0,0,.11)),
-      rgba(15,20,31,.96);
-    box-shadow:0 10px 22px rgba(0,0,0,.30),inset 0 1px 0 rgba(255,255,255,.04);
-  }
-  .notesHero:before{content:"";position:absolute;left:0;top:0;bottom:0;width:4px;background:linear-gradient(180deg,rgba(240,192,96,.78),rgba(240,192,96,.14));pointer-events:none}
-  .notesHeroTop{display:flex;align-items:center;gap:9px;flex-wrap:wrap}
-  .notesTitle{font-size:20px;font-weight:1000;letter-spacing:.2px;color:#ffe0a0;line-height:1.1}
-  .notesSub{margin:7px 0 0;color:#c8d0de;font-size:13px;line-height:1.42}
+  .notesToolbar{display:flex;align-items:center;gap:9px;margin-bottom:2px}
   .identityChip{
     display:inline-flex;
     align-items:center;
@@ -1021,21 +1006,6 @@
   }
   .identityChip .inlineToken.token{width:24px;height:24px;margin:0;vertical-align:middle}
   .identityChip .identityText{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-  .privacyBtn{margin-left:auto;min-height:36px;padding:8px 11px;border-radius:999px}
-  .notesHiddenCard{
-    min-height:260px;
-    display:grid;
-    place-items:center;
-    text-align:center;
-    border:1px dashed rgba(218,169,91,.26);
-    border-radius:18px;
-    background:
-      radial-gradient(circle at 50% 0%,rgba(240,192,96,.08),transparent 42%),
-      rgba(8,12,20,.52);
-    color:#cfd6e5;
-    font-weight:900;
-    padding:24px 16px;
-  }
   .notesPanel{
     border-radius:19px;
     padding:12px;
@@ -1050,7 +1020,7 @@
   .notesPanelTitle{font-size:16px;font-weight:1000;color:#fff6e8}
   .notesPanelHint{margin-left:auto;color:#9faabc;font-size:12px;font-weight:800}
   .noteArea{
-    min-height:152px;
+    min-height:210px;
     border-color:rgba(218,169,91,.20);
     background:
       linear-gradient(180deg,rgba(255,255,255,.018),rgba(255,255,255,0)),
@@ -1070,19 +1040,13 @@
     box-shadow:0 10px 18px rgba(0,0,0,.22),inset 0 0 0 1px rgba(255,255,255,.34),inset 0 16px 36px rgba(255,255,255,.28);
   }
   .toolRow.notesTools{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-top:10px}
-  .notesLocalHint{display:flex;align-items:flex-start;gap:7px;color:#aeb7c7;font-size:12.5px;line-height:1.36;margin:9px 2px 0}
-  .notesLocalHint:before{content:"";width:7px;height:7px;border-radius:50%;margin-top:5px;background:rgba(240,192,96,.72);box-shadow:0 0 10px rgba(240,192,96,.25);flex:0 0 auto}
   @media (max-width:430px){
-    .notesHeroTop{gap:7px}
     .identityChip{flex:1 1 auto;min-width:0}
-    .privacyBtn{margin-left:0;flex:0 0 auto}
     .canvasWrap{height:390px}
     .toolRow.notesTools{grid-template-columns:1fr;gap:7px}
   }
   @media (max-width:380px){
-    .notesTitle{font-size:18px}
-    .notesSub{font-size:12.5px}
-    .noteArea{min-height:142px;font-size:15.5px}
+    .noteArea{min-height:190px;font-size:15.5px}
     .canvasWrap{height:350px}
   }
 
@@ -1158,7 +1122,7 @@
   .roleGrid{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}
   .roleHead{touch-action:manipulation;-webkit-tap-highlight-color:transparent}
   .roleBody .explain,.playerExplain{overflow-wrap:anywhere}
-  details.faq summary,.faqSearchBox input,.ruleJump,.flowSwitchBtn,.privacyBtn,.toolRow.notesTools .btn{touch-action:manipulation;-webkit-tap-highlight-color:transparent}
+  details.faq summary,.faqSearchBox input,.ruleJump,.flowSwitchBtn,.toolRow.notesTools .btn{touch-action:manipulation;-webkit-tap-highlight-color:transparent}
   .faqSearchBox input{min-height:46px}
   .ruleJump{min-height:42px}
   .notesPanelHead{min-width:0}
@@ -1198,10 +1162,7 @@
     .faqSearchBox input{font-size:14.5px;padding-left:42px}
     .faqSearchBox:before{left:14px;top:15px}
     .faqSearchBox:after{left:26px;top:29px}
-    .notesHeroTop{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:8px}
-    .notesTitle{grid-column:1 / -1;font-size:19px}
     .identityChip{min-width:0;width:100%;justify-content:flex-start}
-    .privacyBtn{justify-self:end;margin-left:0;white-space:nowrap}
     .notesPanel{padding:11px}
     .toolRow.notesTools{grid-template-columns:1fr 1fr;gap:7px}
     .toolRow.notesTools .btn.danger{grid-column:1 / -1}
@@ -1250,9 +1211,6 @@
     .ruleJumpRow{grid-template-columns:1fr 1fr;gap:6px}
     .ruleJump{min-height:40px}
     .faqSearchBox input{min-height:44px;font-size:14px;padding-left:40px}
-    .notesHeroTop{grid-template-columns:1fr}
-    .privacyBtn{width:100%;justify-self:stretch}
-    .notesSub{font-size:12.3px}
     .toolRow.notesTools{grid-template-columns:1fr}
     .toolRow.notesTools .btn.danger{grid-column:auto}
     .canvasWrap{height:340px}
@@ -1644,7 +1602,7 @@
   .quickEightCta{display:none;align-items:center;justify-content:center;gap:8px;width:100%;min-height:45px;margin:7px 0 3px;padding:9px 12px;border:1px solid rgba(240,192,96,.36);border-radius:13px;background:linear-gradient(180deg,rgba(240,192,96,.17),rgba(240,192,96,.06));color:#ffe1a0;font-size:14px;font-weight:1000;box-shadow:inset 0 1px 0 rgba(255,255,255,.05),0 8px 16px rgba(0,0,0,.14)}
   .quickDeck.five-flow.is-last>.quickEightCta{display:flex}
   .quickDeck.five-flow.is-last .quickSlide{min-height:560px;justify-content:flex-end}
-  .quickDeck.five-flow.is-last .quickTap{margin-top:6px;transform:translateY(-70px);position:relative;z-index:1}
+  .quickDeck.five-flow.is-last .quickTap{margin-top:12px;transform:none;position:relative;z-index:1}
   .quickEightCta:after{content:"›";font-size:20px;line-height:1}
   .quickEightCta:active{transform:translateY(1px);background:rgba(240,192,96,.20)}
   @media (max-height:720px){.quickDeck.five-flow.is-last .quickSlide{min-height:460px}}
@@ -2026,7 +1984,7 @@ const EN_UI_TEXT = {
   '玩家助手能帮你什么？':'What can this player guide do?','手机上快速查询角色能力和常见误解，不用翻规则书。':'Look up abilities and common misunderstandings quickly on your phone.','长按角色可标记“我的身份”，需要时一键隐藏，避免被旁边玩家看到。':'Press and hold a character to mark it as yours, then hide it from nearby players.','记录页可写文字和手写笔记，适合记夜晚信息、怀疑对象和投票线索。':'Keep typed or handwritten notes about night information, suspects, and votes.','内置 5 人和 8 人示例，并收录《暗流涌动》和 No Greater Joy 两个剧本。':'Includes 5-player and 8-player walkthroughs plus Trouble Brewing and No Greater Joy.',
   '切换 TAB 查看详细内容。新手建议先看':'Use the tabs for more detail. New players should begin with the','流程示例':'walkthrough','，用 5人局快速了解一局游戏怎么进行。':'to see how a 5-player game works.',
   '首页':'Home','规则':'Rules','流程':'Walkthrough','查询':'Characters','记录':'Notes','剧本选择：':'Script:','剧本选择':'Script selection','关闭':'Close','角色能力':'Ability','玩家理解':'How to play it','本剧本提示：':'Script note:','设为我的身份':'Mark as my character','常见问题':'FAQ',
-  '身份与记录已隐藏':'Character and notes hidden','未标记身份':'No character marked','玩家记录':'Player notes','显示记录':'Show notes','隐藏记录':'Hide notes','用于记录夜晚信息、怀疑对象、投票线索和临场推理。隐藏后会遮住身份、文字和手写内容。':'Record night information, suspects, vote clues, and deductions. Hiding conceals your character, typed notes, and handwriting.','记录已隐藏':'Notes hidden','点击“显示记录”查看':'Tap “Show notes” to view them.','文字备注':'Typed notes','自动保存':'Auto-saved','去“角色”页长按自己的身份，可以在这里显示身份标记。':'Press and hold your character on the Characters page to show it here.','手写记录':'Handwritten notes','适合画座位和连线':'Useful for seats and connections','撤销一笔':'Undo stroke','清空文字':'Clear text','清空手写':'Clear drawing','文字和手写只保存在这台设备的浏览器本地，离线可用。':'Typed and handwritten notes stay only in this browser and work offline.',
+  '未标记身份':'No character marked','文字备注':'Typed notes','自动保存':'Auto-saved','去“角色”页长按自己的身份，可以在这里显示身份标记。':'Press and hold your character on the Characters page to show it here.','手写记录':'Handwritten notes','适合画座位和连线':'Useful for seats and connections','撤销一笔':'Undo stroke','清空文字':'Clear text','清空手写':'Clear drawing',
   '血染钟楼 · 快速开始':'Blood on the Clocktower · Quick Start','最简单的游戏规则':'The simplest rules','好人':'Good','让恶魔死亡':'Kill the Demon','邪恶':'Evil','保护恶魔':'Protect the Demon','直到场上只剩 2 人':'until only 2 players live','死亡不等于出局':'Death is not elimination','死亡后仍可讨论，并保留最后一次投票机会。':'After death, you may still discuss and keep one final vote.','5 人游戏示例配置':'Example 5-player setup','镇民':'Townsfolk','爪牙':'Minion','恶魔':'Demon','查看 5 人最简流程示例':'View the 5-player walkthrough',
   'FAQ 速查':'FAQ quick reference','现场遇到争议时，先看基础规则；想查当前剧本角色的常见误解，可以从角色页跳转，或在下方直接搜索角色名 / 关键词。':'Use the basic rules for table disputes. For character questions, jump here from the Characters page or search below.','基础规则':'Basic rules','剧本 FAQ':'Script FAQ','角色 FAQ':'Character FAQ','清空搜索':'Clear search','规':'Rule','基础规则速查':'Basic rules quick reference','胜利':'Victory','胜利条件':'Winning the game','死亡':'Death','死亡以后还能玩吗？':'Can dead players still play?','投票':'Voting','提名、投票和处决怎样进行？':'How do nominations, voting, and execution work?','状态':'Status','醉酒 / 中毒':'Drunk / poisoned','侦测':'Detection','“登记为”是什么意思？':'What does “register as” mean?','发言':'Bluffing','我可以说谎吗？':'May I lie?','对比':'Comparison','和狼人杀最容易搞错的地方':'The biggest differences from Werewolf',
   '好人阵营：':'Good team:','恶魔死亡，通常好人胜利。':'When the Demon dies, good normally wins.','邪恶阵营：':'Evil team:','通常只剩 2 名存活玩家且恶魔仍存活，邪恶胜利。':'Evil normally wins when only 2 living players remain and the Demon is alive.','特殊角色会改变结局，例如圣徒被处决、猩红女巫接棒、市长三人局无人处决。':'Some characters change these conditions, including the Saint, Scarlet Woman, and Mayor.','可以。死亡玩家通常仍可发言，但只剩一次投票机会，常叫“鬼票”。':'Yes. Dead players may still talk, but normally have only one vote left.','只有存活玩家可以提名；每名玩家通常每天只能提名一次，也只能被提名一次。投票时，说书人会依次经过每名玩家，不需要同时举手。':'Only living players may nominate. Each player normally nominates once and is nominated once per day. The Storyteller counts votes around the circle; hands need not rise together.','被提名者需要获得至少存活人数一半的票数，并在当天结束时成为唯一最高票，才会被处决。最高票并列时无人被处决；每天最多处决一人，也可能无人被处决。':'A nominee needs at least half the living players and must finish as the sole highest vote. A tie means no execution. At most one player is executed each day, and sometimes nobody is.','两者对玩家效果很像：能力暂时无效，收到的信息可能是错的。区别是：醉酒通常来自自身或长期状态；中毒通常来自其他角色的临时影响。玩家一般不会被告知自己正醉酒或中毒。':'Both make an ability fail and may make information false. Drunkenness usually comes from the character or a lasting state; poisoning is usually a temporary effect from another character. Players are normally not told.','有些角色会让侦测结果不等于真实身份。比如隐士是好人，但可能被某些能力看成邪恶、爪牙或恶魔。':'Some abilities make detection differ from reality. The Recluse is good but may register as evil, a Minion, or a Demon.','可以。这个游戏允许任何阵营说谎。好人也可能为了保护关键身份而隐藏或伪装。':'Yes. Any team may lie, and good players may bluff to protect important characters.','死亡不等于出局；死人还能说话。信息也不一定绝对真实，因为醉酒、中毒、登记错误和说书人裁定都会影响结果。':'Death is not elimination, and dead players still talk. Information may also be wrong because of drunkenness, poisoning, registration, or Storyteller decisions.',
@@ -2053,9 +2011,8 @@ Object.assign(EN_UI_TEXT,{
   '如果无人被处决，恶魔今晚再杀一人，':'If nobody is executed, the Demon kills again tonight and '
 });
 
-let state = loadState() || {tab:'home', flow:'5', lang:'zh', myRole:null, myHidden:true, noteText:'', notesHidden:false, drawingStrokes:[]};
+let state = loadState() || {tab:'home', flow:'5', lang:'zh', myRole:null, myHidden:true, noteText:'', drawingStrokes:[]};
 state.noteText = state.noteText || '';
-state.notesHidden = !!state.notesHidden;
 state.drawingStrokes = Array.isArray(state.drawingStrokes) ? state.drawingStrokes : [];
 state.lang = state.lang === 'en' ? 'en' : 'zh';
 state.flow = (state.flow === '8' || state.flow === '7') ? '8' : '5';
@@ -2338,7 +2295,7 @@ function roleChip(name){
   const cls=`roleChip ${teamClass(name)} ${tokenClass(r.type)}${mine?' mine':''}`;
   return `<button class="${cls}" type="button" data-role="${escapeHtml(name)}" aria-label="${escapeHtml(roleDisplayName(name))}" onclick="roleClick('${name}')" onpointerdown="holdStart(event,'${name}')" onpointerup="holdEnd()" onpointercancel="holdEnd()" onpointerleave="holdEnd()">
     <span class="roleChipName">${escapeHtml(roleDisplayName(name))}</span>
-    <span class="roleChipEn">${escapeHtml(isEnglish()?typeDisplay(r.type):r.en)}</span>
+    <span class="roleChipEn" data-no-i18n>${escapeHtml(isEnglish()?name:r.en)}</span>
   </button>`;
 }
 function roleClick(name){
@@ -2373,40 +2330,30 @@ function setMineFromModal(name){ setMine(name); openRole(name); }
 function openRoleFaq(name){ closeModal(); jumpFAQ(name); }
 function jumpNotes(){state.tab='notes'; save(); renderAll(); setTimeout(()=>initCanvas(),40);}
 function renderNotes(){
-  const identityHTML = state.notesHidden
-    ? `<span class="identityText">身份与记录已隐藏</span>`
-    : (state.myRole ? `${inlineRoleToken(state.myRole)}<span class="identityText">${escapeHtml(roleDisplayName(state.myRole))}</span>` : `<span class="identityText">未标记身份</span>`);
+  const identityHTML = state.myRole ? `${inlineRoleToken(state.myRole)}<span class="identityText">${escapeHtml(roleDisplayName(state.myRole))}</span>` : `<span class="identityText">未标记身份</span>`;
   $('notes').innerHTML = `
     <div class="notesShell">
-      <div class="notesHero">
-        <div class="notesHeroTop">
-          <div class="notesTitle">玩家记录</div>
-          <div class="identityChip">${identityHTML}</div>
-          <button class="btn secondary privacyBtn" onclick="state.notesHidden=!state.notesHidden;save();renderAll()">${state.notesHidden?'显示记录':'隐藏记录'}</button>
-        </div>
-        <p class="notesSub">用于记录夜晚信息、怀疑对象、投票线索和临场推理。隐藏后会遮住身份、文字和手写内容。</p>
+      <div class="notesToolbar">
+        <div class="identityChip">${identityHTML}</div>
       </div>
 
-      ${state.notesHidden ? `<div class="notesHiddenCard">记录已隐藏<br><span class="small">点击“显示记录”查看</span></div>` : `
-        <div class="notesPanel">
-          <div class="notesPanelHead"><span class="notesPanelTitle">文字备注</span><span class="notesPanelHint">自动保存</span></div>
-          ${state.myRole?'':`<p class="small">去“角色”页长按自己的身份，可以在这里显示身份标记。</p>`}
-          <textarea class="noteArea" placeholder="例：N1 查 4+5：是；2号可信；5号重点观察……" oninput="state.noteText=this.value;save()">${escapeHtml(state.noteText||'')}</textarea>
-        </div>
+      <div class="notesPanel">
+        <div class="notesPanelHead"><span class="notesPanelTitle">文字备注</span><span class="notesPanelHint">自动保存</span></div>
+        ${state.myRole?'':`<p class="small">去“角色”页长按自己的身份，可以在这里显示身份标记。</p>`}
+        <textarea class="noteArea" placeholder="例：N1 查 4+5：是；2号可信；5号重点观察……" oninput="state.noteText=this.value;save()">${escapeHtml(state.noteText||'')}</textarea>
+      </div>
 
-        <div class="notesPanel">
-          <div class="notesPanelHead"><span class="notesPanelTitle">手写记录</span><span class="notesPanelHint">适合画座位和连线</span></div>
-          <div class="canvasWrap"><canvas id="drawCanvas"></canvas></div>
-          <div class="toolRow notesTools">
-            <button class="btn secondary" onclick="undoStroke()">撤销一笔</button>
-            <button class="btn secondary" onclick="clearTextNote()">清空文字</button>
-            <button class="btn danger" onclick="confirmClearDrawing()">清空手写</button>
-          </div>
-          <div class="notesLocalHint">文字和手写只保存在这台设备的浏览器本地，离线可用。</div>
+      <div class="notesPanel">
+        <div class="notesPanelHead"><span class="notesPanelTitle">手写记录</span><span class="notesPanelHint">适合画座位和连线</span></div>
+        <div class="canvasWrap"><canvas id="drawCanvas"></canvas></div>
+        <div class="toolRow notesTools">
+          <button class="btn secondary" onclick="undoStroke()">撤销一笔</button>
+          <button class="btn secondary" onclick="clearTextNote()">清空文字</button>
+          <button class="btn danger" onclick="confirmClearDrawing()">清空手写</button>
         </div>
-      `}
+      </div>
     </div>`;
-  if(!state.notesHidden) setTimeout(()=>initCanvas(),30);
+  setTimeout(()=>initCanvas(),30);
 }
 function clearTextNote(){state.noteText=''; save(); renderAll(); toast(isEnglish()?'Typed notes cleared':'已清空文字备注');}
 function confirmClearDrawing(){
@@ -2471,7 +2418,7 @@ function undoStroke(){
   if(!state.drawingStrokes?.length){toast(isEnglish()?'Nothing to undo':'没有可撤销的手写');return;}
   state.drawingStrokes.pop(); save(); redrawCanvas();
 }
-window.addEventListener('resize', ()=>{if(state.tab==='notes'&&!state.notesHidden) initCanvas();});
+window.addEventListener('resize', ()=>{if(state.tab==='notes') initCanvas();});
 function renderRules(){
   const legacyCss=document.querySelector('style')?.textContent||'';
   const legacyMatch=legacyCss.match(/data:image\/jpeg;base64,[A-Za-z0-9+/=]+/);
