@@ -1709,11 +1709,9 @@
   /* v60: bilingual interface */
   .languageToggle{position:fixed;top:max(10px,env(safe-area-inset-top));right:max(10px,env(safe-area-inset-right));z-index:80;min-width:48px;height:34px;padding:0 11px;border:1px solid rgba(240,192,96,.42);border-radius:999px;background:rgba(7,11,18,.82);color:#ffe1a0;font:900 12px/1 system-ui,-apple-system,"Segoe UI",sans-serif;letter-spacing:.04em;box-shadow:0 6px 18px rgba(0,0,0,.28),inset 0 1px 0 rgba(255,255,255,.06);backdrop-filter:blur(9px);cursor:pointer}
   .languageToggle:focus-visible{outline:2px solid #ffe09a;outline-offset:2px}
-  body[data-lang="en"][data-tab="home"] .wrap{max-width:942px;min-height:100vh;margin:0 auto;padding:54px 12px 104px}
-  body[data-lang="en"][data-tab="home"] .footerNav{display:grid}
-  body[data-lang="en"][data-tab="home"] #home{line-height:1.45}
-  body[data-lang="en"] .homeGrid,body[data-lang="en"] .homeScriptPanel,body[data-lang="en"] .assistantCard{max-width:760px;margin-left:auto;margin-right:auto}
-  body[data-lang="en"] .homeHint{max-width:760px;margin-left:auto;margin-right:auto}
+  body[data-lang="en"][data-tab="home"] .wrap{max-width:none;min-height:100vh;margin:0;padding:0}
+  body[data-lang="en"][data-tab="home"] .footerNav{display:none}
+  body[data-lang="en"][data-tab="home"] #home{line-height:0}
   @media (max-width:380px){.languageToggle{top:max(7px,env(safe-area-inset-top));right:7px;height:32px;min-width:44px;padding:0 9px;font-size:11.5px}}
 
 </style>
@@ -2219,10 +2217,25 @@ function renderHome(){
     <p class="homeHint">切换 TAB 查看详细内容。新手建议先看 <button class="homeHintLink" onclick="showFlow('5')">流程示例</button>，用 5人局快速了解一局游戏怎么进行。</p>`;
 }
 
+function renderEnglishPosterHome(){
+  $('home').innerHTML=`
+    <div class="posterHome posterHomeEnglish">
+      <img src="assets/home-en.png" width="941" height="1672" alt="Blood on the Clocktower Player Assistant: offline quick reference, beginner friendly, with rules, character lookup, FAQ, walkthroughs, and notes.">
+      <nav class="posterNav" aria-label="Home navigation">
+        <button type="button" onclick="showTab('rules')" aria-label="Rules">Rules</button>
+        <button type="button" onclick="showTab('roles')" aria-label="Lookup">Lookup</button>
+        <button type="button" onclick="showTab('faq')" aria-label="FAQ">FAQ</button>
+        <button type="button" onclick="showFlow('5')" aria-label="Flow">Flow</button>
+        <button type="button" onclick="showTab('notes')" aria-label="Notes">Notes</button>
+        <button type="button" onclick="toast('Blood on the Clocktower Player Assistant: offline reference for an easier first game.')" aria-label="About">About</button>
+      </nav>
+    </div>`;
+}
+
 function renderHomeLocale(){
   if(isEnglish()){
-    renderHome();
-  }else if(!$('home').querySelector('.posterHome')){
+    renderEnglishPosterHome();
+  }else if(!$('home').querySelector('.posterHome') || $('home').querySelector('.posterHomeEnglish')){
     $('home').innerHTML=HOME_POSTER_HTML;
   }
 }
@@ -2241,7 +2254,7 @@ function stopTowerLights(){
 }
 
 function towerLightsCanRun(){
-  return !document.hidden && !towerMotionQuery.matches && $('home')?.classList.contains('active');
+  return !document.hidden && !towerMotionQuery.matches && $('home')?.classList.contains('active') && !!document.querySelector('.towerLights');
 }
 
 function scheduleTowerPulse(first=false){
