@@ -1,6 +1,6 @@
 <!doctype html>
 <!--
-  血染钟楼玩家离线助手 v59 - 5人、8人互动流程版
+  血染钟楼玩家离线助手 v61 - 实战易错速查版
   定位：玩家端离线单文件 HTML；不包含说书人专用功能。
   离线：所有样式、脚本、SVG 令牌与首页背景均内嵌在本文件中。
   本地存储键：botc_player_manual_cn_v2，用于保存“我的身份”、文字备注、隐藏状态和手写记录。
@@ -9,10 +9,10 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-<meta name="description" content="血染钟楼玩家端离线助手：角色查询、身份隐藏、玩家记录、规则 FAQ、流程示例。" />
+<meta name="description" content="血染钟楼玩家端离线助手：角色查询、身份隐藏、玩家记录、实战易错点、流程示例。" />
 <meta name="theme-color" content="#0b0d14" />
 <meta name="application-name" content="血染钟楼玩家离线助手" />
-<title>血染钟楼玩家离线助手 - v60 中英双语版</title>
+<title>血染钟楼玩家离线助手 - v61 实战易错速查版</title>
 <style>
   :root{
     --bg:#0b0d14; --card:#171b26; --card2:#202638; --text:#f6f1e7; --muted:#aeb6c8;
@@ -1672,9 +1672,24 @@
   body[data-lang="en"][data-tab="home"] #home{line-height:0}
   @media (max-width:380px){.languageToggle{top:max(7px,env(safe-area-inset-top));right:7px;height:32px;min-width:44px;padding:0 9px;font-size:11.5px}}
 
+  /* v61：FAQ 改为零输入的实战易错速查 */
+  .practicalHero{padding-bottom:14px}
+  .practicalKicker{display:block;margin-bottom:6px;color:#d8b76f;font-size:11.5px;font-weight:1000;letter-spacing:.12em;text-transform:uppercase}
+  .practicalHero h2{margin:0 0 7px}
+  .practicalHero p{margin:0;color:#c5ccda;line-height:1.48}
+  .practicalJumps{grid-template-columns:repeat(3,minmax(0,1fr));margin-top:12px}
+  .practicalFaq summary{min-height:50px}
+  .practicalFaq p{padding-bottom:13px}
+  .focusedRolePanel{padding:10px}
+  .focusedRolePanel .faqRole{margin:0}
+  .faqRoleEmpty{padding:18px 12px;text-align:center;border:1px dashed rgba(218,169,91,.22);border-radius:14px;background:rgba(8,12,19,.42)}
+  .faqRoleEmpty b{display:block;color:#ffe0a0;font-size:17px}
+  .faqRoleEmpty p{max-width:410px;margin:7px auto 13px;color:#aeb6c8;font-size:13.5px;line-height:1.5}
+  .faqChangeRole{display:block;margin:9px auto 0;padding:8px 13px;border:1px solid rgba(218,169,91,.20);border-radius:999px;background:rgba(12,17,26,.72);color:#d8c9ab;font:inherit;font-size:12.5px;font-weight:900}
+  @media (max-width:380px){.practicalJumps{grid-template-columns:1fr 1fr 1fr}.practicalJumps .ruleJump{font-size:11.5px}}
 </style>
 </head>
-<body data-build="v60-bilingual">
+<body data-build="v61-pitfalls">
 <button id="languageToggle" class="languageToggle" type="button" data-no-i18n onclick="toggleLanguage()" aria-label="Switch to English">EN</button>
 <main class="wrap">
   <section id="home" class="section active">
@@ -1697,7 +1712,7 @@
       <nav class="posterNav" aria-label="首页导航">
         <button type="button" onclick="showTab('rules')" aria-label="规则">规则</button>
         <button type="button" onclick="showTab('roles')" aria-label="查询">查询</button>
-        <button type="button" onclick="showTab('faq')" aria-label="FAQ">FAQ</button>
+        <button type="button" onclick="showTab('faq')" aria-label="易错">易错</button>
         <button type="button" onclick="showFlow('5')" aria-label="流程">流程</button>
         <button type="button" onclick="showTab('notes')" aria-label="记录">记录</button>
         <button type="button" onclick="toast('血染钟楼玩家助手：离线速查、随时查询、轻松开局。')" aria-label="关于">关于</button>
@@ -2181,7 +2196,7 @@ function renderEnglishPosterHome(){
       <nav class="posterNav" aria-label="Home navigation">
         <button type="button" onclick="showTab('rules')" aria-label="Rules">Rules</button>
         <button type="button" onclick="showTab('roles')" aria-label="Lookup">Lookup</button>
-        <button type="button" onclick="showTab('faq')" aria-label="FAQ">FAQ</button>
+        <button type="button" onclick="showTab('faq')" aria-label="Pitfalls">Pitfalls</button>
         <button type="button" onclick="showFlow('5')" aria-label="Flow">Flow</button>
         <button type="button" onclick="showTab('notes')" aria-label="Notes">Notes</button>
         <button type="button" onclick="toast('Blood on the Clocktower Player Assistant: offline reference for an easier first game.')" aria-label="About">About</button>
@@ -2256,7 +2271,7 @@ towerMotionQuery.addEventListener?.('change',syncTowerLights);
 
 function renderTabs(){
   document.body.dataset.tab = state.tab;
-  const tabs=isEnglish()?[['home','Home','home'],['rules','Rules','book'],['process','Flow','flow'],['roles','Roles','search'],['faq','FAQ','help'],['notes','Notes','notes']]:[['home','首页','home'],['rules','规则','book'],['process','流程','flow'],['roles','查询','search'],['faq','FAQ','help'],['notes','记录','notes']];
+  const tabs=isEnglish()?[['home','Home','home'],['rules','Rules','book'],['process','Flow','flow'],['roles','Roles','search'],['faq','Pitfalls','help'],['notes','Notes','notes']]:[['home','首页','home'],['rules','规则','book'],['process','流程','flow'],['roles','查询','search'],['faq','易错','help'],['notes','记录','notes']];
   const bottomHtml=tabs.map(([id,name,icon])=>`<button class="tab ${state.tab===id?'active':''}" onclick="showTab('${id}')" aria-label="${name}"><span class="navIcon" aria-hidden="true">${UI_SVG[icon]}</span><span class="navLabel">${name}</span></button>`).join('');
   $('bottomTabs').innerHTML=bottomHtml;
   document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));
@@ -2320,7 +2335,7 @@ function openRole(name){
     ${note?`<div class="scriptNotice">${isEnglish()?'Script note:':'本剧本提示：'}${escapeHtml(note)}</div>`:''}
     <div class="roleModalActions">
       <button class="btn" type="button" onclick="setMineFromModal('${name}')">${isEnglish()?'Mark as my character':'设为我的身份'}</button>
-      ${faqSource[name]?`<button class="btn secondary" type="button" onclick="openRoleFaq('${name}')">${isEnglish()?'FAQ':'常见问题'}</button>`:`<button class="btn secondary" type="button" onclick="closeModal()">${isEnglish()?'Close':'关闭'}</button>`}
+      ${faqSource[name]?`<button class="btn secondary" type="button" onclick="openRoleFaq('${name}')">${isEnglish()?'Pitfalls':'易错点'}</button>`:`<button class="btn secondary" type="button" onclick="closeModal()">${isEnglish()?'Close':'关闭'}</button>`}
     </div>
   </div>`;
   $('modal').classList.add('show');
@@ -2458,82 +2473,94 @@ function renderRules(){
       </div>
     </div>`;
 }
+function faqTipCards(items){
+  return items.map(([badge,title,body,tone='warn'])=>`<details class="faq practicalFaq" ontoggle="oneFaqOnly(this)"><summary><span class="faqBadge ${tone}">${escapeHtml(badge)}</span><span class="faqTitleText">${escapeHtml(title)}</span></summary><p>${escapeHtml(body)}</p></details>`).join('');
+}
+function currentScriptPitfalls(){
+  const en=isEnglish();
+  if(state.script==='no_greater_joy') return en?[
+    ['INFO','A correct clue does not prove you are healthy','Drunk or poisoned information may still happen to be correct. Never clear yourself from one accurate result.','info'],
+    ['SETUP','The Baron may add only one Outsider in a 6-player game','This script contains only two Outsiders. If one is already required, only one more can be added.'],
+    ['DETECT','A good player can look evil','The Recluse may register as evil, a Minion, or a Demon without changing team.','info'],
+    ['DEMON','A dead Demon may not end the game','If at least five players live, a healthy Scarlet Woman can become the new Demon.','evil'],
+    ['DEATH','No death does not prove there was no attack','Protection, Demon safety, poisoning, or another effect may prevent a chosen player from dying.'],
+    ['VOTE','The Butler follows the master’s actual vote','If the master does not vote, the Butler may not vote; the restriction does not prevent nominations.']
+  ]:[
+    ['信息','信息正确，不代表你一定健康','醉酒或中毒时，说书人仍可能给出正确的信息；不能凭一次正确结果自证健康。','info'],
+    ['配置','6 人男爵可能只增加 1 名外来者','这个剧本只有两名外来者；原本已有一名时，男爵最多再加入一名。'],
+    ['侦测','好人可能被查成邪恶','隐士可以登记为邪恶、爪牙或恶魔，但真实阵营仍然是好人。','info'],
+    ['恶魔','恶魔死亡，不一定立即结束','至少五人存活时，健康的猩红女巫可能成为新的恶魔。','evil'],
+    ['死亡','无人死亡，不代表无人被攻击','保护、免疫、中毒或其他效果，都可能让被选中的玩家没有死亡。'],
+    ['投票','管家跟随的是主人的实际投票','主人没有投票时，管家不能投票；这个限制不影响管家提名。']
+  ];
+  return en?[
+    ['INFO','A correct clue does not prove you are healthy','Drunk or poisoned information may still happen to be correct. Never clear yourself from one accurate result.','info'],
+    ['DEATH','No death does not prove there was no attack','Protection, Demon safety, redirection, or another effect may change the visible result.'],
+    ['DETECT','A detection result may not be the real team','The Recluse and Spy can register incorrectly without changing their actual character or alignment.','info'],
+    ['DEMON','A dead Demon may not end the game','If at least five players live, a healthy Scarlet Woman can become the new Demon.','evil'],
+    ['TIMING','Night death is not always Demon-killed','“Dies at night”, “chosen by the Demon”, and “killed by the Demon” are different conditions.'],
+    ['EXECUTE','Executed and dies are not identical','Some effects can prevent death, but the player may still count as having been executed.']
+  ]:[
+    ['信息','信息正确，不代表你一定健康','醉酒或中毒时，说书人仍可能给出正确的信息；不能凭一次正确结果自证健康。','info'],
+    ['死亡','无人死亡，不代表无人被攻击','保护、免疫、转移或其他效果，都可能改变玩家看到的结果。'],
+    ['侦测','查到的阵营未必是真实阵营','隐士和间谍可能错误登记，但不会因此改变真实角色或阵营。','info'],
+    ['恶魔','恶魔死亡，不一定立即结束','至少五人存活时，健康的猩红女巫可能成为新的恶魔。','evil'],
+    ['时机','夜里死亡不等于被恶魔杀死','“夜间死亡”“被恶魔选中”和“被恶魔杀死”是不同的触发条件。'],
+    ['处决','被处决和死于处决不是一回事','某些效果可能阻止死亡，但该玩家仍可能算作当天被处决。']
+  ];
+}
+function tableRulings(){
+  return isEnglish()?[
+    ['TIE','A tie for highest votes means no execution','A nominee must meet the vote threshold and remain the sole highest total.'],
+    ['VOTE','A ghost vote is spent only when counted','Raising a hand and lowering it before the vote is counted does not spend the vote.','info'],
+    ['STATUS','Drunk or poisoned means the ability does not work','Information may be true or false; a correct answer does not prove the ability worked.'],
+    ['REGISTER','Registration does not change the real character','It only changes what a relevant ability may detect. Team, ability, and win condition stay the same.','info'],
+    ['CHOICE','Some outcomes are the Storyteller’s choice','“May” and registration effects can have several legal outcomes. Ask about the general rule, not hidden information.'],
+    ['COMPLEX','For a multi-role timing dispute, ask the Storyteller','The Storyteller applies the night order and the exact hidden state of this game.','evil']
+  ]:[
+    ['并列','最高票并列时，无人被处决','被提名者必须达到票数门槛，并在当天结束时保持唯一最高票。'],
+    ['鬼票','鬼票只有实际计入时才消耗','说书人数到你之前放下手，票未被计入，就不消耗最后一次投票。','info'],
+    ['状态','醉酒或中毒意味着能力无效','获得的信息可以真也可以假；答案正确并不能证明能力生效。'],
+    ['登记','错误登记不会改变真实身份','它只影响相关能力看到的结果，不改变阵营、能力或胜利条件。','info'],
+    ['选择','有些结果本来就由说书人选择','能力中的“可能”和登记效果往往有多个合法结果；可以问规则，但不应要求透露隐藏信息。'],
+    ['复杂','多角色时机争议请直接问说书人','说书人会结合夜间顺序和本局隐藏状态作出现场裁定。','evil']
+  ];
+}
+function focusedRoleFaq(){
+  const faqSource=isEnglish()?ROLE_FAQ_EN:ROLE_FAQ;
+  const scriptNames=new Set(currentScriptRoleNames());
+  let name=state.faqRole;
+  if(!name || !scriptNames.has(name) || !faqSource[name]) name=(state.myRole&&scriptNames.has(state.myRole)&&faqSource[state.myRole])?state.myRole:null;
+  if(!name) return `<div class="faqRoleEmpty"><b>${isEnglish()?'Open a character’s “Pitfalls” button':'从角色页进入更快'}</b><p>${isEnglish()?'Choose a character on the Characters page to see only its 2–4 easy-to-miss details here.':'在角色页打开某个角色，点击“易错点”，这里只显示该角色最容易误会的 2–4 条。'}</p><button class="btn secondary" type="button" onclick="showTab('roles')">${isEnglish()?'Choose a character':'去角色页选择'}</button></div>`;
+  const r=ROLES[name]||{};
+  return `<details class="faq faqRole ${tokenClass(r.type)}" id="faq-${encodeURIComponent(name)}" open ontoggle="oneFaqOnly(this)"><summary>${inlineRoleToken(name)}<span class="faqTitleText">${escapeHtml(roleDisplayName(name))}</span><span class="faqBadge">${escapeHtml(typeDisplay(r.type))}</span></summary>${faqSource[name].map(x=>`<p>${escapeHtml(x)}</p>`).join('')}</details><button class="faqChangeRole" type="button" onclick="showTab('roles')">${isEnglish()?'View another character':'查看其他角色'}</button>`;
+}
 function renderFaq(){
+  const en=isEnglish();
   $('faq').innerHTML=`
-    <div class="ruleHero card">
-      <h2>FAQ 速查</h2>
-      <p>现场遇到争议时，先看基础规则；想查当前剧本角色的常见误解，可以从角色页跳转，或在下方直接搜索角色名 / 关键词。</p>
-      <div class="ruleJumpRow">
-        <button class="ruleJump" onclick="scrollToRules('basic-rules')">基础规则</button>
-        <button class="ruleJump" onclick="scrollToRules('script-faqs')">剧本 FAQ</button>
-        <button class="ruleJump" onclick="scrollToRules('role-faqs')">角色 FAQ</button>
-        <button class="ruleJump" onclick="clearFaqSearch()">清空搜索</button>
+    <div class="ruleHero card practicalHero">
+      <span class="practicalKicker">${en?'AT-THE-TABLE QUICK CHECK':'当前剧本 · ${escapeHtml(scriptDisplay(state.script))}'}</span>
+      <h2>${en?'Easy-to-miss details':'实战易错点'}</h2>
+      <p>${en?'Not a rulebook: only the details most likely to cause a wrong read or a table dispute.':'不重复基础规则，只提醒最容易让整局判断跑偏的地方。复杂互动请直接询问本局说书人。'}</p>
+      <div class="ruleJumpRow practicalJumps">
+        <button class="ruleJump" onclick="scrollToRules('script-pitfalls')">${en?'Script pitfalls':'本剧本避坑'}</button>
+        <button class="ruleJump" onclick="scrollToRules('table-rulings')">${en?'Table rulings':'现场裁定'}</button>
+        <button class="ruleJump" onclick="scrollToRules('role-pitfalls')">${en?'Character':'角色易错点'}</button>
       </div>
     </div>
-
-    <div class="ruleClusterTitle" id="basic-rules"><span class="miniToken">规</span><span>基础规则速查</span></div>
-    <div class="ruleBasics">
-      <details class="faq" open ontoggle="oneFaqOnly(this)"><summary><span class="faqBadge good">胜利</span><span class="faqTitleText">胜利条件</span></summary><p><b>好人阵营：</b>恶魔死亡，通常好人胜利。</p><p><b>邪恶阵营：</b>通常只剩 2 名存活玩家且恶魔仍存活，邪恶胜利。</p><p class="small">特殊角色会改变结局，例如圣徒被处决、猩红女巫接棒、市长三人局无人处决。</p></details>
-      <details class="faq" ontoggle="oneFaqOnly(this)"><summary><span class="faqBadge info">死亡</span><span class="faqTitleText">死亡以后还能玩吗？</span></summary><p>可以。死亡玩家通常仍可发言，但只剩一次投票机会，常叫“鬼票”。</p></details>
-      <details class="faq" ontoggle="oneFaqOnly(this)"><summary><span class="faqBadge warn">投票</span><span class="faqTitleText">提名、投票和处决怎样进行？</span></summary><p>只有存活玩家可以提名；每名玩家通常每天只能提名一次，也只能被提名一次。投票时，说书人会依次经过每名玩家，不需要同时举手。</p><p>被提名者需要获得至少存活人数一半的票数，并在当天结束时成为唯一最高票，才会被处决。最高票并列时无人被处决；每天最多处决一人，也可能无人被处决。</p></details>
-      <details class="faq" ontoggle="oneFaqOnly(this)"><summary><span class="faqBadge warn">状态</span><span class="faqTitleText">醉酒 / 中毒</span></summary><p>两者对玩家效果很像：能力暂时无效，收到的信息可能是错的。区别是：醉酒通常来自自身或长期状态；中毒通常来自其他角色的临时影响。玩家一般不会被告知自己正醉酒或中毒。</p></details>
-      <details class="faq" ontoggle="oneFaqOnly(this)"><summary><span class="faqBadge info">侦测</span><span class="faqTitleText">“登记为”是什么意思？</span></summary><p>有些角色会让侦测结果不等于真实身份。比如隐士是好人，但可能被某些能力看成邪恶、爪牙或恶魔。</p></details>
-      <details class="faq" ontoggle="oneFaqOnly(this)"><summary><span class="faqBadge evil">发言</span><span class="faqTitleText">我可以说谎吗？</span></summary><p>可以。这个游戏允许任何阵营说谎。好人也可能为了保护关键身份而隐藏或伪装。</p></details>
-      <details class="faq" ontoggle="oneFaqOnly(this)"><summary><span class="faqBadge warn">对比</span><span class="faqTitleText">和狼人杀最容易搞错的地方</span></summary><p>死亡不等于出局；死人还能说话。信息也不一定绝对真实，因为醉酒、中毒、登记错误和说书人裁定都会影响结果。</p></details>
-    </div>
-
-    <div class="ruleClusterTitle" id="script-faqs"><span class="groupIcon token neutral" aria-hidden="true">${SVG.default}</span><span>剧本 / 选剧本常见问题</span></div>
-    <div class="ruleBasics scriptBasics">
-      <details class="faq" ontoggle="oneFaqOnly(this)"><summary><span class="faqBadge info">剧本</span><span class="faqTitleText">第一次玩应该选哪个剧本？</span></summary><p>建议先玩《暗流涌动》。它是标准入门剧本，角色更多但结构完整，最适合让新人理解阵营、夜晚信息、白天讨论和处决。</p></details>
-      <details class="faq" ontoggle="oneFaqOnly(this)"><summary><span class="faqBadge info">NGJ</span><span class="faqTitleText">No Greater Joy 适合什么时候玩？</span></summary><p>适合 5–6 人，并且大家已经理解血染钟楼基本流程之后。它节奏更快，角色更少，但信息密度不低。</p></details>
-      <details class="faq" ontoggle="oneFaqOnly(this)"><summary><span class="faqBadge warn">区别</span><span class="faqTitleText">No Greater Joy 和暗流涌动最大的区别是什么？</span></summary><p>No Greater Joy 是小局剧本，只有 11 个角色。好人信息来得更集中，邪恶方常靠酒鬼、男爵和猩红女巫制造混乱。6 人局男爵的外来者增加也有剧本上限。</p></details>
-      <div class="scriptFaqHint">这些说明只面向玩家理解，不包含发身份、夜晚唤醒或魔典配置等说书人专用功能。</div>
-    </div>
-
-    <div class="ruleClusterTitle" id="role-faqs"><span class="groupIcon token neutral" aria-hidden="true">${SVG.default}</span><span>角色功能常见问题</span></div>
-    <div class="roleFaqPanel">
-      <div class="faqSearchBox"><input id="faqSearch" type="search" inputmode="search" placeholder="搜索角色或关键词，例如：侍女 / 中毒 / 男爵" oninput="filterRoleFaqs(this.value)" /></div>
-      <div class="faqSearchHint">提示：这里默认显示当前剧本的角色 FAQ；从角色页点“常见问题”会自动打开对应角色。</div>
-      <div id="roleFaqList">${renderRoleFaqs()}</div>
-      <div id="faqEmpty" class="faqEmpty">没有匹配的角色 FAQ</div>
-    </div>`;
-}
-function renderRoleFaqs(){
-  const scriptNames=new Set(currentScriptRoleNames());
-  const faqSource=isEnglish()?ROLE_FAQ_EN:ROLE_FAQ;
-  return Object.keys(faqSource).filter(name=>scriptNames.has(name)).map(name=>{
-    const r=ROLES[name]||{};
-    const typeClass=tokenClass(r.type);
-    const aliases=ROLE_ALIASES[name]||[];
-    const text=[name,r.en,...aliases,r.type,typeDisplay(r.type),phaseText(r),...(faqSource[name]||[])].join(' ');
-    return `<details class="faq faqRole ${typeClass}" id="faq-${encodeURIComponent(name)}" data-faq="${escapeHtml(text)}" ontoggle="oneFaqOnly(this)"><summary>${inlineRoleToken(name)}<span class="faqTitleText">${escapeHtml(roleDisplayName(name))}</span><span class="faqBadge">${escapeHtml(typeDisplay(r.type)||'Character')}</span></summary>${faqSource[name].map(x=>`<p>${escapeHtml(x)}</p>`).join('')}</details>`;
-  }).join('');
+    <div class="ruleClusterTitle" id="script-pitfalls"><span class="miniToken">${en?'!' :'避'}</span><span>${en?`${scriptDisplay(state.script)} pitfalls`:`${scriptDisplay(state.script)} · 最容易想错`}</span></div>
+    <div class="ruleBasics">${faqTipCards(currentScriptPitfalls())}</div>
+    <div class="ruleClusterTitle" id="table-rulings"><span class="miniToken">${en?'R':'裁'}</span><span>${en?'Six table rulings worth remembering':'现场只需记住的 6 条裁定'}</span></div>
+    <div class="ruleBasics">${faqTipCards(tableRulings())}</div>
+    <div class="ruleClusterTitle" id="role-pitfalls"><span class="groupIcon token neutral" aria-hidden="true">${SVG.default}</span><span>${en?'Current character’s pitfalls':'当前角色 · 易错点'}</span></div>
+    <div class="roleFaqPanel focusedRolePanel">${focusedRoleFaq()}</div>`;
 }
 function scrollToRules(id){
   const el=document.getElementById(id);
   if(el) el.scrollIntoView({behavior:'smooth',block:'start'});
 }
-function filterRoleFaqs(raw){
-  const q=String(raw||'').trim().toLowerCase();
-  const items=[...document.querySelectorAll('.faqRole')];
-  let shown=0;
-  items.forEach(el=>{
-    const txt=(el.getAttribute('data-faq')||el.textContent||'').toLowerCase();
-    const hit=!q || txt.includes(q);
-    el.classList.toggle('hiddenBySearch',!hit);
-    if(!hit && el.open) el.open=false;
-    if(hit) shown++;
-  });
-  const empty=document.getElementById('faqEmpty');
-  if(empty) empty.classList.toggle('show',!!q && shown===0);
-}
-function clearFaqSearch(){
-  const input=document.getElementById('faqSearch');
-  if(input){input.value=''; filterRoleFaqs(''); input.focus();}
-  scrollToRules('role-faqs');
-}
 function jumpFAQ(name){
-  state.tab='faq'; save(); renderAll();
+  state.tab='faq'; state.faqRole=name; save(); renderAll();
   setTimeout(()=>{
     const el=document.getElementById('faq-'+encodeURIComponent(name));
     if(!el) return;
