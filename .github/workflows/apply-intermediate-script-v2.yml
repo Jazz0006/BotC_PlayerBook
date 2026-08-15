@@ -1,0 +1,99 @@
+name: Apply intermediate 7-9 player script v2
+
+on:
+  push:
+    branches: [agent/add-intermediate-script]
+    paths: [.github/workflows/apply-intermediate-script-v2.yml]
+
+permissions:
+  contents: write
+
+jobs:
+  patch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: agent/add-intermediate-script
+          fetch-depth: 0
+
+      - name: Patch index.html
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          import re
+          p=Path('index.html'); s=p.read_text(encoding='utf-8'); original=s
+          def once(old,new,label):
+              global s
+              n=s.count(old)
+              if n!=1: raise SystemExit(f'{label}: expected 1 match, got {n}')
+              s=s.replace(old,new,1)
+
+          once("  '侍女': {en:'Chambermaid', team:'good', type:'镇民', first:true, other:true, ability:'每晚选择两名存活玩家（不能选择自己），得知其中有几人当晚因自己的能力醒来。', player:'你会得到 0、1 或 2。你不知道具体是谁醒来；恶魔和爪牙开局互认、被别人叫醒等通常不算。'},",
+               "  '侍女': {en:'Chambermaid', team:'good', type:'镇民', first:true, other:true, ability:'选两名其他存活玩家，得知其中几人今晚因自身能力醒来。', player:'每晚选择两名其他存活玩家，你会得到 0、1 或 2。只计算他们今晚因自身角色能力而醒来的情况。'},\n  '赌徒': {en:'Gambler', team:'good', type:'镇民', first:false, other:true, ability:'选一人并猜其角色；猜错则死亡。', player:'每晚选择一名玩家并猜他的具体角色。猜对通常无事发生；猜错时你会死亡，因此你的生死本身也能形成信息。'},\n  '弄臣': {en:'Fool', team:'good', type:'镇民', first:false, other:false, ability:'第一次将要死亡时不会死亡。', player:'第一次有事情会让你死亡时，你不会死亡；之后再次受到致死效果时就可能正常死亡。'},\n  '神谕者': {en:'Oracle', team:'good', type:'镇民', first:false, other:true, ability:'得知死亡玩家中有几名邪恶玩家。', player:'每晚得知当前所有死亡玩家中有几名邪恶玩家。随着死亡人数增加，这个数字可以帮助你判断已死玩家的阵营。'},",'townsfolk')
+          once("  '圣徒': {en:'Saint', team:'good', type:'外来者', first:false, other:false, ability:'如果你被处决，邪恶阵营获胜。', player:'如果你白天被处决，邪恶阵营立刻获胜。夜里被杀不触发。'},",
+               "  '圣徒': {en:'Saint', team:'good', type:'外来者', first:false, other:false, ability:'如果你被处决，邪恶阵营获胜。', player:'如果你白天被处决，邪恶阵营立刻获胜。夜里被杀不触发。'},\n  '月之子': {en:'Moonchild', team:'good', type:'外来者', first:false, other:false, ability:'死亡后，公开选择一名存活玩家；若其是好人，该玩家今晚死亡。', player:'当你得知自己死亡后，要公开选择一名仍存活的玩家。如果你选中好人，那名玩家会在当晚死亡；选中邪恶玩家则不会因此死亡。'},",'moonchild')
+          once("  '男爵': {en:'Baron', team:'evil', type:'爪牙', first:false, other:false, ability:'本局多 2 个外来者，少 2 个镇民。', player:'你的存在会改变开局配置：多 2 个外来者，少 2 个镇民。你白天主要靠发言帮助邪恶阵营。'},\n  '小恶魔': {en:'Imp', team:'evil', type:'恶魔', first:false, other:true, ability:'每晚选择一名玩家死亡。若自杀，另一名爪牙变成小恶魔。', player:'每晚杀一人。你也可以选择杀自己，通常会让一名爪牙变成新的小恶魔。第一夜通常不杀人。'}",
+               "  '男爵': {en:'Baron', team:'evil', type:'爪牙', first:false, other:false, ability:'本局多 2 个外来者，少 2 个镇民。', player:'你的存在会改变开局配置：多 2 个外来者，少 2 个镇民。你白天主要靠发言帮助邪恶阵营。'},\n  '恶魔辩护人': {en:\"Devil's Advocate\", team:'evil', type:'爪牙', first:true, other:true, ability:'选一名存活玩家，不能连续选同一人；其明天被处决时不死。', player:'每晚保护一名存活玩家免于第二天的处决死亡，但不能连续两晚选择同一个人。你可以保护邪恶队友，也可以故意保护好人制造混乱。'},\n  '小恶魔': {en:'Imp', team:'evil', type:'恶魔', first:false, other:true, ability:'每晚选择一名玩家死亡。若自杀，另一名爪牙变成小恶魔。', player:'每晚杀一人。你也可以选择杀自己，通常会让一名爪牙变成新的小恶魔。第一夜通常不杀人。'},\n  '普卡': {en:'Pukka', team:'evil', type:'恶魔', first:true, other:true, ability:'选一人使其中毒；此前被你中毒的人恢复健康并死亡。', player:'每晚选择一名玩家让他中毒。你上一次中毒的目标会先恢复健康，然后死亡，因此你的击杀通常比选择目标晚一个夜晚发生。'}",'evil roles')
+
+          once("    notice:'本剧本只有 2 名外来者；6 人局若男爵在场且原本已有 1 名外来者，只会再增加 1 名外来者。'\n  }\n};\n\nconst SCRIPTS_EN = {",
+               "    notice:'本剧本只有 2 名外来者；6 人局若男爵在场且原本已有 1 名外来者，只会再增加 1 名外来者。'\n  },\n  advanced_7_9: {\n    id:'advanced_7_9',\n    name:'7–9人进阶',\n    en:'Intermediate 7–9',\n    format:'TB 熟练后进阶剧本',\n    players:'7–9 人',\n    subtitle:'为已经熟悉暗流涌动的玩家设计：保留基础推理骨架，同时加入死亡干扰、处决保护、延迟击杀与死亡阵营统计。',\n    roleNames:['洗衣妇','调查员','厨师','共情者','占卜师','送葬者','僧侣','守鸦人','杀手','侍女','赌徒','弄臣','神谕者','酒鬼','隐士','圣徒','月之子','投毒者','猩红女巫','男爵','恶魔辩护人','小恶魔','普卡'],\n    notice:'推荐 7–9 人、已经玩熟《暗流涌动》的玩家。NEW 标记表示相对《暗流涌动》新增的角色。'\n  }\n};\n\nconst SCRIPTS_EN = {",'script')
+          once("  no_greater_joy:{name:'No Greater Joy',format:'Teensyville script',players:'5–6 players',subtitle:'A faster follow-up after Trouble Brewing, with fewer roles and a brisker pace.',notice:'This script has only 2 Outsiders. In a 6-player game that already has 1 Outsider, a Baron adds only 1 more.'}\n};",
+               "  no_greater_joy:{name:'No Greater Joy',format:'Teensyville script',players:'5–6 players',subtitle:'A faster follow-up after Trouble Brewing, with fewer roles and a brisker pace.',notice:'This script has only 2 Outsiders. In a 6-player game that already has 1 Outsider, a Baron adds only 1 more.'},\n  advanced_7_9:{name:'Intermediate 7–9',format:'Post-TB intermediate script',players:'7–9 players',subtitle:'Keeps the Trouble Brewing deduction core while adding death interaction, execution protection, delayed kills, and dead-player alignment counts.',notice:'Recommended after your group is comfortable with Trouble Brewing. NEW marks characters not found in Trouble Brewing.'}\n};",'script en')
+          once("  '呆瓜':['Klutz','笨蛋'],","  '呆瓜':['Klutz','笨蛋'],\n  '赌徒':['Gambler'],\n  '弄臣':['Fool'],\n  '神谕者':['Oracle'],\n  '月之子':['Moonchild'],\n  '恶魔辩护人':[\"Devil's Advocate\",'DA'],\n  '普卡':['Pukka'],",'aliases')
+          once("  '小恶魔': ['第一夜杀人吗？通常第一夜不杀人。', '可以杀自己吗？可以，通常会让一名爪牙变成新的小恶魔。']\n};\nconst ROLE_EN_DETAILS = {",
+               "  '小恶魔': ['第一夜杀人吗？通常第一夜不杀人。', '可以杀自己吗？可以，通常会让一名爪牙变成新的小恶魔。'],\n  '赌徒': ['必须猜具体角色吗？是，要猜具体角色而不是只猜阵营。', '猜错就一定会死吗？正常情况下会，但醉酒、中毒、死亡保护等效果可能让结果不同。'],\n  '弄臣': ['能挡处决吗？可以，只要那是你第一次将要死亡。', '第一次没死之后还继续免死吗？不会，能力已经用掉。'],\n  '神谕者': ['数字统计哪些人？统计所有已经死亡的玩家中有几名邪恶玩家。', '数字会随着新玩家死亡而变化吗？会，所以连续几晚的信息很有价值。'],\n  '月之子': ['什么时候选人？当你得知自己死亡后公开选择一名存活玩家。', '选到邪恶玩家会怎样？不会因为月之子能力而死亡；选到好人才会在当晚死亡。'],\n  '恶魔辩护人': ['可以连续保护同一人吗？不能，不能连续两晚选择同一名玩家。', '被保护的人还能被处决吗？可以被处决，但不会因那次处决而死亡。'],\n  '普卡': ['今晚选的人今晚就死吗？通常不会。新目标先中毒，之前被普卡中毒的人恢复健康并死亡。', '为什么普卡第一夜也要选人？因为第一夜先建立中毒目标，之后夜晚才开始出现延迟死亡。']\n};\nconst ROLE_EN_DETAILS = {",'faq zh')
+
+          start=s.find('const ROLE_EN_DETAILS = {'); end=s.find('\n};\n\nconst ROLE_FAQ_EN = {',start)
+          if start<0 or end<0: raise SystemExit('ROLE_EN_DETAILS boundary')
+          s=s[:end]+",\n  '赌徒':{ability:'Each night*, choose a player and guess their character. If you are wrong, you die.',player:'Guess one player’s exact character. A wrong guess can kill you, so whether you survive can itself become information.'},\n  '弄臣':{ability:'The first time you would die, you do not.',player:'The first effect that would kill you fails to do so. Later lethal effects can kill you normally.'},\n  '神谕者':{ability:'Each night*, learn how many dead players are evil.',player:'Each night you learn the total number of evil players among everyone who is currently dead.'},\n  '月之子':{ability:'When you learn that you died, publicly choose a living player. If they are good, they die tonight.',player:'After your death, publicly choose a living player. Choosing good causes that player to die that night; choosing evil does not.'},\n  '恶魔辩护人':{ability:\"Each night, choose a living player, different from last night. If executed tomorrow, they do not die.\",player:'Protect one living player from dying by execution the next day. You cannot choose the same player on consecutive nights.'},\n  '普卡':{ability:'Each night, choose a player: they are poisoned. The previously poisoned player becomes healthy, then dies.',player:'Your new target is poisoned first; the previous target recovers and then dies, creating a delayed kill pattern.'}"+s[end:]
+          start=s.find('const ROLE_FAQ_EN = {'); end=s.find('\n};\nconst EN_UI_TEXT = {',start)
+          if start<0 or end<0: raise SystemExit('ROLE_FAQ_EN boundary')
+          s=s[:end]+",\n  '赌徒':['You must guess the exact character, not merely the team.','Normally a wrong guess kills you, though drunkenness, poisoning, or protection can change the outcome.'],\n  '弄臣':['The protection can stop an execution if that is the first time you would die.','After the first prevented death, the protection is spent.'],\n  '神谕者':['The number counts evil players among all dead players.','The total can change as more players die, so comparing nights is useful.'],\n  '月之子':['Choose publicly when you learn that you died.','Choosing an evil player causes no Moonchild death; choosing good kills that player that night.'],\n  '恶魔辩护人':['You cannot choose the same player on consecutive nights.','The protected player may still be executed, but does not die from that execution.'],\n  '普卡':['The newly chosen target normally does not die that same night.','The Pukka chooses on the first night to establish the first poisoned target.']"+s[end:]
+
+          once("  const r=ROLES[name]; const mine=state.myRole===name;\n  const cls=`roleChip ${teamClass(name)} ${tokenClass(r.type)}${mine?' mine':''}`;\n  return `<button class=\"${cls}\" type=\"button\" data-role=\"${escapeHtml(name)}\" aria-label=\"${escapeHtml(roleDisplayName(name))}\" onclick=\"roleClick('${name}')\" onpointerdown=\"holdStart(event,'${name}')\" onpointerup=\"holdEnd()\" onpointercancel=\"holdEnd()\" onpointerleave=\"holdEnd()\">\n    <span class=\"roleChipName\">${escapeHtml(roleDisplayName(name))}</span>\n    <span class=\"roleChipEn\" data-no-i18n>${escapeHtml(isEnglish()?name:r.en)}</span>",
+               "  const r=ROLES[name]; const mine=state.myRole===name;\n  const cls=`roleChip ${teamClass(name)} ${tokenClass(r.type)}${mine?' mine':''}`;\n  const isNew=state.script==='advanced_7_9' && !SCRIPTS.trouble_brewing.roleNames.includes(name);\n  return `<button class=\"${cls}\" type=\"button\" data-role=\"${escapeHtml(name)}\" aria-label=\"${escapeHtml(roleDisplayName(name))}\" onclick=\"roleClick('${name}')\" onpointerdown=\"holdStart(event,'${name}')\" onpointerup=\"holdEnd()\" onpointercancel=\"holdEnd()\" onpointerleave=\"holdEnd()\">\n    <span class=\"roleChipName\">${escapeHtml(roleDisplayName(name))}${isNew?'<span class=\"roleNewBadge\">NEW</span>':''}</span>\n    <span class=\"roleChipEn\" data-no-i18n>${escapeHtml(isEnglish()?name:r.en)}</span>",'new badge')
+          once("  .roleChipEn{display:none}\n\n  .roleModal{","  .roleChipEn{display:none}\n  .roleNewBadge{display:inline-flex;vertical-align:2px;margin-left:4px;padding:1px 4px;border:1px solid rgba(240,192,96,.42);border-radius:999px;color:#f4ca72;background:rgba(240,192,96,.10);font-size:8px;line-height:1.15;font-weight:1000;letter-spacing:.15px}\n\n  .roleModal{",'badge css')
+          once("    const short=isEnglish()?(id==='no_greater_joy'?'Fast 5–6 player game after Trouble Brewing.':'Standard beginner script for a first full game.'):(id==='no_greater_joy'?'5–6 人快速小局；适合玩过暗流涌动后继续。':'标准入门剧本；适合第一次完整体验。');",
+               "    const short=isEnglish()?(id==='no_greater_joy'?'Fast 5–6 player game after Trouble Brewing.':id==='advanced_7_9'?'Recommended 7–9 player step after Trouble Brewing.':'Standard beginner script for a first full game.'):(id==='no_greater_joy'?'5–6 人快速小局；适合玩过暗流涌动后继续。':id==='advanced_7_9'?'7–9 人进阶；熟悉暗流涌动后推荐。':'标准入门剧本；适合第一次完整体验。');",'home cards')
+          old='建议第一次仍从《暗流涌动》和 5 人流程示例开始；熟悉后再切到 No Greater Joy 查询 5–6 人小局角色。'; new='建议第一次仍从《暗流涌动》和 5 人流程示例开始；5–6 人可选 No Greater Joy，常见 7–9 人聚会则推荐进入“7–9人进阶”。'
+          if old not in s: raise SystemExit('home hint'); s=s.replace(old,new)
+          old='内置 5 人和 8 人示例，并收录《暗流涌动》和 No Greater Joy 两个剧本。'; new='内置 5 人和 8 人示例，并收录《暗流涌动》、No Greater Joy 和“7–9人进阶”三个剧本。'
+          if old not in s: raise SystemExit('home help'); s=s.replace(old,new)
+          s=s.replace("'建议第一次仍从《暗流涌动》和 5 人流程示例开始；5–6 人可选 No Greater Joy，常见 7–9 人聚会则推荐进入“7–9人进阶”。':'Start with Trouble Brewing and the 5-player walkthrough, then try No Greater Joy for a faster 5–6 player game.'","'建议第一次仍从《暗流涌动》和 5 人流程示例开始；5–6 人可选 No Greater Joy，常见 7–9 人聚会则推荐进入“7–9人进阶”。':'Start with Trouble Brewing and the 5-player walkthrough. Use No Greater Joy for 5–6 players, or Intermediate 7–9 for a typical 7–9 player group.'")
+          s=s.replace("'内置 5 人和 8 人示例，并收录《暗流涌动》、No Greater Joy 和“7–9人进阶”三个剧本。':'Includes 5-player and 8-player walkthroughs plus Trouble Brewing and No Greater Joy.'","'内置 5 人和 8 人示例，并收录《暗流涌动》、No Greater Joy 和“7–9人进阶”三个剧本。':'Includes 5-player and 8-player walkthroughs plus Trouble Brewing, No Greater Joy, and Intermediate 7–9.'")
+          once('</style>',"  @media (max-width:430px){\n    .scriptChooserLine{gap:5px;flex-wrap:wrap}\n    .scriptChooserLabel{flex-basis:100%;margin-bottom:1px}\n    .scriptChooserBtn{flex:1 1 30%;min-width:0;padding-left:5px;padding-right:5px;font-size:11.6px}\n  }\n</style>",'chooser css')
+          p.write_text(s,encoding='utf-8'); print('patched',len(original),'->',len(s))
+          PY
+
+      - name: Validate data and JavaScript
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          import re
+          s=Path('index.html').read_text(encoding='utf-8')
+          for x in ['advanced_7_9','赌徒','弄臣','神谕者','月之子','恶魔辩护人','普卡','roleNewBadge']:
+              if x not in s: raise SystemExit('missing '+x)
+          m=re.search(r"advanced_7_9:\s*\{.*?roleNames:\[(.*?)\]",s,re.S); names=re.findall(r"'([^']+)'",m.group(1))
+          expected={'镇民':13,'外来者':4,'爪牙':4,'恶魔':2}; counts={}; rb=re.search(r'const ROLES\s*=\s*\{(.*?)\n\};\n\nconst GROUPS',s,re.S).group(1)
+          for n in names:
+              mm=re.search(r"'"+re.escape(n)+r"':\s*\{.*?type:'([^']+)'",rb,re.S)
+              if not mm: raise SystemExit('missing definition '+n)
+              counts[mm.group(1)]=counts.get(mm.group(1),0)+1
+          if counts!=expected: raise SystemExit(f'counts {counts}')
+          print('advanced roles',len(names),counts)
+          blocks=re.findall(r'<script(?:\s[^>]*)?>(.*?)</script>',s,re.S|re.I); Path('/tmp/app.js').write_text('\n'.join(blocks),encoding='utf-8')
+          PY
+          node --check /tmp/app.js
+
+      - name: Commit patch and remove temporary workflows
+        shell: bash
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git rm .github/workflows/apply-intermediate-script.yml .github/workflows/apply-intermediate-script-v2.yml
+          git add index.html
+          git commit -m "feat: add 7-9 player intermediate script"
+          git push origin HEAD:agent/add-intermediate-script
