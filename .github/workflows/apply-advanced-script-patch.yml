@@ -1,0 +1,68 @@
+name: Apply advanced script patch
+on:
+  pull_request:
+    branches: [ main ]
+permissions:
+  contents: write
+jobs:
+  patch:
+    if: github.head_ref == 'agent/add-intermediate-script'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.head_ref }}
+      - name: Patch index.html
+        shell: python
+        run: |
+          from pathlib import Path
+          import re
+          p=Path('index.html')
+          s=p.read_text(encoding='utf-8')
+
+          # Add missing role definitions before Imp.
+          marker="  '小恶魔': {en:'Imp'"
+          if "'赌徒': {en:'Gambler'" not in s:
+              insert="""  '赌徒': {en:'Gambler', team:'good', type:'镇民', first:false, other:true, ability:'每晚*选择一名玩家并猜其角色；猜错则死亡。', player:'从第二夜开始，每晚选一人并猜他的角色。猜错时你会死亡。'},\n  '弄臣': {en:'Fool', team:'good', type:'镇民', first:false, other:false, ability:'第一次将要死亡时不会死亡。', player:'你第一次本应死亡时不会死亡。'},\n  '神谕者': {en:'Oracle', team:'good', type:'镇民', first:false, other:true, ability:'每晚*得知死亡玩家中有几名邪恶玩家。', player:'从第二夜开始，每晚得知当前所有死亡玩家中有几名邪恶玩家。'},\n  '月之子': {en:'Moonchild', team:'good', type:'外来者', first:false, other:false, ability:'当你得知自己死亡时，公开选择一名存活玩家；若其是好人，该玩家今晚死亡。', player:'你死亡后公开选择一名存活玩家；若他是好人，他会在今晚死亡。'},\n  '恶魔辩护人': {en:\"Devil's Advocate\", team:'evil', type:'爪牙', first:true, other:true, ability:'每晚选择一名存活玩家，不能连续选择同一人；其明天被处决时不会死亡。', player:'每晚保护一名存活玩家免于第二天的处决死亡，但不能连续两晚选择同一人。'},\n  '普卡': {en:'Pukka', team:'evil', type:'恶魔', first:true, other:true, ability:'每晚选择一名玩家使其中毒；此前被你中毒的人恢复健康并死亡。', player:'首夜就开始下毒。之后每晚让上一名中毒者恢复健康并死亡，同时选择新的中毒目标。'},\n"""
+              s=s.replace(marker,insert+marker,1)
+
+          # Add the 7–9 player script.
+          if "advanced_7_9:" not in s:
+              anchor="\n};\n\nconst SCRIPTS_EN = {"
+              block=""",\n  advanced_7_9: {\n    id:'advanced_7_9',\n    name:'7–9人进阶',\n    en:'Intermediate 7–9',\n    format:'TB 进阶自定义剧本',\n    players:'7–9 人',\n    subtitle:'熟悉暗流涌动后的第一套进阶剧本，加入新的信息、死亡与保护机制。',\n    roleNames:['侍女','赌徒','弄臣','神谕者','洗衣妇','厨师','共情者','占卜师','送葬者','僧侣','守鸦人','杀手','市长','月之子','酒鬼','隐士','圣徒','恶魔辩护人','投毒者','间谍','猩红女巫','普卡','小恶魔']\n  }"""
+              s=s.replace(anchor,block+anchor,1)
+
+          # Ensure quick-reference copy has correct timing and new roles.
+          q="const ROLE_QUICK_COPY = {"
+          if "'侍女':{phase:'每晚'" not in s:
+              s=s.replace(q,q+"\n  '侍女':{phase:'每晚',ability:'选两名其他存活玩家，得知其中几人今晚因自身能力醒来',enPhase:'Each night',enAbility:'Choose 2 other living players and learn how many woke tonight due to their own ability'},\n  '赌徒':{phase:'每晚*',ability:'选一人并猜其角色；猜错则死亡',enPhase:'Each night*',enAbility:'Choose a player and guess their character; if wrong, you die'},\n  '弄臣':{phase:'被动',ability:'第一次将要死亡时不会死亡',enPhase:'Passive',enAbility:'The first time you would die, you do not'},\n  '神谕者':{phase:'每晚*',ability:'得知死亡玩家中有几名邪恶玩家',enPhase:'Each night*',enAbility:'Learn how many dead players are evil'},\n  '月之子':{phase:'死亡后',ability:'公开选一名存活玩家；若其是好人，该玩家今晚死亡',enPhase:'After death',enAbility:'Publicly choose a living player; if good, they die tonight'},\n  '恶魔辩护人':{phase:'每晚',ability:'选一名存活玩家，不能连续选同一人；其明天被处决时不死',enPhase:'Each night',enAbility:'Choose a living player, not the same as last night; if executed tomorrow, they do not die'},\n  '普卡':{phase:'每晚',ability:'选一人使其中毒；此前被你中毒的人恢复健康并死亡',enPhase:'Each night',enAbility:'Choose a player to poison; the previously poisoned player becomes healthy and dies'},",1)
+          s=s.replace("'小恶魔':{phase:'每晚',ability:","'小恶魔':{phase:'每晚*',ability:",1)
+          s=s.replace("enPhase:'Each night',enAbility:'Choose a player to die; if you choose yourself, a Minion becomes the Imp'","enPhase:'Each night*',enAbility:'Choose a player to die; if you choose yourself, a Minion becomes the Imp'",1)
+
+          # Highlight roles that are new relative to Trouble Brewing, only in the advanced script.
+          if "ADVANCED_NEW_ROLES" not in s:
+              s=s.replace("function roleQuickRow(name){", "const ADVANCED_NEW_ROLES=new Set(['侍女','赌徒','弄臣','神谕者','月之子','恶魔辩护人','普卡']);\nfunction roleQuickRow(name){",1)
+              s=s.replace("const mine=state.myRole===name;", "const mine=state.myRole===name;\n  const isAdvancedNew=state.script==='advanced_7_9'&&ADVANCED_NEW_ROLES.has(name);",1)
+              s=s.replace("roleQuickRow ${teamClass(name)}${mine?' mine':''}", "roleQuickRow ${teamClass(name)}${mine?' mine':''}${isAdvancedNew?' advancedNew':''}",1)
+
+          if ".roleQuickRow.advancedNew" not in s:
+              css="""\n  .roleQuickRow.advancedNew{background:linear-gradient(90deg,rgba(218,169,91,.15),rgba(218,169,91,.07))!important;box-shadow:inset 3px 0 rgba(218,169,91,.65)}\n  .roleQuickRow.advancedNew td{border-bottom-color:rgba(218,169,91,.26)}\n"""
+              s=s.replace("  .roleQuickRow:nth-child(even){background:rgba(255,255,255,.018)}", "  .roleQuickRow:nth-child(even){background:rgba(255,255,255,.018)}"+css,1)
+
+          p.write_text(s,encoding='utf-8')
+
+          # Sanity checks
+          assert "advanced_7_9:" in s
+          assert "'侍女':{phase:'每晚'" in s
+          assert "'赌徒':{phase:'每晚*'" in s
+          assert "'神谕者':{phase:'每晚*'" in s
+          assert "'小恶魔':{phase:'每晚*'" in s
+          assert "ADVANCED_NEW_ROLES" in s
+      - name: Commit patch and remove temporary workflow
+        run: |
+          rm .github/workflows/apply-advanced-script-patch.yml
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add index.html .github/workflows/apply-advanced-script-patch.yml
+          git commit -m "Add 7-9 player advanced script" || exit 0
+          git push origin HEAD:${{ github.head_ref }}
