@@ -1,0 +1,695 @@
+{
+  "washerwoman": {
+    "type": "townsfolk",
+    "team": "good",
+    "icon": "<svg viewBox=\"0 0 24 24\" aria-hidden=\"true\"><path class=\"softFill\" d=\"M6.7 10.2h10.6l-1.1 7.1H7.8Z\"/><path d=\"M6.4 9.6h11.2l-1.2 8.2H7.6L6.4 9.6Z\"/><path d=\"M8.5 9.6c.2-2 1.5-3.3 3.5-3.3s3.3 1.3 3.5 3.3\"/><path d=\"M8.8 13.1c1.1.7 2.1.7 3.2 0 1.1-.7 2.1-.7 3.2 0\"/><path d=\"M9.2 15.7h5.6\"/></svg>",
+    "zh": {
+      "name": "洗衣妇",
+      "ability": "第一夜得知：两个玩家中有一人是某个镇民。",
+      "player": "你会知道一个镇民身份，并看到两个玩家；这两人里至少有一个真的是这个镇民。",
+      "phase": "首夜",
+      "quickPhase": "首夜",
+      "quickAbility": "得知两名玩家中有一人是某个镇民"
+    },
+    "en": {
+      "name": "Washerwoman",
+      "ability": "On your first night, you learn that 1 of 2 players is a particular Townsfolk.",
+      "player": "You learn a Townsfolk character and see two players. At least one of them really is that character.",
+      "phase": "First night",
+      "quickPhase": "First night",
+      "quickAbility": "Learn that 1 of 2 players is a particular Townsfolk"
+    }
+  },
+  "librarian": {
+    "type": "townsfolk",
+    "team": "good",
+    "icon": "<svg viewBox=\"0 0 24 24\" aria-hidden=\"true\"><path class=\"softFill\" d=\"M5.3 6.4h5.1c.8 0 1.3.4 1.6 1v10.4c-.4-.6-.9-.9-1.7-.9h-5Z\"/><path d=\"M12 7.4c-.4-.7-1-.9-1.8-.9H5.4v10.6h4.9c.8 0 1.4.2 1.7.8V7.4Z\"/><path d=\"M12 7.4c.4-.7 1-.9 1.8-.9h4.8v10.6h-4.9c-.8 0-1.4.2-1.7.8V7.4Z\"/><path d=\"M7.4 9.4h2.6M7.4 12h2.6M14 9.4h2.6M14 12h2.6\"/></svg>",
+    "zh": {
+      "name": "图书管理员",
+      "ability": "第一夜得知：两个玩家中有一人是某个外来者；若没有外来者，可得知 0。",
+      "player": "你会知道一个外来者身份，并看到两个玩家；这两人里至少有一个是这个外来者。也可能被告知本局没有外来者。",
+      "phase": "首夜",
+      "quickPhase": "首夜",
+      "quickAbility": "得知两名玩家中有一人是某个外来者，或得知没有外来者"
+    },
+    "en": {
+      "name": "Librarian",
+      "ability": "On your first night, you learn that 1 of 2 players is a particular Outsider, or that there are no Outsiders in play.",
+      "player": "You learn an Outsider character and see two players. At least one is that character, unless you are shown a zero.",
+      "phase": "First night",
+      "quickPhase": "First night",
+      "quickAbility": "Learn that 1 of 2 players is a particular Outsider, or that none are in play"
+    }
+  },
+  "investigator": {
+    "type": "townsfolk",
+    "team": "good",
+    "icon": "<svg viewBox=\"0 0 24 24\" aria-hidden=\"true\"><circle class=\"softFill\" cx=\"10.4\" cy=\"10.4\" r=\"4.8\"/><circle cx=\"10.4\" cy=\"10.4\" r=\"4.8\"/><path d=\"m14 14 4.7 4.7\"/><path d=\"M8.3 10.1c.5-1.2 1.3-1.8 2.6-1.8\"/><path d=\"M17.3 17.1 18.9 15.5\"/></svg>",
+    "zh": {
+      "name": "调查员",
+      "ability": "第一夜得知：两个玩家中有一人是某个爪牙。",
+      "player": "你会知道一个爪牙身份，并看到两个玩家；这两人里至少有一个是这个爪牙。但有些角色可能被错误登记。",
+      "phase": "首夜",
+      "quickPhase": "首夜",
+      "quickAbility": "得知两名玩家中有一人是某个爪牙"
+    },
+    "en": {
+      "name": "Investigator",
+      "ability": "On your first night, you learn that 1 of 2 players is a particular Minion.",
+      "player": "You learn a Minion character and see two players. Normally at least one is that Minion, although registration effects can interfere.",
+      "phase": "First night",
+      "quickPhase": "First night",
+      "quickAbility": "Learn that 1 of 2 players is a particular Minion"
+    }
+  },
+  "chef": {
+    "type": "townsfolk",
+    "team": "good",
+    "icon": "<svg viewBox=\"0 0 24 24\" aria-hidden=\"true\"><path class=\"softFill\" d=\"M7.2 11.4h9.6v5.2c0 .9-.7 1.6-1.6 1.6H8.8c-.9 0-1.6-.7-1.6-1.6Z\"/><path d=\"M7.1 11.2h9.8v5.3c0 .9-.7 1.6-1.6 1.6H8.7c-.9 0-1.6-.7-1.6-1.6v-5.3Z\"/><path d=\"M6.2 11.2h11.6\"/><path d=\"M8.4 9.1c-.7-1.1.1-2.4 1.5-2.4.3-1.1 1.1-1.8 2.1-1.8s1.8.7 2.1 1.8c1.4 0 2.2 1.3 1.5 2.4\"/><path d=\"M18.5 7.2c1.1 1.1 1.2 2.7.2 4\"/><path d=\"M18.7 11.2h1.2\"/></svg>",
+    "zh": {
+      "name": "厨师",
+      "ability": "第一夜得知有几对相邻的邪恶玩家。",
+      "player": "你得到一个数字：有多少对坐在相邻位置的邪恶玩家。首尾也算相邻。",
+      "phase": "首夜",
+      "quickPhase": "首夜",
+      "quickAbility": "得知有几对邪恶玩家相邻而坐"
+    },
+    "en": {
+      "name": "Chef",
+      "ability": "On your first night, you learn how many pairs of evil players are sitting next to each other.",
+      "player": "You receive a number counting adjacent evil pairs. The first and last seats are also adjacent.",
+      "phase": "First night",
+      "quickPhase": "First night",
+      "quickAbility": "Learn how many pairs of evil players are sitting next to each other"
+    }
+  },
+  "empath": {
+    "type": "townsfolk",
+    "team": "good",
+    "icon": "<svg viewBox=\"0 0 24 24\" aria-hidden=\"true\"><path class=\"softFill\" d=\"M7.5 8.4c0-1.4 1.1-2.5 2.5-2.5.8 0 1.5.4 2 1 .5-.6 1.2-1 2-1 1.4 0 2.5 1.1 2.5 2.5 0 3.2-4.5 5.7-4.5 5.7s-4.5-2.5-4.5-5.7Z\"/><path d=\"M7.5 8.4c0-1.4 1.1-2.5 2.5-2.5.8 0 1.5.4 2 1 .5-.6 1.2-1 2-1 1.4 0 2.5 1.1 2.5 2.5 0 3.2-4.5 5.7-4.5 5.7s-4.5-2.5-4.5-5.7Z\"/><path d=\"M6.4 17.7c1.1-1.7 2.9-2.7 5.6-2.7s4.5 1 5.6 2.7\"/></svg>",
+    "zh": {
+      "name": "共情者",
+      "ability": "每晚得知自己两个存活邻居中有几个邪恶玩家。",
+      "player": "每晚你会得到 0、1 或 2，表示你左右最近的两个存活邻居里有几个邪恶玩家。死人会被跳过。",
+      "phase": "首夜+夜晚",
+      "quickPhase": "每晚",
+      "quickAbility": "得知两个存活邻居中有几个邪恶玩家"
+    },
+    "en": {
+      "name": "Empath",
+      "ability": "Each night, you learn how many of your two nearest living neighbours are evil.",
+      "player": "You receive 0, 1, or 2. Dead players are skipped when finding your nearest living neighbours.",
+      "phase": "First + later nights",
+      "quickPhase": "Each night",
+      "quickAbility": "Learn how many of your 2 living neighbours are evil"
+    }
+  },
+  "fortune_teller": {
+    "type": "townsfolk",
+    "team": "good",
+    "icon": "<svg viewBox=\"0 0 24 24\" aria-hidden=\"true\"><circle class=\"softFill\" cx=\"12\" cy=\"10.2\" r=\"5.1\"/><circle cx=\"12\" cy=\"10.2\" r=\"5.1\"/><path d=\"M8.6 18h6.8M9.5 15.6l-1.1 2.4h7.2l-1.1-2.4\"/><path d=\"M9.6 10.2c1.7-1.9 3.1-1.9 4.8 0-1.7 1.9-3.1 1.9-4.8 0Z\"/><circle cx=\"12\" cy=\"10.2\" r=\".8\"/></svg>",
+    "zh": {
+      "name": "占卜师",
+      "ability": "每晚选择两名玩家，得知其中是否有恶魔。另有一名好人红鲱鱼也会被算作恶魔。",
+      "player": "每晚选两人，问“这里面有没有恶魔”。注意：有一名好人会被你误判成恶魔。",
+      "phase": "首夜+夜晚",
+      "quickPhase": "每晚",
+      "quickAbility": "选择两名玩家，得知其中是否有恶魔；但有一名好人会误报"
+    },
+    "en": {
+      "name": "Fortune Teller",
+      "ability": "Each night, choose 2 players and learn whether either is a Demon. One good Red Herring also registers as a Demon to you.",
+      "player": "Choose two players and ask whether a Demon is among them. Remember that one good player will also produce a yes.",
+      "phase": "First + later nights",
+      "quickPhase": "Each night",
+      "quickAbility": "Choose 2 players and learn if either is the Demon; 1 good player may register falsely"
+    }
+  },
+  "undertaker": {
+    "type": "townsfolk",
+    "team": "good",
+    "icon": "<svg viewBox=\"0 0 24 24\" aria-hidden=\"true\"><path class=\"softFill\" d=\"M8.2 7.1h7.6l1.7 2v8.2H6.5V9.1Z\"/><path d=\"M8.2 7.1h7.6l1.7 2v8.2H6.5V9.1Z\"/><path d=\"M8.1 17.3h7.8M12 9.1v5.4M9.8 11.3h4.4\"/></svg>",
+    "zh": {
+      "name": "送葬者",
+      "ability": "每晚得知今天被处决玩家的角色。",
+      "player": "晚上你会得知白天被处决玩家的身份。没人被处决时通常没有信息。",
+      "phase": "夜晚",
+      "quickPhase": "每晚",
+      "quickAbility": "得知今天被处决的玩家是什么角色"
+    },
+    "en": {
+      "name": "Undertaker",
+      "ability": "Each night, you learn the character of the player executed today.",
+      "player": "You learn who the executed player really was. If nobody was executed, you usually receive no information.",
+      "phase": "Night",
+      "quickPhase": "Each night",
+      "quickAbility": "Learn the character of the player executed today"
+    }
+  },
+  "monk": {
+    "type": "townsfolk",
+    "team": "good",
+    "icon": "<svg viewBox=\"0 0 24 24\" aria-hidden=\"true\"><path class=\"softFill\" d=\"M12 4.5 17.8 7v4.2c0 3.5-2.1 6.4-5.8 8.1-3.7-1.7-5.8-4.6-5.8-8.1V7Z\"/><path d=\"M12 4.5 17.8 7v4.2c0 3.5-2.1 6.4-5.8 8.1-3.7-1.7-5.8-4.6-5.8-8.1V7Z\"/><path d=\"M12 8.1v6.8M9.5 10.6h5\"/></svg>",
+    "zh": {
+      "name": "僧侣",
+      "ability": "每晚选择除自己外一名玩家，保护其免受恶魔攻击。",
+      "player": "每晚选一名其他玩家。如果恶魔今晚杀他，他不会因此死亡。不能保护自己。",
+      "phase": "夜晚",
+      "quickPhase": "每晚",
+      "quickAbility": "选择一名其他玩家，使其今晚免受恶魔伤害"
+    },
+    "en": {
+      "name": "Monk",
+      "ability": "Each night, choose another player. They are safe from the Demon tonight.",
+      "player": "Protect one other player each night. You cannot protect yourself, and the protection does not stop every possible cause of death.",
+      "phase": "Night",
+      "quickPhase": "Each night",
+      "quickAbility": "Choose another player; they are safe from the Demon tonight"
+    }
+  },
+  "ravenkeeper": {
+    "type": "townsfolk",
+    "team": "good",
+    "icon": "<svg viewBox=\"0 0 24 24\" aria-hidden=\"true\"><path class=\"softFill\" d=\"M7 16.9c3.9-.7 7.1-3.6 9.7-8.6-3.9.2-7.4 2.2-9.9 6.3Z\"/><path d=\"M7 16.9c3.9-.7 7.1-3.6 9.7-8.6-3.9.2-7.4 2.2-9.9 6.3Z\"/><path d=\"M7.2 16.7 5.5 19M10.2 14.6l3.9 3M11.7 11.8l3.5 1.5M9.1 13.6c1.2.3 2.2.1 3.1-.6\"/></svg>",
+    "zh": {
+      "name": "守鸦人",
+      "ability": "若夜里死亡，当晚醒来选择一名玩家并得知其角色。",
+      "player": "如果你在夜里死亡，你会立刻醒来查一个人的真实身份。白天被处决不会触发。",
+      "phase": "夜晚",
+      "quickPhase": "夜晚被杀时",
+      "quickAbility": "选择一名玩家并得知其角色"
+    },
+    "en": {
+      "name": "Ravenkeeper",
+      "ability": "If you die at night, choose a player and learn their character.",
+      "player": "Your ability triggers only when you die at night, not when you are executed during the day.",
+      "phase": "Night",
+      "quickPhase": "Killed at night",
+      "quickAbility": "Choose a player and learn their character"
+    }
+  },
+  "virgin": {
+    "type": "townsfolk",
+    "team": "good",
+    "icon": "<svg viewBox=\"0 0 24 24\" aria-hidden=\"true\"><path class=\"softFill\" d=\"M12 4.8 14.2 9l4.6.7-3.3 3.2.8 4.6L12 15.3l-4.3 2.2.8-4.6-3.3-3.2L9.8 9Z\"/><path d=\"M12 4.8 14.2 9l4.6.7-3.3 3.2.8 4.6L12 15.3l-4.3 2.2.8-4.6-3.3-3.2L9.8 9Z\"/><circle cx=\"12\" cy=\"12\" r=\"2.4\"/></svg>",
+    "zh": {
+      "name": "圣女",
+      "ability": "第一次被镇民提名时，该镇民立即被处决。",
+      "player": "第一次有镇民提名你时，那个镇民会立刻被处决。只有第一次，而且提名者必须是镇民。",
+      "phase": "白天/被动",
+      "quickPhase": "被提名时",
+      "quickAbility": "若首次提名者是镇民，该镇民立即被处决"
+    },
+    "en": {
+      "name": "Virgin",
+      "ability": "The first time a Townsfolk nominates you, that Townsfolk is executed immediately.",
+      "player": "This can happen only once, and only when the nominator is a Townsfolk.",
+      "phase": "Daytime / passive",
+      "quickPhase": "When nominated",
+      "quickAbility": "If first nominated by a Townsfolk, that Townsfolk is executed immediately"
+    }
+  },
+  "slayer": {
+    "type": "townsfolk",
+    "team": "good",
+    "icon": "<svg viewBox=\"0 0 24 24\" aria-hidden=\"true\"><circle class=\"softFill\" cx=\"12\" cy=\"12\" r=\"5.7\"/><circle cx=\"12\" cy=\"12\" r=\"5.7\"/><circle cx=\"12\" cy=\"12\" r=\"2.2\"/><path d=\"M12 4.4v2.2M12 17.4v2.2M4.4 12h2.2M17.4 12h2.2\"/></svg>",
+    "zh": {
+      "name": "杀手",
+      "ability": "白天一次性公开选择一人；若目标是恶魔，目标死亡。",
+      "player": "白天你有一次开枪机会。公开选择一人；如果他是恶魔，他会死亡，否则通常无事发生。",
+      "phase": "白天主动",
+      "quickPhase": "白天",
+      "quickAbility": "全场仅一次，公开选择一人，若目标是恶魔，目标死亡，否则无事发生"
+    },
+    "en": {
+      "name": "Slayer",
+      "ability": "Once per game during the day, publicly choose a player. If they are the Demon, they die.",
+      "player": "You get one public shot. If your target is not the Demon, usually nothing happens and the ability is spent.",
+      "phase": "Daytime active",
+      "quickPhase": "Day",
+      "quickAbility": "Once per game, publicly choose a player; if they are the Demon, they die, otherwise nothing happens"
+    }
+  },
+  "soldier": {
+    "type": "townsfolk",
+    "team": "good",
+    "icon": "<svg viewBox=\"0 0 24 24\" aria-hidden=\"true\"><path class=\"softFill\" d=\"M12 4.7 18 7.2v4.5c0 3.4-2.2 6-6 7.6-3.8-1.6-6-4.2-6-7.6V7.2Z\"/><path d=\"M12 4.7 18 7.2v4.5c0 3.4-2.2 6-6 7.6-3.8-1.6-6-4.2-6-7.6V7.2Z\"/><path d=\"M8.8 12.2h6.4M12 8.5v7.2\"/></svg>",
+    "zh": {
+      "name": "士兵",
+      "ability": "不会被恶魔杀死。",
+      "player": "恶魔夜里杀你时，你不会因此死亡。其他死亡方式仍可能发生。",
+      "phase": "白天/被动",
+      "quickPhase": "被动",
+      "quickAbility": "恶魔不能杀死你"
+    },
+    "en": {
+      "name": "Soldier",
+      "ability": "You are safe from the Demon.",
+      "player": "A Demon attack cannot kill you, although execution and other causes of death still can.",
+      "phase": "Daytime / passive",
+      "quickPhase": "Passive",
+      "quickAbility": "The Demon cannot kill you"
+    }
+  },
+  "mayor": {
+    "type": "townsfolk",
+    "team": "good",
+    "icon": "<svg viewBox=\"0 0 24 24\" aria-hidden=\"true\"><path class=\"softFill\" d=\"M6.2 10.3 12 5.7l5.8 4.6v7.5H6.2Z\"/><path d=\"M5.4 10.6 12 5.3l6.6 5.3M6.6 10.2v7.6h10.8v-7.6\"/><path d=\"M10.4 17.8v-4.2h3.2v4.2M8.2 12.3h2M13.8 12.3h2M8.2 14.6h2M13.8 14.6h2\"/></svg>",
+    "zh": {
+      "name": "市长",
+      "ability": "若只剩 3 名存活玩家且无人被处决，好人获胜。若夜晚被攻击，可能由其他玩家代死。",
+      "player": "只剩 3 个活人时，如果白天没人被处决，好人胜利。你夜里被攻击时，可能会弹到别人身上。",
+      "phase": "白天/被动",
+      "quickPhase": "被动",
+      "quickAbility": "若只剩3人且白天无人被处决，则好人获胜；夜晚死亡可能转移"
+    },
+    "en": {
+      "name": "Mayor",
+      "ability": "If only 3 players live and nobody is executed, good wins. If you are attacked at night, another player might die instead.",
+      "player": "At three alive, a day with no execution can win the game for good. A night attack on you may be redirected.",
+      "phase": "Daytime / passive",
+      "quickPhase": "Passive",
+      "quickAbility": "With 3 alive, no execution means good wins; your night death may be redirected"
+    }
+  },
+  "butler": {
+    "type": "outsider",
+    "team": "good",
+    "icon": "<svg viewBox=\"0 0 24 24\" aria-hidden=\"true\"><path class=\"coolFill\" d=\"M7.1 13.4h9.8c-.2-3-2.2-5.2-4.9-5.2s-4.7 2.2-4.9 5.2Z\"/><path d=\"M7.1 13.4h9.8c-.2-3-2.2-5.2-4.9-5.2s-4.7 2.2-4.9 5.2Z\"/><path d=\"M5.8 15h12.4M12 6.3v1.9M10.4 6.3h3.2\"/><path d=\"M8.8 17.3h6.4\"/></svg>",
+    "zh": {
+      "name": "管家",
+      "ability": "每晚选择主人；白天只有主人正在投票或已经被计票，管家才可以投票。",
+      "player": "每晚选一个主人。第二天投票时，观察主人是否举手或已经被计票；如果主人不投或放下手，你也要放下手。这个限制主要靠管家自己遵守，不是说书人公开管控。你仍然可以提名。",
+      "phase": "首夜+夜晚",
+      "quickPhase": "每晚",
+      "quickAbility": "选择一名主人，明天只有主人投票时你才可以投票"
+    },
+    "en": {
+      "name": "Butler",
+      "ability": "Each night, choose a master. Tomorrow, you may vote only if your master is voting or their vote has already been counted.",
+      "player": "Watch your master during each vote and follow the restriction yourself. You may still nominate.",
+      "phase": "First + later nights",
+      "quickPhase": "Each night",
+      "quickAbility": "Choose a master; tomorrow you may vote only when your master votes"
+    }
+  },
+  "clockmaker": {
+    "type": "townsfolk",
+    "team": "good",
+    "icon": "<svg viewBox=\"0 0 24 24\" aria-hidden=\"true\"><circle class=\"softFill\" cx=\"12\" cy=\"12\" r=\"6.8\"/><circle cx=\"12\" cy=\"12\" r=\"6.8\"/><path d=\"M12 6.9v5.2l3.2 2.1\"/><path d=\"M12 4.9v1.3M12 17.8v1.3M4.9 12h1.3M17.8 12h1.3\"/><path d=\"M7.6 7.6l.9.9M15.5 15.5l.9.9M16.4 7.6l-.9.9M8.5 15.5l-.9.9\"/></svg>",
+    "zh": {
+      "name": "钟表匠",
+      "ability": "第一夜得知：恶魔到最近爪牙相隔几步。",
+      "player": "你会得到一个数字。距离从恶魔旁边的玩家开始数；如果爪牙正好坐在恶魔旁边，数字就是 1。",
+      "phase": "首夜",
+      "quickPhase": "首夜",
+      "quickAbility": "第一夜得知：恶魔到最近爪牙相隔几步。"
+    },
+    "en": {
+      "name": "Clockmaker",
+      "ability": "On your first night, learn the number of steps from the Demon to the nearest Minion.",
+      "player": "A Minion sitting next to the Demon gives a result of 1.",
+      "phase": "First night",
+      "quickPhase": "First night",
+      "quickAbility": "On your first night, learn the number of steps from the Demon to the nearest Minion."
+    }
+  },
+  "chambermaid": {
+    "type": "townsfolk",
+    "team": "good",
+    "icon": "<svg viewBox=\"0 0 24 24\" aria-hidden=\"true\"><path class=\"softFill\" d=\"M7.2 7.2h9.6v10.9H7.2Z\"/><path d=\"M7.2 7.2h9.6v10.9H7.2Z\"/><path d=\"M9.2 7.2V5.6h5.6v1.6M10.4 10.1h3.2M10.4 12.4h3.2\"/><circle cx=\"15\" cy=\"12.2\" r=\".7\"/><path d=\"M8.6 18.1h6.8\"/></svg>",
+    "zh": {
+      "name": "侍女",
+      "ability": "选两名其他存活玩家，得知其中几人今晚因自身能力醒来。",
+      "player": "每晚选择两名其他存活玩家，你会得到 0、1 或 2。只计算他们今晚因自身角色能力而醒来的情况。",
+      "phase": "首夜+夜晚",
+      "quickPhase": "每晚",
+      "quickAbility": "选两名其他存活玩家，得知其中几人今晚因自身能力醒来"
+    },
+    "en": {
+      "name": "Chambermaid",
+      "ability": "Each night, choose 2 living players other than yourself and learn how many woke tonight because of their own ability.",
+      "player": "You receive 0, 1, or 2, but do not learn which chosen player woke.",
+      "phase": "First + later nights",
+      "quickPhase": "Each night",
+      "quickAbility": "Choose 2 other living players and learn how many woke tonight due to their own ability"
+    }
+  },
+  "gambler": {
+    "type": "townsfolk",
+    "team": "good",
+    "icon": "<svg viewBox=\"0 0 24 24\" aria-hidden=\"true\"><circle class=\"softFill\" cx=\"12\" cy=\"12\" r=\"7\"/><path d=\"M12 4.2v2.1M12 17.7v2.1M4.2 12h2.1M17.7 12h2.1M6.5 6.5 8 8M16 16l1.5 1.5M17.5 6.5 16 8M8 16l-1.5 1.5\"/><circle cx=\"12\" cy=\"12\" r=\"4.1\"/></svg>",
+    "zh": {
+      "name": "赌徒",
+      "ability": "选一人并猜其角色；猜错则死亡。",
+      "player": "每晚选择一名玩家并猜他的具体角色。猜对通常无事发生；猜错时你会死亡，因此你的生死本身也能形成信息。",
+      "phase": "夜晚",
+      "quickPhase": "每晚*",
+      "quickAbility": "选一人并猜其角色；猜错则死亡"
+    },
+    "en": {
+      "name": "Gambler",
+      "ability": "Each night*, choose a player and guess their character. If you are wrong, you die.",
+      "player": "Guess one player’s exact character. A wrong guess can kill you, so whether you survive can itself become information.",
+      "phase": "Night",
+      "quickPhase": "Each night*",
+      "quickAbility": "Choose a player and guess their character; if wrong, you die"
+    }
+  },
+  "fool": {
+    "type": "townsfolk",
+    "team": "good",
+    "icon": "<svg viewBox=\"0 0 24 24\" aria-hidden=\"true\"><circle class=\"softFill\" cx=\"12\" cy=\"12\" r=\"7\"/><path d=\"M12 4.2v2.1M12 17.7v2.1M4.2 12h2.1M17.7 12h2.1M6.5 6.5 8 8M16 16l1.5 1.5M17.5 6.5 16 8M8 16l-1.5 1.5\"/><circle cx=\"12\" cy=\"12\" r=\"4.1\"/></svg>",
+    "zh": {
+      "name": "弄臣",
+      "ability": "第一次将要死亡时不会死亡。",
+      "player": "第一次有事情会让你死亡时，你不会死亡；之后再次受到致死效果时就可能正常死亡。",
+      "phase": "白天/被动",
+      "quickPhase": "被动",
+      "quickAbility": "第一次将要死亡时不会死亡"
+    },
+    "en": {
+      "name": "Fool",
+      "ability": "The first time you would die, you do not.",
+      "player": "The first effect that would kill you fails to do so. Later lethal effects can kill you normally.",
+      "phase": "Daytime / passive",
+      "quickPhase": "Passive",
+      "quickAbility": "The first time you would die, you do not"
+    }
+  },
+  "oracle": {
+    "type": "townsfolk",
+    "team": "good",
+    "icon": "<svg viewBox=\"0 0 24 24\" aria-hidden=\"true\"><circle class=\"softFill\" cx=\"12\" cy=\"12\" r=\"7\"/><path d=\"M12 4.2v2.1M12 17.7v2.1M4.2 12h2.1M17.7 12h2.1M6.5 6.5 8 8M16 16l1.5 1.5M17.5 6.5 16 8M8 16l-1.5 1.5\"/><circle cx=\"12\" cy=\"12\" r=\"4.1\"/></svg>",
+    "zh": {
+      "name": "神谕者",
+      "ability": "得知死亡玩家中有几名邪恶玩家。",
+      "player": "每晚得知当前所有死亡玩家中有几名邪恶玩家。随着死亡人数增加，这个数字可以帮助你判断已死玩家的阵营。",
+      "phase": "夜晚",
+      "quickPhase": "每晚*",
+      "quickAbility": "得知死亡玩家中有几名邪恶玩家"
+    },
+    "en": {
+      "name": "Oracle",
+      "ability": "Each night*, learn how many dead players are evil.",
+      "player": "Each night you learn the total number of evil players among everyone who is currently dead.",
+      "phase": "Night",
+      "quickPhase": "Each night*",
+      "quickAbility": "Learn how many dead players are evil"
+    }
+  },
+  "artist": {
+    "type": "townsfolk",
+    "team": "good",
+    "icon": "<svg viewBox=\"0 0 24 24\" aria-hidden=\"true\"><path class=\"softFill\" d=\"M6.4 16.8c1.5-4.5 4.6-7.6 9.3-9.3l1.9 1.9c-1.8 4.5-5 7.6-9.4 9.2Z\"/><path d=\"M6.4 16.8c1.5-4.5 4.6-7.6 9.3-9.3l1.9 1.9c-1.8 4.5-5 7.6-9.4 9.2Z\"/><path d=\"M14.8 8.5 16.6 10.3M8 15.2l2.4 2.4M6.1 18.7c1.2.2 2.1-.1 2.8-.9\"/><circle cx=\"9.3\" cy=\"10.2\" r=\"1.1\"/></svg>",
+    "zh": {
+      "name": "艺术家",
+      "ability": "每局一次，白天私下向说书人询问任意一个是非问题。",
+      "player": "你可以找说书人私聊，问一个能用“是/否”回答的问题。问题越清楚，得到的信息越好用。",
+      "phase": "白天主动",
+      "quickPhase": "白天主动",
+      "quickAbility": "每局一次，白天私下向说书人询问任意一个是非问题。"
+    },
+    "en": {
+      "name": "Artist",
+      "ability": "Once per game during the day, privately ask the Storyteller any yes/no question.",
+      "player": "Ask one clear question that can be answered yes or no. Clearer questions produce more useful information.",
+      "phase": "Daytime active",
+      "quickPhase": "Daytime active",
+      "quickAbility": "Once per game during the day, privately ask the Storyteller any yes/no question."
+    }
+  },
+  "sage": {
+    "type": "townsfolk",
+    "team": "good",
+    "icon": "<svg viewBox=\"0 0 24 24\" aria-hidden=\"true\"><path class=\"softFill\" d=\"M6.5 6.3h11v11.4h-11Z\"/><path d=\"M7.2 6.3h9.7c.8 0 1.4.6 1.4 1.4v10H7.2c-.8 0-1.5-.7-1.5-1.5V7.8c0-.8.7-1.5 1.5-1.5Z\"/><path d=\"M8.6 9.4h6.8M8.6 12h5.3M8.6 14.6h6.8\"/><path d=\"M16.9 6.6v10.7\"/></svg>",
+    "zh": {
+      "name": "贤者",
+      "ability": "如果被恶魔杀死，你会得知恶魔是两名玩家之一。",
+      "player": "活着时没有信息。只有被恶魔杀死才触发；白天被处决或被其他来源杀死通常不会触发。",
+      "phase": "白天/被动",
+      "quickPhase": "白天/被动",
+      "quickAbility": "如果被恶魔杀死，你会得知恶魔是两名玩家之一。"
+    },
+    "en": {
+      "name": "Sage",
+      "ability": "If the Demon kills you, you learn that the Demon is 1 of 2 players.",
+      "player": "You receive information only when the Demon kills you, not when you are executed or die from another source.",
+      "phase": "Daytime / passive",
+      "quickPhase": "Daytime / passive",
+      "quickAbility": "If the Demon kills you, you learn that the Demon is 1 of 2 players."
+    }
+  },
+  "drunk": {
+    "type": "outsider",
+    "team": "good",
+    "icon": "<svg viewBox=\"0 0 24 24\" aria-hidden=\"true\"><path class=\"coolFill\" d=\"M9.7 5.5h4.6v3.3l2.1 5.8c.7 1.9-.4 3.6-2.4 3.6h-4c-2 0-3.1-1.7-2.4-3.6l2.1-5.8Z\"/><path d=\"M9.7 5.5h4.6v3.3l2.1 5.8c.7 1.9-.4 3.6-2.4 3.6h-4c-2 0-3.1-1.7-2.4-3.6l2.1-5.8Z\"/><path d=\"M9.8 8.8h4.4M9.2 13.5c1.4-.8 2.8.8 4.2 0 .5-.3 1-.4 1.5-.2\"/></svg>",
+    "zh": {
+      "name": "酒鬼",
+      "ability": "你不知道自己是酒鬼，会以为自己是某个镇民；你的能力没有效果。",
+      "player": "你不会知道自己是酒鬼。你会以为自己是某个镇民，但你的能力没有效果，得到的信息也可能不可靠。",
+      "phase": "白天/被动",
+      "quickPhase": "被动",
+      "quickAbility": "你以为自己是镇民，但其实不是"
+    },
+    "en": {
+      "name": "Drunk",
+      "ability": "You do not know you are the Drunk. You think you are a Townsfolk, but your ability does not work.",
+      "player": "You are shown a Townsfolk character. Your information may be true or false, but your supposed ability has no effect.",
+      "phase": "Daytime / passive",
+      "quickPhase": "Passive",
+      "quickAbility": "You think you are a Townsfolk, but you are not"
+    }
+  },
+  "klutz": {
+    "type": "outsider",
+    "team": "good",
+    "icon": "<svg viewBox=\"0 0 24 24\" aria-hidden=\"true\"><path class=\"coolFill\" d=\"M9.1 5.8h5.4l1.6 4.1-2.3 2.8 2.5 5.5H8.4l2.5-5.5-2.4-2.8Z\"/><path d=\"M9.1 5.8h5.4l1.6 4.1-2.3 2.8 2.5 5.5H8.4l2.5-5.5-2.4-2.8Z\"/><path d=\"M9.5 9.9h6.1M10.8 13.1h2.9\"/><path d=\"M7.2 6.7 5.7 5.2M18.3 18.8l-1.5-1.5\"/></svg>",
+    "zh": {
+      "name": "呆瓜",
+      "ability": "当你得知自己死亡时，公开选择一名存活玩家；若对方邪恶，你的阵营失败。",
+      "player": "你死亡后要公开选一名还活着的玩家。选到好人通常没事；选到邪恶玩家，好人立刻输。",
+      "phase": "白天/被动",
+      "quickPhase": "白天/被动",
+      "quickAbility": "当你得知自己死亡时，公开选择一名存活玩家；若对方邪恶，你的阵营失败。"
+    },
+    "en": {
+      "name": "Klutz",
+      "ability": "When you learn that you died, publicly choose a living player. If they are evil, your team loses.",
+      "player": "You must choose a living player after learning you died. Choosing evil immediately loses the game for your team.",
+      "phase": "Daytime / passive",
+      "quickPhase": "Daytime / passive",
+      "quickAbility": "When you learn that you died, publicly choose a living player. If they are evil, your team loses."
+    }
+  },
+  "recluse": {
+    "type": "outsider",
+    "team": "good",
+    "icon": "<svg viewBox=\"0 0 24 24\" aria-hidden=\"true\"><path class=\"coolFill\" d=\"M12 4.4c3.1 1.4 4.8 3.9 4.8 7.2v6.6H7.2v-6.6c0-3.3 1.7-5.8 4.8-7.2Z\"/><path d=\"M12 4.4c3.1 1.4 4.8 3.9 4.8 7.2v6.6H7.2v-6.6c0-3.3 1.7-5.8 4.8-7.2Z\"/><path d=\"M9.4 12.2c.9-1 1.8-1.5 2.6-1.5s1.7.5 2.6 1.5M9.9 18.2c.1-2.2.8-3.5 2.1-4.2 1.3.7 2 2 2.1 4.2\"/></svg>",
+    "zh": {
+      "name": "隐士",
+      "ability": "可能被登记为邪恶、爪牙或恶魔，即使死亡也可能如此。",
+      "player": "你是好人，但别人的侦测能力可能把你看成邪恶、爪牙或恶魔。死亡后也可能这样。",
+      "phase": "白天/被动",
+      "quickPhase": "被动",
+      "quickAbility": "你可能被判定为邪恶、爪牙或恶魔"
+    },
+    "en": {
+      "name": "Recluse",
+      "ability": "You might register as evil, a Minion, or a Demon, even while dead.",
+      "player": "You are good, but detection abilities may see you as an evil character.",
+      "phase": "Daytime / passive",
+      "quickPhase": "Passive",
+      "quickAbility": "You may register as evil, a Minion, or a Demon"
+    }
+  },
+  "saint": {
+    "type": "outsider",
+    "team": "good",
+    "icon": "<svg viewBox=\"0 0 24 24\" aria-hidden=\"true\"><circle class=\"coolFill\" cx=\"12\" cy=\"7.5\" r=\"3.1\"/><ellipse cx=\"12\" cy=\"6.1\" rx=\"4.7\" ry=\"1.7\"/><path d=\"M12 10.6v7.1M9.2 13.4h5.6\"/><path d=\"M7.5 18.2c.9-2.5 2.4-3.8 4.5-3.8s3.6 1.3 4.5 3.8\"/></svg>",
+    "zh": {
+      "name": "圣徒",
+      "ability": "如果你被处决，邪恶阵营获胜。",
+      "player": "如果你白天被处决，邪恶阵营立刻获胜。夜里被杀不触发。",
+      "phase": "白天/被动",
+      "quickPhase": "被处决时",
+      "quickAbility": "如果你被处决，邪恶阵营立即获胜"
+    },
+    "en": {
+      "name": "Saint",
+      "ability": "If you are executed, your team loses.",
+      "player": "Execution causes evil to win immediately. Dying at night does not trigger this ability.",
+      "phase": "Daytime / passive",
+      "quickPhase": "When executed",
+      "quickAbility": "If you are executed, evil wins immediately"
+    }
+  },
+  "moonchild": {
+    "type": "outsider",
+    "team": "good",
+    "icon": "<svg viewBox=\"0 0 24 24\" aria-hidden=\"true\"><path class=\"coolFill\" d=\"M12 4.2c3.1 2.1 5.1 4.8 5.1 7.8 0 3.5-2.2 6.5-5.1 7.8-2.9-1.3-5.1-4.3-5.1-7.8 0-3 2-5.7 5.1-7.8Z\"/><path d=\"M12 4.2c3.1 2.1 5.1 4.8 5.1 7.8 0 3.5-2.2 6.5-5.1 7.8-2.9-1.3-5.1-4.3-5.1-7.8 0-3 2-5.7 5.1-7.8Z\"/><path d=\"M9 9.9c.5-1.6 1.6-2.5 3-2.5 1.6 0 2.7 1 2.7 2.3 0 1.8-1.9 2.2-2.5 3.7\"/><path d=\"M12.1 16.6h.1\"/></svg>",
+    "zh": {
+      "name": "月之子",
+      "ability": "死亡后，公开选择一名存活玩家；若其是好人，该玩家今晚死亡。",
+      "player": "当你得知自己死亡后，要公开选择一名仍存活的玩家。如果你选中好人，那名玩家会在当晚死亡；选中邪恶玩家则不会因此死亡。",
+      "phase": "白天/被动",
+      "quickPhase": "死亡后",
+      "quickAbility": "公开选一名存活玩家；若其是好人，该玩家今晚死亡"
+    },
+    "en": {
+      "name": "Moonchild",
+      "ability": "When you learn that you died, publicly choose a living player. If they are good, they die tonight.",
+      "player": "After your death, publicly choose a living player. Choosing good causes that player to die that night; choosing evil does not.",
+      "phase": "Daytime / passive",
+      "quickPhase": "After death",
+      "quickAbility": "Publicly choose a living player; if good, they die tonight"
+    }
+  },
+  "poisoner": {
+    "type": "minion",
+    "team": "evil",
+    "icon": "<svg viewBox=\"0 0 24 24\" aria-hidden=\"true\"><path class=\"hotFill\" d=\"M10.1 5.6h3.8v3l2.7 5.9c.8 1.7-.3 3.5-2.2 3.5H9.6c-1.9 0-3-1.8-2.2-3.5l2.7-5.9Z\"/><path d=\"M10.1 5.6h3.8v3l2.7 5.9c.8 1.7-.3 3.5-2.2 3.5H9.6c-1.9 0-3-1.8-2.2-3.5l2.7-5.9Z\"/><path d=\"M9.3 14.1c1.6-.9 2.9.7 4.5-.1.5-.2.9-.3 1.4-.2\"/><path d=\"M9.4 5.6h5.2\"/></svg>",
+    "zh": {
+      "name": "投毒者",
+      "ability": "每晚选择一名玩家：该玩家今晚和明天白天中毒。",
+      "player": "每晚选一人中毒。他的能力暂时无效，得到的信息可能是错的。",
+      "phase": "首夜+夜晚",
+      "quickPhase": "每晚",
+      "quickAbility": "选择一名玩家，使其今晚和明天白天中毒"
+    },
+    "en": {
+      "name": "Poisoner",
+      "ability": "Each night, choose a player. They are poisoned tonight and tomorrow day.",
+      "player": "The chosen player’s ability does not work temporarily, and their information may be wrong.",
+      "phase": "First + later nights",
+      "quickPhase": "Each night",
+      "quickAbility": "Choose a player; they are poisoned tonight and tomorrow day"
+    }
+  },
+  "spy": {
+    "type": "minion",
+    "team": "evil",
+    "icon": "<svg viewBox=\"0 0 24 24\" aria-hidden=\"true\"><path class=\"hotFill\" d=\"M5.7 12c1.8-3.1 3.9-4.7 6.3-4.7s4.5 1.6 6.3 4.7c-1.8 3.1-3.9 4.7-6.3 4.7S7.5 15.1 5.7 12Z\"/><path d=\"M5.7 12c1.8-3.1 3.9-4.7 6.3-4.7s4.5 1.6 6.3 4.7c-1.8 3.1-3.9 4.7-6.3 4.7S7.5 15.1 5.7 12Z\"/><circle cx=\"12\" cy=\"12\" r=\"2.2\"/><path d=\"M15.8 15.8 18.2 18.2\"/></svg>",
+    "zh": {
+      "name": "间谍",
+      "ability": "每晚可以查看魔典；可能被登记为好人或镇民。",
+      "player": "每晚可以看说书人的魔典。别人查你时，你可能显示成好人或镇民。",
+      "phase": "首夜+夜晚",
+      "quickPhase": "每晚",
+      "quickAbility": "查看说书人的真实信息；自己可能被判定为好人或镇民"
+    },
+    "en": {
+      "name": "Spy",
+      "ability": "Each night, you may see the Grimoire. You might register as good or as a Townsfolk.",
+      "player": "You can inspect the Storyteller’s information each night and may look good to detection abilities.",
+      "phase": "First + later nights",
+      "quickPhase": "Each night",
+      "quickAbility": "View the Grimoire; you may register as good or as a Townsfolk"
+    }
+  },
+  "scarlet_woman": {
+    "type": "minion",
+    "team": "evil",
+    "icon": "<svg viewBox=\"0 0 24 24\" aria-hidden=\"true\"><path class=\"hotFill\" d=\"M6.8 12.1c1.3-1.4 2.4-2.1 3.5-2.1.7 0 1.2.2 1.7.7.5-.5 1-.7 1.7-.7 1.1 0 2.2.7 3.5 2.1-1.3 2-3 3.2-5.2 3.2s-3.9-1.2-5.2-3.2Z\"/><path d=\"M6.8 12.1c1.3-1.4 2.4-2.1 3.5-2.1.7 0 1.2.2 1.7.7.5-.5 1-.7 1.7-.7 1.1 0 2.2.7 3.5 2.1-1.3 2-3 3.2-5.2 3.2s-3.9-1.2-5.2-3.2Z\"/><path d=\"M8 12.2h8M9.7 15.2c1.4 1.2 3.2 1.2 4.6 0\"/></svg>",
+    "zh": {
+      "name": "猩红女巫",
+      "ability": "若恶魔在仍有至少 5 名玩家存活时死亡，你变成恶魔。",
+      "player": "如果恶魔死亡时仍有至少 5 名玩家存活，你会变成新的恶魔，游戏继续。",
+      "phase": "白天/被动",
+      "quickPhase": "被动",
+      "quickAbility": "若至少5名玩家存活且恶魔死亡，你变成新的恶魔"
+    },
+    "en": {
+      "name": "Scarlet Woman",
+      "ability": "If the Demon dies while 5 or more players are alive, you become the Demon.",
+      "player": "When the condition is met, you become the new Imp and the game continues.",
+      "phase": "Daytime / passive",
+      "quickPhase": "Passive",
+      "quickAbility": "If the Demon dies with 5 or more players alive, you become the Demon"
+    }
+  },
+  "baron": {
+    "type": "minion",
+    "team": "evil",
+    "icon": "<svg viewBox=\"0 0 24 24\" aria-hidden=\"true\"><path class=\"warmFill\" d=\"M6.3 10.2 8.4 7l3.6 3.4L15.6 7l2.1 3.2-1.1 7H7.4Z\"/><path d=\"M6.3 10.2 8.4 7l3.6 3.4L15.6 7l2.1 3.2-1.1 7H7.4Z\"/><path d=\"M7.1 14h9.8M9.4 17.2h5.2\"/></svg>",
+    "zh": {
+      "name": "男爵",
+      "ability": "本局多 2 个外来者，少 2 个镇民。",
+      "player": "你的存在会改变开局配置：多 2 个外来者，少 2 个镇民。你白天主要靠发言帮助邪恶阵营。",
+      "phase": "白天/被动",
+      "quickPhase": "开局",
+      "quickAbility": "本局多2个外来者，少2个镇民"
+    },
+    "en": {
+      "name": "Baron",
+      "ability": "There are 2 extra Outsiders and 2 fewer Townsfolk in play.",
+      "player": "Your ability changes the setup before play begins. You have no night action.",
+      "phase": "Daytime / passive",
+      "quickPhase": "Setup",
+      "quickAbility": "This game has 2 extra Outsiders and 2 fewer Townsfolk"
+    }
+  },
+  "devil_s_advocate": {
+    "type": "minion",
+    "team": "evil",
+    "icon": "<svg viewBox=\"0 0 24 24\" aria-hidden=\"true\"><path class=\"warmFill\" d=\"M7.4 5.8 18.2 16.6 16.7 18.1 5.9 7.3Z\"/><path d=\"m5.6 5.6 12.8 12.8M15.7 6.4l1.9 1.9-9.3 9.3-2.1.5.5-2.1 9-9.6Z\"/><path d=\"M14.3 7.7 16.3 9.7\"/></svg>",
+    "zh": {
+      "name": "恶魔辩护人",
+      "ability": "选一名存活玩家，不能连续选同一人；其明天被处决时不死。",
+      "player": "每晚保护一名存活玩家免于第二天的处决死亡，但不能连续两晚选择同一个人。你可以保护邪恶队友，也可以故意保护好人制造混乱。",
+      "phase": "首夜+夜晚",
+      "quickPhase": "每晚",
+      "quickAbility": "选一名存活玩家，不能连续选同一人；其明天被处决时不死"
+    },
+    "en": {
+      "name": "Devil's Advocate",
+      "ability": "Each night, choose a living player, different from last night. If executed tomorrow, they do not die.",
+      "player": "Protect one living player from dying by execution the next day. You cannot choose the same player on consecutive nights.",
+      "phase": "First + later nights",
+      "quickPhase": "Each night",
+      "quickAbility": "Choose a living player, not the same as last night; if executed tomorrow, they do not die"
+    }
+  },
+  "imp": {
+    "type": "demon",
+    "team": "evil",
+    "icon": "<svg viewBox=\"0 0 24 24\" aria-hidden=\"true\"><path class=\"hotFill\" d=\"M7 6.1c2.2.3 3.4 1.4 4 2.9h2c.6-1.5 1.8-2.6 4-2.9-.5 1.7-1.2 2.9-2.3 3.7 1.1.9 1.8 2.3 1.8 3.9 0 2.8-2 5-4.5 5s-4.5-2.2-4.5-5c0-1.6.7-3 1.8-3.9C8.2 9 7.5 7.8 7 6.1Z\"/><path d=\"M7 6.1c2.2.3 3.4 1.4 4 2.9h2c.6-1.5 1.8-2.6 4-2.9-.5 1.7-1.2 2.9-2.3 3.7 1.1.9 1.8 2.3 1.8 3.9 0 2.8-2 5-4.5 5s-4.5-2.2-4.5-5c0-1.6.7-3 1.8-3.9C8.2 9 7.5 7.8 7 6.1Z\"/><path d=\"M9.8 13.2h.1M14.1 13.2h.1\"/><path d=\"M10 16c1.1.7 2.9.7 4 0\"/></svg>",
+    "zh": {
+      "name": "小恶魔",
+      "ability": "每晚选择一名玩家死亡。若自杀，另一名爪牙变成小恶魔。",
+      "player": "每晚杀一人。你也可以选择杀自己，通常会让一名爪牙变成新的小恶魔。第一夜通常不杀人。",
+      "phase": "夜晚",
+      "quickPhase": "每晚*",
+      "quickAbility": "选择一名玩家死亡；若选择自己，一名爪牙变成小恶魔"
+    },
+    "en": {
+      "name": "Imp",
+      "ability": "Each night, choose a player: they die. If you kill yourself, a Minion becomes the Imp.",
+      "player": "Kill one player each night. You may choose yourself to pass the Demon role to a Minion. The first night normally has no kill.",
+      "phase": "Night",
+      "quickPhase": "Each night*",
+      "quickAbility": "Choose a player to die; if you choose yourself, a Minion becomes the Imp"
+    }
+  },
+  "pukka": {
+    "type": "demon",
+    "team": "evil",
+    "icon": "<svg viewBox=\"0 0 24 24\" aria-hidden=\"true\"><path class=\"hotFill\" d=\"M12.2 3.8c3.6 3.3 5.3 6.3 5.3 9.4 0 4-2.6 6.9-5.5 6.9s-5.5-2.9-5.5-6.5c0-2.2 1.2-4 3.1-5.7-.1 1.8.4 3.1 1.4 3.9.1-2.6.6-5.1 1.2-8Z\"/><path d=\"M12.2 3.8c3.6 3.3 5.3 6.3 5.3 9.4 0 4-2.6 6.9-5.5 6.9s-5.5-2.9-5.5-6.5c0-2.2 1.2-4 3.1-5.7-.1 1.8.4 3.1 1.4 3.9.1-2.6.6-5.1 1.2-8Z\"/><path d=\"M9.7 15.2c.7.7 1.4 1 2.3 1s1.6-.3 2.3-1\"/></svg>",
+    "zh": {
+      "name": "普卡",
+      "ability": "选一人使其中毒；此前被你中毒的人恢复健康并死亡。",
+      "player": "每晚选择一名玩家让他中毒。你上一次中毒的目标会先恢复健康，然后死亡，因此你的击杀通常比选择目标晚一个夜晚发生。",
+      "phase": "首夜+夜晚",
+      "quickPhase": "每晚",
+      "quickAbility": "选一人使其中毒；此前被你中毒的人恢复健康并死亡"
+    },
+    "en": {
+      "name": "Pukka",
+      "ability": "Each night, choose a player: they are poisoned. The previously poisoned player becomes healthy, then dies.",
+      "player": "Your new target is poisoned first; the previous target recovers and then dies, creating a delayed kill pattern.",
+      "phase": "First + later nights",
+      "quickPhase": "Each night",
+      "quickAbility": "Choose a player to poison; the previously poisoned player becomes healthy and dies"
+    }
+  }
+}

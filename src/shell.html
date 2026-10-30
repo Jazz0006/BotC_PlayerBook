@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="血染钟楼玩家角色速查：中英文角色资料、人数配置、规则与流程，单文件离线使用。">
+<meta name="theme-color" content="#0b0d14">
+<title>血染钟楼玩家角色速查</title>
+<style>{{styles}}</style>
+</head>
+<body data-tab="home" data-lang="zh">
+<button id="languageToggle" class="languageToggle" type="button" onclick="toggleLanguage()" aria-label="Switch to English">EN</button>
+<main class="wrap">
+  <section id="home" class="section active">{{home}}</section>
+  <section id="roles" class="section"></section>
+  <section id="rules" class="section"></section>
+  <section id="counts" class="section"></section>
+  <section id="process" class="section"></section>
+</main>
+<nav class="footerNav" id="bottomTabs"></nav>
+<div class="modal" id="modal"><div class="modalBox" id="modalBox"></div></div>
+<script>{{data}}
+{{app}}</script>
+</body>
+</html>

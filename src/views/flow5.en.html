@@ -1,0 +1,89 @@
+<div class="flowQuick">
+      <div class="quickDeck five-flow" data-step="0" tabindex="0" aria-label="Interactive 5-player walkthrough. Tap to continue." onclick="quickFlowAdvance(event)" onkeydown="quickFlowKey(event)">
+        <div class="quickDeckTop">
+          <button class="quickBack" type="button" hidden onclick="quickFlowBack(event)" aria-label="Back to the previous step">‹</button>
+          <div class="quickDeckStatus"><span class="quickDeckLabel">Character</span><div class="quickProgress" aria-hidden="true"><span class="quickProgressDot active"></span><span class="quickProgressDot"></span><span class="quickProgressDot"></span><span class="quickProgressDot"></span><span class="quickProgressDot"></span></div></div>
+          <span class="quickProgressCount">1/5</span>
+        </div>
+
+        <div class="quickStory">
+        <div class="quickSlide active" data-step="0" data-label="Character" aria-hidden="false">
+      <section class="quickRoster">
+        <div class="quickSlideSwitch"><div class="flowSwitch" aria-label="Choose a walkthrough"><button class="flowSwitchBtn active" onclick="showFlow(&#x27;5&#x27;)">5-player</button><button class="flowSwitchBtn" onclick="showFlow(&#x27;8&#x27;)">8-player</button></div></div>
+        <h2>Which characters are in play?</h2>
+        <div class="quickTeam good">
+          <div class="quickTeamTitle">Townsfolk</div>
+          <div class="quickRoleList">
+            <div class="quickRole townsfolk"><span class="seatToken token townsfolk" aria-hidden="true"><svg viewbox="0 0 24 24" aria-hidden="true"><circle class="softFill" cx="10.4" cy="10.4" r="4.8"></circle><circle cx="10.4" cy="10.4" r="4.8"></circle><path d="m14 14 4.7 4.7"></path><path d="M8.3 10.1c.5-1.2 1.3-1.8 2.6-1.8"></path><path d="M17.3 17.1 18.9 15.5"></path></svg></span><div class="quickRoleCopy"><span class="quickRoleName">Seat 1 · Investigator</span><span class="quickRoleAbility">Starts with a clue about a Minion.</span></div></div>
+            <div class="quickRole townsfolk"><span class="seatToken token townsfolk" aria-hidden="true"><svg viewbox="0 0 24 24" aria-hidden="true"><path class="softFill" d="M7.5 8.4c0-1.4 1.1-2.5 2.5-2.5.8 0 1.5.4 2 1 .5-.6 1.2-1 2-1 1.4 0 2.5 1.1 2.5 2.5 0 3.2-4.5 5.7-4.5 5.7s-4.5-2.5-4.5-5.7Z"></path><path d="M7.5 8.4c0-1.4 1.1-2.5 2.5-2.5.8 0 1.5.4 2 1 .5-.6 1.2-1 2-1 1.4 0 2.5 1.1 2.5 2.5 0 3.2-4.5 5.7-4.5 5.7s-4.5-2.5-4.5-5.7Z"></path><path d="M6.4 17.7c1.1-1.7 2.9-2.7 5.6-2.7s4.5 1 5.6 2.7"></path></svg></span><div class="quickRoleCopy"><span class="quickRoleName">Seat 5 · Empath</span><span class="quickRoleAbility">Learns how many living neighbours are evil.</span></div></div>
+            <div class="quickRole townsfolk"><span class="seatToken token townsfolk" aria-hidden="true"><svg viewbox="0 0 24 24" aria-hidden="true"><circle class="softFill" cx="12" cy="10.2" r="5.1"></circle><circle cx="12" cy="10.2" r="5.1"></circle><path d="M8.6 18h6.8M9.5 15.6l-1.1 2.4h7.2l-1.1-2.4"></path><path d="M9.6 10.2c1.7-1.9 3.1-1.9 4.8 0-1.7 1.9-3.1 1.9-4.8 0Z"></path><circle cx="12" cy="10.2" r=".8"></circle></svg></span><div class="quickRoleCopy"><span class="quickRoleName">Seat 3 · Fortune Teller</span><span class="quickRoleAbility">Chooses two players each night and learns whether either is a Demon.</span></div></div>
+          </div>
+        </div>
+        <div class="quickTeam evil">
+          <div class="quickTeamTitle">Minion</div>
+          <div class="quickRoleList">
+            <div class="quickRole minion"><span class="seatToken token minion" aria-hidden="true"><svg viewbox="0 0 24 24" aria-hidden="true"><path class="hotFill" d="M6.8 12.1c1.3-1.4 2.4-2.1 3.5-2.1.7 0 1.2.2 1.7.7.5-.5 1-.7 1.7-.7 1.1 0 2.2.7 3.5 2.1-1.3 2-3 3.2-5.2 3.2s-3.9-1.2-5.2-3.2Z"></path><path d="M6.8 12.1c1.3-1.4 2.4-2.1 3.5-2.1.7 0 1.2.2 1.7.7.5-.5 1-.7 1.7-.7 1.1 0 2.2.7 3.5 2.1-1.3 2-3 3.2-5.2 3.2s-3.9-1.2-5.2-3.2Z"></path><path d="M8 12.2h8M9.7 15.2c1.4 1.2 3.2 1.2 4.6 0"></path></svg></span><div class="quickRoleCopy"><span class="quickRoleName">Seat 2 · Scarlet Woman</span><span class="quickRoleAbility">May become the new Demon after the Demon dies.</span></div></div>
+          </div>
+        </div>
+        <div class="quickTeam evil">
+          <div class="quickTeamTitle">Demon</div>
+          <div class="quickRoleList">
+            <div class="quickRole demon"><span class="seatToken token demon" aria-hidden="true"><svg viewbox="0 0 24 24" aria-hidden="true"><path class="hotFill" d="M7 6.1c2.2.3 3.4 1.4 4 2.9h2c.6-1.5 1.8-2.6 4-2.9-.5 1.7-1.2 2.9-2.3 3.7 1.1.9 1.8 2.3 1.8 3.9 0 2.8-2 5-4.5 5s-4.5-2.2-4.5-5c0-1.6.7-3 1.8-3.9C8.2 9 7.5 7.8 7 6.1Z"></path><path d="M7 6.1c2.2.3 3.4 1.4 4 2.9h2c.6-1.5 1.8-2.6 4-2.9-.5 1.7-1.2 2.9-2.3 3.7 1.1.9 1.8 2.3 1.8 3.9 0 2.8-2 5-4.5 5s-4.5-2.2-4.5-5c0-1.6.7-3 1.8-3.9C8.2 9 7.5 7.8 7 6.1Z"></path><path d="M9.8 13.2h.1M14.1 13.2h.1"></path><path d="M10 16c1.1.7 2.9.7 4 0"></path></svg></span><div class="quickRoleCopy"><span class="quickRoleName">Seat 4 · Imp</span><span class="quickRoleAbility">Kills each night and can pass the Demon role to a Minion.</span></div></div>
+          </div>
+        </div>
+      </section>
+        </div>
+
+        <div class="quickSlide" data-step="1" data-label="First night" aria-hidden="true">
+        <section class="quickChapter night">
+          <div class="quickChapterHead"><span class="quickPhaseIcon" aria-hidden="true">☾</span><h2>First night</h2></div>
+          <div class="quickSectionLabel">Good players receive information</div>
+          <div class="quickEvent"><span class="seatToken token townsfolk" aria-hidden="true"><svg viewbox="0 0 24 24" aria-hidden="true"><circle class="softFill" cx="10.4" cy="10.4" r="4.8"></circle><circle cx="10.4" cy="10.4" r="4.8"></circle><path d="m14 14 4.7 4.7"></path><path d="M8.3 10.1c.5-1.2 1.3-1.8 2.6-1.8"></path><path d="M17.3 17.1 18.9 15.5"></path></svg></span><div class="quickEventBody"><div class="quickEventName">Seat 1 · Investigator</div><p>Learns that between Seats 2 and 4,<br><span class="quickResult">one is the Scarlet Woman.</span></p></div></div>
+          <div class="quickEvent"><span class="seatToken token townsfolk" aria-hidden="true"><svg viewbox="0 0 24 24" aria-hidden="true"><path class="softFill" d="M7.5 8.4c0-1.4 1.1-2.5 2.5-2.5.8 0 1.5.4 2 1 .5-.6 1.2-1 2-1 1.4 0 2.5 1.1 2.5 2.5 0 3.2-4.5 5.7-4.5 5.7s-4.5-2.5-4.5-5.7Z"></path><path d="M7.5 8.4c0-1.4 1.1-2.5 2.5-2.5.8 0 1.5.4 2 1 .5-.6 1.2-1 2-1 1.4 0 2.5 1.1 2.5 2.5 0 3.2-4.5 5.7-4.5 5.7s-4.5-2.5-4.5-5.7Z"></path><path d="M6.4 17.7c1.1-1.7 2.9-2.7 5.6-2.7s4.5 1 5.6 2.7"></path></svg></span><div class="quickEventBody"><div class="quickEventName">Seat 5 · Empath</div><p>Learns that among the two living neighbours,<br>there is <span class="quickResult"><strong>1 evil player</strong></span>.</p></div></div>
+          <div class="quickEvent"><span class="seatToken token townsfolk" aria-hidden="true"><svg viewbox="0 0 24 24" aria-hidden="true"><circle class="softFill" cx="12" cy="10.2" r="5.1"></circle><circle cx="12" cy="10.2" r="5.1"></circle><path d="M8.6 18h6.8M9.5 15.6l-1.1 2.4h7.2l-1.1-2.4"></path><path d="M9.6 10.2c1.7-1.9 3.1-1.9 4.8 0-1.7 1.9-3.1 1.9-4.8 0Z"></path><circle cx="12" cy="10.2" r=".8"></circle></svg></span><div class="quickEventBody"><div class="quickEventName">Seat 3 · Fortune Teller</div><p>Chooses Seats 1 and 2,<br>and learns there is <span class="quickResult"><strong>no Demon</strong></span>.</p></div></div>
+        </section>
+        </div>
+
+        <div class="quickSlide" data-step="2" data-label="Day" aria-hidden="true">
+        <section class="quickChapter day">
+          <div class="quickChapterHead"><span class="quickPhaseIcon" aria-hidden="true">☀</span><h2>Day</h2></div>
+          <p>The group discusses who seems most suspicious.</p>
+          <p>After discussion, nominations and voting begin.</p>
+          <p class="quickRule">Unlike Werewolf: <strong>each day may execute one player or nobody.</strong></p>
+          <div class="quickOutcome">
+            <div class="quickOutcomeLine">In the end, <strong>Seat 4 is executed.</strong></div>
+            <div class="quickOutcomeLine">Seat 4 was the Imp.</div>
+            <div class="quickTransfer"><div class="quickTransferRole">Seat 4 · Imp</div><div class="quickTransferArrow">→</div><div class="quickTransferRole">Seat 2 · new Demon</div></div>
+            <div class="quickOutcomeLine">The Scarlet Woman at Seat 2 takes over as the new Demon.</div>
+            <span class="quickContinue">The game continues</span>
+          </div>
+        </section>
+        </div>
+
+        <div class="quickSlide" data-step="3" data-label="Second night" aria-hidden="true">
+        <section class="quickChapter night">
+          <div class="quickChapterHead"><span class="quickPhaseIcon" aria-hidden="true">☾</span><h2>Second night</h2></div>
+          <div class="quickEvent"><span class="seatToken token demon" aria-hidden="true"><svg viewbox="0 0 24 24" aria-hidden="true"><path class="hotFill" d="M7 6.1c2.2.3 3.4 1.4 4 2.9h2c.6-1.5 1.8-2.6 4-2.9-.5 1.7-1.2 2.9-2.3 3.7 1.1.9 1.8 2.3 1.8 3.9 0 2.8-2 5-4.5 5s-4.5-2.2-4.5-5c0-1.6.7-3 1.8-3.9C8.2 9 7.5 7.8 7 6.1Z"></path><path d="M7 6.1c2.2.3 3.4 1.4 4 2.9h2c.6-1.5 1.8-2.6 4-2.9-.5 1.7-1.2 2.9-2.3 3.7 1.1.9 1.8 2.3 1.8 3.9 0 2.8-2 5-4.5 5s-4.5-2.2-4.5-5c0-1.6.7-3 1.8-3.9C8.2 9 7.5 7.8 7 6.1Z"></path><path d="M9.8 13.2h.1M14.1 13.2h.1"></path><path d="M10 16c1.1.7 2.9.7 4 0"></path></svg></span><div class="quickEventBody"><div class="quickEventName">Seat 2 · new Demon <span class="quickOrder">Acts first</span></div><p>Kills the Investigator at Seat 1.</p></div></div>
+          <div class="quickEvent"><span class="seatToken token townsfolk" aria-hidden="true"><svg viewbox="0 0 24 24" aria-hidden="true"><path class="softFill" d="M7.5 8.4c0-1.4 1.1-2.5 2.5-2.5.8 0 1.5.4 2 1 .5-.6 1.2-1 2-1 1.4 0 2.5 1.1 2.5 2.5 0 3.2-4.5 5.7-4.5 5.7s-4.5-2.5-4.5-5.7Z"></path><path d="M7.5 8.4c0-1.4 1.1-2.5 2.5-2.5.8 0 1.5.4 2 1 .5-.6 1.2-1 2-1 1.4 0 2.5 1.1 2.5 2.5 0 3.2-4.5 5.7-4.5 5.7s-4.5-2.5-4.5-5.7Z"></path><path d="M6.4 17.7c1.1-1.7 2.9-2.7 5.6-2.7s4.5 1 5.6 2.7"></path></svg></span><div class="quickEventBody"><div class="quickEventName">Seat 5 · Empath <span class="quickOrder">Then receives information</span></div><p>After Seat 1 dies, the new living neighbours are Seats 3 and 2.<br>Learns that they include <span class="quickResult"><strong>1 evil player</strong></span>.</p></div></div>
+          <div class="quickEvent"><span class="seatToken token townsfolk" aria-hidden="true"><svg viewbox="0 0 24 24" aria-hidden="true"><circle class="softFill" cx="12" cy="10.2" r="5.1"></circle><circle cx="12" cy="10.2" r="5.1"></circle><path d="M8.6 18h6.8M9.5 15.6l-1.1 2.4h7.2l-1.1-2.4"></path><path d="M9.6 10.2c1.7-1.9 3.1-1.9 4.8 0-1.7 1.9-3.1 1.9-4.8 0Z"></path><circle cx="12" cy="10.2" r=".8"></circle></svg></span><div class="quickEventBody"><div class="quickEventName">Seat 3 · Fortune Teller</div><p>Chooses Seats 2 and 5,<br>and learns there is <span class="quickResult"><strong>a Demon</strong></span>.</p></div></div>
+        </section>
+        </div>
+
+        <div class="quickSlide" data-step="4" data-label="Day two" aria-hidden="true">
+        <section class="quickChapter final">
+          <div class="quickChapterHead"><span class="quickPhaseIcon" aria-hidden="true">♟</span><h2>Day two</h2></div>
+          <div class="quickDawn">At dawn, Seat 1 is announced dead.</div>
+          <p class="quickGhost">Seat 1 may still talk and has <strong>one final vote</strong>.</p>
+          <p class="quickLastChance">Only one chance remains:</p>
+          <div class="quickChoices">
+            <div class="quickChoice win"><strong>Execute the Demon at Seat 2</strong>; good wins.</div>
+            <div class="quickChoice lose">If a good player is executed, only 2 players remain and <strong>evil wins immediately.</strong></div>
+            <div class="quickChoice lose">If nobody is executed, the Demon kills again tonight and <strong>evil wins.</strong></div>
+          </div>
+        </section>
+        </div>
+        </div>
+        <button class="quickTap" type="button" onclick="quickFlowAdvance(event)">Tap to continue · First night</button>
+        <button class="quickEightCta" type="button" onclick="showFlow(&#x27;8&#x27;)">View the full 8-player walkthrough</button>
+      </div>
+    </div>

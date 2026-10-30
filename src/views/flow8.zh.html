@@ -1,0 +1,111 @@
+<div class="flowQuick">
+      <div class="quickDeck eight-flow" data-step="0" tabindex="0" aria-label="8人局互动流程，轻点进入下一阶段" onclick="quickFlowAdvance(event)" onkeydown="quickFlowKey(event)">
+        <div class="quickDeckTop">
+          <button class="quickBack" type="button" hidden onclick="quickFlowBack(event)" aria-label="返回上一阶段">‹</button>
+          <div class="quickDeckStatus"><span class="quickDeckLabel">背景与看点</span><div class="quickProgress" aria-hidden="true"><span class="quickProgressDot active"></span><span class="quickProgressDot"></span><span class="quickProgressDot"></span><span class="quickProgressDot"></span><span class="quickProgressDot"></span><span class="quickProgressDot"></span><span class="quickProgressDot"></span><span class="quickProgressDot"></span><span class="quickProgressDot"></span></div></div>
+          <span class="quickProgressCount">1/9</span>
+        </div>
+
+        <div class="quickStory">
+        <div class="quickSlide active" data-step="0" data-label="背景与看点" aria-hidden="false">
+          <section class="quickRoster">
+            <div class="quickSlideSwitch"><div class="flowSwitch" aria-label="切换流程示例"><button class="flowSwitchBtn" onclick="showFlow('5')">5人局</button><button class="flowSwitchBtn active" onclick="showFlow('8')">8人局</button></div></div>
+            <h2>标准8人局，多了什么？</h2>
+            <div class="quickPrelude">5人简化局省略了部分标准规则。本局共有 <strong>5名镇民、1名外来者、1名爪牙、1名恶魔</strong>。</div>
+            <p>外来者属于好人阵营，但能力往往会给好人带来麻烦，可以理解为好人阵营里的“猪队友”。</p>
+            <div class="quickPreview" aria-label="本局重点"><span class="quickPreviewItem">醉酒与假身份</span><span class="quickPreviewItem">中毒与错误信息</span><span class="quickPreviewItem">圣女能力触发</span></div>
+          </section>
+        </div>
+
+        <div class="quickSlide" data-step="1" data-label="角色阵容" aria-hidden="true">
+          <section class="quickRoster compactRoster">
+            <h2>这局有哪些角色？</h2>
+            <div class="quickTeam good"><div class="quickTeamTitle">镇民</div><div class="quickRoleList">
+              <div class="quickRole townsfolk"><span class="seatToken token townsfolk" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true"><path class="softFill" d="M7.2 11.4h9.6v5.2c0 .9-.7 1.6-1.6 1.6H8.8c-.9 0-1.6-.7-1.6-1.6Z"/><path d="M7.1 11.2h9.8v5.3c0 .9-.7 1.6-1.6 1.6H8.7c-.9 0-1.6-.7-1.6-1.6v-5.3Z"/><path d="M6.2 11.2h11.6"/><path d="M8.4 9.1c-.7-1.1.1-2.4 1.5-2.4.3-1.1 1.1-1.8 2.1-1.8s1.8.7 2.1 1.8c1.4 0 2.2 1.3 1.5 2.4"/><path d="M18.5 7.2c1.1 1.1 1.2 2.7.2 4"/><path d="M18.7 11.2h1.2"/></svg></span><div class="quickRoleCopy"><span class="quickRoleName">1号 · 厨师</span></div></div>
+              <div class="quickRole townsfolk"><span class="seatToken token townsfolk" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true"><path class="softFill" d="M7.5 8.4c0-1.4 1.1-2.5 2.5-2.5.8 0 1.5.4 2 1 .5-.6 1.2-1 2-1 1.4 0 2.5 1.1 2.5 2.5 0 3.2-4.5 5.7-4.5 5.7s-4.5-2.5-4.5-5.7Z"/><path d="M7.5 8.4c0-1.4 1.1-2.5 2.5-2.5.8 0 1.5.4 2 1 .5-.6 1.2-1 2-1 1.4 0 2.5 1.1 2.5 2.5 0 3.2-4.5 5.7-4.5 5.7s-4.5-2.5-4.5-5.7Z"/><path d="M6.4 17.7c1.1-1.7 2.9-2.7 5.6-2.7s4.5 1 5.6 2.7"/></svg></span><div class="quickRoleCopy"><span class="quickRoleName">2号 · 共情者</span></div></div>
+              <div class="quickRole townsfolk"><span class="seatToken token townsfolk" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true"><circle class="softFill" cx="12" cy="10.2" r="5.1"/><circle cx="12" cy="10.2" r="5.1"/><path d="M8.6 18h6.8M9.5 15.6l-1.1 2.4h7.2l-1.1-2.4"/><path d="M9.6 10.2c1.7-1.9 3.1-1.9 4.8 0-1.7 1.9-3.1 1.9-4.8 0Z"/><circle cx="12" cy="10.2" r=".8"/></svg></span><div class="quickRoleCopy"><span class="quickRoleName">3号 · 占卜师</span></div></div>
+              <div class="quickRole townsfolk"><span class="seatToken token townsfolk" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true"><path class="softFill" d="M8.2 7.1h7.6l1.7 2v8.2H6.5V9.1Z"/><path d="M8.2 7.1h7.6l1.7 2v8.2H6.5V9.1Z"/><path d="M8.1 17.3h7.8M12 9.1v5.4M9.8 11.3h4.4"/></svg></span><div class="quickRoleCopy"><span class="quickRoleName">4号 · 送葬者</span></div></div>
+              <div class="quickRole townsfolk"><span class="seatToken token townsfolk" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true"><path class="softFill" d="M12 4.8 14.2 9l4.6.7-3.3 3.2.8 4.6L12 15.3l-4.3 2.2.8-4.6-3.3-3.2L9.8 9Z"/><path d="M12 4.8 14.2 9l4.6.7-3.3 3.2.8 4.6L12 15.3l-4.3 2.2.8-4.6-3.3-3.2L9.8 9Z"/><circle cx="12" cy="12" r="2.4"/></svg></span><div class="quickRoleCopy"><span class="quickRoleName">5号 · 圣女</span></div></div>
+            </div></div>
+            <div class="quickTeam good"><div class="quickTeamTitle">外来者</div><div class="quickRoleList">
+              <div class="quickRole outsider"><span class="seatToken token outsider" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true"><path class="coolFill" d="M9.7 5.5h4.6v3.3l2.1 5.8c.7 1.9-.4 3.6-2.4 3.6h-4c-2 0-3.1-1.7-2.4-3.6l2.1-5.8Z"/><path d="M9.7 5.5h4.6v3.3l2.1 5.8c.7 1.9-.4 3.6-2.4 3.6h-4c-2 0-3.1-1.7-2.4-3.6l2.1-5.8Z"/><path d="M9.8 8.8h4.4M9.2 13.5c1.4-.8 2.8.8 4.2 0 .5-.3 1-.4 1.5-.2"/></svg></span><div class="quickRoleCopy"><span class="quickRoleName">6号 · 酒鬼</span></div></div>
+            </div></div>
+            <div class="quickTeam evil"><div class="quickTeamTitle">邪恶阵营</div><div class="quickRoleList">
+              <div class="quickRole minion"><span class="seatToken token minion" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true"><path class="hotFill" d="M10.1 5.6h3.8v3l2.7 5.9c.8 1.7-.3 3.5-2.2 3.5H9.6c-1.9 0-3-1.8-2.2-3.5l2.7-5.9Z"/><path d="M10.1 5.6h3.8v3l2.7 5.9c.8 1.7-.3 3.5-2.2 3.5H9.6c-1.9 0-3-1.8-2.2-3.5l2.7-5.9Z"/><path d="M9.3 14.1c1.6-.9 2.9.7 4.5-.1.5-.2.9-.3 1.4-.2"/><path d="M9.4 5.6h5.2"/></svg></span><div class="quickRoleCopy"><span class="quickRoleName">7号 · 投毒者</span></div></div>
+              <div class="quickRole demon"><span class="seatToken token demon" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true"><path class="hotFill" d="M7 6.1c2.2.3 3.4 1.4 4 2.9h2c.6-1.5 1.8-2.6 4-2.9-.5 1.7-1.2 2.9-2.3 3.7 1.1.9 1.8 2.3 1.8 3.9 0 2.8-2 5-4.5 5s-4.5-2.2-4.5-5c0-1.6.7-3 1.8-3.9C8.2 9 7.5 7.8 7 6.1Z"/><path d="M7 6.1c2.2.3 3.4 1.4 4 2.9h2c.6-1.5 1.8-2.6 4-2.9-.5 1.7-1.2 2.9-2.3 3.7 1.1.9 1.8 2.3 1.8 3.9 0 2.8-2 5-4.5 5s-4.5-2.2-4.5-5c0-1.6.7-3 1.8-3.9C8.2 9 7.5 7.8 7 6.1Z"/><path d="M9.8 13.2h.1M14.1 13.2h.1"/><path d="M10 16c1.1.7 2.9.7 4 0"/></svg></span><div class="quickRoleCopy"><span class="quickRoleName">8号 · 小恶魔</span></div></div>
+            </div></div>
+          </section>
+        </div>
+
+        <div class="quickSlide" data-step="2" data-label="第一夜·邪恶" aria-hidden="true">
+          <section class="quickChapter night">
+            <div class="quickChapterHead"><span class="quickPhaseIcon" aria-hidden="true">☾</span><h2>第一夜 · 邪恶阵营</h2></div>
+            <div class="quickEvent"><span class="seatToken token minion" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true"><path class="hotFill" d="M10.1 5.6h3.8v3l2.7 5.9c.8 1.7-.3 3.5-2.2 3.5H9.6c-1.9 0-3-1.8-2.2-3.5l2.7-5.9Z"/><path d="M10.1 5.6h3.8v3l2.7 5.9c.8 1.7-.3 3.5-2.2 3.5H9.6c-1.9 0-3-1.8-2.2-3.5l2.7-5.9Z"/><path d="M9.3 14.1c1.6-.9 2.9.7 4.5-.1.5-.2.9-.3 1.4-.2"/><path d="M9.4 5.6h5.2"/></svg></span><div class="quickEventBody"><div class="quickEventName">7号投毒者</div><p>得知8号是小恶魔，随后选择让 <span class="quickResult"><strong>1号厨师中毒</strong></span>。</p></div></div>
+            <div class="quickEvent"><span class="seatToken token demon" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true"><path class="hotFill" d="M7 6.1c2.2.3 3.4 1.4 4 2.9h2c.6-1.5 1.8-2.6 4-2.9-.5 1.7-1.2 2.9-2.3 3.7 1.1.9 1.8 2.3 1.8 3.9 0 2.8-2 5-4.5 5s-4.5-2.2-4.5-5c0-1.6.7-3 1.8-3.9C8.2 9 7.5 7.8 7 6.1Z"/><path d="M7 6.1c2.2.3 3.4 1.4 4 2.9h2c.6-1.5 1.8-2.6 4-2.9-.5 1.7-1.2 2.9-2.3 3.7 1.1.9 1.8 2.3 1.8 3.9 0 2.8-2 5-4.5 5s-4.5-2.2-4.5-5c0-1.6.7-3 1.8-3.9C8.2 9 7.5 7.8 7 6.1Z"/><path d="M9.8 13.2h.1M14.1 13.2h.1"/><path d="M10 16c1.1.7 2.9.7 4 0"/></svg></span><div class="quickEventBody"><div class="quickEventName">8号小恶魔</div><p>得知7号是自己的爪牙，并获得三个本局没有出现的好人角色，用来安全伪装。</p></div></div>
+            <p class="quickRule">中毒玩家的能力暂时失效，得到的信息也可能是错的。</p>
+          </section>
+        </div>
+
+        <div class="quickSlide" data-step="3" data-label="第一夜·信息" aria-hidden="true">
+          <section class="quickChapter night">
+            <div class="quickChapterHead"><span class="quickPhaseIcon" aria-hidden="true">☾</span><h2>第一夜 · 好人信息</h2></div>
+            <div class="quickEvent"><span class="seatToken token townsfolk" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true"><path class="softFill" d="M7.2 11.4h9.6v5.2c0 .9-.7 1.6-1.6 1.6H8.8c-.9 0-1.6-.7-1.6-1.6Z"/><path d="M7.1 11.2h9.8v5.3c0 .9-.7 1.6-1.6 1.6H8.7c-.9 0-1.6-.7-1.6-1.6v-5.3Z"/><path d="M6.2 11.2h11.6"/><path d="M8.4 9.1c-.7-1.1.1-2.4 1.5-2.4.3-1.1 1.1-1.8 2.1-1.8s1.8.7 2.1 1.8c1.4 0 2.2 1.3 1.5 2.4"/><path d="M18.5 7.2c1.1 1.1 1.2 2.7.2 4"/><path d="M18.7 11.2h1.2"/></svg></span><div class="quickEventBody"><div class="quickEventName">1号厨师 <span class="quickOrder">已中毒</span></div><p>得知数字 <span class="quickResult"><strong>0</strong></span>。实际上7号和8号相邻，正确答案是 <span class="quickTruth">1</span>。</p></div></div>
+            <div class="quickEvent"><span class="seatToken token townsfolk" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true"><path class="softFill" d="M7.5 8.4c0-1.4 1.1-2.5 2.5-2.5.8 0 1.5.4 2 1 .5-.6 1.2-1 2-1 1.4 0 2.5 1.1 2.5 2.5 0 3.2-4.5 5.7-4.5 5.7s-4.5-2.5-4.5-5.7Z"/><path d="M7.5 8.4c0-1.4 1.1-2.5 2.5-2.5.8 0 1.5.4 2 1 .5-.6 1.2-1 2-1 1.4 0 2.5 1.1 2.5 2.5 0 3.2-4.5 5.7-4.5 5.7s-4.5-2.5-4.5-5.7Z"/><path d="M6.4 17.7c1.1-1.7 2.9-2.7 5.6-2.7s4.5 1 5.6 2.7"/></svg></span><div class="quickEventBody"><div class="quickEventName">2号共情者</div><p>两名存活邻居都是好人，得知数字 <span class="quickResult"><strong>0</strong></span>。</p></div></div>
+            <div class="quickEvent"><span class="seatToken token townsfolk" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true"><circle class="softFill" cx="12" cy="10.2" r="5.1"/><circle cx="12" cy="10.2" r="5.1"/><path d="M8.6 18h6.8M9.5 15.6l-1.1 2.4h7.2l-1.1-2.4"/><path d="M9.6 10.2c1.7-1.9 3.1-1.9 4.8 0-1.7 1.9-3.1 1.9-4.8 0Z"/><circle cx="12" cy="10.2" r=".8"/></svg></span><div class="quickEventBody"><div class="quickEventName">3号占卜师</div><p>调查7号和8号，得到回答 <span class="quickResult"><strong>是</strong></span>。两人中至少有一人是恶魔。</p></div></div>
+            <div class="quickEvent"><span class="seatToken token outsider" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true"><path class="coolFill" d="M9.7 5.5h4.6v3.3l2.1 5.8c.7 1.9-.4 3.6-2.4 3.6h-4c-2 0-3.1-1.7-2.4-3.6l2.1-5.8Z"/><path d="M9.7 5.5h4.6v3.3l2.1 5.8c.7 1.9-.4 3.6-2.4 3.6h-4c-2 0-3.1-1.7-2.4-3.6l2.1-5.8Z"/><path d="M9.8 8.8h4.4M9.2 13.5c1.4-.8 2.8.8 4.2 0 .5-.3 1-.4 1.5-.2"/></svg></span><div class="quickEventBody"><div class="quickEventName">6号“调查员” <span class="quickOrder">真实是酒鬼</span></div><p>被告知5号和7号中有一人是投毒者。他不知道这条信息可能是真，也可能是假。</p></div></div>
+            <p class="quickRule">占卜师还可能被一名“红鲱鱼”好人误导，把他当成恶魔。</p>
+          </section>
+        </div>
+
+        <div class="quickSlide" data-step="4" data-label="第一天" aria-hidden="true">
+          <section class="quickChapter day">
+            <div class="quickChapterHead"><span class="quickPhaseIcon" aria-hidden="true">☀</span><h2>第一天</h2></div>
+            <p>经过讨论，7号成为主要嫌疑人。</p>
+            <div class="quickOutcome">
+              <div class="quickOutcomeLine"><strong>3号提名7号。</strong></div>
+              <div class="quickOutcomeLine">7号获得4票，之后无人追平或超过。</div>
+              <div class="quickOutcomeLine"><strong>当天结束时，7号被处决。</strong></div>
+              <span class="quickContinue">恶魔还活着，游戏继续</span>
+            </div>
+          </section>
+        </div>
+
+        <div class="quickSlide" data-step="5" data-label="第二夜" aria-hidden="true">
+          <section class="quickChapter night">
+            <div class="quickChapterHead"><span class="quickPhaseIcon" aria-hidden="true">☾</span><h2>第二夜</h2></div>
+            <div class="quickEvent"><span class="seatToken token demon" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true"><path class="hotFill" d="M7 6.1c2.2.3 3.4 1.4 4 2.9h2c.6-1.5 1.8-2.6 4-2.9-.5 1.7-1.2 2.9-2.3 3.7 1.1.9 1.8 2.3 1.8 3.9 0 2.8-2 5-4.5 5s-4.5-2.2-4.5-5c0-1.6.7-3 1.8-3.9C8.2 9 7.5 7.8 7 6.1Z"/><path d="M7 6.1c2.2.3 3.4 1.4 4 2.9h2c.6-1.5 1.8-2.6 4-2.9-.5 1.7-1.2 2.9-2.3 3.7 1.1.9 1.8 2.3 1.8 3.9 0 2.8-2 5-4.5 5s-4.5-2.2-4.5-5c0-1.6.7-3 1.8-3.9C8.2 9 7.5 7.8 7 6.1Z"/><path d="M9.8 13.2h.1M14.1 13.2h.1"/><path d="M10 16c1.1.7 2.9.7 4 0"/></svg></span><div class="quickEventBody"><div class="quickEventName">8号小恶魔</div><p>选择杀死 <span class="quickResult"><strong>3号占卜师</strong></span>。</p></div></div>
+            <div class="quickEvent"><span class="seatToken token townsfolk" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true"><path class="softFill" d="M8.2 7.1h7.6l1.7 2v8.2H6.5V9.1Z"/><path d="M8.2 7.1h7.6l1.7 2v8.2H6.5V9.1Z"/><path d="M8.1 17.3h7.8M12 9.1v5.4M9.8 11.3h4.4"/></svg></span><div class="quickEventBody"><div class="quickEventName">4号送葬者</div><p>得知白天被处决的7号，真实身份是 <span class="quickResult"><strong>投毒者</strong></span>。</p></div></div>
+          </section>
+        </div>
+
+        <div class="quickSlide" data-step="6" data-label="第二天" aria-hidden="true">
+          <section class="quickChapter day">
+            <div class="quickChapterHead"><span class="quickPhaseIcon" aria-hidden="true">☀</span><h2>第二天</h2></div>
+            <div class="quickOutcome">
+              <div class="quickOutcomeLine"><strong>2号提名5号圣女。</strong></div>
+              <div class="quickOutcomeLine">圣女能力触发，<strong>2号好人立即被处决。</strong></div>
+            </div>
+          </section>
+        </div>
+
+        <div class="quickSlide" data-step="7" data-label="第三夜" aria-hidden="true">
+          <section class="quickChapter night">
+            <div class="quickChapterHead"><span class="quickPhaseIcon" aria-hidden="true">☾</span><h2>第三夜</h2></div>
+            <div class="quickEvent"><span class="seatToken token demon" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true"><path class="hotFill" d="M7 6.1c2.2.3 3.4 1.4 4 2.9h2c.6-1.5 1.8-2.6 4-2.9-.5 1.7-1.2 2.9-2.3 3.7 1.1.9 1.8 2.3 1.8 3.9 0 2.8-2 5-4.5 5s-4.5-2.2-4.5-5c0-1.6.7-3 1.8-3.9C8.2 9 7.5 7.8 7 6.1Z"/><path d="M7 6.1c2.2.3 3.4 1.4 4 2.9h2c.6-1.5 1.8-2.6 4-2.9-.5 1.7-1.2 2.9-2.3 3.7 1.1.9 1.8 2.3 1.8 3.9 0 2.8-2 5-4.5 5s-4.5-2.2-4.5-5c0-1.6.7-3 1.8-3.9C8.2 9 7.5 7.8 7 6.1Z"/><path d="M9.8 13.2h.1M14.1 13.2h.1"/><path d="M10 16c1.1.7 2.9.7 4 0"/></svg></span><div class="quickEventBody"><div class="quickEventName">8号小恶魔</div><p>杀死 <span class="quickResult"><strong>4号送葬者</strong></span>。送葬者在醒来前已被杀死，当晚无法再获得信息。</p></div></div>
+          </section>
+        </div>
+
+        <div class="quickSlide" data-step="8" data-label="第三天" aria-hidden="true">
+          <section class="quickChapter final">
+            <div class="quickChapterHead"><span class="quickPhaseIcon" aria-hidden="true">♟</span><h2>第三天</h2></div>
+            <div class="quickDawn">场上还剩4名存活玩家：3名好人、1名恶魔。</div>
+            <div class="quickChoices">
+              <div class="quickChoice lose">如果白天处决错人，恶魔将在夜里杀人后获胜。</div>
+              <div class="quickChoice">如果白天无人被处决，恶魔夜里杀人后，好人将在第四天获得最后一次机会。</div>
+            </div>
+          </section>
+        </div>
+        </div>
+        <button class="quickTap" type="button" onclick="quickFlowAdvance(event)">轻点继续 · 角色阵容</button>
+      </div>
+    </div>
