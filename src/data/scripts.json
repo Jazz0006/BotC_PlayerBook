@@ -1,0 +1,116 @@
+{
+  "trouble_brewing": {
+    "roles": [
+      "washerwoman",
+      "librarian",
+      "investigator",
+      "chef",
+      "empath",
+      "fortune_teller",
+      "undertaker",
+      "monk",
+      "ravenkeeper",
+      "virgin",
+      "slayer",
+      "soldier",
+      "mayor",
+      "butler",
+      "drunk",
+      "recluse",
+      "saint",
+      "poisoner",
+      "spy",
+      "scarlet_woman",
+      "baron",
+      "imp"
+    ],
+    "zh": {
+      "name": "暗流涌动",
+      "format": "标准入门剧本",
+      "players": "5–15 人",
+      "subtitle": "最适合第一次完整体验的入门剧本。当前流程示例仍以它作为通用教学基础。"
+    },
+    "en": {
+      "name": "Trouble Brewing",
+      "format": "Standard beginner script",
+      "players": "5–15 players",
+      "subtitle": "The best first full game. The walkthroughs use it as their teaching foundation."
+    }
+  },
+  "no_greater_joy": {
+    "roles": [
+      "clockmaker",
+      "investigator",
+      "empath",
+      "chambermaid",
+      "artist",
+      "sage",
+      "drunk",
+      "klutz",
+      "baron",
+      "scarlet_woman",
+      "imp"
+    ],
+    "zh": {
+      "name": "No Greater Joy",
+      "format": "Teensyville 小局剧本",
+      "players": "5–6 人",
+      "subtitle": "玩过暗流涌动后的快速进阶剧本。5–6 人小局，角色更少、节奏更快，适合在熟悉基础流程后体验。",
+      "notice": "本剧本只有 2 名外来者；6 人局若男爵在场且原本已有 1 名外来者，只会再增加 1 名外来者。"
+    },
+    "en": {
+      "name": "No Greater Joy",
+      "format": "Teensyville script",
+      "players": "5–6 players",
+      "subtitle": "A faster follow-up after Trouble Brewing, with fewer roles and a brisker pace.",
+      "notice": "This script has only 2 Outsiders. In a 6-player game that already has 1 Outsider, a Baron adds only 1 more."
+    },
+    "roleNotes": {
+      "baron": {
+        "zh": "No Greater Joy 只有 2 名外来者。6 人局原本已有 1 名外来者时，男爵只能再增加 1 名外来者。",
+        "en": "No Greater Joy has only 2 Outsiders. In a 6-player game that already has 1 Outsider, the Baron can add only 1 more."
+      }
+    }
+  },
+  "advanced_7_9": {
+    "roles": [
+      "chambermaid",
+      "gambler",
+      "fool",
+      "oracle",
+      "washerwoman",
+      "chef",
+      "empath",
+      "fortune_teller",
+      "undertaker",
+      "monk",
+      "ravenkeeper",
+      "slayer",
+      "mayor",
+      "moonchild",
+      "drunk",
+      "recluse",
+      "saint",
+      "devil_s_advocate",
+      "poisoner",
+      "spy",
+      "scarlet_woman",
+      "pukka",
+      "imp"
+    ],
+    "zh": {
+      "name": "7–9人进阶",
+      "format": "TB 熟练后进阶剧本",
+      "players": "7–9 人",
+      "subtitle": "为已经熟悉暗流涌动的玩家设计：保留基础推理骨架，同时加入死亡干扰、处决保护、延迟击杀与死亡阵营统计。",
+      "notice": "推荐 7–9 人、已经玩熟《暗流涌动》的玩家。NEW 标记表示相对《暗流涌动》新增的角色。"
+    },
+    "en": {
+      "name": "Intermediate 7–9",
+      "format": "Post-TB intermediate script",
+      "players": "7–9 players",
+      "subtitle": "Keeps the Trouble Brewing deduction core while adding death interaction, execution protection, delayed kills, and dead-player alignment counts.",
+      "notice": "Recommended after your group is comfortable with Trouble Brewing. NEW marks characters not found in Trouble Brewing."
+    }
+  }
+}
