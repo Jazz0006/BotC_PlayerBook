@@ -46,7 +46,7 @@ try {
       }
     }; sampleCSS();
   `);
-  assert.equal(await evaluate('Object.keys(ROLES).length'),33);
+  assert.equal(await evaluate('Object.keys(ROLES).length'),52);
   assert.deepEqual(await evaluate(`Array.from($('bottomTabs').querySelectorAll('.navLabel'),node=>node.textContent)`),['首页','规则','流程','剧本','人数']);
   assert.equal(await evaluate(`$('counts').querySelectorAll('tbody tr').length`),11);
   assert.equal(await evaluate(`$('counts').querySelectorAll('details,button').length`),0);
@@ -64,7 +64,7 @@ try {
   assert.deepEqual(await evaluate(`[state.lang,state.tab,state.flow,state.step]`),['en','process','8',4]);
   for (const lang of ['en','zh']) {
     if (await evaluate('state.lang') !== lang) await evaluate('toggleLanguage()');
-    for (const script of ['trouble_brewing','no_greater_joy','advanced_7_9']) {
+    for (const script of ['trouble_brewing','no_greater_joy','advanced_7_9','bad_moon_rising']) {
       await evaluate(`setScript('${script}');showTab('roles')`);
       if (lang==='en') assert.equal(await evaluate(`$('bottomTabs').querySelector('button[data-tab=roles] .navLabel').textContent`),'Scripts');
       assert.equal(await evaluate(`document.querySelectorAll('.roleQuickRow').length`),await evaluate(`SCRIPTS[state.script].roles.length`));

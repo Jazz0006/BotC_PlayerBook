@@ -37,6 +37,47 @@
       "subtitle": "The best first full game. The walkthroughs use it as their teaching foundation."
     }
   },
+  "bad_moon_rising": {
+    "roles": [
+      "grandmother",
+      "sailor",
+      "chambermaid",
+      "exorcist",
+      "innkeeper",
+      "gambler",
+      "gossip",
+      "courtier",
+      "professor",
+      "minstrel",
+      "tea_lady",
+      "pacifist",
+      "fool",
+      "tinker",
+      "moonchild",
+      "goon",
+      "lunatic",
+      "godfather",
+      "devil_s_advocate",
+      "assassin",
+      "mastermind",
+      "zombuul",
+      "pukka",
+      "shabaloth",
+      "po"
+    ],
+    "zh": {
+      "name": "黯月初升",
+      "format": "标准进阶剧本",
+      "players": "5–15 人",
+      "subtitle": "从死亡与存活中寻找线索，辨别保护、醉酒与额外击杀。"
+    },
+    "en": {
+      "name": "Bad Moon Rising",
+      "format": "Standard intermediate script",
+      "players": "5–15 players",
+      "subtitle": "Follow deaths and survival to uncover protection, drunkenness, and extra kills."
+    }
+  },
   "no_greater_joy": {
     "roles": [
       "clockmaker",

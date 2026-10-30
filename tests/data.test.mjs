@@ -7,8 +7,8 @@ const roles = JSON.parse(await read('src/data/roles.json'));
 const scripts = JSON.parse(await read('src/data/scripts.json'));
 const ui = JSON.parse(await read('src/i18n.json'));
 test('all scripts reference distinct valid roles with complete bilingual copy', () => {
-  assert.equal(Object.keys(roles).length,33);
-  assert.equal(Object.keys(scripts).length,3);
+  assert.equal(Object.keys(roles).length,52);
+  assert.equal(Object.keys(scripts).length,4);
   for (const script of Object.values(scripts)) {
     assert.equal(new Set(script.roles).size,script.roles.length);
     for (const id of script.roles) assert.ok(roles[id],id);
